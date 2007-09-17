@@ -33,7 +33,7 @@ type
   protected
     EK, DK: array[0..51] of word;
   public
-    class function GetID: longint; override;
+    class function GetId: longint; override;
     class function GetAlgorithm: string; override;
     class function GetMaxKeySize: longint; override;
     class function GetBlockSize: longint; override;

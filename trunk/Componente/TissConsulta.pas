@@ -133,7 +133,7 @@ type
     procedure criaCabecalho;
     procedure criaRodape;    
     procedure adicionarGuia;
-    constructor create(Aowner: TComponent);override;
+    constructor Create(Aowner: TComponent);override;
 
   published
     { Published declarations }

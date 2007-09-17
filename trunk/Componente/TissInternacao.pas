@@ -81,7 +81,7 @@ type
     procedure adicionaOutDesp;
     procedure finalizaGuia;
     procedure GerarXml;
-    constructor create(Aowner: TComponent);override;
+    constructor Create(Aowner: TComponent);override;
   published
     { Published declarations }
 
