@@ -1,16 +1,27 @@
-#summary One-sentence summary of this page.
+#summary Este documento mostra como baixar os fontes usando o TortoiseSVN
 
-= Introduction =
+= Introdução =
 
-Add your content here.
+Devido à demanda por alterações nos componentes, achamos que seria interessante permitir o acesso à modificações nos códigos fontes por pessoas da comunidade dispostas a colaborar no desenvolvimento do mesmo.
 
+= Passo-a-passo =
 
-= Details =
+* Baixe o programa TortotiseSVN:
+  http://tortoisesvn.net/downloads
+
+* Após a instalação, crie uma pasta chamada "TissInternet" onde você achar mais conveniente.
+
+* Clique com o botão direito em cima do nome desta pasta e escolha a opção "SVN Checkout..."
+
+* Digite as seguintes informações:
+  URL of Repository: https://componentestiss.googlecode.com/svn/trunk/
+  
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
 
+ 
  
  
