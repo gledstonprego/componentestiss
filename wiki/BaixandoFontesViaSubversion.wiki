@@ -15,7 +15,7 @@ dispostas a colaborar no desenvolvimento do mesmo.
   * Baixe o programa TortotiseSVN:
     http://tortoisesvn.net/downloads
 
-  * Após a instalação, crie uma pasta chamada *TissInternet* onde você achar mais conveniente.
+  * Após a instalação, crie uma pasta chamada `TissInternet` onde você achar mais conveniente.
 
   * Clique com o botão direito em cima do nome desta pasta e escolha a opção "SVN Checkout..."
 
@@ -23,5 +23,6 @@ dispostas a colaborar no desenvolvimento do mesmo.
     URL of Repository: https://componentestiss.googlecode.com/svn/trunk/
 
   * Digite seu usuário do Google a Senha que você havia recebido.
+ 
  
  
