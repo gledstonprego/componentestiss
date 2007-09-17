@@ -2,7 +2,9 @@
 
 = Introdução =
 
-Devido à demanda por alterações nos componentes, achamos que seria interessante permitir o acesso à modificações nos códigos fontes por pessoas da comunidade dispostas a colaborar no desenvolvimento do mesmo.
+Devido à demanda por alterações nos componentes, achamos que seria interessante 
+permitir o acesso à modificações nos códigos fontes por pessoas da comunidade 
+dispostas a colaborar no desenvolvimento do mesmo.
 
 = Passo-a-passo =
 
@@ -21,3 +23,4 @@ Devido à demanda por alterações nos componentes, achamos que seria interessan
     URL of Repository: https://componentestiss.googlecode.com/svn/trunk/
 
   * Digite seu usuário do Google a Senha que você havia recebido.
+ 
