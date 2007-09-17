@@ -1,0 +1,58 @@
+package Tiss;
+
+{$R *.res}
+{$R 'TissConsulta.dcr'}
+{$R 'TissSP_SADT.dcr'}
+{$R 'TissInternacao.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'TISS'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  xmlrtl,
+  inet,
+  soaprtl,
+  dbrtl,
+  dsnap;
+
+contains
+  md52 in 'md52.pas',
+  TissConsulta in 'TissConsulta.pas',
+  TissSP_SADT in 'TissSP_SADT.pas',
+  U_CipherTiss in 'U_CipherTiss.pas',
+  Base64Tiss in 'Base64Tiss.pas',
+  DCPconstTiss in 'DCPconstTiss.pas',
+  DCPcryptTiss in 'DCPcryptTiss.pas',
+  IDEATiss in 'IDEATiss.pas',
+  Md5Tiss in 'Md5Tiss.pas',
+  Sha1Tiss in 'Sha1Tiss.pas',
+  untTissComp in 'untTissComp.pas',
+  untConfSPSADT in 'untConfSPSADT.pas',
+  TissInternacao in 'TissInternacao.pas',
+  untFunc in 'untFunc.pas',
+  untValida in 'untValida.pas' {frmValida},
+  untConfInt in 'untConfInt.pas';
+
+end.
