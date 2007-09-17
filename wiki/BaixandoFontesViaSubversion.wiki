@@ -6,22 +6,18 @@ Devido à demanda por alterações nos componentes, achamos que seria interessan
 
 = Passo-a-passo =
 
-* Baixe o programa TortotiseSVN:
-  http://tortoisesvn.net/downloads
+  * Se não tiver, você vai precisar criar uma conta do Google
 
-* Após a instalação, crie uma pasta chamada "TissInternet" onde você achar mais conveniente.
+  * Solicite aos *OWNERS* do projeto uma senha para poder fazer alterações nos fontes
 
-* Clique com o botão direito em cima do nome desta pasta e escolha a opção "SVN Checkout..."
+  * Baixe o programa TortotiseSVN:
+    http://tortoisesvn.net/downloads
 
-* Digite as seguintes informações:
-  URL of Repository: https://componentestiss.googlecode.com/svn/trunk/
-  
+  * Após a instalação, crie uma pasta chamada TissInternet onde você achar mais conveniente.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+  * Clique com o botão direito em cima do nome desta pasta e escolha a opção "SVN Checkout..."
 
- 
- 
- 
+  * Digite a seguinte informação:  
+    URL of Repository: https://componentestiss.googlecode.com/svn/trunk/
+
+  * Digite seu usuário do Google a Senha que você havia recebido.
