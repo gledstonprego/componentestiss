@@ -81,7 +81,7 @@ type
     procedure adicionaOutDesp;
     procedure finalizaGuia;
     procedure GerarXml;
-    constructor Create(Aowner: TComponent);override;
+    constructor create(Aowner: TComponent);override;
   published
     { Published declarations }
 
@@ -351,6 +351,9 @@ begin
                       FGuia.add('<ans:CNPJ>'+FTissPrestExec.TissCNPJCPF+'</ans:CNPJ>');
                     if FTissPrestExec.TissTipoGeral = FisicGeral then
                       FGuia.add('<ans:cpf>'+FTissPrestExec.TissCNPJCPF+'</ans:cpf>');
+
+                    if FTissPrestExec.TissTipoGeral = Outros then
+                      FGuia.add('<ans:codigoPrestadorNaOperadora>'+FTissPrestExec.TissCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
                   end;
               FGuia.add('</ans:identificacao>');
               FGuia.add('<ans:nomeContratado>'+FTissPrestExec.TissNomeContradado+'</ans:nomeContratado>');
@@ -505,6 +508,9 @@ begin
 
       if FTissCabecalho.TissTipoGeral = FisicGeral then
         FCabecalho.Add('<ans:cpf>'+FTissCabecalho.TissCNPJCPF+'</ans:cpf>');
+
+      if FTissCabecalho.TissTipoGeral = Outros then
+        FCabecalho.add('<ans:codigoPrestadorNaOperadora>'+FTissCabecalho.TissCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
        // mmCabecalho.Lines.Add('<ans:codigoPrestadorNaOperadora>'+fdsFaturamentoREGPRESTADORA.AsString+'</ans:codigoPrestadorNaOperadora>');
       FCabecalho.Add('</ans:codigoPrestadorNaOperadora>');
       FCabecalho.Add('</ans:origem>');
