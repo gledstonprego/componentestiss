@@ -225,7 +225,7 @@ object Form1: TForm1
     TabOrder = 5
   end
   object TissC: TTissConsulta
-    Versao.Versao = '0.9.10'
+    Versao.Versao = '0.9.11'
     TissVersaoXml = '1.0'
     TissVersaoTISS = '2.01.02'
     TissEncoding = 'ISO-8859-1'
@@ -288,7 +288,7 @@ object Form1: TForm1
     Top = 8
   end
   object TissSP: TTissSP_SADT
-    Versao.Versao = '0.9.10'
+    Versao.Versao = '0.9.11'
     Tissconfig.TissUsarBenefic = True
     Tissconfig.TissUsarContratado = True
     Tissconfig.TissUsarPrestadorExec = True
@@ -425,7 +425,7 @@ object Form1: TForm1
     Top = 8
   end
   object TissInt: TTissInternacao
-    Versao.Versao = '0.9.10'
+    Versao.Versao = '0.9.11'
     TissContratado.TissTipoGeral = JuridicoGeral
     TissProfissional.TissPosicProf = 0
     TissPrestadorExec.TissTipoGeral = JuridicoGeral
