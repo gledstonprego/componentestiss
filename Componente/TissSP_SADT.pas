@@ -234,8 +234,6 @@ begin
                 FProc.Add('<ans:tipoTabela>'+FormatFloat('00', TissProc.TissProcs.TissTipTabela)+'</ans:tipoTabela>');
               if TissProcs.TissDescricao then
                 FProc.Add('<ans:descricao>'+TissProc.TissProcs.TissDescricao+'</ans:descricao>');
-
-
             FProc.Add('</ans:procedimento>');
             if TissData then
               FProc.add('<ans:data>'+FormatDateTime('YYYY-MM-DD',TissProc.TissData)+'</ans:data>');
@@ -446,25 +444,28 @@ begin
               if FTissConfSP_SADT.TissPrestadorExec.TissNomeContradado then
                 FGuia.add('<ans:nomeContratado>'+FTissPrestExec.TissNomeContradado+'</ans:nomeContratado>');
 
-              FGuia.add('<ans:enderecoContratado>');
-                if FTissConfSP_SADT.TissPrestadorExec.TisstipoLogradouro then
-                  FGuia.add('<ans:tipoLogradouro>'+FTissPrestExec.TisstipoLogradouro+'</ans:tipoLogradouro>');
-                if FTissConfSP_SADT.TissPrestadorExec.TissLogradouro then
-                  FGuia.add('<ans:logradouro>'+FTissPrestExec.TissLogradouro+'</ans:logradouro>');
-                if FTissConfSP_SADT.TissPrestadorExec.TissEndNum then
-                  FGuia.add('<ans:numero>'+FTissPrestExec.TissEndNum+'</ans:numero>');
-                if FTissConfSP_SADT.TissPrestadorExec.TissComplemento then
-                  FGuia.add('<ans:complemento>'+FTissPrestExec.TissComplemento+'</ans:complemento>');
-                if FTissConfSP_SADT.TissPrestadorExec.TisscodigoIBGE then
-                  FGuia.add('<ans:codigoIBGEMunicipio>'+FormatFloat('0000000',FTissPrestExec.TisscodigoIBGE)+'</ans:codigoIBGEMunicipio>');
-                if FTissConfSP_SADT.TissPrestadorExec.TissMunicipio then
-                  FGuia.add('<ans:municipio>'+FTissPrestExec.TissMunicipio+'</ans:municipio>');
-                if FTissConfSP_SADT.TissPrestadorExec.TissUF then
-                  FGuia.add('<ans:codigoUF>'+FTissPrestExec.TissUF+'</ans:codigoUF>');
-                if FTissConfSP_SADT.TissPrestadorExec.TissCEP then
-                  FGuia.add('<ans:cep>'+FTissPrestExec.TissCEP+'</ans:cep>');
+              if FTissConfSP_SADT.TissPrestadorExec.TissUsarEnd then
+                begin
+                  FGuia.add('<ans:enderecoContratado>');
+                    if FTissConfSP_SADT.TissPrestadorExec.TisstipoLogradouro then
+                      FGuia.add('<ans:tipoLogradouro>'+FTissPrestExec.TisstipoLogradouro+'</ans:tipoLogradouro>');
+                    if FTissConfSP_SADT.TissPrestadorExec.TissLogradouro then
+                      FGuia.add('<ans:logradouro>'+FTissPrestExec.TissLogradouro+'</ans:logradouro>');
+                    if FTissConfSP_SADT.TissPrestadorExec.TissEndNum then
+                      FGuia.add('<ans:numero>'+FTissPrestExec.TissEndNum+'</ans:numero>');
+                    if FTissConfSP_SADT.TissPrestadorExec.TissComplemento then
+                      FGuia.add('<ans:complemento>'+FTissPrestExec.TissComplemento+'</ans:complemento>');
+                    if FTissConfSP_SADT.TissPrestadorExec.TisscodigoIBGE then
+                      FGuia.add('<ans:codigoIBGEMunicipio>'+FormatFloat('0000000',FTissPrestExec.TisscodigoIBGE)+'</ans:codigoIBGEMunicipio>');
+                    if FTissConfSP_SADT.TissPrestadorExec.TissMunicipio then
+                      FGuia.add('<ans:municipio>'+FTissPrestExec.TissMunicipio+'</ans:municipio>');
+                    if FTissConfSP_SADT.TissPrestadorExec.TissUF then
+                      FGuia.add('<ans:codigoUF>'+FTissPrestExec.TissUF+'</ans:codigoUF>');
+                    if FTissConfSP_SADT.TissPrestadorExec.TissCEP then
+                      FGuia.add('<ans:cep>'+FTissPrestExec.TissCEP+'</ans:cep>');
 
-              FGuia.add('</ans:enderecoContratado>');
+                  FGuia.add('</ans:enderecoContratado>');
+                end;
               if FTissConfSP_SADT.TissPrestadorExec.TissCNES then
                 FGuia.add('<ans:numeroCNES>'+FormatFloat('0000000', FTissPrestExec.TissCNES)+'</ans:numeroCNES>');
 

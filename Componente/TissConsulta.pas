@@ -70,6 +70,7 @@ type
     FObs: String;
     FArqNomeHash: Boolean;
     FZerosArq: integer;
+    Fvalidado: Boolean;
 
     procedure setEncoding(const Value: String);
     procedure setVersaoXml(const Value: String);
@@ -124,9 +125,13 @@ type
     procedure setTipDoenca(const Value: String);
     procedure setObs(const Value: String);
     procedure setFArqNomeHash(const Value: Boolean);
-    procedure SetZerosArq(const Value: integer); 
+    procedure SetZerosArq(const Value: integer);
+    procedure setvalidado(const Value: Boolean);
+  private
+    property validado: Boolean read Fvalidado write setvalidado;
   protected
-    { Protected declarations }   
+    { Protected declarations }
+
   public
     { Public declarations } 
 
@@ -134,6 +139,7 @@ type
     procedure criaRodape;    
     procedure adicionarGuia;
     constructor Create(Aowner: TComponent);override;
+    function arqvalidado: Boolean;
 
   published
     { Published declarations }
@@ -205,7 +211,7 @@ implementation
 
 uses Md5tiss, U_Ciphertiss, md52, untValida, untFunc;
 
-procedure Register;
+procedure Register;     
 begin
   RegisterComponents('Tiss', [TTissConsulta]);
 end;
@@ -355,6 +361,11 @@ begin
     end;      
 end;
 
+function TTissConsulta.arqvalidado: Boolean;
+begin
+  result := Fvalidado;
+end;
+
 constructor TTissConsulta.create(Aowner: TComponent);
 begin
   FZerosArq := 20;
@@ -447,6 +458,7 @@ var
   numhash,linha,nomeArq: string;
 begin
     try
+      Fvalidado := True;
       AssignFile(arquivo,FArquivo);
       Append(arquivo);    
       Writeln(arquivo,'</ans:guiaFaturamento>');
@@ -824,6 +836,11 @@ end;
 procedure TTissConsulta.setValidadeCart(const Value: TDateTime);
 begin
   FValidadeCart := Value;
+end;
+
+procedure TTissConsulta.setvalidado(const Value: Boolean);
+begin
+  Fvalidado := Value;
 end;
 
 procedure TTissConsulta.setVersaoTISS(const Value: String);
