@@ -423,7 +423,11 @@ begin
 
           if FTipo = Fisico then
             Writeln(arquivo,'<ans:cpf>'+FCNPJCPF+'</ans:cpf>');
+
+          if FTipo = Outro then
+            Writeln(arquivo,'<ans:codigoPrestadorNaOperadora>'+FCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
         end;
+
        // mmCabecalho.Lines.Add('<ans:codigoPrestadorNaOperadora>'+fdsFaturamentoREGPRESTADORA.AsString+'</ans:codigoPrestadorNaOperadora>');
       Writeln(arquivo,'</ans:codigoPrestadorNaOperadora>');
       Writeln(arquivo,'</ans:origem>');
