@@ -701,6 +701,7 @@ begin
       FGuia.Clear;
       FProc.Clear;
       FMembEquipe.Clear;
+      FOutDesp.Clear;
 
 
       //AssignFile(arquivoTemp,'temp.xml');

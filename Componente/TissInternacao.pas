@@ -572,6 +572,7 @@ begin
       FGuia.Clear;
       FProc.Clear;
       FMembEquipe.Clear;
+      FOutDesp.Clear;
       DecimalSeparator := '.';
       //AssignFile(arquivoTemp,'temp.xml');
       //Reset(arquivoTemp);
