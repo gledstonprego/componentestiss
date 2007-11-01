@@ -5,6 +5,11 @@ interface
 uses
   SysUtils, Classes,untTissComp,Windows,Dialogs,Messages,forms,xmldom, XMLIntf, msxmldom,
   XMLDoc,untConfSPSADT,Graphics,untConfInt;
+  {COMPONENTE INICIADO POR FABIANO DE OLIVEIRA PRADO
+  Espero ter ajudado alguem com este componente, e
+  espero que mais progrmadores se juntem nesta idéia
+  para assim realizarmo o projeto TISS com sucesso,
+  pela graça de Maria e o amor de Nosso Senhor JESUS CRISTO}  
 const
   MSG_TOVALIDATE_PTBR = 'A SER VALIDADO';
   MSG_ISVALID_PTBR    = 'VÁLIDO';
