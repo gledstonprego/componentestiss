@@ -676,7 +676,7 @@ end;
 procedure TTissSP_SADT.finalizaGuia;
 var
   arquivo,arquivoTemp: TextFile;
-  numhash,linha: string;
+  numhash,linha, TissTotalGeral: string;
   i: integer;
 begin
     try 
@@ -700,6 +700,9 @@ begin
             begin
               FGeral.Add(FOutDesp.Strings[i]);
             end;
+//Inclusão da tag totalGeralOutrasDespesas
+          TissTotalGeral:=CurrToStr(FTissOutrasDesp.TissTotalGeral);
+          FGeral.Add('<ans:totalGeralOutrasDespesas>'+TissTotalGeral+'</ans:totalGeralOutrasDespesas>');
           FGeral.Add('</ans:outrasDespesas>')
         end;
       FGeral.Add('</ans:guiaSP_SADT>');
