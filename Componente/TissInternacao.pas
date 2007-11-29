@@ -545,7 +545,7 @@ end;
 procedure TTissInternacao.finalizaGuia;
 var
   arquivo,arquivoTemp: TextFile;
-  numhash,linha: string;
+  numhash,linha, TissTotalGeral: string;
   i: integer;
 begin
     try
@@ -567,6 +567,10 @@ begin
             begin
               FGeral.Add(FOutDesp.Strings[i]);
             end;
+//Inclusão das Tags totalGeralOutrasDespesas
+          TissTotalGeral:=CurrToStr(FTissOutrasDesp.TissTotalGeral);
+          FGeral.Add('<ans:totalGeralOutrasDespesas>'+TissTotalGeral+'</ans:totalGeralOutrasDespesas>');
+
           FGeral.Add('</ans:outrasDespesas>')
         end;
               
