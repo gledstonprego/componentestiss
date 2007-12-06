@@ -12,6 +12,8 @@ uses
 type
   TTissTipoGeral = (JuridicoGeral,FisicGeral,Outros);
 
+  TTissAnsVersao = (v2_01_02,v2_01_03);
+
   TTissTabela = class(TPersistent)
   private
     fCodigo: String;

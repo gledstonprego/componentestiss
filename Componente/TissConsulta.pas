@@ -71,6 +71,7 @@ type
     FArqNomeHash: Boolean;
     FZerosArq: integer;
     Fvalidado: Boolean;
+    FAnsVersaoxsd: TTissAnsVersao;
 
     procedure setEncoding(const Value: String);
     procedure setVersaoXml(const Value: String);
@@ -127,6 +128,7 @@ type
     procedure setFArqNomeHash(const Value: Boolean);
     procedure SetZerosArq(const Value: integer);
     procedure setvalidado(const Value: Boolean);
+    procedure setAnsVersaoxsd(const Value: TTissAnsVersao);
   private
     property validado: Boolean read Fvalidado write setvalidado;
   protected
@@ -143,6 +145,8 @@ type
 
   published
     { Published declarations }
+    //versão do xsd da ANS
+    property ansVersaoXSD: TTissAnsVersao read FAnsVersaoxsd write setAnsVersaoxsd;    
     property Versao:TCompVersao read FCompVersao write FCompVersao;
     property TissVersaoXml: String read FVersaoXml write setVersaoXml;
     property TissVersaoTISS: String read FVersaoTISS write setVersaoTISS;
@@ -227,7 +231,11 @@ begin
       Writeln(arquivo,'<ans:identificacaoGuia>');
       if FTissReq.UsarRegANS then
         Writeln(arquivo,'<ans:registroANS>'+fRegAns+'</ans:registroANS>');
-      Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',Date)+'</ans:dataEmissaoGuia>');
+      case ansVersaoXSD of
+          v2_01_02: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',Date)+'</ans:dataEmissaoGuia>');
+          v2_01_03: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',Date)+'</ans:dataEmissaoGuia>');
+        end;
+
       if FTissReq.UsarNumGuia then
         Writeln(arquivo,'<ans:numeroGuiaPrestador>'+FNumGuia+'</ans:numeroGuiaPrestador>');
       if FTissReq.UsarNumGuia then
@@ -377,6 +385,7 @@ begin
   FTissReq := TTissReq.Create;
   FCompVersao := TCompVersao.create;
   FTissValid := TTissValidacao.create;
+  FAnsVersaoxsd := v2_01_03;
   // FBusca := TBusca.Create(self);
   inherited;
 end;
@@ -407,7 +416,13 @@ begin
       if FTissReq.UsarSequencialTrans then
         Writeln(arquivo,'<ans:sequencialTransacao>'+FSequencialTrans+'</ans:sequencialTransacao>');
       if FTissReq.UsarDataRegistroTrans then
-        Writeln(arquivo,'<ans:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FDataRegistroTrans)+'</ans:dataRegistroTransacao>');
+        begin
+          case FAnsVersaoxsd of
+            v2_01_02: Writeln(arquivo,'<ans:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FDataRegistroTrans)+'</ans:dataRegistroTransacao>');
+            v2_01_03: Writeln(arquivo,'<ans:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FDataRegistroTrans)+'</ans:dataRegistroTransacao>');
+          end;
+
+        end;
       if FTissReq.UsarHoraRegistroTrans then
         Writeln(arquivo,'<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm:ss',FHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
 
@@ -601,6 +616,11 @@ end;
 function TTissConsulta.RegANS: String;
 begin
 
+end;
+
+procedure TTissConsulta.setAnsVersaoxsd(const Value: TTissAnsVersao);
+begin
+  FAnsVersaoxsd := Value;
 end;
 
 procedure TTissConsulta.setArquivo(const Value: String);

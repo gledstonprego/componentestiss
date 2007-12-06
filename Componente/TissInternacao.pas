@@ -53,6 +53,7 @@ type
     FCompVersao: TCompVersao;
     FTissConf: TTissConfInt;
     FTissValid: TTissValidacao;
+    FAnsVersaoxsd: TTissAnsVersao;
 
     procedure setNumGuiaOper(const Value: String);
     procedure setNumGuiaPrest(const Value: String);
@@ -71,6 +72,7 @@ type
     procedure setNumGuiaSolic(const Value: String);
     function hash(arquivohash:string): String;
     procedure setCarcInt(const Value: String);
+    procedure setAnsVersaoxsd(const Value: TTissAnsVersao);
 
 
     { Private declarations }
@@ -89,6 +91,8 @@ type
     constructor create(Aowner: TComponent);override;
   published
     { Published declarations }
+    //versão do xsd da ANS
+    property ansVersaoXSD: TTissAnsVersao read FAnsVersaoxsd write setAnsVersaoxsd;
 
     //VERSAO
     property Versao:TCompVersao read FCompVersao write FCompVersao;     
@@ -174,7 +178,7 @@ begin
           if TissTipoDesp then
             FOutDesp.Add('<ans:codigo>'+TissOutDesp.TissDespesa.TissIdentCodigo+'</ans:codigo>');
           if TissIdentTipTab then
-            FOutDesp.Add('<ans:tipoTabela>'+TissOutDesp.TissDespesa.TissIdentTipoTab+'</ans:tipoTabela>');
+            FOutDesp.Add('<ans:tipoTabela>'+RetZero(TissOutDesp.TissDespesa.TissIdentTipoTab,2)+'</ans:tipoTabela>');
           if TissIdentDesc then
             FOutDesp.Add('<ans:descricao>'+TissOutDesp.TissDespesa.TissIdentDesc+'</ans:descricao>');
         FOutDesp.Add('</ans:identificadorDespesa>');
@@ -451,8 +455,8 @@ begin
                 end;
 
             FGuia.add('</ans:diagnosticosSaidaInternacao>');
-
-          FGuia.add('<ans:procedimentosRealizados>');
+          if TissConfig.TissUsarProc then
+            FGuia.add('<ans:procedimentosRealizados>');
      // FGuia.add('</ans:guiaSP_SADT>');
     except
       on e: Exception do
@@ -477,6 +481,7 @@ begin
   FCompVersao := TCompVersao.create;
   FTissConf := TTissConfInt.create;
   FTissValid := TTissValidacao.create;
+  FAnsVersaoxsd := v2_01_03;
 
 end;
 
@@ -554,11 +559,15 @@ begin
           FGeral.Add(FGuia.Strings[i]);
         end;
 
-      for i:= 0 to FProc.Count - 1 do
+      if TissConfig.TissUsarProc then
         begin
-          FGeral.Add(FProc.Strings[i]);
+          for i:= 0 to FProc.Count - 1 do
+            begin
+              FGeral.Add(FProc.Strings[i]);
+            end;
+
+          FGeral.add('</ans:procedimentosRealizados>');
         end;
-      FGeral.add('</ans:procedimentosRealizados>');
 
       if Tissconfig.TissUsarOutDespesas then
         begin
@@ -807,6 +816,11 @@ end;
 procedure TTissInternacao.setacomodacao(const Value: String);
 begin
   Facomodacao := Value;
+end;
+
+procedure TTissInternacao.setAnsVersaoxsd(const Value: TTissAnsVersao);
+begin
+  FAnsVersaoxsd := Value;
 end;
 
 procedure TTissInternacao.setcaraAtend(const Value: String);
