@@ -59,6 +59,8 @@ type
     FCompVersao: TCompVersao;
     FTissValid: TTissValidacao;
     FTissOutrasDesp: TTissOutrasDesp;
+    FAnsVersaoxsd: TTissAnsVersao;
+
 
     procedure setCNPJCPF(const Value: String);
     procedure setRegANS(const Value: String);
@@ -78,6 +80,7 @@ type
     procedure setHoraAtend(const Value: TDateTime);
     procedure setTipoSaida(const Value: String);
     procedure setTipoAtend(const Value: integer);
+    procedure setAnsVersaoxsd(const Value: TTissAnsVersao);
 
 
     { Private declarations }
@@ -98,6 +101,8 @@ type
     constructor create(Aowner: TComponent);override;    
   published
     { Published declarations }
+    //versão do xsd da ANS
+    property ansVersaoXSD: TTissAnsVersao read FAnsVersaoxsd write setAnsVersaoxsd;
     //VERSAO
     property Versao:TCompVersao read FCompVersao write FCompVersao;
     //CONFIGURAÇÕES
@@ -541,6 +546,7 @@ begin
   FTissValid := TTissValidacao.create;
   FTissOutrasDesp := TTissOutrasDesp.create;
 
+  FAnsVersaoxsd := v2_01_03;
   FTissCabecalho.TissEncoding:='ISO-8859-1';
   FTissCabecalho.TissVersaoXml:='1.0';
   FTissCabecalho.TissVersaoTISS:='2.01.02';
@@ -923,6 +929,11 @@ begin
   FCabecalho.Clear;
   FTissSPSADT.Clear;
  
+end;
+
+procedure TTissSP_SADT.setAnsVersaoxsd(const Value: TTissAnsVersao);
+begin
+  FAnsVersaoxsd := Value;
 end;
 
 procedure TTissSP_SADT.setcaraAtend(const Value: String);

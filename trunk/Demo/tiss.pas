@@ -542,10 +542,7 @@ begin
                 TissInt.adicionaOutDesp;
               end;
           end;
-                  
       TissInt.finalizaGuia;
-
-
     end;
 
  // TissInt.criaRodape;
