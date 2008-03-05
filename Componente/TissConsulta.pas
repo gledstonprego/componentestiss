@@ -233,7 +233,7 @@ begin
         Writeln(arquivo,'<ans:registroANS>'+fRegAns+'</ans:registroANS>');
       case ansVersaoXSD of
           v2_01_02: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',Date)+'</ans:dataEmissaoGuia>');
-          v2_01_03: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',Date)+'</ans:dataEmissaoGuia>');
+          v2_01_03: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',Date)+'</ans:dataEmissaoGuia>');
         end;
 
       if FTissReq.UsarNumGuia then
@@ -249,7 +249,7 @@ begin
       if FTissReq.UsarNomePlano then
         Writeln(arquivo,'<ans:nomePlano>'+FNomePlano+'</ans:nomePlano>');
       if FTissReq.UsarValidadeCart then
-        Writeln(arquivo,'<ans:validadeCarteira>'+FormatDateTime('YYYY-MM-DD',FValidadeCart)+'</ans:validadeCarteira>');
+        Writeln(arquivo,'<ans:validadeCarteira>'+FormatDateTime('DD/MM/YYYY',FValidadeCart)+'</ans:validadeCarteira>');
       if FTissReq.UsarNumCNS then
         Writeln(arquivo,'<ans:numeroCNS>'+FNumCNS+'</ans:numeroCNS>');
 
@@ -262,7 +262,7 @@ begin
           if FTipo = Juridico then
             Writeln(arquivo,'<ans:CNPJ>'+FCNPJCPF+'</ans:CNPJ>');
           if FTipo = Fisico then
-            Writeln(arquivo,'<ans:cpf>'+FCNPJCPF+'</ans:cpf>');
+            Writeln(arquivo,'<ans:CPF>'+FCNPJCPF+'</ans:CPF>');
           if FTipo = Outro then
             Writeln(arquivo,'<ans:codigoPrestadorNaOperadora>'+FCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
         end;
@@ -342,7 +342,7 @@ begin
 
       Writeln(arquivo,'<ans:dadosAtendimento>');
       if FTissReq.UsardataAtendimento then
-        Writeln(arquivo,'<ans:dataAtendimento>'+FormatDateTime('YYYY-MM-DD',fdataAtendimento)+'</ans:dataAtendimento>');
+        Writeln(arquivo,'<ans:dataAtendimento>'+FormatDateTime('DD/MM/YYYY',fdataAtendimento)+'</ans:dataAtendimento>');
 
       Writeln(arquivo,'<ans:procedimento>');
       if FTissReq.UsarCodigoTabela then
@@ -419,12 +419,12 @@ begin
         begin
           case FAnsVersaoxsd of
             v2_01_02: Writeln(arquivo,'<ans:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FDataRegistroTrans)+'</ans:dataRegistroTransacao>');
-            v2_01_03: Writeln(arquivo,'<ans:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FDataRegistroTrans)+'</ans:dataRegistroTransacao>');
+            v2_01_03: Writeln(arquivo,'<ans:dataRegistroTransacao>'+FormatDateTime('DD/MM/YYYY',FDataRegistroTrans)+'</ans:dataRegistroTransacao>');
           end;
 
         end;
       if FTissReq.UsarHoraRegistroTrans then
-        Writeln(arquivo,'<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm:ss',FHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
+        Writeln(arquivo,'<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm',FHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
 
       Writeln(arquivo,'</ans:identificacaoTransacao>');
 
@@ -437,7 +437,7 @@ begin
             Writeln(arquivo,'<ans:CNPJ>'+FCNPJCPF+'</ans:CNPJ>');
 
           if FTipo = Fisico then
-            Writeln(arquivo,'<ans:cpf>'+FCNPJCPF+'</ans:cpf>');
+            Writeln(arquivo,'<ans:CPF>'+FCNPJCPF+'</ans:CPF>');
 
           if FTipo = Outro then
             Writeln(arquivo,'<ans:codigoPrestadorNaOperadora>'+FCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
@@ -479,7 +479,7 @@ begin
     try
       Fvalidado := True;
       AssignFile(arquivo,FArquivo);
-      Append(arquivo);    
+      Append(arquivo);
       Writeln(arquivo,'</ans:guiaFaturamento>');
       Writeln(arquivo,'</ans:guias>');
       Writeln(arquivo,'</ans:loteGuias>');
