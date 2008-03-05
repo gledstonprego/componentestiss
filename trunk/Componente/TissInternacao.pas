@@ -5,11 +5,6 @@ interface
 uses
   SysUtils, Classes,untTissComp,Windows,Dialogs,Messages,forms,xmldom, XMLIntf, msxmldom,
   XMLDoc,untConfSPSADT,Graphics,untConfInt;
-  {COMPONENTE INICIADO POR FABIANO DE OLIVEIRA PRADO
-  Espero ter ajudado alguem com este componente, e
-  espero que mais progrmadores se juntem nesta idéia
-  para assim realizarmo o projeto TISS com sucesso,
-  pela graça de Maria e o amor de Nosso Senhor JESUS CRISTO}  
 const
   MSG_TOVALIDATE_PTBR = 'A SER VALIDADO';
   MSG_ISVALID_PTBR    = 'VÁLIDO';
@@ -74,7 +69,6 @@ type
     procedure setCarcInt(const Value: String);
     procedure setAnsVersaoxsd(const Value: TTissAnsVersao);
 
-
     { Private declarations }
   protected
     { Protected declarations }
@@ -95,7 +89,7 @@ type
     property ansVersaoXSD: TTissAnsVersao read FAnsVersaoxsd write setAnsVersaoxsd;
 
     //VERSAO
-    property Versao:TCompVersao read FCompVersao write FCompVersao;     
+    property Versao:TCompVersao read FCompVersao write FCompVersao;
        //BENEFICIARIO
     property TissBeneficiario:TTissBenific read FTissBenific write FTissBenific;
      //DADOS CONTRATADO
@@ -103,7 +97,7 @@ type
     //Profissional executante
     property TissProfissional:TTissProfissional read FTissProfissional write FTissProfissional;
     //identificação Executante
-    property TissPrestadorExec:TTissContratado read FTissPrestExec write FTissPrestExec;              
+    property TissPrestadorExec:TTissContratado read FTissPrestExec write FTissPrestExec;
 
 
     //CABEÇALHO
@@ -149,7 +143,7 @@ type
     //Configuracoes
     property TissConfig:TTissConfInt read FTissConf write FTissConf;
     //Validação
-    property TissValid: TTissValidacao read FTissValid write FTissValid;    
+    property TissValid: TTissValidacao read FTissValid write FTissValid;
 
   end;
 
@@ -178,6 +172,7 @@ begin
           if TissTipoDesp then
             FOutDesp.Add('<ans:codigo>'+TissOutDesp.TissDespesa.TissIdentCodigo+'</ans:codigo>');
           if TissIdentTipTab then
+            //FOutDesp.Add('<ans:tipoTabela>'+TissOutDesp.TissDespesa.TissIdentTipoTab+'</ans:tipoTabela>');
             FOutDesp.Add('<ans:tipoTabela>'+RetZero(TissOutDesp.TissDespesa.TissIdentTipoTab,2)+'</ans:tipoTabela>');
           if TissIdentDesc then
             FOutDesp.Add('<ans:descricao>'+TissOutDesp.TissDespesa.TissIdentDesc+'</ans:descricao>');
@@ -187,13 +182,13 @@ begin
           FOutDesp.add('<ans:tipoDespesa>'+IntToStr(TissOutDesp.TissDespesa.TissTipDespesa)+'</ans:tipoDespesa>');
 
         if TissDTRealizacao then
-          FOutDesp.add('<ans:dataRealizacao>'+FormatDateTime('YYYY-MM-DD',TissOutDesp.TissDespesa.TissDataReal)+'</ans:dataRealizacao>');
-          
+          FOutDesp.add('<ans:dataRealizacao>'+FormatDateTime('DD/MM/YYYY',TissOutDesp.TissDespesa.TissDataReal)+'</ans:dataRealizacao>');
+
         if TissHSInicial then
-          FOutDesp.add('<ans:horaInicial>'+FormatDateTime('hh:mm:ss',TissOutDesp.TissDespesa.TissHoraInicial)+'</ans:horaInicial>');
+          FOutDesp.add('<ans:horaInicial>'+FormatDateTime('hh:mm',TissOutDesp.TissDespesa.TissHoraInicial)+'</ans:horaInicial>');
 
         if TissHSFinal then
-          FOutDesp.add('<ans:horaFinal>'+FormatDateTime('hh:mm:ss',TissOutDesp.TissDespesa.TissHoraFinal)+'</ans:horaFinal>');
+          FOutDesp.add('<ans:horaFinal>'+FormatDateTime('hh:mm',TissOutDesp.TissDespesa.TissHoraFinal)+'</ans:horaFinal>');
 
 
         if TissReducAcres then
@@ -248,11 +243,11 @@ begin
 
       FProc.Add('</ans:procedimento>');
       if FTissConf.TissProc.TissData then
-        FProc.add('<ans:data>'+FormatDateTime('YYYY-MM-DD',TissProc.TissData)+'</ans:data>');
+        FProc.add('<ans:data>'+FormatDateTime('DD/MM/YYYY',TissProc.TissData)+'</ans:data>');
       if FTissConf.TissProc.TissHsInicio then
-        FProc.add('<ans:horaInicio>'+FormatDateTime('hh:mm:ss',TissProc.TissHsInicio)+'</ans:horaInicio>');
+        FProc.add('<ans:horaInicio>'+FormatDateTime('hh:mm',TissProc.TissHsInicio)+'</ans:horaInicio>');
       if FTissConf.TissProc.TissHsFim then
-        FProc.add('<ans:horaFim>'+FormatDateTime('hh:mm:ss',TissProc.TissHsFim)+'</ans:horaFim>');
+        FProc.add('<ans:horaFim>'+FormatDateTime('hh:mm',TissProc.TissHsFim)+'</ans:horaFim>');
       if FTissConf.TissProc.TissQtde then
         FProc.add('<ans:quantidadeRealizada>'+CurrToStr(TissProc.TissQtde)+'</ans:quantidadeRealizada>');
       if FTissConf.TissProc.TissVdeAcesso then
@@ -286,12 +281,14 @@ begin
             FMembEquipe.Add('<ans:codigoProfissional>');
               if FTissConf.TissProc.TissEquipe.TissTipoMemb then
                 begin
-                  if TissProc.TissEquipe.TissTipoMemb = JuridicoGeral then
-                    FMembEquipe.Add('<ans:CNPJ>'+TissProc.TissEquipe.TissCodProf+'</ans:CNPJ>');
+                  //if TissProc.TissEquipe.TissTipoMemb = JuridicoGeral then
+                  //  FMembEquipe.Add('<ans:CNPJ>'+TissProc.TissEquipe.TissCodProf+'</ans:CNPJ>');
                   if TissProc.TissEquipe.TissTipoMemb = FisicGeral then
-                    FMembEquipe.Add('<ans:cpf>'+TissProc.TissEquipe.TissCodProf+'</ans:cpf>');
+                    FMembEquipe.Add('<ans:CPF>'+TissProc.TissEquipe.TissCodProf+'</ans:CPF>');
                   if TissProc.TissEquipe.TissTipoMemb = Outros then
                     FMembEquipe.Add('<ans:codigoPrestadorNaOperadora>'+TissProc.TissEquipe.TissCodProf+'</ans:codigoPrestadorNaOperadora>');
+                  //Aqui tem que entrar as tags <ans:conselhoProfissional>
+                  
                 end;
             FMembEquipe.Add('</ans:codigoProfissional>');
           end;
@@ -328,7 +325,7 @@ begin
         FGuia.add('<ans:identificacaoGuiaInternacao>');
             if FTissConf.TissRegANS then
               FGuia.add('<ans:registroANS>'+FRegAns+'</ans:registroANS>');
-          FGuia.add('<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',Date)+'</ans:dataEmissaoGuia>');
+          FGuia.add('<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',Date)+'</ans:dataEmissaoGuia>');
             if FTissConf.TissNumGuiaPrest then
               FGuia.add('<ans:numeroGuiaPrestador>'+FNumGuiaPrest+'</ans:numeroGuiaPrestador>');
             if FTissConf.TissNumGuiaOper then
@@ -346,7 +343,7 @@ begin
               if FTissConf.TissBenefic.TissNomePlano then
                 FGuia.add('<ans:nomePlano>'+FTissBenific.TissNomePlano+'</ans:nomePlano>');
               if FTissConf.TissBenefic.TissValidadeCart then
-                FGuia.add('<ans:validadeCarteira>'+FormatDateTime('YYYY-MM-DD',FTissBenific.TissValidadeCart)+'</ans:validadeCarteira>');
+                FGuia.add('<ans:validadeCarteira>'+FormatDateTime('DD/MM/YYYY',FTissBenific.TissValidadeCart)+'</ans:validadeCarteira>');
               if FTissConf.TissBenefic.TissNumCNS then
                 FGuia.add('<ans:numeroCNS>'+FTissBenific.TissNumCNS+'</ans:numeroCNS>');
 
@@ -360,7 +357,6 @@ begin
                       FGuia.add('<ans:CNPJ>'+FTissPrestExec.TissCNPJCPF+'</ans:CNPJ>');
                     if FTissPrestExec.TissTipoGeral = FisicGeral then
                       FGuia.add('<ans:cpf>'+FTissPrestExec.TissCNPJCPF+'</ans:cpf>');
-
                     if FTissPrestExec.TissTipoGeral = Outros then
                       FGuia.add('<ans:codigoPrestadorNaOperadora>'+FTissPrestExec.TissCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
                   end;
@@ -394,11 +390,11 @@ begin
               begin
                 FGuia.add('<ans:dadosAutorizacao>');
                     if FTissConf.TissDataAut then
-                      FGuia.add('<ans:dataAutorizacao>'+FormatDateTime('YYYY-MM-DD',FDataAut)+'</ans:dataAutorizacao>');
+                      FGuia.add('<ans:dataAutorizacao>'+FormatDateTime('DD/MM/YYYY',FDataAut)+'</ans:dataAutorizacao>');
                     if FTissConf.TissSenhaAut then
                       FGuia.add('<ans:senhaAutorizacao>'+FSenhaAut+'</ans:senhaAutorizacao>');
                     if FTissConf.TissSenhaValid then
-                      FGuia.add('<ans:validadeSenha>'+FormatDateTime('YYYY-MM-DD',FSenhaValid)+'</ans:validadeSenha>');
+                      FGuia.add('<ans:validadeSenha>'+FormatDateTime('DD/MM/YYYY',FSenhaValid)+'</ans:validadeSenha>');
                 FGuia.add('</ans:dadosAutorizacao>');
               end;
             if FTissConf.TisscaraterInt then
@@ -406,9 +402,9 @@ begin
             if FTissConf.TissAcomod then
               FGuia.add('<ans:acomodacao>'+Facomodacao+'</ans:acomodacao>');
             if FTissConf.TissDataInt then
-              FGuia.add('<ans:dataHoraInternacao>'+FormatDateTime('YYYY-MM-DD',FDataHoraInt)+'T'+FormatDateTime('hh:mm:ss',FDataHoraInt)+'</ans:dataHoraInternacao>');
+              FGuia.add('<ans:dataHoraInternacao>'+FormatDateTime('DD/MM/YYYY',FDataHoraInt)+'H'+FormatDateTime('hh:mm',FDataHoraInt)+'</ans:dataHoraInternacao>');
             if FTissConf.TissDataSaidInt then
-              FGuia.add('<ans:dataHoraSaidaInternacao>'+FormatDateTime('YYYY-MM-DD',FDataHoraSaidaInt)+'T'+FormatDateTime('hh:mm:ss',FDataHoraSaidaInt)+'</ans:dataHoraSaidaInternacao>');
+              FGuia.add('<ans:dataHoraSaidaInternacao>'+FormatDateTime('DD/MM/YYYY',FDataHoraSaidaInt)+'H'+FormatDateTime('hh:mm',FDataHoraSaidaInt)+'</ans:dataHoraSaidaInternacao>');
             if FTissConf.TissTipoInt then
               FGuia.add('<ans:tipoInternacao>'+IntToStr(FTipoInternacao)+'</ans:tipoInternacao>');
             if FTissConf.TissRegInt then
@@ -504,9 +500,9 @@ begin
 
       FCabecalho.Add('<ans:sequencialTransacao>'+FTissCabecalho.TissSequencialTrans+'</ans:sequencialTransacao>');
 
-      FCabecalho.Add('<ans:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FTissCabecalho.TissDataRegistroTrans)+'</ans:dataRegistroTransacao>');
+      FCabecalho.Add('<ans:dataRegistroTransacao>'+FormatDateTime('DD/MM/YYYY',FTissCabecalho.TissDataRegistroTrans)+'</ans:dataRegistroTransacao>');
 
-      FCabecalho.Add('<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm:ss',FTissCabecalho.TissHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
+      FCabecalho.Add('<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm',FTissCabecalho.TissHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
 
       FCabecalho.Add('</ans:identificacaoTransacao>');
 
@@ -515,10 +511,8 @@ begin
       FCabecalho.Add('<ans:codigoPrestadorNaOperadora>');
       if FTissCabecalho.TissTipoGeral = JuridicoGeral then
         FCabecalho.Add('<ans:CNPJ>'+FTissCabecalho.TissCNPJCPF+'</ans:CNPJ>');
-
       if FTissCabecalho.TissTipoGeral = FisicGeral then
-        FCabecalho.Add('<ans:cpf>'+FTissCabecalho.TissCNPJCPF+'</ans:cpf>');
-
+        FCabecalho.Add('<ans:CPF>'+FTissCabecalho.TissCNPJCPF+'</ans:CPF>');
       if FTissCabecalho.TissTipoGeral = Outros then
         FCabecalho.add('<ans:codigoPrestadorNaOperadora>'+FTissCabecalho.TissCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
        // mmCabecalho.Lines.Add('<ans:codigoPrestadorNaOperadora>'+fdsFaturamentoREGPRESTADORA.AsString+'</ans:codigoPrestadorNaOperadora>');
@@ -579,7 +573,6 @@ begin
 //Inclusão das Tags totalGeralOutrasDespesas
           TissTotalGeral:=CurrToStr(FTissOutrasDesp.TissTotalGeral);
           FGeral.Add('<ans:totalGeralOutrasDespesas>'+TissTotalGeral+'</ans:totalGeralOutrasDespesas>');
-
           FGeral.Add('</ans:outrasDespesas>')
         end;
               

@@ -3,17 +3,9 @@ unit untTissComp;
 interface
 uses
   SysUtils, Classes;
-
-  {COMPONENTE INICIADO POR FABIANO DE OLIVEIRA PRADO
-  Espero ter ajudado alguem com este componente, e
-  espero que mais progrmadores se juntem nesta idéia
-  para assim realizarmo o projeto TISS com sucesso,
-  pela graça de Maria e o amor de Nosso Senhor JESUS CRISTO}  
 type
   TTissTipoGeral = (JuridicoGeral,FisicGeral,Outros);
-
   TTissAnsVersao = (v2_01_02,v2_01_03);
-
   TTissTabela = class(TPersistent)
   private
     fCodigo: String;
@@ -1382,12 +1374,12 @@ end;
 
 constructor TCompVersao.create;
 begin
- Fversao := '0.9.13';
+ Fversao := '0.9.11';
 end;
 
 procedure TCompVersao.setVersao(const Value: String);
 begin
-  Fversao := '0.9.13';
+  Fversao := '0.9.11';
 end;
 
 { TTissValidacao }
