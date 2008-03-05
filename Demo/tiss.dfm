@@ -225,9 +225,10 @@ object Form1: TForm1
     TabOrder = 5
   end
   object TissC: TTissConsulta
-    Versao.Versao = '0.9.12'
+    ansVersaoXSD = v2_01_03
+    Versao.Versao = '0.9.11'
     TissVersaoXml = '1.0'
-    TissVersaoTISS = '2.01.02'
+    TissVersaoTISS = '2.01.03'
     TissEncoding = 'ISO-8859-1'
     TissMensagemTissXml = 
       'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.a' +
@@ -282,13 +283,14 @@ object Form1: TForm1
     TissConfig.UsarNomeArq = True
     TissConfig.UsarArqNomeHash = True
     TissValid.UsarValidacao = True
-    TissValid.TissXSD = 'tissV2_01_02_completo.xsd'
+    TissValid.TissXSD = 'tissV2_01_03.xsd'
     TissZerosArq = 20
     Left = 8
     Top = 8
   end
   object TissSP: TTissSP_SADT
-    Versao.Versao = '0.9.12'
+    ansVersaoXSD = v2_01_03
+    Versao.Versao = '0.9.11'
     Tissconfig.TissUsarBenefic = True
     Tissconfig.TissUsarContratado = True
     Tissconfig.TissUsarPrestadorExec = True
@@ -425,7 +427,8 @@ object Form1: TForm1
     Top = 8
   end
   object TissInt: TTissInternacao
-    Versao.Versao = '0.9.12'
+    ansVersaoXSD = v2_01_03
+    Versao.Versao = '0.9.11'
     TissContratado.TissTipoGeral = JuridicoGeral
     TissProfissional.TissPosicProf = 0
     TissPrestadorExec.TissTipoGeral = JuridicoGeral
@@ -441,7 +444,7 @@ object Form1: TForm1
     TissTipoInternacao = 0
     TissDiagSaidInt.TissIndicAcid = 0
     TissProc.TissEquipe.TissTipoMemb = Outros
-    TissProc.TissEquipe.TissProfiss.TissPosicProf = 0
+    TissProc.TissEquipe.TissProfiss.TissPosicProf = 10
     TissProc.TissProcs.TissTipTabela = 0
     TissOutDesp.TissDespesa.TissTipDespesa = 0
     TissConfig.TissUsarBenefic = True
@@ -567,7 +570,7 @@ object Form1: TForm1
     TissConfig.TissDiagSaidaInt.TissMotSaidInt = True
     TissConfig.TissDiagSaidaInt.TissObito = True
     TissValid.UsarValidacao = True
-    TissValid.TissXSD = 'tissV2_01_02_completo.xsd'
+    TissValid.TissXSD = 'tissV2_01_03.xsd'
     Left = 88
     Top = 8
   end
