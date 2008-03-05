@@ -76,7 +76,7 @@ begin
   TissC.TissTipo := Juridico;
   TissC.TissCNPJCPF := '02762719000195';
   TissC.TissRegANS := '0';
-  TissC.TissVersaoTISS := '2.01.02';
+  TissC.TissVersaoTISS := '2.01.03';
   TissC.TissNumLote := '1545';  
   //FIM CABEÇALHO
   TissC.criaCabecalho;  {COMANDO PARA ADICIONAR O CABEÇALHO}
