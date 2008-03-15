@@ -76,7 +76,7 @@ object Form1: TForm1
     Top = 188
     Width = 536
     Height = 278
-    ActivePage = TabSheet5
+    ActivePage = TabSheet1
     Align = alBottom
     TabOrder = 3
     object TabSheet1: TTabSheet
@@ -226,7 +226,7 @@ object Form1: TForm1
   end
   object TissC: TTissConsulta
     ansVersaoXSD = v2_01_03
-    Versao.Versao = '0.9.11'
+    Versao.Versao = '0.9.14'
     TissVersaoXml = '1.0'
     TissVersaoTISS = '2.01.03'
     TissEncoding = 'ISO-8859-1'
@@ -290,7 +290,7 @@ object Form1: TForm1
   end
   object TissSP: TTissSP_SADT
     ansVersaoXSD = v2_01_03
-    Versao.Versao = '0.9.11'
+    Versao.Versao = '0.9.14'
     Tissconfig.TissUsarBenefic = True
     Tissconfig.TissUsarContratado = True
     Tissconfig.TissUsarPrestadorExec = True
@@ -349,7 +349,7 @@ object Form1: TForm1
     Tissconfig.TissProc.TissUsarEquipe = False
     Tissconfig.TissProc.TissEquipe.TissCodProf = True
     Tissconfig.TissProc.TissEquipe.TissTipoMemb = True
-    Tissconfig.TissProc.TissEquipe.TissProfiss.TissProf = False
+    Tissconfig.TissProc.TissEquipe.TissProfiss.TissProf = True
     Tissconfig.TissProc.TissEquipe.TissProfiss.TissSiglaConselho = True
     Tissconfig.TissProc.TissEquipe.TissProfiss.TissNumConselho = True
     Tissconfig.TissProc.TissEquipe.TissProfiss.TissUFConselho = True
@@ -411,24 +411,24 @@ object Form1: TForm1
     Tisscabecalho.TissZerosArq = 20
     TissContratado.TissTipoGeral = JuridicoGeral
     TissContratado.TissCEP = '454'
-    TissPrestadorExec.TissTipoGeral = Outros
+    TissPrestadorExec.TissTipoGeral = JuridicoGeral
     TissProfissional.TissPosicProf = 0
     TissTipoSP = FisicoSP_SADT
     TissDiagnostico.TissValor = 0
     TissDiagnostico.TissIndicAcid = 0
     TissTipoAtend = 0
-    TissProc.TissEquipe.TissTipoMemb = JuridicoGeral
+    TissProc.TissEquipe.TissTipoMemb = conselhoProfissional
     TissProc.TissEquipe.TissProfiss.TissPosicProf = 0
     TissProc.TissProcs.TissTipTabela = 0
     TissOutDesp.TissDespesa.TissTipDespesa = 0
     TissValid.UsarValidacao = True
-    TissValid.TissXSD = 'tissV2_01_02_completo.xsd'
+    TissValid.TissXSD = 'tissV2_01_03.xsd'
     Left = 48
     Top = 8
   end
   object TissInt: TTissInternacao
     ansVersaoXSD = v2_01_03
-    Versao.Versao = '0.9.11'
+    Versao.Versao = '0.9.14'
     TissContratado.TissTipoGeral = JuridicoGeral
     TissProfissional.TissPosicProf = 0
     TissPrestadorExec.TissTipoGeral = JuridicoGeral

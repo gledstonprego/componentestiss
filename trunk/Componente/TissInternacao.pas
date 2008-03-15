@@ -284,11 +284,20 @@ begin
                   //if TissProc.TissEquipe.TissTipoMemb = JuridicoGeral then
                   //  FMembEquipe.Add('<ans:CNPJ>'+TissProc.TissEquipe.TissCodProf+'</ans:CNPJ>');
                   if TissProc.TissEquipe.TissTipoMemb = FisicGeral then
-                    FMembEquipe.Add('<ans:CPF>'+TissProc.TissEquipe.TissCodProf+'</ans:CPF>');
+                    FMembEquipe.Add('<ans:cpf>'+TissProc.TissEquipe.TissCodProf+'</ans:cpf>');
                   if TissProc.TissEquipe.TissTipoMemb = Outros then
                     FMembEquipe.Add('<ans:codigoPrestadorNaOperadora>'+TissProc.TissEquipe.TissCodProf+'</ans:codigoPrestadorNaOperadora>');
-                  //Aqui tem que entrar as tags <ans:conselhoProfissional>
-                  
+//----------->adcionei aqui SP/SADT e Internação
+                  if TissProc.TissEquipe.TissTipoMemb = conselhoProfissional then
+                    begin
+                      FMembEquipe.Add('<ans:conselhoProfissional>');
+                      FMembEquipe.Add('<ans:siglaConselho>'+TissProc.TissEquipe.TissProfiss.TissSiglaConselho+'</ans:siglaConselho>');
+                      FMembEquipe.Add('<ans:numeroConselho>'+TissProc.TissEquipe.TissProfiss.TissNumConselho+'</ans:numeroConselho>');
+                      FMembEquipe.Add('<ans:ufConselho>'+TissProc.TissEquipe.TissProfiss.TissUFConselho+'</ans:ufConselho>');
+                      FMembEquipe.Add('</ans:conselhoProfissional>');
+                    end;
+//----------------------->
+
                 end;
             FMembEquipe.Add('</ans:codigoProfissional>');
           end;
@@ -310,7 +319,7 @@ begin
                 FMembEquipe.Add('<ans:codigoCBOS>'+FormatFloat('00000',TissProc.TissEquipe.TissProfiss.TissfCBOS)+'</ans:codigoCBOS>');
         FMembEquipe.Add('</ans:identificacaoProfissional>');
           if FTissConf.TissProc.TissEquipe.TissProfiss.TissPosicProf then
-            FMembEquipe.Add('<ans:posicaoProfissional>'+IntToStr(TissProc.TissEquipe.TissProfiss.TissPosicProf)+'</ans:posicaoProfissional>');
+            FMembEquipe.Add('<ans:posicaoProfissional>'+'0'+IntToStr(TissProc.TissEquipe.TissProfiss.TissPosicProf)+'</ans:posicaoProfissional>');
 
       FMembEquipe.Add('</ans:membroEquipe>');
   end;

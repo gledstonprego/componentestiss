@@ -171,7 +171,7 @@ begin
   TissSP.Tisscabecalho.TissHoraRegistroTrans := Time;
   TissSP.Tisscabecalho.TissCNPJCPF := '02762719000195';
   TissSP.Tisscabecalho.TissRegANS := '0';
-  TissSP.Tisscabecalho.TissVersaoTISS := '2.01.02';
+  TissSP.Tisscabecalho.TissVersaoTISS := '2.01.03';
   TissSP.Tisscabecalho.TissNumLote := '1545';
   //FIM CABEÇALHO
   TissSP.criaCabecalho;  {COMANDO PARA ADICIONAR O CABEÇALHO}
@@ -185,6 +185,7 @@ begin
       //identificação guia SADTSP
       TissSP.TissNumGuiaPrest := IntToStr(i);
       TissSP.TissNumGuiaOper := IntToStr(i);
+      TissSP.TissNumGuiaPrinc:= IntToStr(i);
       TissSP.TissRegANS := '0';
 
       //dados autorização
@@ -236,12 +237,22 @@ begin
       TissSP.TissPrestadorExec.TissCEP := '28380000';
       TissSP.TissPrestadorExec.TissCNES := 457;
 
+      //profissional Executante Complementar
+      //TissSP.Tissconfig.TissUsarProfissionalCompl:=false;
+      TissSP.TissProfissionalCompl.TissProf:='Gledston';
+      TissSP.TissProfissionalCompl.TissSiglaConselho:='CRM';
+      TissSP.TissProfissionalCompl.TissNumConselho:='3435';
+      TissSP.TissProfissionalCompl.TissUFConselho:='DF';
+      TissSP.TissProfissionalCompl.TissfCBOS:=6114;
+      TissSP.TissPrestadorExecCompl.TissTipoGeral:=FisicGeral;
+      TissSP.TissPrestadorExecCompl.TissCNPJCPF:='24428051115';
       //indicação Clinica
       TissSP.TissindicClinica := 'Teste';
       TissSP.TisscaraterAtend := 'E';
       TissSP.TissDataAtend := Now;
 
       //diagnostico Guia
+      //TissSP.Tissconfig.TissUsarDiagnostico:=False;
       TissSP.TissDiagnostico.TissCIDCodDiag := '1';
       TissSP.TissDiagnostico.TissCIDNomeTab := 'CID-10';
       TissSP.TissDiagnostico.TissCIDDescDiag := 'Teste';
@@ -268,18 +279,17 @@ begin
           for l:= 1 to 3 do
             begin
               {TissSP.TissProc.TissEquipe.TissTipoMemb INFORME ESSA PROPRIEDADE NO
-          OBJECT INSPECTOR por padrão fica o tipo para Juridico}
-              TissSP.TissProc.TissEquipe.TissCodProf := '02762719000195';{ o valor informado
+          OBJECT INSPECTOR por padrão fica o tipo para FisicGeral}
+              TissSP.TissProc.TissEquipe.TissTipoMemb:=conselhoProfissional;
+              TissSP.TissProc.TissEquipe.TissCodProf := '22222222';{ o valor informado
               aqui depende do tipo (TissSP.TissProc.TissEquipe.TissTipoMemb)
-               informado se o tipo for jurídico informe o CNPJ se não
-              informe CPF}
+               informado se o tipo for fisíco informe o CPF, Outros, Conselho Profissional}
               TissSP.TissProc.TissEquipe.TissProfiss.TissProf := 'Médico ' + IntToStr(l);
               TissSP.TissProc.TissEquipe.TissProfiss.TissSiglaConselho := 'CRM';
               TissSP.TissProc.TissEquipe.TissProfiss.TissNumConselho := '02457';
               TissSP.TissProc.TissEquipe.TissProfiss.TissUFCONSELHO := 'RJ';
               TissSP.TissProc.TissEquipe.TissProfiss.TissfCBOS := 06158;
-
-
+              TissSP.TissProc.TissEquipe.TissProfiss.TissPosicProf:=1;
               TissSP.adicionaProf;
             end;
           TissSP.TissProc.TissProcs.TissCodigo := '00010014';
@@ -308,16 +318,12 @@ begin
                 TissDespesa.TissIdentTipoTab := '01'; {Verifique
                 os valores nos arquivos da ANS}
                 TissDespesa.TissIdentDesc := 'TESTE DE DESPESA ' + IntToStr(j);
-
                 TissDespesa.TissTipDespesa := 1;
-
                 TissDespesa.TissDataReal := Date;
                 TissDespesa.TissHoraInicial := Time;
                 TissDespesa.TissHoraFinal := Time;
                 TissDespesa.TissredAcres := 0;
                 TissDespesa.TissQtde := 1;
-
-
                 TissDespesa.TissVlrUn :=  19.80;
                 TissDespesa.TissVlrTot := 19.5;
 
@@ -374,7 +380,7 @@ begin
   TissInt.Tisscabecalho.TissHoraRegistroTrans := Time;
   TissInt.Tisscabecalho.TissCNPJCPF := '02762719000195';
   TissInt.Tisscabecalho.TissRegANS := '0';
-  TissInt.Tisscabecalho.TissVersaoTISS := '2.01.02';
+  TissInt.Tisscabecalho.TissVersaoTISS := '2.01.03';
   TissInt.Tisscabecalho.TissNumLote := '1545';
   //FIM CABEÇALHO
   TissInt.criaCabecalho;  {COMANDO PARA ADICIONAR O CABEÇALHO}
@@ -485,16 +491,16 @@ begin
             begin
               {TissInt.TissProc.TissEquipe.TissTipoMemb INFORME ESSA PROPRIEDADE NO
           OBJECT INSPECTOR por padrão fica o tipo para Juridico}
-              TissInt.TissProc.TissEquipe.TissCodProf := '02762719000195';{ o valor informado
+              TissInt.TissProc.TissEquipe.TissTipoMemb:=FisicGeral;
+              TissInt.TissProc.TissEquipe.TissCodProf := '24428051115';{ o valor informado
               aqui depende do tipo (TissInt.TissProc.TissEquipe.TissTipoMemb)
-               informado se o tipo for jurídico informe o CNPJ se não
-              informe CPF}
+               informado se o tipo for jurídico informe o informe CPF, Outros, Conselho Profissional}
               TissInt.TissProc.TissEquipe.TissProfiss.TissProf := 'Médico ' + IntToStr(l);
               TissInt.TissProc.TissEquipe.TissProfiss.TissSiglaConselho := 'CRM';
               TissInt.TissProc.TissEquipe.TissProfiss.TissNumConselho := '02457';
               TissInt.TissProc.TissEquipe.TissProfiss.TissUFCONSELHO := 'RJ';
               TissInt.TissProc.TissEquipe.TissProfiss.TissfCBOS := 06158;
-
+              TissInt.TissProc.TissEquipe.TissProfiss.TissPosicProf := 1;
 
               TissInt.adicionaProf;
             end;

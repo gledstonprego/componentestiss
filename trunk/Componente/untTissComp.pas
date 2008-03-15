@@ -1,10 +1,10 @@
 unit untTissComp;
-                  
+
 interface
 uses
   SysUtils, Classes;
 type
-  TTissTipoGeral = (JuridicoGeral,FisicGeral,Outros);
+  TTissTipoGeral = (JuridicoGeral,FisicGeral,Outros,conselhoProfissional);
   TTissAnsVersao = (v2_01_02,v2_01_03);
   TTissTabela = class(TPersistent)
   private
@@ -160,8 +160,6 @@ type
     property TissObito:TTissObitoInt read fObito write fObito;
   end;
 
-
-
   TCompVersao = class(TPersistent)
   private
     Fversao: String;
@@ -245,6 +243,22 @@ type
     procedure setSiglaConselho(const Value: String);
     procedure setUFConselho(const Value: String);
     procedure setPosicProf(const Value: Integer);
+
+  {TTissProfissionalCompl = class(TPersistent)
+  private
+    fCBOS: Currency;
+    fNumConselho: String;
+    FProf: String;
+    fUFConselho: String;
+    fSiglaConselho: String;
+    FPosicProf: Integer;
+    procedure setCBOS(const Value: Currency);
+    procedure setNumConselho(const Value: String);
+    procedure setProf(const Value: String);
+    procedure setSiglaConselho(const Value: String);
+    procedure setUFConselho(const Value: String);
+    procedure setPosicProf(const Value: Integer);}
+
 
   public
     constructor create;
@@ -589,6 +603,7 @@ type
   private
     FCodProf: String;
     FProfissional: TTissProfissional;
+    //FProfissionalCompl: TTissProfissional;
     FTipoMemb: TTissTipoGeral;
     procedure setCodProf(const Value: String);
 
@@ -954,7 +969,7 @@ begin
   FZerosArq := 20;
   FEncoding:='ISO-8859-1';
   FVersaoXml:='1.0';
-  FVersaoTISS:='2.01.02';
+  FVersaoTISS:='2.01.03';
   FTipoGeral := JuridicoGeral;
   FMensagemTissXml:='xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
 end;
@@ -1203,6 +1218,18 @@ begin
 
 end;
 
+{ TTissPrestExecCompl }
+{
+constructor TTissPrestExecCompl.create;
+begin
+
+end;
+procedure TTissPrestExec.setCNPJCPF(const Value: String);
+begin
+
+end;
+}
+
 { TTissProfissional }
 
 constructor TTissProfissional.create;
@@ -1239,6 +1266,44 @@ procedure TTissProfissional.setUFConselho(const Value: String);
 begin
   fUFConselho := Value;
 end;
+
+{ TTissProfissionalCompl }
+{
+constructor TTissProfissionalCompl.create;
+begin
+
+end;
+
+procedure TTissProfissionalCompl.setCBOS(const Value: Currency);
+begin
+  //fCBOS := Value;
+end;
+
+procedure TTissProfissionalCompl.setNumConselho(const Value: String);
+begin
+  //fNumConselho := Value;
+end;
+
+procedure TTissProfissionalCompl.setPosicProf(const Value: Integer);
+begin
+  //FPosicProf := Value;
+end;
+
+procedure TTissProfissionalCompl.setProf(const Value: String);
+begin
+  //FProf := Value;
+end;
+
+procedure TTissProfissionalCompl.setSiglaConselho(const Value: String);
+begin
+  //fSiglaConselho := Value;
+end;
+
+procedure TTissProfissionalCompl.setUFConselho(const Value: String);
+begin
+  //fUFConselho := Value;
+end;
+}
 
 { TTissDiagnostico }
 
@@ -1374,12 +1439,12 @@ end;
 
 constructor TCompVersao.create;
 begin
- Fversao := '0.9.11';
+ Fversao := '0.9.14';
 end;
 
 procedure TCompVersao.setVersao(const Value: String);
 begin
-  Fversao := '0.9.11';
+  Fversao := '0.9.14';
 end;
 
 { TTissValidacao }
