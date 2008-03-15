@@ -322,7 +322,8 @@ begin
                   FMembEquipe.Add('<ans:codigoCBOS>'+FormatFloat('00000',TissProc.TissEquipe.TissProfiss.TissfCBOS)+'</ans:codigoCBOS>');
               FMembEquipe.Add('</ans:identificacaoProfissional>');
               if FTissConfSP_SADT.TissProc.TissEquipe.TissProfiss.TissPosicProf then
-                FMembEquipe.Add('<ans:posicaoProfissional>'+'0'+IntToStr(TissProc.TissEquipe.TissProfiss.TissPosicProf)+'</ans:posicaoProfissional>');
+                //FMembEquipe.Add('<ans:posicaoProfissional>'+IntToStr(TissProc.TissEquipe.TissProfiss.TissPosicProf)+'</ans:posicaoProfissional>');
+                FMembEquipe.Add('<ans:posicaoProfissional>'+FormatFloat('00',TissProc.TissEquipe.TissProfiss.TissPosicProf)+'</ans:posicaoProfissional>');
             end;
       FMembEquipe.Add('</ans:membroEquipe>');
     end;
@@ -560,7 +561,7 @@ begin
         if FTissConfSP_SADT.TissTipoSaida then
           FGuia.add('<ans:tipoSaida>'+FTipoSaida+'</ans:tipoSaida>');
         if FTissConfSP_SADT.TissTipoAtend then
-          FGuia.add('<ans:tipoAtendimento>'+'0'+inttostr(FTipoAtend)+'</ans:tipoAtendimento>');
+          FGuia.add('<ans:tipoAtendimento>'+FormatFloat('00',FTipoAtend)+'</ans:tipoAtendimento>');
         if Tissconfig.TissUsarProc then
           FGuia.add('<ans:procedimentosRealizados>');
      // FGuia.add('</ans:guiaSP_SADT>');

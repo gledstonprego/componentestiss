@@ -5,7 +5,7 @@
 <ans:tipoTransacao>ENVIO_LOTE_GUIAS</ans:tipoTransacao>
 <ans:sequencialTransacao>1</ans:sequencialTransacao>
 <ans:dataRegistroTransacao>15/03/2008</ans:dataRegistroTransacao>
-<ans:horaRegistroTransacao>16:07</ans:horaRegistroTransacao>
+<ans:horaRegistroTransacao>16:38</ans:horaRegistroTransacao>
 </ans:identificacaoTransacao>
 <ans:origem>
 <ans:codigoPrestadorNaOperadora>
@@ -347,6 +347,6 @@
 </ans:loteGuias>
 </ans:prestadorParaOperadora>
 <ans:epilogo>
-<ans:hash>8037d26da6427868dab9028041b46c32</ans:hash>
+<ans:hash>0e5eae9f546404551bc17eb66952fb5c</ans:hash>
 </ans:epilogo>
 </ans:mensagemTISS>
