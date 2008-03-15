@@ -289,7 +289,7 @@ begin
               TissSP.TissProc.TissEquipe.TissProfiss.TissNumConselho := '02457';
               TissSP.TissProc.TissEquipe.TissProfiss.TissUFCONSELHO := 'RJ';
               TissSP.TissProc.TissEquipe.TissProfiss.TissfCBOS := 06158;
-              TissSP.TissProc.TissEquipe.TissProfiss.TissPosicProf:=1;
+              TissSP.TissProc.TissEquipe.TissProfiss.TissPosicProf:=10;
               TissSP.adicionaProf;
             end;
           TissSP.TissProc.TissProcs.TissCodigo := '00010014';
@@ -500,7 +500,7 @@ begin
               TissInt.TissProc.TissEquipe.TissProfiss.TissNumConselho := '02457';
               TissInt.TissProc.TissEquipe.TissProfiss.TissUFCONSELHO := 'RJ';
               TissInt.TissProc.TissEquipe.TissProfiss.TissfCBOS := 06158;
-              TissInt.TissProc.TissEquipe.TissProfiss.TissPosicProf := 1;
+              TissInt.TissProc.TissEquipe.TissProfiss.TissPosicProf := 11;
 
               TissInt.adicionaProf;
             end;
