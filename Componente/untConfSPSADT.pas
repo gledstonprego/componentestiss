@@ -188,6 +188,7 @@ type
   end;
 
   TTissConfContratado = class(TPersistent)
+
   private
     FUsarEnd: Boolean;
     FNomeContradado: Boolean;
@@ -321,14 +322,18 @@ type
     FTissConfContratado: TTissConfContratado;
     FTissConfDiagnostico: TTissConfDiagnostico;
     FTissPrestadorExec: TTissConfContratado;
+    FTissPrestadorExecCompl: TTissConfContratado;
     FTissSPProcedimentos: TTissConfSPProcedimentos;
     FTissConfProfissional: TTissConfProfissional;
+    FTissProfissionalCompl: TTissConfProfissional;
     FCompVersao: TCompVersao;
     FUsarBenefic: boolean;
     FUsarDiagnostico: boolean;
     FUsarContratado: boolean;
     FUsarPrestadorExec: boolean;
+    FUsarPrestadorExecCompl: boolean;
     FUsarProfissional: boolean;
+    FUsarProfissionalCompl: boolean;
     FUsarUsarProc: boolean;
     FTissConfOutrasDesp: TTissConfOutrasDesp;
     FUsarOutDesp: Boolean;
@@ -353,7 +358,9 @@ type
     procedure setUsarContratado(const Value: boolean);
     procedure setUsarDiagnostico(const Value: boolean);
     procedure setUsarPrestadorExec(const Value: boolean);
+    procedure setUsarPrestadorExecCompl(const Value: boolean);
     procedure setUsarProfissional(const Value: boolean);
+    procedure setUsarProfissionalCompl(const Value: boolean);
     procedure setUsarUsarProc(const Value: boolean);
     procedure setTissConfOutrasDesp(const Value: TTissConfOutrasDesp);
     procedure setUsarOutDesp(const Value: Boolean);
@@ -364,9 +371,11 @@ type
     property TissUsarBenefic:boolean read FUsarBenefic write setUsarBenefic;
     property TissUsarContratado:boolean read FUsarContratado write setUsarContratado;
     property TissUsarPrestadorExec:boolean read FUsarPrestadorExec write setUsarPrestadorExec;
+    property TissUsarPrestadorExecCompl:boolean read FUsarPrestadorExecCompl write setUsarPrestadorExecCompl;
     property TissUsarDiagnostico:boolean read FUsarDiagnostico write setUsarDiagnostico;
     property TissUsarProc:boolean read FUsarUsarProc write setUsarUsarProc;
     property TissUsarProfissional:boolean read FUsarProfissional write setUsarProfissional;
+    property TissUsarProfissionalCompl:boolean read FUsarProfissionalCompl write setUsarProfissionalCompl;
         //Usar ou não outras despesas
     property TissUsarOutDespesas:Boolean read FUsarOutDesp write setUsarOutDesp;
 
@@ -375,9 +384,11 @@ type
     property TissBenefic:TTissConfBenific read FTissConfBenific write FTissConfBenific;
     property TissContratado:TTissConfContratado read FTissConfContratado write FTissConfContratado;
     property TissPrestadorExec:TTissConfContratado read FTissPrestadorExec write FTissPrestadorExec;
+    property TissPrestadorExecCompl:TTissConfContratado read FTissPrestadorExecCompl write FTissPrestadorExecCompl;
     property TissDiagnostico:TTissConfDiagnostico read FTissConfDiagnostico  write FTissConfDiagnostico;
     property TissProc:TTissConfSPProcedimentos read FTissSPProcedimentos  write FTissSPProcedimentos;
     property TissProfissional:TTissConfProfissional read FTissConfProfissional write FTissConfProfissional;
+    property TissProfissionalCompl:TTissConfProfissional read FTissProfissionalCompl write FTissProfissionalCompl;
     //outras Despesas
     property TissOutDesp: TTissConfOutrasDesp read FTissConfOutrasDesp write setTissConfOutrasDesp;
 
@@ -507,7 +518,6 @@ begin
   FTissTipoGeral := Value;
 end;
 
-
 procedure TTissConfCabecalho.setUsarNomeArqu(const Value: boolean);
 begin
   FUsarNomeArqu := Value;
@@ -522,8 +532,10 @@ begin
   FTissConfContratado := TTissConfContratado.create;
   FTissConfDiagnostico := TTissConfDiagnostico.create;
   FTissPrestadorExec := TTissConfContratado.create;
+  FTissPrestadorExecCompl := TTissConfContratado.create;
   FTissSPProcedimentos := TTissConfSPProcedimentos.create;
   FTissConfProfissional := TTissConfProfissional.create;
+  FTissProfissionalCompl := TTissConfProfissional.create;
   FTissConfOutrasDesp := TTissConfOutrasDesp.create;
   FTipoAtend:= true;
   FHoraAtend:= true;
@@ -545,11 +557,11 @@ begin
   FUsarDiagnostico:= true;
   FUsarContratado:= true;
   FUsarPrestadorExec:= true;
+  FUsarPrestadorExecCompl:= true;
   FUsarProfissional := true;
+  FUsarProfissionalCompl := true;
   FUsarUsarProc := true;
 end;
-
-
 
 procedure TTissConfSP_SADT.setcaraAtend(const Value: boolean);
 begin
@@ -662,9 +674,19 @@ begin
   FUsarPrestadorExec := Value;
 end;
 
+procedure TTissConfSP_SADT.setUsarPrestadorExecCompl(const Value: boolean);
+begin
+  FUsarPrestadorExecCompl := Value;
+end;
+
 procedure TTissConfSP_SADT.setUsarProfissional(const Value: boolean);
 begin
   FUsarProfissional := Value;
+end;
+
+procedure TTissConfSP_SADT.setUsarProfissionalCompl(const Value: boolean);
+begin
+  FUsarProfissionalCompl := Value;
 end;
 
 procedure TTissConfSP_SADT.setUsarUsarProc(const Value: boolean);
@@ -755,7 +777,6 @@ procedure TTissConfContratado.setUsarEnd(const Value: Boolean);
 begin
   FUsarEnd := Value;
 end;
-
 { TTissConfDiagnostico }
 
 constructor TTissConfDiagnostico.create;
