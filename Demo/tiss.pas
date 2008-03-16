@@ -148,7 +148,7 @@ begin
 
           {MUITA ATENÇÃO AQUI COMO ANS TRABALHA COM VÍRGULA PARA SEPARAR AS CASAS
           DECIMAIS É NECESSÁRIO COLOCAR A LINHA ABAIXO}
-          DecimalSeparator := ',';
+          DecimalSeparator := '.';
   //Habilitar ou não a validação
   if ckvalidar.Checked then
     TissSP.TissValid.UsarValidacao := true
@@ -276,6 +276,7 @@ begin
           basta vc mudar a propridade TissSP.Tissconfig.TissProc.TissUsarEquipe para True
           e se no proximo procedimento não tiver equipe mude para false e pronto}
           TissSP.Tissconfig.TissProc.TissUsarEquipe := True;
+          TissSP.TissProc.TissValorTotalGeral:=0;
           for l:= 1 to 3 do
             begin
               {TissSP.TissProc.TissEquipe.TissTipoMemb INFORME ESSA PROPRIEDADE NO
@@ -304,6 +305,7 @@ begin
           TissSP.TissProc.TissReducAcres := 0;
           TissSP.TissProc.TissValor := 12.5;
           TissSP.TissProc.TissValorTotal := 125.25;
+          TissSP.TissProc.TissValorTotalGeral:=TissSP.TissProc.TissValorTotalGeral+TissSP.TissProc.TissValorTotal;
           TissSP.adicionaProc;
         end;
 
@@ -331,13 +333,21 @@ begin
                 TissTotalGeral := TissTotalGeral + TissDespesa.TissVlrTot;
                 TissSP.adicionaOutDesp;
               end;
+          // INFORME VALOR ZERO PARA O TOTAL QUE NÃO TEM VALOR
+          TissSP.TissProc.TissValorTotalServicos:=1234.56;
+          TissSP.TissProc.TissValorTotalDiarias:=0;
+          TissSP.TissProc.TissValorTotalTaxas:=239.00;
+          TissSP.TissProc.TissValorTotalMateriais:=5678.90;
+          TissSP.TissProc.TissValorTotalMedicamentos:=10000.34;
+          TissSP.TissProc.TissValorTotalGases:=0;
+          TissSP.TissProc.TissValorTotalGeral:=TissSP.TissProc.TissValorTotalGeral+TissSP.TissOutDesp.TissTotalGeral;
           end;
-      TissSP.finalizaGuia; 
+    TissSP.finalizaGuia;
     end;
 
  // TissSP.criaRodape;
   TissSP.GerarXml;
-                  DecimalSeparator := '.';
+                  DecimalSeparator := ',';
     {VOLTANDO O SEPARADOR DE CASAS DECIMAIS AO PADRAO}
 
   if FileExists(TissSP.Tisscabecalho.TissArquivo) then
@@ -394,6 +404,7 @@ begin
       //identificação guia SADTSP
       TissInt.TissNumGuiaPrest := IntToStr(i);
       TissInt.TissNumGuiaOper := IntToStr(i);
+      TissInt.TissNumGuiaSolic := IntToStr(i);
       TissInt.TissRegANS := '0';
 
       //dados autorização
@@ -486,7 +497,8 @@ begin
           e ser por acaso um procedimento tiver equipe e outro não, então
           basta vc mudar a propridade TissInt.Tissconfig.TissProc.TissUsarEquipe para True
           e se no proximo procedimento não tiver equipe mude para false e pronto}
-         // TissInt.Tissconfig.TissProc.TissUsarEquipe := True;
+          TissInt.Tissconfig.TissProc.TissUsarEquipe := True;
+          TissInt.TissProc.TissValorTotalGeral:=0;
           for l:= 1 to 3 do
             begin
               {TissInt.TissProc.TissEquipe.TissTipoMemb INFORME ESSA PROPRIEDADE NO
@@ -516,6 +528,7 @@ begin
           TissInt.TissProc.TissReducAcres := 0;
           TissInt.TissProc.TissValor := 19.80;
           TissInt.TissProc.TissValorTotal := 125.45;
+          TissInt.TissProc.TissValorTotalGeral:=TissInt.TissProc.TissValorTotalGeral+TissInt.TissProc.TissValorTotal;
           TissInt.adicionaProc;
         end;
 
@@ -547,6 +560,13 @@ begin
                 TissTotalGeral := TissTotalGeral + TissDespesa.TissVlrTot;
                 TissInt.adicionaOutDesp;
               end;
+              TissInt.TissProc.TissValorTotalServicos:=1234.56;
+              TissInt.TissProc.TissValorTotalDiarias:=0;
+              TissInt.TissProc.TissValorTotalTaxas:=239.00;
+              TissInt.TissProc.TissValorTotalMateriais:=5678.90;
+              TissInt.TissProc.TissValorTotalMedicamentos:=10000.34;
+              TissInt.TissProc.TissValorTotalGases:=0;
+              TissInt.TissProc.TissValorTotalGeral:=TissInt.TissProc.TissValorTotalGeral+TissInt.TissOutDesp.TissTotalGeral;
           end;
       TissInt.finalizaGuia;
     end;

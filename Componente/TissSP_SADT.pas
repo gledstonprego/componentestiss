@@ -602,7 +602,7 @@ end;
 
 procedure TTissSP_SADT.criaCabecalho;
 begin
-  DecimalSeparator := '.';
+  //DecimalSeparator := '.';
   if Trim(FTissCabecalho.TissArquivo) = '' then
     begin
       Application.MessageBox('Informe o arquivo xml a ser criado!!!','ATENÇÃO',MB_OK+MB_ICONEXCLAMATION);
@@ -725,7 +725,9 @@ end;
 procedure TTissSP_SADT.finalizaGuia;
 var
   arquivo,arquivoTemp: TextFile;
-  numhash,linha, TissTotalGeral: string;
+  numhash,linha, TissTotalServicos, TissTotalDiarias,
+  TissTotalTaxas,TissTotalMateriais, TissTotalMedicamentos,
+  TissTotalGases, TissTotalGeral: string;
   i: integer;
 begin
     try 
@@ -754,6 +756,15 @@ begin
           FGeral.Add('<ans:totalGeralOutrasDespesas>'+TissTotalGeral+'</ans:totalGeralOutrasDespesas>');
           FGeral.Add('</ans:outrasDespesas>')
         end;
+      FGeral.Add('<ans:valorTotal>');
+      FGeral.Add('<ans:servicosExecutados>'+CurrToStr(TissProc.TissValorTotalServicos)+'</ans:servicosExecutados>');
+      FGeral.Add('<ans:diarias>'+CurrToStr(TissProc.TissValorTotalDiarias)+'</ans:diarias>');
+      FGeral.Add('<ans:taxas>'+CurrToStr(TissProc.TissValorTotalTaxas)+'</ans:taxas>');
+      FGeral.Add('<ans:materiais>'+CurrToStr(TissProc.TissValorTotalMateriais)+'</ans:materiais>');
+      FGeral.Add('<ans:medicamentos>'+CurrToStr(TissProc.TissValorTotalMedicamentos)+'</ans:medicamentos>');
+      FGeral.Add('<ans:gases>'+CurrToStr(TissProc.TissValorTotalGases)+'</ans:gases>');
+      FGeral.Add('<ans:totalGeral>'+CurrToStr(TissProc.TissValorTotalGeral)+'</ans:totalGeral>');
+      FGeral.Add('</ans:valorTotal>');
       FGeral.Add('</ans:guiaSP_SADT>');
       FGuia.Clear;
       FProc.Clear;

@@ -622,6 +622,13 @@ type
     FTissReducAcres: Currency;
     FTissQtde: Currency;
     FValorTotal: Currency;
+    FValorTotalServicos: Currency;
+    FValorTotalDiarias: Currency;
+    FValorTotalTaxas: Currency;
+    FValorTotalMateriais: Currency;
+    FValorTotalMedicamentos: Currency;
+    FValorTotalGases: Currency;
+    FValorTotalGeral: Currency;
     FTissValor: Currency;
     FTissTecUtil: string;
     FTissVdeAcesso: string;
@@ -637,6 +644,13 @@ type
     procedure setTissValor(const Value: Currency);
     procedure setTissVdeAcesso(const Value: string);
     procedure setValorTotal(const Value: Currency);
+    procedure setValorTotalServicos(const Value: Currency);
+    procedure setValorTotalDiarias(const Value: Currency);
+    procedure setValorTotalTaxas(const Value: Currency);
+    procedure setValorTotalMateriais(const Value: Currency);
+    procedure setValorTotalMedicamentos(const Value: Currency);
+    procedure setValorTotalGases(const Value: Currency);
+    procedure setValorTotalGeral(const Value: Currency);
 
   public
     constructor create;
@@ -652,6 +666,13 @@ type
     property TissReducAcres:Currency read FTissReducAcres write setTissReducAcres;
     property TissValor:Currency read FTissValor write setTissValor;
     property TissValorTotal:Currency read FValorTotal write setValorTotal;
+    property TissValorTotalServicos:Currency read FValorTotalServicos write setValorTotalServicos;
+    property TissValorTotalDiarias:Currency read FValorTotalDiarias write setValorTotalDiarias;
+    property TissValorTotalTaxas:Currency read FValorTotalTaxas write setValorTotalTaxas;
+    property TissValorTotalMateriais:Currency read FValorTotalMateriais write setValorTotalMateriais;
+    property TissValorTotalMedicamentos:Currency read FValorTotalMedicamentos write setValorTotalMedicamentos;
+    property TissValorTotalGases:Currency read FValorTotalGases write setValorTotalGases;
+    property TissValorTotalGeral:Currency read FValorTotalGeral write setValorTotalGeral;
   end;
 
   function RetZero(ZEROS: string;QUANT:integer): string;
@@ -1433,6 +1454,36 @@ end;
 procedure TTissSPProcedimentos.setValorTotal(const Value: Currency);
 begin
   FValorTotal := Value;
+end;
+
+procedure TTissSPProcedimentos.setValorTotalServicos(const Value: Currency);
+begin
+  FValorTotalServicos := Value;
+end;
+procedure TTissSPProcedimentos.setValorTotalDiarias(const Value: Currency);
+begin
+  FValorTotalDiarias := Value;
+end;
+procedure TTissSPProcedimentos.setValorTotalTaxas(const Value: Currency);
+begin
+  FValorTotalTaxas := Value;
+end;
+procedure TTissSPProcedimentos.setValorTotalMateriais(const Value: Currency);
+begin
+  FValorTotalMateriais := Value;
+end;
+procedure TTissSPProcedimentos.setValorTotalMedicamentos(const Value: Currency);
+begin
+  FValorTotalMedicamentos := Value;
+end;
+procedure TTissSPProcedimentos.setValorTotalGases(const Value: Currency);
+begin
+  FValorTotalGases := Value;
+end;
+
+procedure TTissSPProcedimentos.setValorTotalGeral(const Value: Currency);
+begin
+  FValorTotalGeral := Value;
 end;
 
 { TTissVersao }

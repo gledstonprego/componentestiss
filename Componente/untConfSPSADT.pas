@@ -126,6 +126,7 @@ type
     FTissQtde: Boolean;
     FTissHsInicio: Boolean;
     FValorTotal: Boolean;
+    FValorTotalGeral: Boolean;
     FEquipe: TTissConfEquipe;
     FProcs: TTissConfProc;
     FTissConfProfissional: TTissConfProfissional;
@@ -139,6 +140,7 @@ type
     procedure setTissValor(const Value: Boolean);
     procedure setTissVdeAcesso(const Value: Boolean);
     procedure setValorTotal(const Value: Boolean);
+    procedure setValorTotalGeral(const Value: Boolean);
     procedure setUsarEquipe(const Value: Boolean);
   public
     constructor create;
@@ -155,6 +157,7 @@ type
     property TissReducAcres:Boolean read FTissReducAcres write setTissReducAcres;
     property TissValor:Boolean read FTissValor write setTissValor;
     property TissValorTotal:Boolean read FValorTotal write setValorTotal;
+    property TissValorTotalGeral:Boolean read FValorTotalGeral write setValorTotalgeral;
   end;
 
 
@@ -882,6 +885,7 @@ begin
     FTissQtde:= True;
     FTissHsInicio:= True;
     FValorTotal:= True;
+    FValorTotalGeral:= True;
     FEquipe:= TTissConfEquipe.create;
     FProcs:= TTissConfProc.create;
     FUsarEquipe := True;
@@ -936,6 +940,10 @@ end;
 procedure TTissConfSPProcedimentos.setValorTotal(const Value: Boolean);
 begin
   FValorTotal := Value;
+end;
+procedure TTissConfSPProcedimentos.setValorTotalGeral(const Value: Boolean);
+begin
+  FValorTotalGeral := Value;
 end;
 
 { TTissConfProfissional }
