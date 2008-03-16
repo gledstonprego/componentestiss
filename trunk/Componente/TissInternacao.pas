@@ -587,6 +587,15 @@ begin
               
       if FTissConf.TissTipoFat then
         FGeral.Add('<ans:tipoFaturamento>'+FTipoFat+'</ans:tipoFaturamento>');
+      FGeral.Add('<ans:valorTotal>');
+      FGeral.Add('<ans:servicosExecutados>'+CurrToStr(TissProc.TissValorTotalServicos)+'</ans:servicosExecutados>');
+      FGeral.Add('<ans:diarias>'+CurrToStr(TissProc.TissValorTotalDiarias)+'</ans:diarias>');
+      FGeral.Add('<ans:taxas>'+CurrToStr(TissProc.TissValorTotalTaxas)+'</ans:taxas>');
+      FGeral.Add('<ans:materiais>'+CurrToStr(TissProc.TissValorTotalMateriais)+'</ans:materiais>');
+      FGeral.Add('<ans:medicamentos>'+CurrToStr(TissProc.TissValorTotalMedicamentos)+'</ans:medicamentos>');
+      FGeral.Add('<ans:gases>'+CurrToStr(TissProc.TissValorTotalGases)+'</ans:gases>');
+      FGeral.Add('<ans:totalGeral>'+CurrToStr(TissProc.TissValorTotalGeral)+'</ans:totalGeral>');
+      FGeral.Add('</ans:valorTotal>');
 
       FGeral.Add('</ans:guiaResumoInternacao>');
       FGuia.Clear;
