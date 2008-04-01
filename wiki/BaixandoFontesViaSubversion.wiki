@@ -8,10 +8,6 @@ dispostas a colaborar no desenvolvimento do mesmo.
 
 = Passo-a-passo =
 
-  * Se não tiver, você vai precisar criar uma conta do Google
-
-  * Solicite aos *OWNERS* do projeto uma senha para poder fazer alterações nos fontes
-
   * Baixe o programa TortotiseSVN:
     http://tortoisesvn.net/downloads
 
@@ -19,10 +15,16 @@ dispostas a colaborar no desenvolvimento do mesmo.
 
   * Clique com o botão direito em cima do nome desta pasta e escolha a opção "SVN Checkout..."
 
-  * Digite a seguinte informação:  
-    URL of Repository: https://componentestiss.googlecode.com/svn/trunk/
+  * Se você quiser colaborar com o desenvolvimento do componente, você vai precisar:
 
-  * Digite seu usuário do Google a Senha que você havia recebido.
+    # Criar uma conta do Google e Solicite aos *OWNERS* do projeto te adicionem como membro
+
+    # Digite a seguinte informação:  
+      URL of Repository: https://componentestiss.googlecode.com/svn/trunk/
+
+    # Digite seu usuário do Google a Senha que o Google Code gerou pra você.
  
- 
+  * Agora se você simplesmente quer baixar os fontes, sem maiores pretensões, utilize a url:
+    http://componentestiss.googlecode.com/svn/trunk/
+
  
