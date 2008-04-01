@@ -22,7 +22,7 @@ dispostas a colaborar no desenvolvimento do mesmo.
 
     - Usar a seguinte url no Tortoise: https://componentestiss.googlecode.com/svn/trunk/
 
-    - Usar como login o seu USERNAME do Google (o que vem antes do "@" no seu email) e seu GOOGLE CODE PASSWORD.
+    - Usar como login o seu USERNAME do Google (o que vem antes do "@" no seu email) e seu GOOGLE CODE PASSWORD (http://code.google.com/hosting/settings).
 
 
  
