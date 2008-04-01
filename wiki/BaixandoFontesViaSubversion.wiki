@@ -14,14 +14,15 @@ dispostas a colaborar no desenvolvimento do mesmo.
 
   * Clique com o botão direito em cima do nome desta pasta e escolha a opção "SVN Checkout..."
 
-  * Se você quiser colaborar com o desenvolvimento do componente, você vai precisar:
+  * Se você simplesmente quer baixar os fontes, sem maiores pretensões, utilize a url: http://componentestiss.googlecode.com/svn/trunk/
+
+  * Agora, se você quiser colaborar com o desenvolvimento do componente, você vai precisar:
 
     - Criar uma conta do Google e Solicite aos *OWNERS* do projeto te adicionem como membro
 
-    - Digite a seguinte informação: https://componentestiss.googlecode.com/svn/trunk/
+    - Usar a seguinte url no Tortoise: https://componentestiss.googlecode.com/svn/trunk/
 
-    - Digite seu usuário do Google a Senha que o Google Code gerou pra você.
+    - Usar como login o seu USERNAME do Google (o que vem antes do "@" no seu email) e seu GOOGLE CODE PASSWORD.
 
-  * Agora se você simplesmente quer baixar os fontes, sem maiores pretensões, utilize a url: http://componentestiss.googlecode.com/svn/trunk/
 
  
