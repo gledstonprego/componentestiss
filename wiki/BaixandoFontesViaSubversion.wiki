@@ -18,7 +18,7 @@ dispostas a colaborar no desenvolvimento do mesmo.
 
     # Criar uma conta do Google e Solicite aos *OWNERS* do projeto te adicionem como membro
 
-    Digite a seguinte informação: https://componentestiss.googlecode.com/svn/trunk/
+    # Digite a seguinte informação: https://componentestiss.googlecode.com/svn/trunk/
 
     Digite seu usuário do Google a Senha que o Google Code gerou pra você.
 
