@@ -16,11 +16,11 @@ dispostas a colaborar no desenvolvimento do mesmo.
 
   * Se você quiser colaborar com o desenvolvimento do componente, você vai precisar:
 
-    #1 Criar uma conta do Google e Solicite aos *OWNERS* do projeto te adicionem como membro
+    - Criar uma conta do Google e Solicite aos *OWNERS* do projeto te adicionem como membro
 
-    #2 Digite a seguinte informação: https://componentestiss.googlecode.com/svn/trunk/
+    - Digite a seguinte informação: https://componentestiss.googlecode.com/svn/trunk/
 
-    Digite seu usuário do Google a Senha que o Google Code gerou pra você.
+    - Digite seu usuário do Google a Senha que o Google Code gerou pra você.
 
   * Agora se você simplesmente quer baixar os fontes, sem maiores pretensões, utilize a url: http://componentestiss.googlecode.com/svn/trunk/
 
