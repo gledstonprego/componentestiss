@@ -22,7 +22,6 @@ dispostas a colaborar no desenvolvimento do mesmo.
 
     * Digite seu usuário do Google a Senha que o Google Code gerou pra você.
 
-  * Agora se você simplesmente quer baixar os fontes, sem maiores pretensões,
-utilize a url: http://componentestiss.googlecode.com/svn/trunk/
+  * Agora se você simplesmente quer baixar os fontes, sem maiores pretensões, utilize a url: http://componentestiss.googlecode.com/svn/trunk/
 
  
