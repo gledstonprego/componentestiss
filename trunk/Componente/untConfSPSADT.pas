@@ -560,9 +560,9 @@ begin
   FUsarDiagnostico:= true;
   FUsarContratado:= true;
   FUsarPrestadorExec:= true;
-  FUsarPrestadorExecCompl:= true;
+  FUsarPrestadorExecCompl:= false;
   FUsarProfissional := true;
-  FUsarProfissionalCompl := true;
+  FUsarProfissionalCompl := false;
   FUsarUsarProc := true;
 end;
 
