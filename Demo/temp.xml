@@ -4,8 +4,8 @@
 <ans:identificacaoTransacao>
 <ans:tipoTransacao>ENVIO_LOTE_GUIAS</ans:tipoTransacao>
 <ans:sequencialTransacao>1</ans:sequencialTransacao>
-<ans:dataRegistroTransacao>15/03/2008</ans:dataRegistroTransacao>
-<ans:horaRegistroTransacao>16:38</ans:horaRegistroTransacao>
+<ans:dataRegistroTransacao>29/05/2008</ans:dataRegistroTransacao>
+<ans:horaRegistroTransacao>15:49</ans:horaRegistroTransacao>
 </ans:identificacaoTransacao>
 <ans:origem>
 <ans:codigoPrestadorNaOperadora>
@@ -25,7 +25,7 @@
 <ans:guiaConsulta>
 <ans:identificacaoGuia>
 <ans:registroANS>0</ans:registroANS>
-<ans:dataEmissaoGuia>15/03/2008</ans:dataEmissaoGuia>
+<ans:dataEmissaoGuia>29/05/2008</ans:dataEmissaoGuia>
 <ans:numeroGuiaPrestador>1</ans:numeroGuiaPrestador>
 <ans:numeroGuiaOperadora>1</ans:numeroGuiaOperadora>
 </ans:identificacaoGuia>
@@ -33,7 +33,7 @@
 <ans:numeroCarteira>548787</ans:numeroCarteira>
 <ans:nomeBeneficiario>Fabiano de Oliveira Prado</ans:nomeBeneficiario>
 <ans:nomePlano>PLANO DE SAUDE 1</ans:nomePlano>
-<ans:validadeCarteira>14/04/2008</ans:validadeCarteira>
+<ans:validadeCarteira>28/06/2008</ans:validadeCarteira>
 <ans:numeroCNS>45787</ans:numeroCNS>
 </ans:beneficiario>
 <ans:dadosContratado>
@@ -89,7 +89,7 @@
 <ans:guiaConsulta>
 <ans:identificacaoGuia>
 <ans:registroANS>0</ans:registroANS>
-<ans:dataEmissaoGuia>15/03/2008</ans:dataEmissaoGuia>
+<ans:dataEmissaoGuia>29/05/2008</ans:dataEmissaoGuia>
 <ans:numeroGuiaPrestador>2</ans:numeroGuiaPrestador>
 <ans:numeroGuiaOperadora>2</ans:numeroGuiaOperadora>
 </ans:identificacaoGuia>
@@ -97,7 +97,7 @@
 <ans:numeroCarteira>548787</ans:numeroCarteira>
 <ans:nomeBeneficiario>Fabiano de Oliveira Prado</ans:nomeBeneficiario>
 <ans:nomePlano>PLANO DE SAUDE 2</ans:nomePlano>
-<ans:validadeCarteira>14/04/2008</ans:validadeCarteira>
+<ans:validadeCarteira>28/06/2008</ans:validadeCarteira>
 <ans:numeroCNS>45787</ans:numeroCNS>
 </ans:beneficiario>
 <ans:dadosContratado>
@@ -153,7 +153,7 @@
 <ans:guiaConsulta>
 <ans:identificacaoGuia>
 <ans:registroANS>0</ans:registroANS>
-<ans:dataEmissaoGuia>15/03/2008</ans:dataEmissaoGuia>
+<ans:dataEmissaoGuia>29/05/2008</ans:dataEmissaoGuia>
 <ans:numeroGuiaPrestador>3</ans:numeroGuiaPrestador>
 <ans:numeroGuiaOperadora>3</ans:numeroGuiaOperadora>
 </ans:identificacaoGuia>
@@ -161,7 +161,7 @@
 <ans:numeroCarteira>548787</ans:numeroCarteira>
 <ans:nomeBeneficiario>Fabiano de Oliveira Prado</ans:nomeBeneficiario>
 <ans:nomePlano>PLANO DE SAUDE 3</ans:nomePlano>
-<ans:validadeCarteira>14/04/2008</ans:validadeCarteira>
+<ans:validadeCarteira>28/06/2008</ans:validadeCarteira>
 <ans:numeroCNS>45787</ans:numeroCNS>
 </ans:beneficiario>
 <ans:dadosContratado>
@@ -217,7 +217,7 @@
 <ans:guiaConsulta>
 <ans:identificacaoGuia>
 <ans:registroANS>0</ans:registroANS>
-<ans:dataEmissaoGuia>15/03/2008</ans:dataEmissaoGuia>
+<ans:dataEmissaoGuia>29/05/2008</ans:dataEmissaoGuia>
 <ans:numeroGuiaPrestador>4</ans:numeroGuiaPrestador>
 <ans:numeroGuiaOperadora>4</ans:numeroGuiaOperadora>
 </ans:identificacaoGuia>
@@ -225,7 +225,7 @@
 <ans:numeroCarteira>548787</ans:numeroCarteira>
 <ans:nomeBeneficiario>Fabiano de Oliveira Prado</ans:nomeBeneficiario>
 <ans:nomePlano>PLANO DE SAUDE 4</ans:nomePlano>
-<ans:validadeCarteira>14/04/2008</ans:validadeCarteira>
+<ans:validadeCarteira>28/06/2008</ans:validadeCarteira>
 <ans:numeroCNS>45787</ans:numeroCNS>
 </ans:beneficiario>
 <ans:dadosContratado>
@@ -281,7 +281,7 @@
 <ans:guiaConsulta>
 <ans:identificacaoGuia>
 <ans:registroANS>0</ans:registroANS>
-<ans:dataEmissaoGuia>15/03/2008</ans:dataEmissaoGuia>
+<ans:dataEmissaoGuia>29/05/2008</ans:dataEmissaoGuia>
 <ans:numeroGuiaPrestador>5</ans:numeroGuiaPrestador>
 <ans:numeroGuiaOperadora>5</ans:numeroGuiaOperadora>
 </ans:identificacaoGuia>
@@ -289,7 +289,7 @@
 <ans:numeroCarteira>548787</ans:numeroCarteira>
 <ans:nomeBeneficiario>Fabiano de Oliveira Prado</ans:nomeBeneficiario>
 <ans:nomePlano>PLANO DE SAUDE 5</ans:nomePlano>
-<ans:validadeCarteira>14/04/2008</ans:validadeCarteira>
+<ans:validadeCarteira>28/06/2008</ans:validadeCarteira>
 <ans:numeroCNS>45787</ans:numeroCNS>
 </ans:beneficiario>
 <ans:dadosContratado>
@@ -347,6 +347,6 @@
 </ans:loteGuias>
 </ans:prestadorParaOperadora>
 <ans:epilogo>
-<ans:hash>0e5eae9f546404551bc17eb66952fb5c</ans:hash>
+<ans:hash>fb437d6aedd0fdbe44160ffcfbdc7235</ans:hash>
 </ans:epilogo>
 </ans:mensagemTISS>
