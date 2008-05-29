@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 198
-  Top = 53
+  Left = 295
+  Top = 232
   BorderStyle = bsDialog
   Caption = 'Form1'
   ClientHeight = 466
@@ -226,7 +226,7 @@ object Form1: TForm1
   end
   object TissC: TTissConsulta
     ansVersaoXSD = v2_01_03
-    Versao.Versao = '0.9.14'
+    Versao.Versao = '0.9.15'
     TissVersaoXml = '1.0'
     TissVersaoTISS = '2.01.03'
     TissEncoding = 'ISO-8859-1'
@@ -290,13 +290,15 @@ object Form1: TForm1
   end
   object TissSP: TTissSP_SADT
     ansVersaoXSD = v2_01_03
-    Versao.Versao = '0.9.14'
+    Versao.Versao = '0.9.15'
     Tissconfig.TissUsarBenefic = True
     Tissconfig.TissUsarContratado = True
     Tissconfig.TissUsarPrestadorExec = True
+    Tissconfig.TissUsarPrestadorExecCompl = False
     Tissconfig.TissUsarDiagnostico = True
     Tissconfig.TissUsarProc = True
     Tissconfig.TissUsarProfissional = True
+    Tissconfig.TissUsarProfissionalCompl = False
     Tissconfig.TissUsarOutDespesas = True
     Tissconfig.TissCabecalho.TissTipoTrans = True
     Tissconfig.TissCabecalho.TissDataRegistroTrans = True
@@ -339,6 +341,19 @@ object Form1: TForm1
     Tissconfig.TissPrestadorExec.TissCEP = True
     Tissconfig.TissPrestadorExec.TissCNES = True
     Tissconfig.TissPrestadorExec.TissUsarEnd = True
+    Tissconfig.TissPrestadorExecCompl.TissTipoGeral = True
+    Tissconfig.TissPrestadorExecCompl.TissCNPJCPF = True
+    Tissconfig.TissPrestadorExecCompl.TissNomeContradado = True
+    Tissconfig.TissPrestadorExecCompl.TisstipoLogradouro = True
+    Tissconfig.TissPrestadorExecCompl.TissLogradouro = True
+    Tissconfig.TissPrestadorExecCompl.TissEndNum = True
+    Tissconfig.TissPrestadorExecCompl.TissComplemento = True
+    Tissconfig.TissPrestadorExecCompl.TisscodigoIBGE = True
+    Tissconfig.TissPrestadorExecCompl.TissMunicipio = True
+    Tissconfig.TissPrestadorExecCompl.TissUF = True
+    Tissconfig.TissPrestadorExecCompl.TissCEP = True
+    Tissconfig.TissPrestadorExecCompl.TissCNES = True
+    Tissconfig.TissPrestadorExecCompl.TissUsarEnd = True
     Tissconfig.TissDiagnostico.TissCIDNomeTab = True
     Tissconfig.TissDiagnostico.TissCIDCodDiag = True
     Tissconfig.TissDiagnostico.TissCIDDescDiag = True
@@ -367,12 +382,19 @@ object Form1: TForm1
     Tissconfig.TissProc.TissReducAcres = True
     Tissconfig.TissProc.TissValor = True
     Tissconfig.TissProc.TissValorTotal = True
+    Tissconfig.TissProc.TissValorTotalGeral = True
     Tissconfig.TissProfissional.TissProf = True
     Tissconfig.TissProfissional.TissSiglaConselho = True
     Tissconfig.TissProfissional.TissNumConselho = True
     Tissconfig.TissProfissional.TissUFConselho = True
     Tissconfig.TissProfissional.TissfCBOS = True
     Tissconfig.TissProfissional.TissPosicProf = True
+    Tissconfig.TissProfissionalCompl.TissProf = True
+    Tissconfig.TissProfissionalCompl.TissSiglaConselho = True
+    Tissconfig.TissProfissionalCompl.TissNumConselho = True
+    Tissconfig.TissProfissionalCompl.TissUFConselho = True
+    Tissconfig.TissProfissionalCompl.TissfCBOS = True
+    Tissconfig.TissProfissionalCompl.TissPosicProf = True
     Tissconfig.TissOutDesp.TissIdentCodTab = True
     Tissconfig.TissOutDesp.TissIdentTipTab = True
     Tissconfig.TissOutDesp.TissIdentDesc = True
@@ -412,7 +434,9 @@ object Form1: TForm1
     TissContratado.TissTipoGeral = JuridicoGeral
     TissContratado.TissCEP = '454'
     TissPrestadorExec.TissTipoGeral = JuridicoGeral
+    TissPrestadorExecCompl.TissTipoGeral = JuridicoGeral
     TissProfissional.TissPosicProf = 0
+    TissProfissionalCompl.TissPosicProf = 0
     TissTipoSP = FisicoSP_SADT
     TissDiagnostico.TissValor = 0
     TissDiagnostico.TissIndicAcid = 0
@@ -428,7 +452,7 @@ object Form1: TForm1
   end
   object TissInt: TTissInternacao
     ansVersaoXSD = v2_01_03
-    Versao.Versao = '0.9.14'
+    Versao.Versao = '0.9.15'
     TissContratado.TissTipoGeral = JuridicoGeral
     TissProfissional.TissPosicProf = 0
     TissPrestadorExec.TissTipoGeral = JuridicoGeral
