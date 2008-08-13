@@ -18,7 +18,7 @@ dispostas a colaborar no desenvolvimento do mesmo.
 
   * Agora, se você quiser colaborar com o desenvolvimento do componente, você vai precisar:
 
-    - Criar uma conta do Google e Solicite aos *OWNERS* do projeto te adicionem como membro
+    - Criar uma conta do Google e solicitar aos *OWNERS* do projeto que te adicionem como membro
 
     - Usar a seguinte url no Tortoise: https://componentestiss.googlecode.com/svn/trunk/
 
