@@ -40,7 +40,7 @@ object Form1: TForm1
     Top = 56
     Width = 97
     Height = 25
-    Caption = 'Gerar Consulta'
+    Caption = 'Gerar Consulta    '
     TabOrder = 0
     OnClick = Button1Click
   end
@@ -49,7 +49,7 @@ object Form1: TForm1
     Top = 88
     Width = 97
     Height = 25
-    Caption = 'Gerar SP/SADT'
+    Caption = 'Gerar SP/SADT '
     TabOrder = 1
     OnClick = Button2Click
   end
@@ -59,8 +59,9 @@ object Form1: TForm1
     Width = 409
     Height = 129
     Lines.Strings = (
-      'Todos os componentes est'#227'o em fase de'
-      'teste, e n'#227'o foi colocado hainda todos'
+      
+        'Todos os componentes est'#227'o em fase de teste, e n'#227'o foi colocado ' +
+        'ainda todos'
       'os campos da Guia somente os obrigat'#243'rios.'
       ''
       'Desenvolvimento'
@@ -226,7 +227,7 @@ object Form1: TForm1
   end
   object TissC: TTissConsulta
     ansVersaoXSD = v2_01_03
-    Versao.Versao = '0.9.15'
+    Versao.Versao = '0.9.14'
     TissVersaoXml = '1.0'
     TissVersaoTISS = '2.01.03'
     TissEncoding = 'ISO-8859-1'
@@ -298,7 +299,9 @@ object Form1: TForm1
     Tissconfig.TissUsarDiagnostico = True
     Tissconfig.TissUsarProc = True
     Tissconfig.TissUsarProfissional = True
+
     Tissconfig.TissUsarProfissionalCompl = False
+    Tissconfig.TissUsarOPM = True
     Tissconfig.TissUsarOutDespesas = True
     Tissconfig.TissCabecalho.TissTipoTrans = True
     Tissconfig.TissCabecalho.TissDataRegistroTrans = True
@@ -389,12 +392,25 @@ object Form1: TForm1
     Tissconfig.TissProfissional.TissUFConselho = True
     Tissconfig.TissProfissional.TissfCBOS = True
     Tissconfig.TissProfissional.TissPosicProf = True
+
+
+
+
+
+
     Tissconfig.TissProfissionalCompl.TissProf = True
     Tissconfig.TissProfissionalCompl.TissSiglaConselho = True
     Tissconfig.TissProfissionalCompl.TissNumConselho = True
     Tissconfig.TissProfissionalCompl.TissUFConselho = True
     Tissconfig.TissProfissionalCompl.TissfCBOS = True
     Tissconfig.TissProfissionalCompl.TissPosicProf = True
+    Tissconfig.TissOPM.TissCodigo = True
+    Tissconfig.TissOPM.TissTipTab = True
+    Tissconfig.TissOPM.TissDescricao = False
+    Tissconfig.TissOPM.TissQtde = True
+    Tissconfig.TissOPM.TissCodBar = True
+    Tissconfig.TissOPM.TissVlrUnt = False
+    Tissconfig.TissOPM.TissVlrTot = False
     Tissconfig.TissOutDesp.TissIdentCodTab = True
     Tissconfig.TissOutDesp.TissIdentTipTab = True
     Tissconfig.TissOutDesp.TissIdentDesc = True
@@ -409,6 +425,7 @@ object Form1: TForm1
     Tissconfig.TissNumGuiaPrest = True
     Tissconfig.TissNumGuiaOper = False
     Tissconfig.TissNumGuiaPrinc = True
+    Tissconfig.TissDataEmis = True
     Tissconfig.TissDataAut = True
     Tissconfig.TissSenhaAut = True
     Tissconfig.TissSenhaValid = True
@@ -479,6 +496,7 @@ object Form1: TForm1
     TissConfig.TissUsarDiagSaidInt = True
     TissConfig.TissUsarProfissional = True
     TissConfig.TissUsarOPMS = True
+    TissConfig.TissUsarOPM = True
     TissConfig.TissUsarOutDespesas = True
     TissConfig.TissCabecalho.TissTipoTrans = True
     TissConfig.TissCabecalho.TissDataRegistroTrans = True
@@ -555,6 +573,13 @@ object Form1: TForm1
     TissConfig.TissProfissional.TissUFConselho = True
     TissConfig.TissProfissional.TissfCBOS = True
     TissConfig.TissProfissional.TissPosicProf = True
+    TissConfig.TissOPM.TissCodigo = True
+    TissConfig.TissOPM.TissTipTab = True
+    TissConfig.TissOPM.TissDescricao = True
+    TissConfig.TissOPM.TissQtde = True
+    TissConfig.TissOPM.TissCodBar = True
+    TissConfig.TissOPM.TissVlrUnt = True
+    TissConfig.TissOPM.TissVlrTot = True
     TissConfig.TissOutDesp.TissIdentCodTab = True
     TissConfig.TissOutDesp.TissIdentTipTab = True
     TissConfig.TissOutDesp.TissIdentDesc = True

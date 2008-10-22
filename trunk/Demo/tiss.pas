@@ -1,3 +1,4 @@
+
 unit tiss;
 
 interface
@@ -76,6 +77,7 @@ begin
   TissC.TissTipo := Juridico;
   TissC.TissCNPJCPF := '02762719000195';
   TissC.TissRegANS := '0';
+  TissC.TissDataEmis := StrToDate ('26/10/2009');
   TissC.TissVersaoTISS := '2.01.03';
   TissC.TissNumLote := '1545';  
   //FIM CABEÇALHO
@@ -180,13 +182,14 @@ begin
   USA-SE O MÉTODO "CRIACABEÇALHO" DEPOIS ADICIONA-SE AS GUIAS
   PASSANDO OS VALORES E USANDO O MÉTODO "ADICIONARGUIA" E POR
   ÚLTIMO A PROCEDURE "CRIARRODAPE" SE NÃO FOR FEITO ASSIM VAI GERAR ERRO}
-  for i:= 1 to 5 do
+  for i:= 1 to 1 {5} do
     begin
       //identificação guia SADTSP
       TissSP.TissNumGuiaPrest := IntToStr(i);
       TissSP.TissNumGuiaOper := IntToStr(i);
       TissSP.TissNumGuiaPrinc:= IntToStr(i);
       TissSP.TissRegANS := '0';
+      TissSP.TissDataEmis := StrToDate ('26/10/2009');
 
       //dados autorização
       TissSP.TissDataAut := Date;
@@ -255,7 +258,7 @@ begin
       //TissSP.Tissconfig.TissUsarDiagnostico:=False;
       TissSP.TissDiagnostico.TissCIDCodDiag := '1';
       TissSP.TissDiagnostico.TissCIDNomeTab := 'CID-10';
-      TissSP.TissDiagnostico.TissCIDDescDiag := 'Teste';
+      TissSP.TissDiagnostico.TissCIDDescDiag := 'Teste Sp/Sadt';
       TissSP.TissDiagnostico.TissTipDoenc := 'A';
       TissSP.TissDiagnostico.TissUnTemp := 'D';
       TissSP.TissDiagnostico.TissValor := 0;
@@ -268,7 +271,7 @@ begin
       TissSP.adicionarGuia;
 
       //Adicionando Procedimentos Realizados
-      for j:= 1 to 2 do
+      for j:= 1 to 1 {2} do
         begin
           {Adiciona-se aqui todos os demais profissionais membros da equipe
           se tiver, se não tiver por favor não adicione aqui vem um detalhe
@@ -295,7 +298,7 @@ begin
             end;
           TissSP.TissProc.TissProcs.TissCodigo := '00010014';
           TissSP.TissProc.TissProcs.TissTipTabela := 1;
-          TissSP.TissProc.TissProcs.TissDescricao := 'TESTE';
+          TissSP.TissProc.TissProcs.TissDescricao := 'TESTE SP/SADT';
           TissSP.TissProc.TissData := Now;
           TissSP.TissProc.TissHsInicio := Now;
           TissSP.TissProc.TissHsFim := Now;
@@ -309,17 +312,36 @@ begin
           TissSP.adicionaProc;
         end;
 
+
+        // Adicionando OPM
+        // É FUNDAMENTAL QUE VC ZERE ESTA PROPRIEDADE ANTES DE ADICIONAR AS OPMs
+        TissSP.TissOpmUti.TissVlrTotOPM := 0;
+
+        For j := 1 to 1 do
+          begin
+            TissSP.TissOpmUti.TissOpm.TissTabOpm.TissCodigo    := '12345678';
+            TissSP.TissOpmUti.TissOpm.TissTabOpm.TissTipTab    := '02';
+            TissSP.TissOpmUti.TissOpm.TissTabOpm.TissDescricao := 'DESCRICAO ORTESE PROTESE MATERIAL ESPECIAL SP/SADT: ' + IntToStr (j);
+            TissSP.TissOpmUti.TissOpm.TissQtde                 := 1 * j;
+            TissSP.TissOpmUti.TissOpm.TissCodBar               := '1234567890123';
+            TissSP.TissOpmUti.TissOpm.TissVlrUn                := 12.34 * j;
+            TissSP.TissOpmUti.TissOpm.TissVlrTot               := TissSP.TissOpmUti.TissOpm.TissQtde * TissSP.TissOpmUti.TissOpm.TissVlrUn;
+            TissSP.TissOpmUti.TissVlrTotOPM := TissSP.TissOpmUti.TissVlrTotOPM + TissSP.TissOpmUti.TissOpm.TissVlrTot;
+            TissSP.AdicionaOPM;
+          end;
+
+
         //Adicionando Outras Despesas
-        //É FUNDAMENTAL QUE VC ZERE ESTA PROPRIEDADE ANTES DE ADICIONAR AS DESPESAS
-        TissSP.TissOutDesp.TissTotalGeral := 0;
-        For j:= 1 to 5 do
+        //ESTE MÉTODO LIMPA OS VALORES DAS OUTRAS DESPESAS USAR ESTE MÉTODO É FUNDAMENTAL
+        TissSP.ClearDespesas;
+        For j:= 1 to 1 {5} do
           begin
             with TissSP.TissOutDesp do
               begin
                 TissDespesa.TissIdentCodigo := '00010014';//informei um código qualquer
                 TissDespesa.TissIdentTipoTab := '01'; {Verifique
                 os valores nos arquivos da ANS}
-                TissDespesa.TissIdentDesc := 'TESTE DE DESPESA ' + IntToStr(j);
+                TissDespesa.TissIdentDesc := 'TESTE DE DESPESA SP/SADT' + IntToStr(j);
                 TissDespesa.TissTipDespesa := 1;
                 TissDespesa.TissDataReal := Date;
                 TissDespesa.TissHoraInicial := Time;
@@ -333,6 +355,8 @@ begin
                 TissTotalGeral := TissTotalGeral + TissDespesa.TissVlrTot;
                 TissSP.adicionaOutDesp;
               end;
+
+
           // INFORME VALOR ZERO PARA O TOTAL QUE NÃO TEM VALOR
           TissSP.TissProc.TissValorTotalServicos:=1234.56;
           TissSP.TissProc.TissValorTotalDiarias:=0;
@@ -399,13 +423,14 @@ begin
   USA-SE O MÉTODO "CRIACABEÇALHO" DEPOIS ADICIONA-SE AS GUIAS
   PASSANDO OS VALORES E USANDO O MÉTODO "ADICIONARGUIA" E POR
   ÚLTIMO A PROCEDURE "CRIARRODAPE" SE NÃO FOR FEITO ASSIM VAI GERAR ERRO}
-  for i:= 1 to 5 do
+  for i := 1 to 1 {5} do
     begin
-      //identificação guia SADTSP
+      //identificação guia Internação
       TissInt.TissNumGuiaPrest := IntToStr(i);
       TissInt.TissNumGuiaOper := IntToStr(i);
       TissInt.TissNumGuiaSolic := IntToStr(i);
       TissInt.TissRegANS := '0';
+      TissInt.TissDataEmis := StrToDate ('26/10/2009');
 
       //dados autorização
       TissInt.TissDataAut := Date;
@@ -465,23 +490,23 @@ begin
       TissInt.TissTipoInternacao := 1;
       TissInt.TissRegInt := '1';
 
-      
+
       //Diagnostico Saída internação
       TissInt.TissDiagSaidInt.TissIndicAcid := 0;
       TissInt.TissDiagSaidInt.TissMotSaidInt := '10';
       TissInt.TissDiagSaidInt.TissDiagPrinc.TissCIDNomeTab := 'CID-10';
       TissInt.TissDiagSaidInt.TissDiagPrinc.TissCIDCodDiag := '1';
-      TissInt.TissDiagSaidInt.TissDiagPrinc.TissCIDDescDiag := 'TESTE';
+      TissInt.TissDiagSaidInt.TissDiagPrinc.TissCIDDescDiag := 'TESTE INT';
 
       TissInt.TissDiagSaidInt.TissDiagSec.TissCIDNomeTab := 'CID-10';;
       TissInt.TissDiagSaidInt.TissDiagSec.TissCIDCodDiag := '1';
-      TissInt.TissDiagSaidInt.TissDiagSec.TissCIDDescDiag := 'TESTE';
+      TissInt.TissDiagSaidInt.TissDiagSec.TissCIDDescDiag := 'TESTE INT';
 
 
       //EM CASO DE ÓBITO
       TissInt.TissDiagSaidInt.TissObito.TissCID.TissCIDNomeTab := 'CID-10';
       TissInt.TissDiagSaidInt.TissObito.TissCID.TissCIDCodDiag  := '1';
-      TissInt.TissDiagSaidInt.TissObito.TissCID.TissCIDDescDiag := 'TESTE';
+      TissInt.TissDiagSaidInt.TissObito.TissCID.TissCIDDescDiag := 'TESTE INT';
       TissInt.TissDiagSaidInt.TissObito.TissnumeracaoDe := '8';
       //Tipo faturamento
       TissInt.TissTipoFat := 'T';
@@ -490,7 +515,7 @@ begin
       TissInt.adicionarGuia;
 
       //Adicionando Procedimentos Realizados
-      for j:= 1 to 2 do
+      for j:= 1 to 1 {2} do
         begin
           {Adiciona-se aqui todos os demais profissionais membros da equipe
           se tiver, se não tiver por favor não adicione aqui vem um detalhe
@@ -518,7 +543,7 @@ begin
             end;
           TissInt.TissProc.TissProcs.TissCodigo := '00010014';
           TissInt.TissProc.TissProcs.TissTipTabela := 1;
-          TissInt.TissProc.TissProcs.TissDescricao := 'TESTE';
+          TissInt.TissProc.TissProcs.TissDescricao := 'TESTE INT.';
           TissInt.TissProc.TissData := Now;
           TissInt.TissProc.TissHsInicio := Now;
           TissInt.TissProc.TissHsFim := Now;
@@ -532,17 +557,36 @@ begin
           TissInt.adicionaProc;
         end;
 
+
+        // Adicionando OPM
+        // É FUNDAMENTAL QUE VC ZERE ESTA PROPRIEDADE ANTES DE ADICIONAR AS OPMs
+        TissInt.TissOpmUti.TissVlrTotOPM := 0;
+
+        For j := 1 to 2 do
+          begin
+            TissInt.TissOpmUti.TissOpm.TissTabOpm.TissCodigo    := '12345678';
+            TissInt.TissOpmUti.TissOpm.TissTabOpm.TissTipTab    := '02';
+            TissInt.TissOpmUti.TissOpm.TissTabOpm.TissDescricao := 'DESCRICAO ORTESE PROTESE MATERIAL ESPECIAL INT.: ' + IntToStr (j);
+            TissInt.TissOpmUti.TissOpm.TissQtde                 := 1 * j;
+            TissInt.TissOpmUti.TissOpm.TissCodBar               := '1234567890123';
+            TissInt.TissOpmUti.TissOpm.TissVlrUn                := 12.34 * j;
+            TissInt.TissOpmUti.TissOpm.TissVlrTot               := TissInt.TissOpmUti.TissOpm.TissQtde * TissInt.TissOpmUti.TissOpm.TissVlrUn;
+            TissInt.TissOpmUti.TissVlrTotOPM := TissInt.TissOpmUti.TissVlrTotOPM + TissInt.TissOpmUti.TissOpm.TissVlrTot;
+            TissInt.AdicionaOPM;
+          end;
+
+
         //Adicionando Outras Despesas
-        //É FUNDAMENTAL QUE VC ZERE ESTA PROPRIEDADE ANTES DE ADICIONAR AS DESPESAS
-        TissInt.TissOutDesp.TissTotalGeral := 0;
-        For j:= 1 to 5 do
+        ////ESTE MÉTODO LIMPA OS VALORES DAS OUTRAS DESPESAS ESTE MÉTODO É FUNDAMENTAL
+        TissInt.ClearDespesas;
+        For j:= 1 to 1 {5} do
           begin
             with TissInt.TissOutDesp do
               begin
                 TissDespesa.TissIdentCodigo := '00010014';//informei um código qualquer
                 TissDespesa.TissIdentTipoTab := '01'; {Verifique
                 os valores nos arquivos da ANS}
-                TissDespesa.TissIdentDesc := 'TESTE DE DESPESA ' + IntToStr(j);
+                TissDespesa.TissIdentDesc := 'TESTE DE DESPESA INT. ' + IntToStr(j);
 
                 TissDespesa.TissTipDespesa := 1;
 
@@ -568,7 +612,8 @@ begin
               TissInt.TissProc.TissValorTotalGases:=0;
               TissInt.TissProc.TissValorTotalGeral:=TissInt.TissProc.TissValorTotalGeral+TissInt.TissOutDesp.TissTotalGeral;
           end;
-      TissInt.finalizaGuia;
+
+      TissInt.FinalizaGuia;
     end;
 
  // TissInt.criaRodape;
