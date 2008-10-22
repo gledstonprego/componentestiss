@@ -1491,12 +1491,12 @@ end;
 
 constructor TCompVersao.create;
 begin
- Fversao := '0.9.15';
+ Fversao := '0.9.16';
 end;
 
 procedure TCompVersao.setVersao(const Value: String);
 begin
-  Fversao := '0.9.15';
+  Fversao := '0.9.16';
 end;
 
 { TTissValidacao }
