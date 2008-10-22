@@ -227,7 +227,7 @@ object Form1: TForm1
   end
   object TissC: TTissConsulta
     ansVersaoXSD = v2_01_03
-    Versao.Versao = '0.9.14'
+    Versao.Versao = '0.9.16'
     TissVersaoXml = '1.0'
     TissVersaoTISS = '2.01.03'
     TissEncoding = 'ISO-8859-1'
@@ -291,7 +291,7 @@ object Form1: TForm1
   end
   object TissSP: TTissSP_SADT
     ansVersaoXSD = v2_01_03
-    Versao.Versao = '0.9.15'
+    Versao.Versao = '0.9.16'
     Tissconfig.TissUsarBenefic = True
     Tissconfig.TissUsarContratado = True
     Tissconfig.TissUsarPrestadorExec = True
@@ -299,7 +299,6 @@ object Form1: TForm1
     Tissconfig.TissUsarDiagnostico = True
     Tissconfig.TissUsarProc = True
     Tissconfig.TissUsarProfissional = True
-
     Tissconfig.TissUsarProfissionalCompl = False
     Tissconfig.TissUsarOPM = True
     Tissconfig.TissUsarOutDespesas = True
@@ -392,12 +391,6 @@ object Form1: TForm1
     Tissconfig.TissProfissional.TissUFConselho = True
     Tissconfig.TissProfissional.TissfCBOS = True
     Tissconfig.TissProfissional.TissPosicProf = True
-
-
-
-
-
-
     Tissconfig.TissProfissionalCompl.TissProf = True
     Tissconfig.TissProfissionalCompl.TissSiglaConselho = True
     Tissconfig.TissProfissionalCompl.TissNumConselho = True
@@ -469,7 +462,7 @@ object Form1: TForm1
   end
   object TissInt: TTissInternacao
     ansVersaoXSD = v2_01_03
-    Versao.Versao = '0.9.15'
+    Versao.Versao = '0.9.16'
     TissContratado.TissTipoGeral = JuridicoGeral
     TissProfissional.TissPosicProf = 0
     TissPrestadorExec.TissTipoGeral = JuridicoGeral
@@ -495,7 +488,6 @@ object Form1: TForm1
     TissConfig.TissUsarProc = True
     TissConfig.TissUsarDiagSaidInt = True
     TissConfig.TissUsarProfissional = True
-    TissConfig.TissUsarOPMS = True
     TissConfig.TissUsarOPM = True
     TissConfig.TissUsarOutDespesas = True
     TissConfig.TissCabecalho.TissTipoTrans = True
