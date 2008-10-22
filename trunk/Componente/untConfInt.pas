@@ -1,8 +1,38 @@
+
 unit untConfInt;
 interface
 uses
   SysUtils, Classes,untTissComp;
 type
+  TTissConfOPM = class(TPersistent)
+  private
+    FCodigo    : Boolean;
+    FTipTab    : Boolean;
+    FDescricao : Boolean;
+    FQtde      : Boolean;
+    FCodBar    : Boolean;
+    FVlrUnt    : Boolean;
+    FVlrTot    : Boolean;
+    procedure setCodigo(const Value: Boolean);
+    procedure setTipTab(const Value: Boolean);
+    procedure setDescricao(const Value: Boolean);
+    procedure setQtde(const Value: Boolean);
+    procedure setCodBar(const Value: Boolean);
+    procedure setVlrUnt(const Value: Boolean);
+    procedure setVlrTot(const Value: Boolean);
+
+  public
+    constructor create;
+  published
+    property TissCodigo:Boolean    read FCodigo    write setCodigo;
+    property TissTipTab:Boolean    read FTipTab    write setTipTab;
+    property TissDescricao:Boolean read FDescricao write setDescricao;
+    property TissQtde:Boolean      read FQtde      write setQtde;
+    property TissCodBar:Boolean    read FCodBar    write setCodBar;
+    property TissVlrUnt:Boolean    read FVlrUnt    write setVlrUnt;
+    property TissVlrTot:Boolean    read FVlrTot    write setVlrTot;
+  end;
+
 
   TTissConfOutrasDesp = class(TPersistent)
   private
@@ -32,7 +62,6 @@ type
   public
     constructor create;
   published
-
     //Identificador Despesa
     property TissIdentCodTab:Boolean read FIdentCodTab write setIdentCodTab;
     property TissIdentTipTab:Boolean read FTipTab write setTipTab;
@@ -50,6 +79,7 @@ type
     //TOTAL GERAL
     property TissTotalGeral:Boolean read FTotalGeral write setTotalGeral;
   end;
+
 
   TconfDiagSaidInt = class(TPersistent)
   private
@@ -359,9 +389,11 @@ type
     FUsarDiagSaidInt: boolean;
     FconfDiagSaidInt: TconfDiagSaidInt;
     FTipoFat: boolean;
+    //FUsarUsarOPMS: boolean;  tirei...
+    FUsarOPM: boolean;
     FUsarOutDespesas: boolean;
-    FUsarUsarOPMS: boolean;
     FUsarDadAut: boolean;
+    FTissConfOPM: TTissConfOPM;
     FTissConfOutrasDesp: TTissConfOutrasDesp;
 
     procedure setcaraAtend(const Value: boolean);
@@ -392,9 +424,11 @@ type
     procedure setRegInt(const Value: boolean);
     procedure setUsarDiagSaidInt(const Value: boolean);
     procedure setTipoFat(const Value: boolean);
-    procedure setUsarOPMS(const Value: boolean);
+    //procedure setUsarOPMS(const Value: boolean);  tirei...
+    procedure setUsarOPM(const Value: boolean);
     procedure setUsarOutDespesas(const Value: boolean);
     procedure setUsarDadAut(const Value: boolean);
+    procedure setTissConfOPM(const Value: TTissConfOPM);
     procedure setTissConfOutrasDesp(const Value: TTissConfOutrasDesp);
 
   public
@@ -407,9 +441,9 @@ type
     property TissUsarProc:boolean read FUsarUsarProc write setUsarUsarProc;
     property TissUsarDiagSaidInt:boolean read FUsarDiagSaidInt write setUsarDiagSaidInt;
     property TissUsarProfissional:boolean read FUsarProfissional write setUsarProfissional;
-    property TissUsarOPMS:boolean read FUsarUsarOPMS write setUsarOPMS;
+    //property TissUsarOPMS:boolean read FUsarUsarOPMS write setUsarOPMS;  tirei...
+    property TissUsarOPM:boolean read FUsarOPM write setUsarOPM;
     property TissUsarOutDespesas:boolean read FUsarOutDespesas write setUsarOutDespesas;
-
 
     property TissCabecalho:TTissConfCabecalho read FTissCabecalho write FTissCabecalho;
     property TissBenefic:TTissConfBenific read FTissConfBenific write FTissConfBenific;
@@ -418,7 +452,9 @@ type
     property TissDiagnostico:TTissConfDiagnostico read FTissConfDiagnostico  write FTissConfDiagnostico;
     property TissProc:TTissConfSPProcedimentos read FTissSPProcedimentos  write FTissSPProcedimentos;
     property TissProfissional:TTissConfProfissional read FTissConfProfissional write FTissConfProfissional;
-    //outras Despesas
+    // OPM
+    property TissOPM: TTissConfOPM read FTissConfOPM write setTissConfOPM;
+    // Outras Despesas
     property TissOutDesp: TTissConfOutrasDesp read FTissConfOutrasDesp write setTissConfOutrasDesp;
 
 
@@ -576,6 +612,7 @@ begin
   FTissPrestadorExec := TTissConfContratado.create;
   FTissSPProcedimentos := TTissConfSPProcedimentos.create;
   FTissConfProfissional := TTissConfProfissional.create;
+  FTissConfOPM := TTissConfOPM.create;
   FTissConfOutrasDesp := TTissConfOutrasDesp.create;
   FTipoAtend:= true;
   FHoraAtend:= true;
@@ -604,7 +641,8 @@ begin
   FDataSaidInt := True;
   FconfDiagSaidInt := TconfDiagSaidInt.create;
   FTipoFat := True; 
-  FUsarUsarOPMS := true;
+  //FUsarUsarOPMS := true;  tirei...
+  FUsarOPM := false;
   FUsarOutDespesas := false;
   FUsarDiagSaidInt := True;
   FRegInt := True;
@@ -719,8 +757,12 @@ begin
   FTipoSP := Value;
 end;
 
-procedure TTissConfInt.setTissConfOutrasDesp(
-  const Value: TTissConfOutrasDesp);
+procedure TTissConfInt.setTissConfOPM(const Value: TTissConfOPM);
+begin
+  FTissConfOPM := Value;
+end;
+
+procedure TTissConfInt.setTissConfOutrasDesp(const Value: TTissConfOutrasDesp);
 begin
   FTissConfOutrasDesp := Value;
 end;
@@ -750,9 +792,15 @@ begin
   FUsarDiagSaidInt := Value;
 end;
 
+{
 procedure TTissConfInt.setUsarOPMS(const Value: boolean);
 begin
   FUsarUsarOPMS := Value;
+end;  }
+
+procedure TTissConfInt.setUsarOPM(const Value: boolean);
+begin
+  FUsarOPM := Value;
 end;
 
 procedure TTissConfInt.setUsarOutDespesas(const Value: boolean);
@@ -1097,6 +1145,56 @@ procedure TConfDiagSaidInt.setTissDiagSec(const Value: boolean);
 begin
   fTissDiagSec := Value;
 end;
+
+
+{ TTissConfOPM }
+
+constructor TTissConfOPM.create;
+begin
+  FCodigo    := True;
+  FTipTab    := True;
+  FDescricao := False;
+  FQtde      := True;
+  FCodBar    := True;
+  FVlrUnt    := False;
+  FVlrTot    := False;
+end;
+
+procedure TTissConfOPM.setCodigo(const Value: Boolean);
+begin
+  FCodigo := Value;
+end;
+
+procedure TTissConfOPM.setTipTab(const Value: Boolean);
+begin
+  FTipTab := Value;
+end;
+
+procedure TTissConfOPM.setDescricao(const Value: Boolean);
+begin
+  FDescricao := Value;
+end;
+
+procedure TTissConfOPM.setQtde(const Value: Boolean);
+begin
+  FQtde := Value;
+end;
+
+procedure TTissConfOPM.setCodBar(const Value: Boolean);
+begin
+  FCodBar := Value;
+end;
+
+procedure TTissConfOPM.setVlrUnt(const Value: Boolean);
+begin
+  FVlrUnt := Value;
+end;
+
+procedure TTissConfOPM.setVlrTot(const Value: Boolean);
+begin
+  FVlrTot := Value;
+end;
+
 
 { TTissConfOutrasDesp }
 

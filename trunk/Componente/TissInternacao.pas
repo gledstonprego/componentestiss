@@ -1,3 +1,4 @@
+
 unit TissInternacao;
 
 interface
@@ -18,12 +19,14 @@ type
     FGuia:TStringList;
     FProc:TStringList;
     FMembEquipe:TStringList;
+    FOPM: TStringList;
     FOutDesp: TStringList;    
     FGeral: TStringList;  
 
     FTissCabecalho: TTissCabecalho;
     FNumGuiaOper: String;
     FNumGuiaPrest: String;
+    FDataEmis:TDateTime;
     FRegANS: String;
     FSenhaAut: String;
     FDataAut: TDateTime;
@@ -43,8 +46,8 @@ type
     FTipoFat: String;
     FNumGuiaSolic: String;
     FCarcInt: String;
-    FTissOutrasDesp: TTissOutrasDesp;
     FTissOpmUti: TTissOpmUti;
+    FTissOutrasDesp: TTissOutrasDesp;
     FCompVersao: TCompVersao;
     FTissConf: TTissConfInt;
     FTissValid: TTissValidacao;
@@ -52,6 +55,7 @@ type
 
     procedure setNumGuiaOper(const Value: String);
     procedure setNumGuiaPrest(const Value: String);
+    procedure setDataEmis(const Value: TDateTime);
     procedure setRegANS(const Value: String);
     procedure setDataAut(const Value: TDateTime);
     procedure setSenhaAut(const Value: String);
@@ -79,9 +83,11 @@ type
     procedure adicionarGuia;
     procedure adicionaProc;
     procedure adicionaProf;
+    procedure AdicionaOPM;
     procedure adicionaOutDesp;
     procedure finalizaGuia;
     procedure GerarXml;
+    procedure ClearDespesas;
     constructor create(Aowner: TComponent);override;
   published
     { Published declarations }
@@ -103,6 +109,7 @@ type
     //CABEÇALHO
     property Tisscabecalho: TTissCabecalho read FTissCabecalho write FTissCabecalho;
       //identificação Guia
+    property TissDataEmis:TDateTime read FDataEmis write setDataEmis;
     property TissRegANS:String read FRegANS write setRegANS;
     property TissNumGuiaPrest:String read FNumGuiaPrest write setNumGuiaPrest;
     property TissNumGuiaOper:String read FNumGuiaOper write setNumGuiaOper;
@@ -135,11 +142,10 @@ type
     property TissNumGuiaSolic:String read FNumGuiaSolic write setNumGuiaSolic;
     //Carater Internação
     property TissCarcInt:String read FCarcInt write setCarcInt;
-    //Despesas
-    property TissOutDesp:TTissOutrasDesp read FTissOutrasDesp write FTissOutrasDesp;
     //OpmUtilizada
     property TissOpmUti:TTissOpmUti read FTissOpmUti write FTissOpmUti;
-
+    //Despesas
+    property TissOutDesp:TTissOutrasDesp read FTissOutrasDesp write FTissOutrasDesp;
     //Configuracoes
     property TissConfig:TTissConfInt read FTissConf write FTissConf;
     //Validação
@@ -160,6 +166,48 @@ begin
 end;
 
 { TTissInternacao }
+
+procedure TTissInternacao.AdicionaOPM;
+begin
+  Try
+    FOPM.Add('<ans:identificacaoOPM>');
+    FOPM.Add('<ans:OPM>');
+
+    with FTissConf.TissOPM do
+      begin
+        if TissCodigo then
+          FOPM.Add ('<ans:codigo>' + TissOPMuti.TissOPM.TissTabOPM.TissCodigo + '</ans:codigo>');
+
+        if TissTipTab then
+          FOPM.Add ('<ans:tipoTabela>' + RetZero (TissOPMuti.TissOPM.TissTabOPM.TissTipTab, 2) + '</ans:tipoTabela>');
+
+        if TissDescricao then;
+          FOPM.Add ('<ans:descricao>' + TissOPMuti.TissOPM.TissTabOPM.TissDescricao + '</ans:descricao>');
+
+        FOPM.Add('</ans:OPM>');
+
+        if TissQtde then
+          FOPM.add ('<ans:quantidade>' + CurrToStr (TissOPMuti.TissOPM.TissQtde) + '</ans:quantidade>');
+
+        if TissCodBar then
+          FOPM.add ('<ans:codigoBarra>' + TissOPMuti.TissOPM.TissCodBar + '</ans:codigoBarra>');
+
+        if TissVlrUnt then
+          FOPM.add ('<ans:valorUnitario>' + CurrToStr (TissOPMuti.TissOPM.TissVlrUn) + '</ans:valorUnitario>');
+
+        if TissVlrTot then
+          FOPM.add ('<ans:valorTotal>' + CurrToStr (TissOPMuti.TissOPM.TissVlrTot) + '</ans:valorTotal>');
+      end;
+
+    FOPM.Add('</ans:identificacaoOPM>');
+
+  Except on e: Exception do
+    begin
+      Application.MessageBox (PChar ('Erro ao adicionar OPM: ' + #13 + e.Message), 'ATENÇÃO', MB_OK+MB_ICONERROR);
+    end;
+  end;
+end;
+
 
 procedure TTissInternacao.adicionaOutDesp;
 begin
@@ -199,7 +247,7 @@ begin
 
         if TissVlrUnt then
           FOutDesp.add('<ans:valorUnitario>'+CurrToStr(TissOutDesp.TissDespesa.TissVlrUn)+'</ans:valorUnitario>');
-        
+
         if TissTotalGeral then
           FOutDesp.add('<ans:valorTotal>'+CurrToStr(TissOutDesp.TissDespesa.TissVlrTot)+'</ans:valorTotal>');
 
@@ -214,6 +262,7 @@ begin
         end;
     end;
 end;
+
 
 procedure TTissInternacao.adicionaProc;
 var
@@ -334,7 +383,7 @@ begin
         FGuia.add('<ans:identificacaoGuiaInternacao>');
             if FTissConf.TissRegANS then
               FGuia.add('<ans:registroANS>'+FRegAns+'</ans:registroANS>');
-          FGuia.add('<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',Date)+'</ans:dataEmissaoGuia>');
+            FGuia.add('<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY', FDataEmis)+'</ans:dataEmissaoGuia>');
             if FTissConf.TissNumGuiaPrest then
               FGuia.add('<ans:numeroGuiaPrestador>'+FNumGuiaPrest+'</ans:numeroGuiaPrestador>');
             if FTissConf.TissNumGuiaOper then
@@ -481,8 +530,8 @@ begin
   FTissPrestExec := TTissContratado.create;
   FDiagSaidInt := TDiagSaidInt.create;
   FTissSPProcedimentos := TTissSPProcedimentos.create;
-  FTissOutrasDesp := TTissOutrasDesp.create;
   FTissOpmUti := TTissOpmUti.create;
+  FTissOutrasDesp := TTissOutrasDesp.create;
   FCompVersao := TCompVersao.create;
   FTissConf := TTissConfInt.create;
   FTissValid := TTissValidacao.create;
@@ -546,14 +595,14 @@ begin
         begin
           Application.MessageBox(PChar('Erro ao criar cabeçalho:'+#13+e.Message),'ATENÇÃO',MB_OK+MB_ICONERROR);
         end;
-    end; 
+    end;
 
 end;
 
 procedure TTissInternacao.finalizaGuia;
 var
   arquivo,arquivoTemp: TextFile;
-  numhash,linha, TissTotalGeral: string;
+  numhash,linha, TissTotalGeral, TissVlrTotOpm : string;
   i: integer;
 begin
     try
@@ -572,6 +621,15 @@ begin
           FGeral.add('</ans:procedimentosRealizados>');
         end;
 
+      if TissConfig.TissUsarOPM then
+        begin
+          FGeral.Add ('<ans:OPMutilizada>');
+          for i := 0 to FOPM.Count - 1 do FGeral.Add (FOPM.Strings[i]);
+          TissVlrTotOpm := CurrToStr (FTissOpmUti.TissVlrTotOPM);
+          FGeral.Add ('<ans:valorTotalOPM>' + TissVlrTotOpm + '</ans:valorTotalOPM>');
+          FGeral.Add ('</ans:OPMutilizada>');
+        end;
+
       if Tissconfig.TissUsarOutDespesas then
         begin
           FGeral.Add('<ans:outrasDespesas>');
@@ -584,7 +642,8 @@ begin
           FGeral.Add('<ans:totalGeralOutrasDespesas>'+TissTotalGeral+'</ans:totalGeralOutrasDespesas>');
           FGeral.Add('</ans:outrasDespesas>')
         end;
-              
+
+
       if FTissConf.TissTipoFat then
         FGeral.Add('<ans:tipoFaturamento>'+FTipoFat+'</ans:tipoFaturamento>');
       FGeral.Add('<ans:valorTotal>');
@@ -601,6 +660,7 @@ begin
       FGuia.Clear;
       FProc.Clear;
       FMembEquipe.Clear;
+      FOPM.Clear;
       FOutDesp.Clear;
       DecimalSeparator := '.';
       //AssignFile(arquivoTemp,'temp.xml');
@@ -814,7 +874,9 @@ begin
   FMembEquipe := TStringList.Create;
   FGeral := TStringList.Create;
   FGeral := TStringList.Create;
+  FOPM := TStringList.Create;
   FOutDesp := TStringList.Create;
+  FOPM.Clear;
   FOutDesp.Clear;
   FGeral.Clear;
   FMembEquipe.Clear;
@@ -876,6 +938,11 @@ begin
   FNumGuiaSolic := Value;
 end;
 
+procedure TTissInternacao.setDataEmis(const Value: TDateTime);
+begin
+  FDataEmis := Value;
+end;
+
 procedure TTissInternacao.setRegANS(const Value: String);
 begin
   FRegANS := Value;
@@ -905,6 +972,17 @@ end;
 procedure TTissInternacao.setTipoInternacao(const Value: Integer);
 begin
   FTipoInternacao := Value;
+end;
+
+procedure TTissInternacao.ClearDespesas;
+begin
+  TissProc.TissValorTotalServicos := 0;
+  TissProc.TissValorTotalDiarias := 0;
+  TissProc.TissValorTotalTaxas := 0;
+  TissProc.TissValorTotalMateriais := 0;
+  TissProc.TissValorTotalMedicamentos := 0;
+  TissProc.TissValorTotalGases := 0;
+  FTissOutrasDesp.TissTotalGeral := 0;  
 end;
 
 end.
