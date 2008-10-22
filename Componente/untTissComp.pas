@@ -6,6 +6,7 @@ uses
 type
   TTissTipoGeral = (JuridicoGeral,FisicGeral,Outros,conselhoProfissional);
   TTissAnsVersao = (v2_01_02,v2_01_03);
+
   TTissTabela = class(TPersistent)
   private
     fCodigo: String;
@@ -1571,14 +1572,58 @@ begin
   fnumeracaoDe := Value;
 end;
 
+
+//
+
+
+{ TTissOpmUti }
+
+constructor TTissOpmUti.create;
+begin
+  fOpm := TTissOpm.create;
+end;
+
+procedure TTissOpmUti.setVlrTotOPM(const Value: Currency);
+begin
+  fVlrTotOPM := Value;
+end;
+
+{ TTissOpm }
+
+constructor TTissOpm.create;
+begin
+  fOpm := TTissTabela.Create;
+end;
+
+procedure TTissOpm.setCodBar(const Value: String);
+begin
+  fCodBar := Value;
+end;
+
+procedure TTissOpm.setqtde(const Value: Currency);
+begin
+  fqtde := Value;
+end;
+
+procedure TTissOpm.setVlrTot(const Value: Currency);
+begin
+  fVlrTot := Value;
+end;
+
+procedure TTissOpm.setVlrUn(const Value: Currency);
+begin
+  fVlrUn := Value;
+end;
+
+//
+
+
 { TTissOutrasDesp }
 
 constructor TTissOutrasDesp.create;
 begin
   fTissDespesas := TTissDespesas.create;
 end;
-
-
 
 procedure TTissOutrasDesp.setTotalGeral(const Value: Currency);
 begin
@@ -1647,8 +1692,6 @@ begin
   fVlrUn := Value;
 end;
 
-
-
 procedure TTissTabela.setCodigo(const Value: String);
 begin
   fCodigo := Value;
@@ -1662,45 +1705,6 @@ end;
 procedure TTissTabela.setTipTab(const Value: String);
 begin
   fTipTab := Value;
-end;
-
-{ TTissOpmUti }
-
-constructor TTissOpmUti.create;
-begin
-  fOpm := TTissOpm.create;
-end;
-
-procedure TTissOpmUti.setVlrTotOPM(const Value: Currency);
-begin
-  fVlrTotOPM := Value;
-end;
-
-{ TTissOpm }
-
-constructor TTissOpm.create;
-begin
-  fOpm := TTissTabela.Create;
-end;
-
-procedure TTissOpm.setCodBar(const Value: String);
-begin
-  fCodBar := Value;
-end;
-
-procedure TTissOpm.setqtde(const Value: Currency);
-begin
-  fqtde := Value;
-end;
-
-procedure TTissOpm.setVlrTot(const Value: Currency);
-begin
-  fVlrTot := Value;
-end;
-
-procedure TTissOpm.setVlrUn(const Value: Currency);
-begin
-  fVlrUn := Value;
 end;
 
 end.

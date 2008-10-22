@@ -30,6 +30,7 @@ type
     FCNPJCPF: String;
     FVersaoTISS: String;
     FRegANS: String;
+    FDataEmis : TDateTime;
     FNumLote: String;
     FNumGuia: String;
     FNumCarteira: String;
@@ -86,6 +87,7 @@ type
     procedure setCNPJCPF(const Value: String);
     function RegANS: String;
     procedure setRegANS(const Value: String);
+    procedure setDataEmis(const Value: TDateTime);
     procedure setVersaoTISS(const Value: String);
     procedure setNumLote(const Value: String);
     procedure setNumGuia(const Value: String);
@@ -146,7 +148,7 @@ type
   published
     { Published declarations }
     //versão do xsd da ANS
-    property ansVersaoXSD: TTissAnsVersao read FAnsVersaoxsd write setAnsVersaoxsd;    
+    property ansVersaoXSD: TTissAnsVersao read FAnsVersaoxsd write setAnsVersaoxsd;
     property Versao:TCompVersao read FCompVersao write FCompVersao;
     property TissVersaoXml: String read FVersaoXml write setVersaoXml;
     property TissVersaoTISS: String read FVersaoTISS write setVersaoTISS;
@@ -160,6 +162,7 @@ type
     property TissTipo:Tpessoa read FTipo write setTipo;
     property TissCNPJCPF:String read FCNPJCPF write setCNPJCPF;
     property TissRegANS:String read FRegANS write setRegANS;
+    property TissDataEmis:TDateTime read FDataEmis write setDataEmis;
     property TissNumLote:String read FNumLote write setNumLote;
     property TissNumGuia:String read FNumGuia write setNumGuia;
     property TissNumCarteira:String read FNumCarteira write setNumCarteira;
@@ -215,7 +218,7 @@ implementation
 
 uses Md5tiss, U_Ciphertiss, md52, untValida, untFunc;
 
-procedure Register;     
+procedure Register;
 begin
   RegisterComponents('Tiss', [TTissConsulta]);
 end;
@@ -232,8 +235,8 @@ begin
       if FTissReq.UsarRegANS then
         Writeln(arquivo,'<ans:registroANS>'+fRegAns+'</ans:registroANS>');
       case ansVersaoXSD of
-          v2_01_02: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',Date)+'</ans:dataEmissaoGuia>');
-          v2_01_03: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',Date)+'</ans:dataEmissaoGuia>');
+          v2_01_02: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',FDataEmis)+'</ans:dataEmissaoGuia>');
+          v2_01_03: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',FDataEmis)+'</ans:dataEmissaoGuia>');
         end;
 
       if FTissReq.UsarNumGuia then
@@ -616,6 +619,11 @@ end;
 function TTissConsulta.RegANS: String;
 begin
 
+end;
+
+procedure TTissConsulta.setDataEmis(const Value: TDateTime);
+begin
+  FDataEmis := Value;
 end;
 
 procedure TTissConsulta.setAnsVersaoxsd(const Value: TTissAnsVersao);
