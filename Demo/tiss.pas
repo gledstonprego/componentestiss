@@ -1,4 +1,8 @@
-
+  {COMPONENTE INICIADO POR Fabiano
+  Espero ter ajudado alguem com este componente, e
+  espero que mais progrmadores se juntem nesta idéia
+  para assim realizarmo o projeto TISS com sucesso,
+  pela graça de Maria e o amor de Nosso Senhor JESUS CRISTO}
 unit tiss;
 
 interface
@@ -61,8 +65,8 @@ begin
     TissC.TissValid.UsarValidacao := false;
 
   {ATENÇÃO ESTE COMPONENTE ESTÁ EM FASE DE TESTE, QUALQUER DÚVIDA ENTRE
-  EM CONTATO PELO EMAIL: fopprado@gmail.com ou pelo MSN: fopprado@hotmail.com
-  FALAR COM FABIANO DE OLIVEIRA PRADO}
+  EM CONTATO PELO EMAIL: fopprado@gmail.com 
+  FALAR COM Fabiano}
   TissC.TissArquivo := 'CONSULTA.xml';
   TissC.TissEncoding := 'ISO-8859-1';
   TissC.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
@@ -91,10 +95,14 @@ begin
   //Adicionando guias
    for i:= 1 to 5 do
      begin
+        //VERSÃO 2.02.01
+        TissC.TissFontePadora.TissRegAns := '15484';
+        TissC.TissFontePadora.TissCnpj := '02762719000195';
+        //VERSÃO 2.02.01
         TissC.TissRegANS := '0';
         TissC.TissNumGuia := IntToStr(I);
         TissC.TissNumCarteira := '548787';
-        TissC.TissPaciente := 'Fabiano de Oliveira Prado';
+        TissC.TissPaciente := 'PACIENTE TESTE';
         TissC.TissNomePlano := 'PLANO DE SAUDE '+IntToStr(I);
         TissC.TissValidadeCart := Date + 30;
         TissC.TissNumCNS := '45787';
@@ -158,8 +166,8 @@ begin
     TissSP.TissValid.UsarValidacao := false;
 
   {ATENÇÃO ESTE COMPONENTE ESTÁ EM FASE DE TESTE, QUALQUER DÚVIDA ENTRE
-  EM CONTATO PELO EMAIL: fopprado@gmail.com ou pelo MSN: fopprado@hotmail.com
-  FALAR COM FABIANO DE OLIVEIRA PRADO}
+  EM CONTATO PELO EMAIL: fopprado@gmail.com
+  FALAR COM FABIANO}
   TissSP.iniciaSPSADT; //Método de inicialização
   TissSP.Tisscabecalho.TissArquivo := 'SPSADT.xml';
   TissSP.Tisscabecalho.TissEncoding := 'ISO-8859-1';
@@ -198,7 +206,7 @@ begin
 
       //Dados Beneficiario
       TissSP.TissBeneficiario.TissNumCarteira := IntToStr(I);
-      TissSP.TissBeneficiario.TissBenific := 'Fabiano de Oliveira Prado';
+      TissSP.TissBeneficiario.TissBenific := 'Paciente TESTE';
       TissSP.TissBeneficiario.TissNomePlano := 'PLANO DE SAÚDE'+IntToStr(i);
       TissSP.TissBeneficiario.TissValidadeCart := Date + 30;
       TissSP.TissBeneficiario.TissNumCNS := '45787';
@@ -399,8 +407,8 @@ begin
     TissInt.TissValid.UsarValidacao := false;
 
   {ATENÇÃO ESTE COMPONENTE ESTÁ EM FASE DE TESTE, QUALQUER DÚVIDA ENTRE
-  EM CONTATO PELO EMAIL: fopprado@gmail.com ou pelo MSN: fopprado@hotmail.com
-  FALAR COM FABIANO DE OLIVEIRA PRADO}
+  EM CONTATO PELO EMAIL: fopprado@gmail.com
+  FALAR COM Fabiano}
   TissInt.iniciaInternacao; //Método de inicialização
   TissInt.Tisscabecalho.TissArquivo := 'internacao.xml';
   TissInt.Tisscabecalho.TissEncoding := 'ISO-8859-1';
@@ -439,7 +447,7 @@ begin
 
       //Dados Beneficiario
       TissInt.TissBeneficiario.TissNumCarteira := IntToStr(I);
-      TissInt.TissBeneficiario.TissBenific := 'Fabiano de Oliveira Prado';
+      TissInt.TissBeneficiario.TissBenific := 'Paciente teste';
       TissInt.TissBeneficiario.TissNomePlano := 'PLANO DE SAÚDE'+IntToStr(i);
       TissInt.TissBeneficiario.TissValidadeCart := Date + 30;
       TissInt.TissBeneficiario.TissNumCNS := '45787';
