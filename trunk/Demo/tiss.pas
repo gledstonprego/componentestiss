@@ -17,7 +17,7 @@ type
     TissC: TTissConsulta;
     Button2: TButton;
     Label1: TLabel;
-    Memo1: TMemo;
+    Memo1: TMemo; 
     TissSP: TTissSP_SADT;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;

@@ -10,4 +10,4 @@ se vai usar o valor RegistroANS ou CNPJ, pois só uma das entradas é valida:
 							</ans:identificacaoFontePagadora>
 
 mudado o tipo CBOS para String 
- 
+  
