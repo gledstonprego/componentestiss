@@ -5,7 +5,19 @@ uses
   SysUtils, Classes;
 type
   TTissTipoGeral = (JuridicoGeral,FisicGeral,Outros,conselhoProfissional);
-  TTissAnsVersao = (v2_01_02,v2_01_03);
+  TTissAnsVersao = (v2_01_03,v2_02_01);
+  TTissAnsRegCNPJ = (RegistroANS,CNPJ);
+
+  TTissIdentFontPag = class(TPersistent)
+  private
+    FregAns: string;
+    FCnpj: string;
+    procedure setCnpj(const Value: string);
+    procedure setRegAns(const Value: string);
+  published
+    property TissRegAns: string read FregAns write setRegAns;
+    property TissCnpj: string read FCnpj write setCnpj; 
+  end;
 
   TTissTabela = class(TPersistent)
   private
@@ -401,6 +413,7 @@ type
     FUsarEndContratado: Boolean;
     FNomeArqu: Boolean;
     FArqNomeHash: Boolean;
+    FPadraoTipFontPg: TTissAnsRegCNPJ;
     procedure setFArqNomeHash(const Value: Boolean);    
     procedure SetUsarCBOS(const Value: Boolean);
     procedure setCEP(const Value: Boolean);
@@ -448,8 +461,8 @@ type
     procedure setObs(const Value: Boolean);
     procedure setUsarEndContratado(const Value: Boolean);
     procedure setNomeArq(const Value: Boolean);
-
-
+    procedure setPadraoTipFontPg(const Value: TTissAnsRegCNPJ);
+    
   public
     constructor create;
 
@@ -505,9 +518,9 @@ type
     property UsarEndContratado:Boolean read FUsarEndContratado write setUsarEndContratado;
 
     property UsarNomeArq:Boolean read FNomeArqu write setNomeArq;
-    
-    property UsarArqNomeHash:Boolean read FArqNomeHash write setFArqNomeHash;
 
+    property UsarArqNomeHash:Boolean read FArqNomeHash write setFArqNomeHash;
+    property PadraoTipFontPg: TTissAnsRegCNPJ read FPadraoTipFontPg write setPadraoTipFontPg;
 
   end;
 
@@ -902,6 +915,11 @@ end;
 procedure TTissReq.setPaciente(const Value: Boolean);
 begin
   FPaciente := Value;
+end;
+
+procedure TTissReq.setPadraoTipFontPg(const Value: TTissAnsRegCNPJ);
+begin
+  FPadraoTipFontPg := Value;
 end;
 
 procedure TTissReq.setRegANS(const Value: Boolean);
@@ -1705,6 +1723,18 @@ end;
 procedure TTissTabela.setTipTab(const Value: String);
 begin
   fTipTab := Value;
+end;
+
+{ TTissIdentFontPag }
+
+procedure TTissIdentFontPag.setCnpj(const Value: string);
+begin
+  FCnpj := Value;
+end;
+
+procedure TTissIdentFontPag.setRegAns(const Value: string);
+begin
+  FregAns := Value;
 end;
 
 end.

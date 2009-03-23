@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes,Windows,Dialogs,Messages,forms,xmldom, XMLIntf, msxmldom, XMLDoc,untTissComp,Graphics;
-  {COMPONENTE INICIADO POR FABIANO DE OLIVEIRA PRADO
+  {COMPONENTE INICIADO POR Fabiano
   Espero ter ajudado alguem com este componente, e
   espero que mais progrmadores se juntem nesta idéia
   para assim realizarmo o projeto TISS com sucesso,
@@ -48,7 +48,7 @@ type
     FUF: String;
     fCEP: String;
     fCNES: Currency;
-    fCBOS: Currency;
+
     fCodigoTabela: Integer;
     fUFCONSELHO: String;
     fSIGLACONSELHO: String;
@@ -106,7 +106,7 @@ type
     procedure setUF(const Value: String);
     procedure setCEP(const Value: String);
     procedure setCNES(const Value: Currency);
-    procedure setCBOS(const Value: Currency);
+
     procedure setCIDCodDiag(const Value: String);
     procedure setCIDDescDiag(const Value: String);
     procedure setCIDNomeTab(const Value: String);
@@ -132,6 +132,10 @@ type
     procedure setvalidado(const Value: Boolean);
     procedure setAnsVersaoxsd(const Value: TTissAnsVersao);
   private
+    FFontePadora: TTissIdentFontPag;
+    fCBOS: String;
+    procedure SetFontePagora(const Value: TTissIdentFontPag);
+    procedure setCBOS(const Value: String);
     property validado: Boolean read Fvalidado write setvalidado;
   protected
     { Protected declarations }
@@ -149,6 +153,8 @@ type
     { Published declarations }
     //versão do xsd da ANS
     property ansVersaoXSD: TTissAnsVersao read FAnsVersaoxsd write setAnsVersaoxsd;
+    //fonte pagadora
+    property TissFontePadora: TTissIdentFontPag read FFontePadora write SetFontePagora;
     property Versao:TCompVersao read FCompVersao write FCompVersao;
     property TissVersaoXml: String read FVersaoXml write setVersaoXml;
     property TissVersaoTISS: String read FVersaoTISS write setVersaoTISS;
@@ -184,7 +190,7 @@ type
     property TissSIGLACONSELHO:String read fSIGLACONSELHO write setSIGLACONSELHO;
     property TissNUMEROCONSELHO:String read fNUMEROCONSELHO write setNUMEROCONSELHO;
     property TissUFCONSELHO:String read fUFCONSELHO write setUFCONSELHO;
-    property TissCBOS:Currency read fCBOS write setCBOS;
+    property TissCBOS:String read fCBOS write setCBOS;
     property TissCIDNomeTab:String read fCIDNomeTab write setCIDNomeTab;
     property TissCIDCodDiag:String read fCIDCodDiag write setCIDCodDiag;
     property TissCIDDescDiag:String read fCIDDescDiag write setCIDDescDiag;
@@ -232,11 +238,22 @@ begin
       Append(arquivo);
       Writeln(arquivo,'<ans:guiaConsulta>');
       Writeln(arquivo,'<ans:identificacaoGuia>');
+      if FAnsVersaoxsd = v2_02_01 then
+        begin
+          Writeln(arquivo,'<ans:identificacaoFontePagadora>');
+          case FTissReq.PadraoTipFontPg of
+            RegistroANS: Writeln(arquivo,'<ans:registroANS>'+FFontePadora.TissRegAns+'</ans:registroANS>');
+            CNPJ: Writeln(arquivo,'<ans:cnpjFontePagadora>'+FFontePadora.TissCnpj+'</ans:cnpjFontePagadora>');
+          end;    
+          Writeln(arquivo,'</ans:identificacaoFontePagadora>');
+        end;      
       if FTissReq.UsarRegANS then
-        Writeln(arquivo,'<ans:registroANS>'+fRegAns+'</ans:registroANS>');
-      case ansVersaoXSD of
-          v2_01_02: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',FDataEmis)+'</ans:dataEmissaoGuia>');
+        if FAnsVersaoxsd = v2_01_03 then        
+          Writeln(arquivo,'<ans:registroANS>'+fRegAns+'</ans:registroANS>');
+      case FansVersaoXSD of
+          //v2_01_02: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',FDataEmis)+'</ans:dataEmissaoGuia>');
           v2_01_03: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',FDataEmis)+'</ans:dataEmissaoGuia>');
+          v2_02_01: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',FDataEmis)+'</ans:dataEmissaoGuia>');
         end;
 
       if FTissReq.UsarNumGuia then
@@ -252,7 +269,13 @@ begin
       if FTissReq.UsarNomePlano then
         Writeln(arquivo,'<ans:nomePlano>'+FNomePlano+'</ans:nomePlano>');
       if FTissReq.UsarValidadeCart then
-        Writeln(arquivo,'<ans:validadeCarteira>'+FormatDateTime('DD/MM/YYYY',FValidadeCart)+'</ans:validadeCarteira>');
+        begin
+          case FansVersaoXSD of
+            v2_01_03: Writeln(arquivo,'<ans:validadeCarteira>'+FormatDateTime('DD/MM/YYYY',FValidadeCart)+'</ans:validadeCarteira>');
+            v2_02_01: Writeln(arquivo,'<ans:validadeCarteira>'+FormatDateTime('YYYY-MM-DD',FValidadeCart)+'</ans:validadeCarteira>');
+          end;
+
+        end;
       if FTissReq.UsarNumCNS then
         Writeln(arquivo,'<ans:numeroCNS>'+FNumCNS+'</ans:numeroCNS>');
 
@@ -315,7 +338,7 @@ begin
 
       Writeln(arquivo,'</ans:conselhoProfissional>');
       if FTissReq.UsarCBOS then
-        Writeln(arquivo,'<ans:cbos>'+FormatFloat('00000',fCBOS)+'</ans:cbos>');
+        Writeln(arquivo,'<ans:cbos>'+fCBOS+'</ans:cbos>');
 
       Writeln(arquivo,'</ans:profissionalExecutante>');
 
@@ -345,7 +368,13 @@ begin
 
       Writeln(arquivo,'<ans:dadosAtendimento>');
       if FTissReq.UsardataAtendimento then
-        Writeln(arquivo,'<ans:dataAtendimento>'+FormatDateTime('DD/MM/YYYY',fdataAtendimento)+'</ans:dataAtendimento>');
+        begin
+          case FAnsVersaoxsd of
+            v2_01_03: Writeln(arquivo,'<ans:dataAtendimento>'+FormatDateTime('DD/MM/YYYY',fdataAtendimento)+'</ans:dataAtendimento>');
+            v2_02_01: Writeln(arquivo,'<ans:dataAtendimento>'+FormatDateTime('YYYY-MM-DD',fdataAtendimento)+'</ans:dataAtendimento>');
+          end;
+
+        end;
 
       Writeln(arquivo,'<ans:procedimento>');
       if FTissReq.UsarCodigoTabela then
@@ -382,13 +411,14 @@ begin
   FZerosArq := 20;
   FEncoding:='ISO-8859-1';
   FVersaoXml:='1.0';
-  FVersaoTISS:='2.01.02';
+  FVersaoTISS:='2.02.01';
   FTipo:=Juridico;
   FMensagemTissXml:='xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
   FTissReq := TTissReq.Create;
   FCompVersao := TCompVersao.create;
   FTissValid := TTissValidacao.create;
-  FAnsVersaoxsd := v2_01_03;
+  FFontePadora := TTissIdentFontPag.Create;
+  FAnsVersaoxsd := v2_02_01;
   // FBusca := TBusca.Create(self);
   inherited;
 end;
@@ -415,19 +445,28 @@ begin
       Writeln(arquivo,'<ans:cabecalho>');
     //TAG IDENTIFICAÇÃO DA TRANSAÇÃO
       Writeln(arquivo,'<ans:identificacaoTransacao>');
+      
+
+
       Writeln(arquivo,'<ans:tipoTransacao>'+FTipoTrans+'</ans:tipoTransacao>');
       if FTissReq.UsarSequencialTrans then
         Writeln(arquivo,'<ans:sequencialTransacao>'+FSequencialTrans+'</ans:sequencialTransacao>');
       if FTissReq.UsarDataRegistroTrans then
         begin
           case FAnsVersaoxsd of
-            v2_01_02: Writeln(arquivo,'<ans:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FDataRegistroTrans)+'</ans:dataRegistroTransacao>');
             v2_01_03: Writeln(arquivo,'<ans:dataRegistroTransacao>'+FormatDateTime('DD/MM/YYYY',FDataRegistroTrans)+'</ans:dataRegistroTransacao>');
+            v2_02_01: Writeln(arquivo,'<ans:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FDataRegistroTrans)+'</ans:dataRegistroTransacao>');
           end;
 
         end;
       if FTissReq.UsarHoraRegistroTrans then
-        Writeln(arquivo,'<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm',FHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
+        begin
+          case FAnsVersaoxsd of
+            v2_01_03: Writeln(arquivo,'<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm',FHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
+            v2_02_01: Writeln(arquivo,'<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm:ss',FHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
+          end;
+
+        end;
 
       Writeln(arquivo,'</ans:identificacaoTransacao>');
 
@@ -636,7 +675,8 @@ begin
   FArquivo := Value;
 end;
 
-procedure TTissConsulta.setCBOS(const Value: Currency);
+
+procedure TTissConsulta.setCBOS(const Value: String);
 begin
   fCBOS := Value;
 end;
@@ -725,6 +765,11 @@ end;
 procedure TTissConsulta.setFArqNomeHash(const Value: Boolean);
 begin
   FArqNomeHash := Value;
+end;
+
+procedure TTissConsulta.SetFontePagora(const Value: TTissIdentFontPag);
+begin
+  FFontePadora := Value;
 end;
 
 procedure TTissConsulta.setHoraRegistroTrans(const Value: TDateTime);
@@ -908,7 +953,7 @@ end;
 
 procedure TTissConsulta.Verifica;
 begin
-  if FTissReq.UsarCBOS = True then
+  {if FTissReq.UsarCBOS = True then
     begin
       if  fCBOS = 0 then
         begin

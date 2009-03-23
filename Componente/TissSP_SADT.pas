@@ -66,6 +66,7 @@ type
     FTissOpmUti: TTissOpmUti;
     FTissOutrasDesp: TTissOutrasDesp;
     FAnsVersaoxsd: TTissAnsVersao;
+    FFontePagadora: TTissIdentFontPag;
 
     procedure setCNPJCPF(const Value: String);
     procedure setRegANS(const Value: String);
@@ -87,6 +88,7 @@ type
     procedure setTipoSaida(const Value: String);
     procedure setTipoAtend(const Value: integer);
     procedure setAnsVersaoxsd(const Value: TTissAnsVersao);
+    procedure SetFontePagadora(const Value: TTissIdentFontPag);
 
     { Private declarations }
   protected
@@ -111,6 +113,10 @@ type
     { Published declarations }
     //versão do xsd da ANS
     property ansVersaoXSD: TTissAnsVersao read FAnsVersaoxsd write setAnsVersaoxsd;
+
+    //fonte pagadora
+    property TissFontePadora: TTissIdentFontPag read FFontePagadora write SetFontePagadora;    
+
     //VERSAO
     property Versao:TCompVersao read FCompVersao write FCompVersao;
     //CONFIGURAÇÕES
@@ -386,14 +392,26 @@ end;
 
 procedure TTissSP_SADT.adicionarGuia;
 begin
-    try
-
+    try  
       FGuia.add('<ans:guiaSP_SADT>');
 
         FGuia.add('<ans:identificacaoGuiaSADTSP>');
+        if FAnsVersaoxsd = v2_02_01 then
+          begin
+            FGuia.Add('<ans:identificacaoFontePagadora>');
+            case FTissConfSP_SADT.PadraoTipFontPg of
+              RegistroANS: FGuia.add('<ans:registroANS>'+FFontePagadora.TissRegAns+'</ans:registroANS>');
+              CNPJ: FGuia.add('<ans:cnpjFontePagadora>'+FFontePagadora.TissCnpj+'</ans:cnpjFontePagadora>');
+            end;    
+            FGuia.add('</ans:identificacaoFontePagadora>');
+          end;
           if FTissConfSP_SADT.TissRegANS then
             FGuia.add('<ans:registroANS>'+FRegAns+'</ans:registroANS>');
-          FGuia.add('<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',FDataEmis)+'</ans:dataEmissaoGuia>');
+          case ansVersaoXSD of
+            v2_01_03: FGuia.add('<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',FDataEmis)+'</ans:dataEmissaoGuia>');
+            v2_02_01: FGuia.add('<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',FDataEmis)+'</ans:dataEmissaoGuia>');
+          end;
+
           if FTissConfSP_SADT.TissNumGuiaPrest then
             FGuia.add('<ans:numeroGuiaPrestador>'+FNumGuiaPrest+'</ans:numeroGuiaPrestador>');
           if FTissConfSP_SADT.TissNumGuiaOper then
@@ -409,11 +427,22 @@ begin
           begin
             FGuia.add('<ans:dadosAutorizacao>');
               if FTissConfSP_SADT.TissDataAut then
-                FGuia.add('<ans:dataAutorizacao>'+FormatDateTime('DD/MM/YYYY',FDataAut)+'</ans:dataAutorizacao>');
+                begin
+                  case ansVersaoXSD of
+                    v2_01_03: FGuia.add('<ans:dataAutorizacao>'+FormatDateTime('DD/MM/YYYY',FDataAut)+'</ans:dataAutorizacao>');
+                    v2_02_01: FGuia.add('<ans:dataAutorizacao>'+FormatDateTime('YYYY-MM-DD',FDataAut)+'</ans:dataAutorizacao>');
+                  end;
+                end;
               if FTissConfSP_SADT.TissSenhaAut then
                 FGuia.add('<ans:senhaAutorizacao>'+FSenhaAut+'</ans:senhaAutorizacao>');
               if FTissConfSP_SADT.TissSenhaValid then
-                FGuia.add('<ans:validadeSenha>'+FormatDateTime('DD/MM/YYYY',FSenhaValid)+'</ans:validadeSenha>');
+                begin
+                  case ansVersaoXSD of
+                    v2_01_03: FGuia.add('<ans:validadeSenha>'+FormatDateTime('DD/MM/YYYY',FSenhaValid)+'</ans:validadeSenha>');
+                    v2_02_01: FGuia.add('<ans:validadeSenha>'+FormatDateTime('YYYY-MM-DD',FSenhaValid)+'</ans:validadeSenha>');
+                  end;
+
+                end;
             FGuia.add('</ans:dadosAutorizacao>');
           end;
 
@@ -427,7 +456,13 @@ begin
               if FTissConfSP_SADT.TissBenefic.TissNomePlano then
                 FGuia.add('<ans:nomePlano>'+FTissBenific.TissNomePlano+'</ans:nomePlano>');
               if FTissConfSP_SADT.TissBenefic.TissValidadeCart then
-                FGuia.add('<ans:validadeCarteira>'+FormatDateTime('DD/MM/YYYY',FTissBenific.TissValidadeCart)+'</ans:validadeCarteira>');
+                begin
+                  case ansVersaoXSD of
+                    v2_01_03: FGuia.add('<ans:validadeCarteira>'+FormatDateTime('DD/MM/YYYY',FTissBenific.TissValidadeCart)+'</ans:validadeCarteira>');
+                    v2_02_01: FGuia.add('<ans:validadeCarteira>'+FormatDateTime('YYYY-MM-DD',FTissBenific.TissValidadeCart)+'</ans:validadeCarteira>');
+                  end;
+
+                end;
               if FTissConfSP_SADT.TissBenefic.TissNumCNS then
                 FGuia.add('<ans:numeroCNS>'+FTissBenific.TissNumCNS+'</ans:numeroCNS>');
 
@@ -583,7 +618,13 @@ begin
         if FTissConfSP_SADT.TisscaraterAtend then
           FGuia.add('<ans:caraterAtendimento>'+FcaraAtend+'</ans:caraterAtendimento>');
         if FTissConfSP_SADT.TissDataAtend then
-        FGuia.add('<ans:dataHoraAtendimento>'+FormatDateTime('DD/MM/YYYY',FDataATend)+'H'+FormatDateTime('hh:mm',FHoraAtend)+'</ans:dataHoraAtendimento>');
+          begin
+            case ansVersaoXSD of
+              v2_01_03: FGuia.add('<ans:dataHoraAtendimento>'+FormatDateTime('DD/MM/YYYY',FDataATend)+'H'+FormatDateTime('hh:mm',FHoraAtend)+'</ans:dataHoraAtendimento>');
+              v2_02_01: FGuia.add('<ans:dataHoraAtendimento>'+FormatDateTime('YYYY-MM-DD',FDataATend)+'H'+FormatDateTime('hh:mm',FHoraAtend)+'</ans:dataHoraAtendimento>');
+            end;
+
+          end;
 
         if Tissconfig.TissUsarDiagnostico then
           begin
@@ -644,6 +685,7 @@ begin
   FTissValid := TTissValidacao.create;
   FTissOpmUti := TTissOpmUti.create;
   FTissOutrasDesp := TTissOutrasDesp.create;
+  FFontePagadora := TTissIdentFontPag.Create;
 
   FAnsVersaoxsd := v2_01_03;
   FTissCabecalho.TissEncoding:='ISO-8859-1';
@@ -675,9 +717,18 @@ begin
 
       FCabecalho.Add('<ans:sequencialTransacao>'+FTissCabecalho.TissSequencialTrans+'</ans:sequencialTransacao>');
 
-      FCabecalho.Add('<ans:dataRegistroTransacao>'+FormatDateTime('DD/MM/YYYY',FTissCabecalho.TissDataRegistroTrans)+'</ans:dataRegistroTransacao>');
-
-      FCabecalho.Add('<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm',FTissCabecalho.TissHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
+      case ansVersaoXSD of
+        v2_01_03:
+          begin
+            FCabecalho.Add('<ans:dataRegistroTransacao>'+FormatDateTime('DD/MM/YYYY',FTissCabecalho.TissDataRegistroTrans)+'</ans:dataRegistroTransacao>');
+            FCabecalho.Add('<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm',FTissCabecalho.TissHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
+          end;
+        v2_02_01:
+          begin
+            FCabecalho.Add('<ans:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FTissCabecalho.TissDataRegistroTrans)+'</ans:dataRegistroTransacao>');
+            FCabecalho.Add('<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm:ss',FTissCabecalho.TissHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
+          end;
+      end; 
 
       FCabecalho.Add('</ans:identificacaoTransacao>');
 
@@ -1083,6 +1134,11 @@ end;
 procedure TTissSP_SADT.setDataEmis(const Value: TDateTime);
 begin
   FDataEmis := Value;
+end;
+
+procedure TTissSP_SADT.SetFontePagadora(const Value: TTissIdentFontPag);
+begin
+  FFontePagadora := Value;
 end;
 
 procedure TTissSP_SADT.setDataAut(const Value: TDateTime);
