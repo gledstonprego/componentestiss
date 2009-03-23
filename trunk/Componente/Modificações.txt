@@ -9,5 +9,5 @@ se vai usar o valor RegistroANS ou CNPJ, pois só uma das entradas é valida:
   <ans: cnpjFontePagadora>Campo 61</ans: cnpjFontePagadora>
 							</ans:identificacaoFontePagadora>
 
-mudado o tipo CBOS para String
+mudado o tipo CBOS para String 
  
