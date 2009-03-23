@@ -283,8 +283,9 @@ object Form1: TForm1
     TissConfig.UsarEndContratado = True
     TissConfig.UsarNomeArq = True
     TissConfig.UsarArqNomeHash = True
+    TissConfig.PadraoTipFontPg = CNPJ
     TissValid.UsarValidacao = True
-    TissValid.TissXSD = 'tissV2_01_03.xsd'
+    TissValid.TissXSD = 'tissV2_02_01.xsd'
     TissZerosArq = 20
     Left = 8
     Top = 8
