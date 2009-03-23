@@ -79,10 +79,10 @@ begin
   TissC.TissDataRegistroTrans := Date;
   TissC.TissHoraRegistroTrans := Time;
   TissC.TissTipo := Juridico;
-  TissC.TissCNPJCPF := '02762719000195';
-  TissC.TissRegANS := '0';
+  TissC.TissCNPJCPF := '01614414000173';
+  TissC.TissRegANS := '123';
   TissC.TissDataEmis := StrToDate ('26/10/2009');
-  TissC.TissVersaoTISS := '2.01.03';
+  TissC.TissVersaoTISS := '2.02.01';
   TissC.TissNumLote := '1545';  
   //FIM CABEÇALHO
   TissC.criaCabecalho;  {COMANDO PARA ADICIONAR O CABEÇALHO}
@@ -96,8 +96,8 @@ begin
    for i:= 1 to 5 do
      begin
         //VERSÃO 2.02.01
-        TissC.TissFontePadora.TissRegAns := '15484';
-        TissC.TissFontePadora.TissCnpj := '02762719000195';
+        TissC.TissFontePadora.TissRegAns := '123';
+        TissC.TissFontePadora.TissCnpj := '01614414000173';
         //VERSÃO 2.02.01
         TissC.TissRegANS := '0';
         TissC.TissNumGuia := IntToStr(I);
@@ -120,7 +120,7 @@ begin
         TissC.TissSIGLACONSELHO := 'CRM';
         TissC.TissNUMEROCONSELHO := '02457';
         TissC.TissUFCONSELHO := 'RJ';
-        TissC.TissCBOS := 01280;
+        TissC.TissCBOS := '2231.40';
 
         //hipótese diagnóstica
         TissC.TissCIDNomeTab := 'CID-10';
