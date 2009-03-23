@@ -226,7 +226,7 @@ object Form1: TForm1
     TabOrder = 5
   end
   object TissC: TTissConsulta
-    ansVersaoXSD = v2_01_03
+    ansVersaoXSD = v2_02_01
     Versao.Versao = '0.9.16'
     TissVersaoXml = '1.0'
     TissVersaoTISS = '2.01.03'
