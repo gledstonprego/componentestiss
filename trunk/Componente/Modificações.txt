@@ -1,0 +1,12 @@
+Modificação do tipo data e time
+YYYY-MM-DD / HH:MM:SS
+
+Criado a propriedade PadraotipfontePg nos componentes para defininir
+se vai usar o valor RegistroANS ou CNPJ, pois só uma das entradas é valida:
+							<ans:identificacaoFontePagadora>
+								  <ans:registroANS>Campo 5</ans:registroANS>
+  Ou
+  <ans: cnpjFontePagadora>Campo 61</ans: cnpjFontePagadora>
+							</ans:identificacaoFontePagadora>
+
+mudado o tipo CBOS para String
