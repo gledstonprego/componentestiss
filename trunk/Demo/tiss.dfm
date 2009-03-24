@@ -301,7 +301,7 @@ object Form1: TForm1
     Tissconfig.TissUsarProc = True
     Tissconfig.TissUsarProfissional = True
     Tissconfig.TissUsarProfissionalCompl = False
-    Tissconfig.TissUsarOPM = True
+    Tissconfig.TissUsarOPM = False
     Tissconfig.TissUsarOutDespesas = True
     Tissconfig.TissCabecalho.TissTipoTrans = True
     Tissconfig.TissCabecalho.TissDataRegistroTrans = True
