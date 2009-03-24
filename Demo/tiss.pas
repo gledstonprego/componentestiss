@@ -17,7 +17,7 @@ type
     TissC: TTissConsulta;
     Button2: TButton;
     Label1: TLabel;
-    Memo1: TMemo; 
+    Memo1: TMemo;
     TissSP: TTissSP_SADT;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
@@ -193,10 +193,15 @@ begin
   for i:= 1 to 1 {5} do
     begin
       //identificação guia SADTSP
+
+        //VERSÃO 2.02.01
+        TissSP.TissFontePadora.TissRegAns := '123';
+        TissSP.TissFontePadora.TissCnpj := '01614414000173';
+        //VERSÃO 2.02.01
       TissSP.TissNumGuiaPrest := IntToStr(i);
       TissSP.TissNumGuiaOper := IntToStr(i);
       TissSP.TissNumGuiaPrinc:= IntToStr(i);
-      TissSP.TissRegANS := '0';
+      //TissSP.TissRegANS := '0';
       TissSP.TissDataEmis := StrToDate ('26/10/2009');
 
       //dados autorização
@@ -231,7 +236,7 @@ begin
       TissSP.TissProfissional.TissSIGLACONSELHO := 'CRM';
       TissSP.TissProfissional.TissNumConselho := '02457';
       TissSP.TissProfissional.TissUFCONSELHO := 'RJ';
-      TissSP.TissProfissional.TissfCBOS := 06158;
+      TissSP.TissProfissional.TissfCBOS := '2011';
 
       // Prestador Executante
       {TissSP.TissPrestadorExec.TissTipoGeral INFORME ESSA PROPRIEDADE NO
@@ -254,7 +259,7 @@ begin
       TissSP.TissProfissionalCompl.TissSiglaConselho:='CRM';
       TissSP.TissProfissionalCompl.TissNumConselho:='3435';
       TissSP.TissProfissionalCompl.TissUFConselho:='DF';
-      TissSP.TissProfissionalCompl.TissfCBOS:=6114;
+      TissSP.TissProfissionalCompl.TissfCBOS:='2011';
       TissSP.TissPrestadorExecCompl.TissTipoGeral:=FisicGeral;
       TissSP.TissPrestadorExecCompl.TissCNPJCPF:='24428051115';
       //indicação Clinica
@@ -300,7 +305,7 @@ begin
               TissSP.TissProc.TissEquipe.TissProfiss.TissSiglaConselho := 'CRM';
               TissSP.TissProc.TissEquipe.TissProfiss.TissNumConselho := '02457';
               TissSP.TissProc.TissEquipe.TissProfiss.TissUFCONSELHO := 'RJ';
-              TissSP.TissProc.TissEquipe.TissProfiss.TissfCBOS := 06158;
+              TissSP.TissProc.TissEquipe.TissProfiss.TissfCBOS := '2011';
               TissSP.TissProc.TissEquipe.TissProfiss.TissPosicProf:=10;
               TissSP.adicionaProf;
             end;
@@ -325,7 +330,7 @@ begin
         // É FUNDAMENTAL QUE VC ZERE ESTA PROPRIEDADE ANTES DE ADICIONAR AS OPMs
         TissSP.TissOpmUti.TissVlrTotOPM := 0;
 
-        For j := 1 to 1 do
+        For j := 1 to 3 do
           begin
             TissSP.TissOpmUti.TissOpm.TissTabOpm.TissCodigo    := '12345678';
             TissSP.TissOpmUti.TissOpm.TissTabOpm.TissTipTab    := '02';
@@ -437,7 +442,8 @@ begin
       TissInt.TissNumGuiaPrest := IntToStr(i);
       TissInt.TissNumGuiaOper := IntToStr(i);
       TissInt.TissNumGuiaSolic := IntToStr(i);
-      TissInt.TissRegANS := '0';
+      TissInt.TissFontePadora.TissRegAns:= '154';
+     // TissInt.TissRegANS := '0';
       TissInt.TissDataEmis := StrToDate ('26/10/2009');
 
       //dados autorização
@@ -472,7 +478,7 @@ begin
       TissInt.TissProfissional.TissSIGLACONSELHO := 'CRM';
       TissInt.TissProfissional.TissNumConselho := '02457';
       TissInt.TissProfissional.TissUFCONSELHO := 'RJ';
-      TissInt.TissProfissional.TissfCBOS := 06158;
+      TissInt.TissProfissional.TissfCBOS := '2231.44';
 
       // Prestador Executante
       {TissInt.TissPrestadorExec.TissTipoGeral INFORME ESSA PROPRIEDADE NO
@@ -501,7 +507,7 @@ begin
 
       //Diagnostico Saída internação
       TissInt.TissDiagSaidInt.TissIndicAcid := 0;
-      TissInt.TissDiagSaidInt.TissMotSaidInt := '10';
+      TissInt.TissDiagSaidInt.TissMotSaidInt := '11';
       TissInt.TissDiagSaidInt.TissDiagPrinc.TissCIDNomeTab := 'CID-10';
       TissInt.TissDiagSaidInt.TissDiagPrinc.TissCIDCodDiag := '1';
       TissInt.TissDiagSaidInt.TissDiagPrinc.TissCIDDescDiag := 'TESTE INT';
@@ -544,7 +550,7 @@ begin
               TissInt.TissProc.TissEquipe.TissProfiss.TissSiglaConselho := 'CRM';
               TissInt.TissProc.TissEquipe.TissProfiss.TissNumConselho := '02457';
               TissInt.TissProc.TissEquipe.TissProfiss.TissUFCONSELHO := 'RJ';
-              TissInt.TissProc.TissEquipe.TissProfiss.TissfCBOS := 06158;
+              TissInt.TissProc.TissEquipe.TissProfiss.TissfCBOS := '2231.44';
               TissInt.TissProc.TissEquipe.TissProfiss.TissPosicProf := 11;
 
               TissInt.adicionaProf;
