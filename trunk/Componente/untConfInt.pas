@@ -395,6 +395,7 @@ type
     FUsarDadAut: boolean;
     FTissConfOPM: TTissConfOPM;
     FTissConfOutrasDesp: TTissConfOutrasDesp;
+    FPadraoTipFontPg: TTissAnsRegCNPJ;
 
     procedure setcaraAtend(const Value: boolean);
     procedure setCNPJCPF(const Value: boolean);
@@ -430,6 +431,7 @@ type
     procedure setUsarDadAut(const Value: boolean);
     procedure setTissConfOPM(const Value: TTissConfOPM);
     procedure setTissConfOutrasDesp(const Value: TTissConfOutrasDesp);
+    procedure setPadraoTipFontPg(const Value: TTissAnsRegCNPJ);
 
   public
     constructor create;
@@ -488,6 +490,7 @@ type
 
     //Diagnostico saida internacao
     property TissDiagSaidaInt: TconfDiagSaidInt read FconfDiagSaidInt write FconfDiagSaidInt;
+    property PadraoTipFontPg: TTissAnsRegCNPJ read FPadraoTipFontPg write setPadraoTipFontPg;
 
   end;
 
@@ -715,6 +718,11 @@ end;
 procedure TTissConfInt.setNumLote(const Value: boolean);
 begin
   FNumLote := Value;
+end;
+
+procedure TTissConfInt.setPadraoTipFontPg(const Value: TTissAnsRegCNPJ);
+begin
+  FPadraoTipFontPg := Value;
 end;
 
 procedure TTissConfInt.setRegANS(const Value: boolean);

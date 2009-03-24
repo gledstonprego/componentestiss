@@ -244,13 +244,13 @@ type
 
   TTissProfissional = class(TPersistent)
   private
-    fCBOS: Currency;
+    fCBOS: String;
     fNumConselho: String;
     FProf: String;
     fUFConselho: String;
     fSiglaConselho: String;
     FPosicProf: Integer;
-    procedure setCBOS(const Value: Currency);
+    procedure setCBOS(const Value: String);
     procedure setNumConselho(const Value: String);
     procedure setProf(const Value: String);
     procedure setSiglaConselho(const Value: String);
@@ -280,7 +280,7 @@ type
     property TissSiglaConselho:String read fSiglaConselho write setSiglaConselho;
     property TissNumConselho:String read fNumConselho write setNumConselho;
     property TissUFConselho:String read fUFConselho write setUFConselho;
-    property TissfCBOS:Currency read fCBOS write setCBOS;
+    property TissfCBOS:String read fCBOS write setCBOS;
     property TissPosicProf:Integer read FPosicProf write setPosicProf;
 
   end;
@@ -1277,7 +1277,7 @@ begin
 
 end;
 
-procedure TTissProfissional.setCBOS(const Value: Currency);
+procedure TTissProfissional.setCBOS(const Value: String);
 begin
   fCBOS := Value;
 end;
@@ -1509,12 +1509,12 @@ end;
 
 constructor TCompVersao.create;
 begin
- Fversao := '0.9.16';
+ Fversao := '0.10.1';
 end;
 
 procedure TCompVersao.setVersao(const Value: String);
 begin
-  Fversao := '0.9.16';
+  Fversao := '0.10.1';
 end;
 
 { TTissValidacao }

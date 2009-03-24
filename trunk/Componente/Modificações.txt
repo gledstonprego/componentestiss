@@ -10,3 +10,8 @@ se vai usar o valor RegistroANS ou CNPJ, pois só uma das entradas é valida:
 							</ans:identificacaoFontePagadora>
 
 mudado o tipo CBOS para String 
+
+retirado a propriedade TissRegANS do componente SPSADT correspondente ao registroANS
+foi incluido agora no campo TissSP.TissFontePadora.TissRegAns este campo vai 
+ser utilizado tanto para a versão nova como para a antiga
+ 
