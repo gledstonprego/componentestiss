@@ -6,7 +6,7 @@ interface
 uses
   SysUtils, Classes,Windows,Dialogs,Messages,forms,xmldom, XMLIntf, msxmldom,
   XMLDoc,untTissComp,untConfSPSADT,Graphics;
-  {COMPONENTE INICIADO POR FABIANO DE OLIVEIRA PRADO
+  {COMPONENTE INICIADO POR FABIANO
    Espero ter ajudado alguem com este componente, e
    espero que mais programadores se juntem nesta idéia
    para assim realizarmo o projeto TISS com sucesso,
@@ -21,7 +21,7 @@ type
   TpessoaSP_SADT = (FisicoSP_SADT,JuridicoSP_SADT);
   TTissSP_SADT = class(TComponent)
   private
-    FRegANS: String;
+//    FRegANS: String;
     FCNPJCPF: String;
 
     FTissSPSADT: TStringList;
@@ -69,7 +69,6 @@ type
     FFontePagadora: TTissIdentFontPag;
 
     procedure setCNPJCPF(const Value: String);
-    procedure setRegANS(const Value: String);
     procedure setNumLote(const Value: String);
     function TiraMascara(Texto: String): String;
     function hash(arquivohash:string): String;
@@ -139,7 +138,7 @@ type
     property TissProfissionalCompl:TTissProfissional read FTissProfissionalCompl write FTissProfissionalCompl;
 
     property TissCNPJCPF:String read FCNPJCPF write setCNPJCPF;
-    property TissRegANS:String read FRegANS write setRegANS;
+//    property TissRegANS:String read FRegANS write setRegANS;
     property TissNumLote:String read FNumLote write setNumLote;
 
     //GUIA
@@ -250,14 +249,33 @@ begin
         if TissTipoDesp then
           FOutDesp.add('<ans:tipoDespesa>'+IntToStr(TissOutDesp.TissDespesa.TissTipDespesa)+'</ans:tipoDespesa>');
 
+
         if TissDTRealizacao then
-          FOutDesp.add('<ans:dataRealizacao>'+FormatDateTime('DD/MM/YYYY',TissOutDesp.TissDespesa.TissDataReal)+'</ans:dataRealizacao>');
+          begin
+            case ansVersaoXSD of
+              v2_01_03: FOutDesp.add('<ans:dataRealizacao>'+FormatDateTime('DD/MM/YYYY',TissOutDesp.TissDespesa.TissDataReal)+'</ans:dataRealizacao>');
+              v2_02_01: FOutDesp.add('<ans:dataRealizacao>'+FormatDateTime('YYYY-MM-DD',TissOutDesp.TissDespesa.TissDataReal)+'</ans:dataRealizacao>');              
+            end;
+
+          end;
 
         if TissHSInicial then
-          FOutDesp.add('<ans:horaInicial>'+FormatDateTime('hh:mm',TissOutDesp.TissDespesa.TissHoraInicial)+'</ans:horaInicial>');
+          begin
+            case ansVersaoXSD of
+              v2_01_03: FOutDesp.add('<ans:horaInicial>'+FormatDateTime('hh:mm',TissOutDesp.TissDespesa.TissHoraInicial)+'</ans:horaInicial>');
+              v2_02_01: FOutDesp.add('<ans:horaInicial>'+FormatDateTime('hh:mm:ss',TissOutDesp.TissDespesa.TissHoraInicial)+'</ans:horaInicial>');
+            end;
+
+          end;
 
         if TissHSFinal then
-          FOutDesp.add('<ans:horaFinal>'+FormatDateTime('hh:mm',TissOutDesp.TissDespesa.TissHoraFinal)+'</ans:horaFinal>');
+          begin
+            case ansVersaoXSD of
+              v2_01_03: FOutDesp.add('<ans:horaFinal>'+FormatDateTime('hh:mm',TissOutDesp.TissDespesa.TissHoraFinal)+'</ans:horaFinal>');
+              v2_02_01: FOutDesp.add('<ans:horaFinal>'+FormatDateTime('hh:mm:ss',TissOutDesp.TissDespesa.TissHoraFinal)+'</ans:horaFinal>');
+            end;
+
+          end;
 
 
         if TissReducAcres then
@@ -311,11 +329,29 @@ begin
                 FProc.Add('<ans:descricao>'+TissProc.TissProcs.TissDescricao+'</ans:descricao>');
             FProc.Add('</ans:procedimento>');
             if TissData then
-              FProc.add('<ans:data>'+FormatDateTime('DD/MM/YYYY',TissProc.TissData)+'</ans:data>');
+              begin
+                case ansVersaoXSD of
+                  v2_01_03: FProc.add('<ans:data>'+FormatDateTime('DD/MM/YYYY',TissProc.TissData)+'</ans:data>');
+                  v2_02_01: FProc.add('<ans:data>'+FormatDateTime('YYYY-MM-DD',TissProc.TissData)+'</ans:data>');
+                end;
+
+              end;
             if TissHsInicio then
-              FProc.add('<ans:horaInicio>'+FormatDateTime('hh:mm',TissProc.TissHsInicio)+'</ans:horaInicio>');
+              begin
+                case ansVersaoXSD of
+                  v2_01_03: FProc.add('<ans:horaInicio>'+FormatDateTime('hh:mm',TissProc.TissHsInicio)+'</ans:horaInicio>');
+                  v2_02_01: FProc.add('<ans:horaInicio>'+FormatDateTime('hh:mm:ss',TissProc.TissHsInicio)+'</ans:horaInicio>');
+                end;
+
+              end;
             if TissHsFim then
-              FProc.add('<ans:horaFim>'+FormatDateTime('hh:mm',TissProc.TissHsFim)+'</ans:horaFim>');
+              begin
+                case ansVersaoXSD of
+                  v2_01_03: FProc.add('<ans:horaFim>'+FormatDateTime('hh:mm',TissProc.TissHsFim)+'</ans:horaFim>');
+                  v2_02_01: FProc.add('<ans:horaFim>'+FormatDateTime('hh:mm:ss',TissProc.TissHsFim)+'</ans:horaFim>');
+                end;
+
+              end;
             if TissQtde then
               FProc.add('<ans:quantidadeRealizada>'+CurrToStr(TissProc.TissQtde)+'</ans:quantidadeRealizada>');
             if TissVdeAcesso then
@@ -380,7 +416,7 @@ begin
                 FMembEquipe.Add('</ans:conselhoProfissional>');
                 
                 if FTissConfSP_SADT.TissProc.TissEquipe.TissProfiss.TissfCBOS then
-                  FMembEquipe.Add('<ans:codigoCBOS>'+FormatFloat('00000',TissProc.TissEquipe.TissProfiss.TissfCBOS)+'</ans:codigoCBOS>');
+                  FMembEquipe.Add('<ans:codigoCBOS>'+TissProc.TissEquipe.TissProfiss.TissfCBOS+'</ans:codigoCBOS>');
               FMembEquipe.Add('</ans:identificacaoProfissional>');
               if FTissConfSP_SADT.TissProc.TissEquipe.TissProfiss.TissPosicProf then
                 //FMembEquipe.Add('<ans:posicaoProfissional>'+IntToStr(TissProc.TissEquipe.TissProfiss.TissPosicProf)+'</ans:posicaoProfissional>');
@@ -405,8 +441,9 @@ begin
             end;    
             FGuia.add('</ans:identificacaoFontePagadora>');
           end;
+        if FAnsVersaoxsd = v2_01_03 then        
           if FTissConfSP_SADT.TissRegANS then
-            FGuia.add('<ans:registroANS>'+FRegAns+'</ans:registroANS>');
+            FGuia.add('<ans:registroANS>'+FFontePagadora.TissRegAns+'</ans:registroANS>');
           case ansVersaoXSD of
             v2_01_03: FGuia.add('<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',FDataEmis)+'</ans:dataEmissaoGuia>');
             v2_02_01: FGuia.add('<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',FDataEmis)+'</ans:dataEmissaoGuia>');
@@ -535,7 +572,7 @@ begin
                       FGuia.add('<ans:ufConselho>'+FTissProfissional.TissUFConselho+'</ans:ufConselho>');
                     FGuia.add('</ans:conselhoProfissional>');
                     if FTissConfSP_SADT.TissProfissional.TissfCBOS then
-                     FGuia.add('<ans:cbos>'+FormatFloat('00000',FTissProfissional.TissfCBOS)+'</ans:cbos>');
+                     FGuia.add('<ans:cbos>'+FTissProfissional.TissfCBOS+'</ans:cbos>');
                   FGuia.add('</ans:profissional>');
                end;
             FGuia.add('</ans:dadosSolicitante>');
@@ -596,7 +633,7 @@ begin
                       FGuia.add('<ans:ufConselho>'+FTissProfissionalCompl.TissUFConselho+'</ans:ufConselho>');
                     FGuia.add('</ans:conselhoProfissional>');
                     if FTissConfSP_SADT.TissProfissionalCompl.TissfCBOS then
-                     FGuia.add('<ans:codigoCBOS>'+FormatFloat('00000',FTissProfissionalCompl.TissfCBOS)+'</ans:codigoCBOS>');
+                     FGuia.add('<ans:codigoCBOS>'+FTissProfissionalCompl.TissfCBOS+'</ans:codigoCBOS>');
                     FGuia.Add('<ans:codigoProfissionalCompl>');
                     if FTissConfSP_SADT.TissUsarPrestadorExecCompl then
                       begin
@@ -621,7 +658,8 @@ begin
           begin
             case ansVersaoXSD of
               v2_01_03: FGuia.add('<ans:dataHoraAtendimento>'+FormatDateTime('DD/MM/YYYY',FDataATend)+'H'+FormatDateTime('hh:mm',FHoraAtend)+'</ans:dataHoraAtendimento>');
-              v2_02_01: FGuia.add('<ans:dataHoraAtendimento>'+FormatDateTime('YYYY-MM-DD',FDataATend)+'H'+FormatDateTime('hh:mm',FHoraAtend)+'</ans:dataHoraAtendimento>');
+              v2_02_01: FGuia.add('<ans:dataHoraAtendimento>'+FormatDateTime('YYYY-MM-DD',FDataATend)+'T'+FormatDateTime('hh:mm:ss',FHoraAtend)+'</ans:dataHoraAtendimento>');
+
             end;
 
           end;
@@ -687,10 +725,10 @@ begin
   FTissOutrasDesp := TTissOutrasDesp.create;
   FFontePagadora := TTissIdentFontPag.Create;
 
-  FAnsVersaoxsd := v2_01_03;
+  FAnsVersaoxsd := v2_02_01;
   FTissCabecalho.TissEncoding:='ISO-8859-1';
   FTissCabecalho.TissVersaoXml:='1.0';
-  FTissCabecalho.TissVersaoTISS:='2.01.03';
+  FTissCabecalho.TissVersaoTISS:='2.02.02';
   FTipoSP:=JuridicoSP_SADT;
   FTissCabecalho.TissMensagemTissXml:='xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
 
@@ -853,14 +891,6 @@ begin
           FGeral.add('</ans:procedimentosRealizados>');
         end;
 
-      if TissConfig.TissUsarOPM then
-        begin
-          FGeral.Add ('<ans:OPMutilizada>');
-          for i := 0 to FOPM.Count - 1 do FGeral.Add (FOPM.Strings[i]);
-          TissVlrTotOpm := CurrToStr (FTissOpmUti.TissVlrTotOPM);
-          FGeral.Add ('<ans:valorTotalOPM>' + TissVlrTotOpm + '</ans:valorTotalOPM>');
-          FGeral.Add ('</ans:OPMutilizada>');
-        end;
 
       if Tissconfig.TissUsarOutDespesas then
         begin
@@ -873,6 +903,15 @@ begin
           TissTotalGeral:=CurrToStr(FTissOutrasDesp.TissTotalGeral);
           FGeral.Add('<ans:totalGeralOutrasDespesas>'+TissTotalGeral+'</ans:totalGeralOutrasDespesas>');
           FGeral.Add('</ans:outrasDespesas>')
+        end;
+
+      if TissConfig.TissUsarOPM then
+        begin
+          FGeral.Add ('<ans:OPMutilizada>');
+          for i := 0 to FOPM.Count - 1 do FGeral.Add (FOPM.Strings[i]);
+          TissVlrTotOpm := CurrToStr (FTissOpmUti.TissVlrTotOPM);
+          FGeral.Add ('<ans:valorTotalOPM>' + TissVlrTotOpm + '</ans:valorTotalOPM>');
+          FGeral.Add ('</ans:OPMutilizada>');
         end;
 
       FGeral.Add('<ans:valorTotal>');
@@ -1177,10 +1216,10 @@ begin
   FNumLote := Value;
 end;
 
-procedure TTissSP_SADT.setRegANS(const Value: String);
+{procedure TTissSP_SADT.setRegANS(const Value: String);
 begin
   FRegANS := Value;
-end;
+end;}
 
 procedure TTissSP_SADT.setSenhaAut(const Value: String);
 begin
