@@ -434,6 +434,7 @@ object Form1: TForm1
     Tissconfig.TissRegANS = True
     Tissconfig.TissNumLote = True
     Tissconfig.PadraoTipFontPg = RegistroANS
+    Tissconfig.TissUsarObs = False
     Tisscabecalho.TissVersaoXml = '1.0'
     Tisscabecalho.TissEncoding = 'ISO-8859-1'
     Tisscabecalho.TissMensagemTissXml = 
@@ -613,8 +614,10 @@ object Form1: TForm1
     TissConfig.TissDiagSaidaInt.TissMotSaidInt = True
     TissConfig.TissDiagSaidaInt.TissObito = True
     TissConfig.PadraoTipFontPg = RegistroANS
+    TissConfig.TissUsarObs = False
     TissValid.UsarValidacao = True
     TissValid.TissXSD = 'tissV2_02_01.xsd'
+    TissObservacao = 'teste'
     Left = 88
     Top = 8
   end

@@ -373,6 +373,8 @@ type
     FUsarOPM: boolean;
     FUsarOutDesp: Boolean;
     FPadraoTipFontPg: TTissAnsRegCNPJ;
+    FUsarObs: Boolean;
+
 
     procedure setcaraAtend(const Value: boolean);
     procedure setCNPJCPF(const Value: boolean);
@@ -404,6 +406,7 @@ type
     procedure setUsarOPM(const Value: Boolean);
     procedure setUsarOutDesp(const Value: Boolean);
     procedure setPadraoTipFontPg(const Value: TTissAnsRegCNPJ);
+    procedure setUsarObs(const Value: Boolean);
 
   public
     constructor create;
@@ -455,6 +458,7 @@ type
 
     property TissNumLote:boolean read FNumLote write setNumLote;
     property PadraoTipFontPg: TTissAnsRegCNPJ read FPadraoTipFontPg write setPadraoTipFontPg;
+    property TissUsarObs: Boolean read FUsarObs write setUsarObs;
   end;
 
 
@@ -720,6 +724,11 @@ end;
 procedure TTissConfSP_SADT.setUsarDiagnostico(const Value: boolean);
 begin
   FUsarDiagnostico := Value;
+end;
+
+procedure TTissConfSP_SADT.setUsarObs(const Value: Boolean);
+begin
+  FUsarObs := Value;
 end;
 
 procedure TTissConfSP_SADT.setUsarOPM(const Value: Boolean);
