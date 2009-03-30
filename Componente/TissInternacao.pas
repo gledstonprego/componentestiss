@@ -52,6 +52,7 @@ type
     FTissValid: TTissValidacao;
     FAnsVersaoxsd: TTissAnsVersao;
     FFontePagadora: TTissIdentFontPag;
+    FObservacao: String;
 
     procedure setNumGuiaOper(const Value: String);
     procedure setNumGuiaPrest(const Value: String);
@@ -73,6 +74,7 @@ type
     procedure setCarcInt(const Value: String);
     procedure setAnsVersaoxsd(const Value: TTissAnsVersao);
     procedure SetFontePagadora(const Value: TTissIdentFontPag);
+    procedure setObservacao(const Value: String);
 
     { Private declarations }
   protected
@@ -154,6 +156,7 @@ type
     property TissConfig:TTissConfInt read FTissConf write FTissConf;
     //Validação
     property TissValid: TTissValidacao read FTissValid write FTissValid;
+    property TissObservacao: String read FObservacao write setObservacao; 
 
   end;
 
@@ -749,6 +752,8 @@ begin
       FGeral.Add('<ans:gases>'+CurrToStr(TissProc.TissValorTotalGases)+'</ans:gases>');
       FGeral.Add('<ans:totalGeral>'+CurrToStr(TissProc.TissValorTotalGeral)+'</ans:totalGeral>');
       FGeral.Add('</ans:valorTotal>');
+      if FTissConf.TissUsarObs  then
+        FGeral.Add('<ans:observacao>'+FObservacao+'</ans:observacao>');
 
       FGeral.Add('</ans:guiaResumoInternacao>');
       FGuia.Clear;
@@ -1035,6 +1040,11 @@ end;
 procedure TTissInternacao.setNumGuiaSolic(const Value: String);
 begin
   FNumGuiaSolic := Value;
+end;
+
+procedure TTissInternacao.setObservacao(const Value: String);
+begin
+  FObservacao := Value;
 end;
 
 procedure TTissInternacao.setDataEmis(const Value: TDateTime);

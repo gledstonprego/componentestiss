@@ -378,6 +378,7 @@ begin
           TissSP.TissProc.TissValorTotalMedicamentos:=10000.34;
           TissSP.TissProc.TissValorTotalGases:=0;
           TissSP.TissProc.TissValorTotalGeral:=TissSP.TissProc.TissValorTotalGeral+TissSP.TissOutDesp.TissTotalGeral;
+          TissSP.TissObservacao := 'Observação';
           end;
     TissSP.finalizaGuia;
     end;
@@ -631,6 +632,7 @@ begin
     end;
 
  // TissInt.criaRodape;
+  TissInt.TissObservacao := 'Observação';
   TissInt.GerarXml;
   if FileExists(TissInt.Tisscabecalho.TissArquivo) then
     begin

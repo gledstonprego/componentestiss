@@ -67,6 +67,7 @@ type
     FTissOutrasDesp: TTissOutrasDesp;
     FAnsVersaoxsd: TTissAnsVersao;
     FFontePagadora: TTissIdentFontPag;
+    FObservacao: String;
 
     procedure setCNPJCPF(const Value: String);
     procedure setNumLote(const Value: String);
@@ -88,6 +89,7 @@ type
     procedure setTipoAtend(const Value: integer);
     procedure setAnsVersaoxsd(const Value: TTissAnsVersao);
     procedure SetFontePagadora(const Value: TTissIdentFontPag);
+    procedure setObservacao(const Value: String);
 
     { Private declarations }
   protected
@@ -169,6 +171,7 @@ type
     property TissOutDesp:TTissOutrasDesp read FTissOutrasDesp write FTissOutrasDesp;
     //Validação
     property TissValid: TTissValidacao read FTissValid write FTissValid;
+    property TissObservacao: String read FObservacao write setObservacao;
 
   end;
 
@@ -915,14 +918,17 @@ begin
         end;
 
       FGeral.Add('<ans:valorTotal>');
+
       FGeral.Add('<ans:servicosExecutados>'+CurrToStr(TissProc.TissValorTotalServicos)+'</ans:servicosExecutados>');
       FGeral.Add('<ans:diarias>'+CurrToStr(TissProc.TissValorTotalDiarias)+'</ans:diarias>');
       FGeral.Add('<ans:taxas>'+CurrToStr(TissProc.TissValorTotalTaxas)+'</ans:taxas>');
       FGeral.Add('<ans:materiais>'+CurrToStr(TissProc.TissValorTotalMateriais)+'</ans:materiais>');
       FGeral.Add('<ans:medicamentos>'+CurrToStr(TissProc.TissValorTotalMedicamentos)+'</ans:medicamentos>');
       FGeral.Add('<ans:gases>'+CurrToStr(TissProc.TissValorTotalGases)+'</ans:gases>');
-      FGeral.Add('<ans:totalGeral>'+CurrToStr(TissProc.TissValorTotalGeral)+'</ans:totalGeral>');
+      FGeral.Add('<ans:totalGeral>'+CurrToStr(TissProc.TissValorTotalGeral)+'</ans:totalGeral>');  
       FGeral.Add('</ans:valorTotal>');
+      if FTissConfSP_SADT.TissUsarObs  then      
+        FGeral.Add('<ans:observacao>'+FObservacao+'</ans:observacao>');
       FGeral.Add('</ans:guiaSP_SADT>');
       FGuia.Clear;
       FProc.Clear;
@@ -1214,6 +1220,11 @@ end;
 procedure TTissSP_SADT.setNumLote(const Value: String);
 begin
   FNumLote := Value;
+end;
+
+procedure TTissSP_SADT.setObservacao(const Value: String);
+begin
+  FObservacao := Value;
 end;
 
 {procedure TTissSP_SADT.setRegANS(const Value: String);
