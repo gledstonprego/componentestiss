@@ -720,11 +720,13 @@ begin
 
       if TissConfig.TissUsarOPM then
         begin
-          FGeral.Add ('<ans:OPMutilizada>');
+         FGeral.Add ('<ans:OPMUtilizadas>');
+          FGeral.Add ('<ans:OPM>');
           for i := 0 to FOPM.Count - 1 do FGeral.Add (FOPM.Strings[i]);
           TissVlrTotOpm := CurrToStr (FTissOpmUti.TissVlrTotOPM);
+          FGeral.Add ('</ans:OPM>');
           FGeral.Add ('<ans:valorTotalOPM>' + TissVlrTotOpm + '</ans:valorTotalOPM>');
-          FGeral.Add ('</ans:OPMutilizada>');
+          FGeral.Add ('</ans:OPMUtilizadas>');
         end;
 
       if Tissconfig.TissUsarOutDespesas then
