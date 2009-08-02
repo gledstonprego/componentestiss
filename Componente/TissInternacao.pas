@@ -1,4 +1,3 @@
-
 unit TissInternacao;
 
 interface
@@ -6,10 +5,11 @@ interface
 uses
   SysUtils, Classes,untTissComp,Windows,Dialogs,Messages,forms,xmldom, XMLIntf, msxmldom,
   XMLDoc,untConfSPSADT,Graphics,untConfInt;
+
 const
   MSG_TOVALIDATE_PTBR = 'A SER VALIDADO';
   MSG_ISVALID_PTBR    = 'VÁLIDO';
-  MSG_ISNTVALID_PTBR  = 'INVÁLIDO';  
+  MSG_ISNTVALID_PTBR  = 'INVÁLIDO';
 
 type
   TTissInternacao = class(TComponent)
@@ -22,6 +22,7 @@ type
     FOPM: TStringList;
     FOutDesp: TStringList;    
     FGeral: TStringList;  
+    FNumeroDN: TStringList;
 
     FTissCabecalho: TTissCabecalho;
     FNumGuiaOper: String;
@@ -42,6 +43,7 @@ type
     FDataHoraInt: TDateTime;
     FDiagSaidInt: TDiagSaidInt;
     FTissSPProcedimentos: TTissSPProcedimentos;
+    FTissInternacaoObstetrica: TTissInternacaoObstetrica;
     FTipoFat: String;
     FNumGuiaSolic: String;
     FCarcInt: String;
@@ -75,10 +77,13 @@ type
     procedure setAnsVersaoxsd(const Value: TTissAnsVersao);
     procedure SetFontePagadora(const Value: TTissIdentFontPag);
     procedure setObservacao(const Value: String);
+    procedure setTissInternacaoObstetrica(
+      const Value: TTissInternacaoObstetrica);
 
     { Private declarations }
   protected
     { Protected declarations }
+    function BooleanToStr(value: Boolean): String;
   public
     { Public declarations }
     procedure iniciaInternacao;
@@ -88,6 +93,7 @@ type
     procedure adicionaProf;
     procedure AdicionaOPM;
     procedure adicionaOutDesp;
+    procedure adicionaNumeroDN;
     procedure finalizaGuia;
     procedure GerarXml;
     procedure ClearDespesas;
@@ -98,7 +104,7 @@ type
     property ansVersaoXSD: TTissAnsVersao read FAnsVersaoxsd write setAnsVersaoxsd;
 
     //fonte pagadora
-    property TissFontePadora: TTissIdentFontPag read FFontePagadora write SetFontePagadora;  
+    property TissFontePadora: TTissIdentFontPag read FFontePagadora write SetFontePagadora;
 
     //VERSAO
     property Versao:TCompVersao read FCompVersao write FCompVersao;
@@ -136,6 +142,8 @@ type
     property TissDataHoraSaidaInt: TDateTime read FDataHoraSaidaInt write setDataHoraSaidaInt;
     //Tipo Internação
     property TissTipoInternacao:Integer read FTipoInternacao write setTipoInternacao;
+    //Internacao Obstetrica
+    property TissInternacaoObstetrica: TTissInternacaoObstetrica read FTissInternacaoObstetrica write setTissInternacaoObstetrica;
     //Regime internação
     property TissRegInt:String read FRegInt write setRegInt;
     //Diagnóstico Saída Internação
@@ -420,6 +428,8 @@ begin
 end;
 
 procedure TTissInternacao.adicionarGuia;
+var
+  i : Integer;
 begin
     try
       FGuia.add('<ans:guiaResumoInternacao>');
@@ -544,6 +554,7 @@ begin
                 end;
 
               end;
+
             if FTissConf.TissDataSaidInt then
               begin
                 case  ansVersaoXSD of
@@ -556,6 +567,56 @@ begin
               FGuia.add('<ans:tipoInternacao>'+IntToStr(FTipoInternacao)+'</ans:tipoInternacao>');
             if FTissConf.TissRegInt then
               FGuia.add('<ans:regimeInternacao>'+FRegInt+'</ans:regimeInternacao>');
+
+            if FTissConf.TissUsarInternacaoObstetrica then
+            begin
+              FGuia.add('<ans:internacaoObstetrica>');
+                FGuia.add('<ans:emGestacao>'+BooleanToStr(FTissInternacaoObstetrica.TissEmGestacao)+'</ans:emGestacao>');
+                FGuia.add('<ans:aborto>'+BooleanToStr(FTissInternacaoObstetrica.TissAborto)+'</ans:aborto>');
+                FGuia.add('<ans:transtornoMaternoRelGravidez>'+BooleanToStr(FTissInternacaoObstetrica.TissTranstornoMaternoRelGravidez)+'</ans:transtornoMaternoRelGravidez>');
+                FGuia.add('<ans:complicacaoPeriodoPuerperio>'+BooleanToStr(FTissInternacaoObstetrica.TissComplicacaoPeriodoPuerperio)+'</ans:complicacaoPeriodoPuerperio>');
+                FGuia.add('<ans:atendimentoRNSalaParto>'+BooleanToStr(FTissInternacaoObstetrica.TissAtendimentoRNSalaParto)+'</ans:atendimentoRNSalaParto>');
+                FGuia.add('<ans:complicacaoNeonatal>'+BooleanToStr(FTissInternacaoObstetrica.TissComplicacaoNeonatal)+'</ans:complicacaoNeonatal>');
+                FGuia.add('<ans:baixoPeso>'+BooleanToStr(FTissInternacaoObstetrica.TissBaixoPeso)+'</ans:baixoPeso>');
+                FGuia.add('<ans:partoCesareo>'+BooleanToStr(FTissInternacaoObstetrica.TissPartoCesareo)+'</ans:partoCesareo>');
+                FGuia.add('<ans:partoNormal>'+BooleanToStr(FTissInternacaoObstetrica.TissPartoNormal)+'</ans:partoNormal>');
+
+                if FNumeroDN.Count > 0 then
+                begin
+                  FGuia.add('<ans:declaracoesNascidosVivos>');
+                    for i := 0 to FNumeroDN.Count - 1 do
+                    begin
+                      FGuia.add(FNumeroDN.Strings[i]);
+                    end;
+                  FGuia.add('</ans:declaracoesNascidosVivos>');
+                end;
+
+                FGuia.add('<ans:qtdNascidosVivosTermo>'+IntToStr(FTissInternacaoObstetrica.TissQtdNascidosVivosTermo)+'</ans:qtdNascidosVivosTermo>');
+                FGuia.add('<ans:qtdNascidosMortos>'+IntToStr(FTissInternacaoObstetrica.TissQtdNascidosMortos)+'</ans:qtdNascidosMortos>');
+                FGuia.add('<ans:qtdVivosPrematuros>'+IntToStr(FTissInternacaoObstetrica.TissQtdVivosPrematuros)+'</ans:qtdVivosPrematuros>');
+
+                if (FTissInternacaoObstetrica.TissObitoMulher = '1') or
+                   (FTissInternacaoObstetrica.TissObitoMulher = '2') or
+                   (FTissInternacaoObstetrica.TissObitoMulher = '3') then
+                  FGuia.add('<ans:obitoMulher>'+FTissInternacaoObstetrica.TissObitoMulher+'</ans:obitoMulher>');
+                  
+              FGuia.Add('</ans:internacaoObstetrica>');
+
+              if (FTissInternacaoObstetrica.TissQtdeobitoPrecoce <> 0) or
+                 (FTissInternacaoObstetrica.TissQtdeobitoTardio <> 0) then
+              begin
+                FGuia.add('<ans:obitoNeonatal>');
+
+                if (FTissInternacaoObstetrica.TissQtdeobitoPrecoce <> 0) then
+                  FGuia.add('<ans:qtdeobitoPrecoce>'+IntToStr(FTissInternacaoObstetrica.TissQtdeobitoPrecoce)+'</ans:qtdeobitoPrecoce>');
+
+                if (FTissInternacaoObstetrica.TissQtdeobitoTardio <> 0) then
+                  FGuia.add('<ans:qtdeobitoTardio>'+IntToStr(FTissInternacaoObstetrica.TissQtdeobitoTardio)+'</ans:qtdeobitoTardio>');
+                  
+                FGuia.add('</ans:obitoNeonatal>');
+              end;
+            end;
+
 
             FGuia.add('<ans:diagnosticosSaidaInternacao>');
 
@@ -598,8 +659,11 @@ begin
                 end;
 
             FGuia.add('</ans:diagnosticosSaidaInternacao>');
-          if TissConfig.TissUsarProc then
-            FGuia.add('<ans:procedimentosRealizados>');
+
+            {WLF - Estou colocando essa informação junto da chamada da lista de procedimentos no
+             métodos finalizaGuia}
+//          if TissConfig.TissUsarProc then
+//            FGuia.add('<ans:procedimentosRealizados>');
      // FGuia.add('</ans:guiaSP_SADT>');
     except
       on e: Exception do
@@ -615,6 +679,7 @@ begin
   FTissCabecalho := TTissCabecalho.create;
   FTissBenific := TTissBenific.create;
   FTissContratado := TTissContratado.create;
+  FTissInternacaoObstetrica := TTissInternacaoObstetrica.Create;
   FTissProfissional := TTissProfissional.create;
   FTissPrestExec := TTissContratado.create;
   FDiagSaidInt := TDiagSaidInt.create;
@@ -710,6 +775,7 @@ begin
 
       if TissConfig.TissUsarProc then
         begin
+          FGeral.add('<ans:procedimentosRealizados>');
           for i:= 0 to FProc.Count - 1 do
             begin
               FGeral.Add(FProc.Strings[i]);
@@ -763,6 +829,7 @@ begin
       FMembEquipe.Clear;
       FOPM.Clear;
       FOutDesp.Clear;
+      FNumeroDN.Clear;
       DecimalSeparator := '.';
       //AssignFile(arquivoTemp,'temp.xml');
       //Reset(arquivoTemp);
@@ -977,6 +1044,7 @@ begin
   FGeral := TStringList.Create;
   FOPM := TStringList.Create;
   FOutDesp := TStringList.Create;
+  FNumeroDN := TStringList.Create;
   FOPM.Clear;
   FOutDesp.Clear;
   FGeral.Clear;
@@ -984,7 +1052,7 @@ begin
   FProc.Clear;
   FGuia.Clear;
   FCabecalho.Clear;
-
+  FNumeroDN.Clear;
 end;
 
 procedure TTissInternacao.setacomodacao(const Value: String);
@@ -1091,6 +1159,31 @@ begin
   TissProc.TissValorTotalMedicamentos := 0;
   TissProc.TissValorTotalGases := 0;
   FTissOutrasDesp.TissTotalGeral := 0;  
+end;
+
+procedure TTissInternacao.setTissInternacaoObstetrica(
+  const Value: TTissInternacaoObstetrica);
+begin
+  FTissInternacaoObstetrica := Value;
+end;
+
+procedure TTissInternacao.adicionaNumeroDN;
+begin
+  try
+    FNumeroDN.Add('<ans:numeroDN>'+Trim(FTissInternacaoObstetrica.TissNumeroDN.TissNumeroDN)+'</ans:numeroDN>');
+  except on e: Exception do
+    begin
+      Application.MessageBox (PChar ('Erro ao adicionar declaração de nascidos vivos: ' + #13 + e.Message), 'ATENÇÃO', MB_OK+MB_ICONERROR);
+    end;
+  end;
+end;
+
+function TTissInternacao.BooleanToStr(value: Boolean): String;
+begin
+  if value then
+    Result := 'true'
+  else
+    Result := 'false';
 end;
 
 end.

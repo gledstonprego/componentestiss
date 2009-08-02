@@ -1,8 +1,10 @@
-
 unit untConfInt;
+
 interface
+
 uses
-  SysUtils, Classes,untTissComp;
+  SysUtils, Classes, untTissComp;
+
 type
   TTissConfOPM = class(TPersistent)
   private
@@ -381,6 +383,7 @@ type
     FUsarContratado: boolean;
     FUsarPrestadorExec: boolean;
     FUsarProfissional: boolean;
+    FUsarInternacaoObstetrica: Boolean;
     FUsarUsarProc: boolean;
     FAcomod: boolean;
     FHoraSaidInt: boolean;
@@ -434,6 +437,7 @@ type
     procedure setTissConfOutrasDesp(const Value: TTissConfOutrasDesp);
     procedure setPadraoTipFontPg(const Value: TTissAnsRegCNPJ);
     procedure setUsarObs(const Value: Boolean);
+    procedure setUsarInternacaoObstetrica(const Value: boolean);
 
   public
     constructor create;
@@ -448,6 +452,7 @@ type
     //property TissUsarOPMS:boolean read FUsarUsarOPMS write setUsarOPMS;  tirei...
     property TissUsarOPM:boolean read FUsarOPM write setUsarOPM;
     property TissUsarOutDespesas:boolean read FUsarOutDespesas write setUsarOutDespesas;
+    property TissUsarInternacaoObstetrica:boolean read FUsarInternacaoObstetrica write setUsarInternacaoObstetrica;
 
     property TissCabecalho:TTissConfCabecalho read FTissCabecalho write FTissCabecalho;
     property TissBenefic:TTissConfBenific read FTissConfBenific write FTissConfBenific;
@@ -809,6 +814,11 @@ begin
   FUsarUsarOPMS := Value;
 end;  }
 
+procedure TTissConfInt.setUsarInternacaoObstetrica(const Value: boolean);
+begin
+  FUsarInternacaoObstetrica := Value;
+end;
+
 procedure TTissConfInt.setUsarObs(const Value: Boolean);
 begin
   FUsarObs := Value;
@@ -1031,7 +1041,6 @@ begin
     FEquipe:= TTissConfEquipe.create;
     FProcs:= TTissConfProc.create;
     FUsarEquipe := True;
-
 end;
 
 procedure TTissConfSPProcedimentos.SetTissData(const Value: Boolean);

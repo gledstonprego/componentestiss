@@ -89,18 +89,21 @@ type
     fUFConselho: Boolean;
     fCBOS: Boolean;
     fSiglaConselho: Boolean;
+    fUsarConselho: Boolean;
     procedure setCBOS(const Value: Boolean);
     procedure setNumConselho(const Value: Boolean);
     procedure setPosicProf(const Value: Boolean);
     procedure setProf(const Value: Boolean);
     procedure setSiglaConselho(const Value: Boolean);
     procedure setUFConselho(const Value: Boolean);
+    procedure setUsarConselho(const Value: Boolean);
 
 
   public
     constructor create;
   published
     property TissProf:Boolean read FProf write setProf;
+    property TissUsarConselho:Boolean read fUsarConselho write setUsarConselho;
     property TissSiglaConselho:Boolean read fSiglaConselho write setSiglaConselho;
     property TissNumConselho:Boolean read fNumConselho write setNumConselho;
     property TissUFConselho:Boolean read fUFConselho write setUFConselho;
@@ -1184,6 +1187,11 @@ end;
 procedure TTissConfOutrasDesp.setVlrUnt(const Value: Boolean);
 begin
   FVlrUnt := Value;
+end;
+
+procedure TTissConfProfissional.setUsarConselho(const Value: Boolean);
+begin
+  fUsarConselho := Value;
 end;
 
 end.
