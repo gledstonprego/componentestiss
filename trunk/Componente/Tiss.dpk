@@ -4,6 +4,7 @@ package Tiss;
 {$R 'TissConsulta.dcr'}
 {$R 'TissSP_SADT.dcr'}
 {$R 'TissInternacao.dcr'}
+{$R 'TissHonorario.dcr'}
 {$ALIGN 8}
 {$ASSERTIONS ON}
 {$BOOLEVAL OFF}
@@ -53,6 +54,8 @@ contains
   TissInternacao in 'TissInternacao.pas',
   untFunc in 'untFunc.pas',
   untValida in 'untValida.pas' {frmValida},
-  untConfInt in 'untConfInt.pas';
+  untConfInt in 'untConfInt.pas',
+  TissHonorario in 'TissHonorario.pas',
+  untConfHonorario in 'untConfHonorario.pas';
 
 end.

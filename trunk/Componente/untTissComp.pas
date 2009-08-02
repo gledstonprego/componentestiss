@@ -689,6 +689,70 @@ type
     property TissValorTotalGeral:Currency read FValorTotalGeral write setValorTotalGeral;
   end;
 
+  TTissNumeroDN = class(TPersistent)
+  private
+    FNumeroDN: String;
+    procedure setNumeroDN(const Value: String);
+  published
+    property TissNumeroDN: String read FNumeroDN write setNumeroDN;
+  end;
+
+  TTissInternacaoObstetrica = class(TPersistent)
+  private
+    FEmGestacao: Boolean;
+    FAborto: Boolean;
+    FTranstornoMaternoRelGravidez: Boolean;
+    FComplicacaoPeriodoPuerperio: Boolean;
+    FAtendimentoRNSalaParto: Boolean;
+    FComplicacaoNeonatal: Boolean;
+    FBaixoPeso: Boolean;
+    FPartoCesareo: Boolean;
+    FPartoNormal: Boolean;
+    FNumeroDN: TTissNumeroDN;
+    FQtdNascidosVivosTermo: Integer;
+    FQtdNascidosMortos: Integer;
+    FQtdVivosPrematuros: Integer;
+    FQtdeobitoPrecoce: Integer;
+    FQtdeobitoTardio: Integer;
+    FObitoMulher: String;
+    procedure setAborto(const Value: Boolean);
+    procedure setAtendimentoRNSalaParto(const Value: Boolean);
+    procedure setBaixoPeso(const Value: Boolean);
+    procedure setComplicacaoNeonatal(const Value: Boolean);
+    procedure setComplicacaoPeriodoPuerperio(const Value: Boolean);
+    procedure setEmGestacao(const Value: Boolean);
+    procedure setNumeroDN(const Value: TTissNumeroDN);
+    procedure setObitoMulher(const Value: String);
+    procedure setPartoCesareo(const Value: Boolean);
+    procedure setPartoNormal(const Value: Boolean);
+    procedure setQtdeobitoPrecoce(const Value: Integer);
+    procedure setQtdeobitoTardio(const Value: Integer);
+    procedure setQtdNascidosMortos(const Value: Integer);
+    procedure setQtdNascidosVivosTermo(const Value: Integer);
+    procedure setQtdVivosPrematuros(const Value: Integer);
+    procedure setTranstornoMaternoRelGravidez(const Value: Boolean);
+  public
+    constructor Create;
+    
+  published
+    property TissEmGestacao: Boolean read FEmGestacao write setEmGestacao;
+    property TissAborto: Boolean read FAborto write setAborto;
+    property TissTranstornoMaternoRelGravidez: Boolean read FTranstornoMaternoRelGravidez write setTranstornoMaternoRelGravidez;
+    property TissComplicacaoPeriodoPuerperio: Boolean read FComplicacaoPeriodoPuerperio write setComplicacaoPeriodoPuerperio;
+    property TissAtendimentoRNSalaParto: Boolean read FAtendimentoRNSalaParto write setAtendimentoRNSalaParto;
+    property TissComplicacaoNeonatal: Boolean read FComplicacaoNeonatal write setComplicacaoNeonatal;
+    property TissBaixoPeso: Boolean read FBaixoPeso write setBaixoPeso;
+    property TissPartoCesareo: Boolean read FPartoCesareo write setPartoCesareo;
+    property TissPartoNormal: Boolean read FPartoNormal write setPartoNormal;
+    property TissNumeroDN: TTissNumeroDN read FNumeroDN write setNumeroDN;
+    property TissQtdNascidosVivosTermo: Integer read FQtdNascidosVivosTermo write setQtdNascidosVivosTermo;
+    property TissQtdNascidosMortos: Integer read FQtdNascidosMortos write setQtdNascidosMortos;
+    property TissQtdVivosPrematuros: Integer read FQtdVivosPrematuros write setQtdVivosPrematuros;
+    property TissQtdeobitoPrecoce: Integer read FQtdeobitoPrecoce write setQtdeobitoPrecoce;
+    property TissQtdeobitoTardio: Integer read FQtdeobitoTardio write setQtdeobitoTardio;
+    property TissObitoMulher: String read FObitoMulher write setObitoMulher;
+  end;
+
   function RetZero(ZEROS: string;QUANT:integer): string;
 
 implementation
@@ -1735,6 +1799,110 @@ end;
 procedure TTissIdentFontPag.setRegAns(const Value: string);
 begin
   FregAns := Value;
+end;
+
+{ TTissNumeroDN }
+
+procedure TTissNumeroDN.setNumeroDN(const Value: String);
+begin
+  FNumeroDN := Value;
+end;
+
+{ TTissInternacaoObstetrica }
+
+constructor TTissInternacaoObstetrica.Create;
+begin
+  FNumeroDN := TTissNumeroDN.Create;
+end;
+
+procedure TTissInternacaoObstetrica.setAborto(const Value: Boolean);
+begin
+  FAborto := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setAtendimentoRNSalaParto(
+  const Value: Boolean);
+begin
+  FAtendimentoRNSalaParto := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setBaixoPeso(const Value: Boolean);
+begin
+  FBaixoPeso := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setComplicacaoNeonatal(
+  const Value: Boolean);
+begin
+  FComplicacaoNeonatal := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setComplicacaoPeriodoPuerperio(
+  const Value: Boolean);
+begin
+  FComplicacaoPeriodoPuerperio := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setEmGestacao(const Value: Boolean);
+begin
+  FEmGestacao := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setNumeroDN(
+  const Value: TTissNumeroDN);
+begin
+  FNumeroDN := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setObitoMulher(const Value: String);
+begin
+  FObitoMulher := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setPartoCesareo(const Value: Boolean);
+begin
+  FPartoCesareo := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setPartoNormal(const Value: Boolean);
+begin
+  FPartoNormal := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setQtdeobitoPrecoce(
+  const Value: Integer);
+begin
+  FQtdeobitoPrecoce := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setQtdeobitoTardio(
+  const Value: Integer);
+begin
+  FQtdeobitoTardio := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setQtdNascidosMortos(
+  const Value: Integer);
+begin
+  FQtdNascidosMortos := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setQtdNascidosVivosTermo(
+  const Value: Integer);
+begin
+  FQtdNascidosVivosTermo := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setQtdVivosPrematuros(
+  const Value: Integer);
+begin
+  FQtdVivosPrematuros := Value;
+end;
+
+procedure TTissInternacaoObstetrica.setTranstornoMaternoRelGravidez(
+  const Value: Boolean);
+begin
+  FTranstornoMaternoRelGravidez := Value;
 end;
 
 end.
