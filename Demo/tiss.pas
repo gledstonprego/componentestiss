@@ -9,7 +9,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, TissSP_SADT, TissConsulta, ComCtrls, TissInternacao;
+  Dialogs, StdCtrls, TissSP_SADT, TissConsulta, ComCtrls, TissInternacao,
+  TissHonorario;
 
 type
   TForm1 = class(TForm)
@@ -34,6 +35,7 @@ type
     TabSheet5: TTabSheet;
     Memo4: TMemo;
     ckvalidar: TCheckBox;
+    TissHonorario1: TTissHonorario;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
