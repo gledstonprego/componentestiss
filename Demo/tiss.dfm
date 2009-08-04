@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 295
-  Top = 232
+  Left = 359
+  Top = 163
   BorderStyle = bsDialog
   Caption = 'Form1'
   ClientHeight = 466
@@ -23,8 +23,8 @@ object Form1: TForm1
     Height = 13
   end
   object lblVersao: TLabel
-    Left = 5
-    Top = 166
+    Left = 193
+    Top = 147
     Width = 53
     Height = 13
     Caption = 'lblVersao'
@@ -37,8 +37,8 @@ object Form1: TForm1
   end
   object Button1: TButton
     Left = 8
-    Top = 56
-    Width = 97
+    Top = 16
+    Width = 129
     Height = 25
     Caption = 'Gerar Consulta    '
     TabOrder = 0
@@ -46,17 +46,17 @@ object Form1: TForm1
   end
   object Button2: TButton
     Left = 8
-    Top = 88
-    Width = 97
+    Top = 48
+    Width = 129
     Height = 25
     Caption = 'Gerar SP/SADT '
     TabOrder = 1
     OnClick = Button2Click
   end
   object Memo1: TMemo
-    Left = 127
+    Left = 144
     Top = 8
-    Width = 409
+    Width = 392
     Height = 129
     Lines.Strings = (
       
@@ -74,10 +74,10 @@ object Form1: TForm1
   end
   object PageControl1: TPageControl
     Left = 0
-    Top = 188
+    Top = 168
     Width = 536
-    Height = 278
-    ActivePage = TabSheet1
+    Height = 298
+    ActivePage = TabSheet5
     Align = alBottom
     TabOrder = 3
     object TabSheet1: TTabSheet
@@ -86,7 +86,7 @@ object Form1: TForm1
         Left = 0
         Top = 0
         Width = 528
-        Height = 250
+        Height = 270
         Align = alClient
         ScrollBars = ssVertical
         TabOrder = 0
@@ -99,7 +99,7 @@ object Form1: TForm1
         Left = 0
         Top = 0
         Width = 528
-        Height = 250
+        Height = 270
         Align = alClient
         Lines.Strings = (
           'Muita Aten'#231#227'o antes de gerar os arquivos:'
@@ -142,7 +142,7 @@ object Form1: TForm1
         Left = 0
         Top = 0
         Width = 528
-        Height = 250
+        Height = 270
         Align = alClient
         Lines.Strings = (
           'Caso queira que o pr'#243'prio componente Valide as informa'#231#245'es'
@@ -160,7 +160,7 @@ object Form1: TForm1
         Left = 0
         Top = 0
         Width = 528
-        Height = 250
+        Height = 270
         Align = alClient
         Lines.Strings = (
           'ATEN'#199#195'O TODOS OS COMPONENTES EST'#195'O EM FASE DE TESTE'
@@ -179,7 +179,7 @@ object Form1: TForm1
         Left = 0
         Top = 0
         Width = 528
-        Height = 250
+        Height = 270
         Align = alClient
         Lines.Strings = (
           'As vezes existe a necessidade de colocar no'
@@ -208,22 +208,31 @@ object Form1: TForm1
   end
   object Button3: TButton
     Left = 8
-    Top = 120
-    Width = 97
+    Top = 80
+    Width = 129
     Height = 25
     Caption = 'Gerar Interna'#231#227'o'
     TabOrder = 4
     OnClick = Button3Click
   end
   object ckvalidar: TCheckBox
-    Left = 128
-    Top = 140
+    Left = 8
+    Top = 145
     Width = 161
     Height = 17
     Caption = 'Validar arquivos gerados'
     Checked = True
     State = cbChecked
     TabOrder = 5
+  end
+  object Button4: TButton
+    Left = 8
+    Top = 112
+    Width = 129
+    Height = 25
+    Caption = 'Gerar Honor'#225'rio'
+    TabOrder = 6
+    OnClick = Button4Click
   end
   object TissC: TTissConsulta
     ansVersaoXSD = v2_02_01
@@ -287,8 +296,8 @@ object Form1: TForm1
     TissValid.UsarValidacao = True
     TissValid.TissXSD = 'tissV2_02_01.xsd'
     TissZerosArq = 20
-    Left = 8
-    Top = 8
+    Left = 408
+    Top = 144
   end
   object TissSP: TTissSP_SADT
     ansVersaoXSD = v2_02_01
@@ -463,8 +472,8 @@ object Form1: TForm1
     TissOutDesp.TissDespesa.TissTipDespesa = 0
     TissValid.UsarValidacao = True
     TissValid.TissXSD = 'tissV2_02_01.xsd'
-    Left = 48
-    Top = 8
+    Left = 440
+    Top = 144
   end
   object TissInt: TTissInternacao
     ansVersaoXSD = v2_02_01
@@ -636,10 +645,10 @@ object Form1: TForm1
     TissValid.UsarValidacao = True
     TissValid.TissXSD = 'tissV2_02_01.xsd'
     TissObservacao = 'teste'
-    Left = 88
-    Top = 8
+    Left = 472
+    Top = 144
   end
-  object TissHonorario1: TTissHonorario
+  object TissHon: TTissHonorario
     TissConf.TissUsarBenefic = True
     TissConf.TissUsarContratado = True
     TissConf.TissUsarIdentExec = True
@@ -729,8 +738,8 @@ object Form1: TForm1
     TissInfProfissional.TissPosicProf = 0
     TissProc.TissProcs.TissTipTabela = 0
     TissCompVersao.Versao = '0.10.3'
-    ansVersaoXSD = v2_01_03
-    Left = 120
-    Top = 8
+    ansVersaoXSD = v2_02_01
+    Left = 504
+    Top = 144
   end
 end

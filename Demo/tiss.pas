@@ -14,28 +14,29 @@ uses
 
 type
   TForm1 = class(TForm)
-    Button1: TButton;
-    TissC: TTissConsulta;
-    Button2: TButton;
     Label1: TLabel;
+    lblVersao: TLabel;
+    Button1: TButton;
+    Button2: TButton;
     Memo1: TMemo;
-    TissSP: TTissSP_SADT;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
     RichEdit1: TRichEdit;
+    TabSheet2: TTabSheet;
     RichEdit2: TRichEdit;
-    lblVersao: TLabel;
-    TissInt: TTissInternacao;
     TabSheet3: TTabSheet;
     Memo2: TMemo;
-    Button3: TButton;
     TabSheet4: TTabSheet;
     Memo3: TMemo;
     TabSheet5: TTabSheet;
     Memo4: TMemo;
+    Button3: TButton;
     ckvalidar: TCheckBox;
-    TissHonorario1: TTissHonorario;
+    Button4: TButton;
+    TissC: TTissConsulta;
+    TissSP: TTissSP_SADT;
+    TissInt: TTissInternacao;
+    TissHon: TTissHonorario;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -60,6 +61,8 @@ procedure TForm1.Button1Click(Sender: TObject);
 var
   i: Integer;
 begin
+  RichEdit1.Clear;
+  
   //Habilitar ou não a validação
   if ckvalidar.Checked then
     TissC.TissValid.UsarValidacao := true
@@ -157,6 +160,7 @@ procedure TForm1.Button2Click(Sender: TObject);
 var
   i,j,l: Integer;
 begin
+  RichEdit1.Clear;
 
           {MUITA ATENÇÃO AQUI COMO ANS TRABALHA COM VÍRGULA PARA SEPARAR AS CASAS
           DECIMAIS É NECESSÁRIO COLOCAR A LINHA ABAIXO}
@@ -408,6 +412,8 @@ procedure TForm1.Button3Click(Sender: TObject);
 var
   i,j,l: Integer;
 begin
+  RichEdit1.Clear;
+  
   //Habilitar ou não a validação
   if ckvalidar.Checked then
     TissInt.TissValid.UsarValidacao := true
@@ -645,8 +651,134 @@ begin
 end;
 
 procedure TForm1.Button4Click(Sender: TObject);
+var
+  i,j: Integer;
 begin
-  RenameFile(TissSP.Tisscabecalho.TissArquivo,'fop.xml');
+  RichEdit1.Clear;
+
+  //Habilitar ou não a validação
+  if ckvalidar.Checked then
+    TissHon.TissValid.UsarValidacao := true
+  else
+    TissHon.TissValid.UsarValidacao := false;
+
+  {ATENÇÃO ESTE COMPONENTE ESTÁ EM FASE DE TESTE, QUALQUER DÚVIDA ENTRE
+  EM CONTATO PELO EMAIL: wenderlf@gmail.com
+  FALAR COM Wender}
+  TissHon.iniciaHonorario; //Método de inicialização
+  TissHon.Tisscabecalho.TissArquivo := 'honorario.xml';
+  TissHon.Tisscabecalho.TissEncoding := 'ISO-8859-1';
+  TissHon.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+  TissHon.Tisscabecalho.TissVersaoXml := '1.0';
+
+  //CABEÇALHO
+  TissHon.Tisscabecalho.TissTipoTrans := 'ENVIO_LOTE_GUIAS';//ENVIO_LOTE_GUIAS
+  TissHon.Tisscabecalho.TissSequencialTrans := '3';
+  TissHon.Tisscabecalho.TissDataRegistroTrans := Date;
+  TissHon.Tisscabecalho.TissHoraRegistroTrans := Time;
+  TissHon.Tisscabecalho.TissCNPJCPF := '02762719000195';
+  TissHon.Tisscabecalho.TissRegANS := '0';
+  TissHon.Tisscabecalho.TissVersaoTISS := '2.02.01';
+  TissHon.Tisscabecalho.TissNumLote := '1545';
+  //FIM CABEÇALHO
+  TissHon.criaCabecalho;  {COMANDO PARA ADICIONAR O CABEÇALHO}
+
+  {ATENÇÃO A ORDEM TEM QUE SER DE ACORDO COM ESTE DEMO, PRIMEIRO
+  USA-SE O MÉTODO "CRIACABEÇALHO" DEPOIS ADICIONA-SE AS GUIAS
+  PASSANDO OS VALORES E USANDO O MÉTODO "ADICIONARGUIA" E POR
+  ÚLTIMO A PROCEDURE "CRIARRODAPE" SE NÃO FOR FEITO ASSIM VAI GERAR ERRO}
+  for i := 1 to 1 {5} do
+  begin
+    //identificação guia Internação
+    TissHon.TissNumGuiaPrest := IntToStr(i);
+    TissHon.TissNumGuiaOper := IntToStr(i);
+    TissHon.TissNumeroGuiaPrincipal := IntToStr(i);
+    TissHon.TissFontePagadora.TissRegAns:= '154';
+   // TissHon.TissRegANS := '0';
+    TissHon.TissDataEmis := StrToDate ('26/10/2009');
+
+    //Dados Beneficiario
+    TissHon.TissBenific.TissNumCarteira := IntToStr(I);
+    TissHon.TissBenific.TissBenific := 'Paciente teste';
+    TissHon.TissBenific.TissNomePlano := 'PLANO DE SAÚDE'+IntToStr(i);
+    TissHon.TissBenific.TissValidadeCart := Date + 30;
+    TissHon.TissBenific.TissNumCNS := '45787';
+
+    //Dados Solicitante
+    {TissHon.TissContratado.TissTipoGeral INFORME ESSA PROPRIEDADE NO
+    OBJECT INSPECTOR por padrão fica o tipo para Juridico}
+    TissHon.TissContratado.TissCNPJCPF := '02762719000195';
+    TissHon.TissContratado.TissNomeContradado := 'Fabiano';
+    TissHon.TissContratado.TisstipoLogradouro := '008';
+    TissHon.TissContratado.TissLogradouro := 'Av. dos Anjos';
+    TissHon.TissContratado.TissEndNum := '457';
+    TissHon.TissContratado.TissComplemento := 'Complemento';
+    TissHon.TissContratado.TisscodigoIBGE := 014;
+    TissHon.TissContratado.TissMunicipio := 'Itaperuna';
+    TissHon.TissContratado.TissUF := 'RJ';
+    TissHon.TissContratado.TissCEP := '28380000';
+    TissHon.TissContratado.TissCNES := 457;
+
+    // Prestador Executante
+    {TissHon.TissPrestadorExec.TissTipoGeral INFORME ESSA PROPRIEDADE NO
+    OBJECT INSPECTOR por padrão fica o tipo para Juridico}
+    TissHon.TissPrestExec.TissCNPJCPF := '02762719000195';
+    TissHon.TissPrestExec.TissNomeContradado := 'Fabiano';
+    TissHon.TissPrestExec.TisstipoLogradouro := '008';
+    TissHon.TissPrestExec.TissLogradouro := 'Av. dos Anjos';
+    TissHon.TissPrestExec.TissEndNum := '457';
+    TissHon.TissPrestExec.TissComplemento := 'Complemento';
+    TissHon.TissPrestExec.TisscodigoIBGE := 014;
+    TissHon.TissPrestExec.TissMunicipio := 'Itaperuna';
+    TissHon.TissPrestExec.TissUF := 'RJ';
+    TissHon.TissPrestExec.TissCEP := '28380000';
+    TissHon.TissPrestExec.TissCNES := 457;
+
+    TissHon.TissTipoAcomodacao := '1';
+
+    //profissional
+    TissHon.TissInfProfissional.TissPosicProf     := 12;
+    TissHon.TissInfProfissional.TissfCBOS         := '2231.40';
+    TissHon.TissInfProfissional.TissProf          := 'Médico';
+    TissHon.TissInfProfissional.TissSiglaConselho := 'CRM';
+    TissHon.TissInfProfissional.TissUFConselho    := 'RJ';
+    TissHon.TissInfProfissional.TissNumConselho   := '02457';
+
+    TissHon.adicionarGuia;
+
+    for j := 1 to 1 do
+    begin
+      TissHon.TissProc.TissData        := Date;
+      TissHon.TissProc.TissHsInicio    := Time;
+      TissHon.TissProc.TissHsFim       := Time;
+      TissHon.TissProc.TissVdeAcesso   := 'U';
+      TissHon.TissProc.TissTecUtil     := 'C';
+
+      TissHon.TissProc.TissQtde        := 1;
+      TissHon.TissProc.TissReducAcres  := 0;
+      TissHon.TissProc.TissValor       := 10;
+      TissHon.TissProc.TissValorTotal  := 10;
+
+      TissHon.TissProc.TissProcs.TissCodigo    := '00010014';
+      TissHon.TissProc.TissProcs.TissDescricao := 'TESTE SP/SADT';
+      TissHon.TissProc.TissProcs.TissTipTabela := 1;
+
+      TissHon.adicionaProc;
+    end;
+
+    TissHon.TissTotalGeralHonorario := 10;
+    TissHon.TissObservacao := 'Observação';
+    TissHon.finalizaGuia;
+  end;
+
+  // TissHon.criaRodape;
+  TissHon.GerarXml;
+  if FileExists(TissHon.Tisscabecalho.TissArquivo) then
+  begin
+    RichEdit1.Lines.Clear;
+    RichEdit1.Lines.LoadFromFile(TissHon.Tisscabecalho.TissArquivo);
+    PageControl1.ActivePageIndex := 0;
+  end;
 end;
 
 end.
