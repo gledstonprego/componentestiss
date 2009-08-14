@@ -102,6 +102,7 @@ type
     procedure setTotalGeralHonorario(const Value: Currency);
   protected
     function hash(arquivohash:string): String;
+    function zeroEsquerda(value: String; count: Integer): String;
   public
     constructor Create(AOwner: TComponent); override;
 
@@ -137,7 +138,7 @@ procedure Register;
 
 implementation
 
-uses md52, Md5Tiss, untValida, untFunc;
+uses md52, Md5Tiss, untValida, untFunc, StrUtils;
 
 procedure Register;
 begin
@@ -327,7 +328,6 @@ begin
       FGuia.add('</ans:contratado>');
 
       FGuia.add('<ans:contratadoExecutante>');
-//        FGuia.add('<ans:contratado>');
           FGuia.add('<ans:identificacao>');
             if FTissConf.TissIdentExec.TissCNPJCPF then
             begin
@@ -375,8 +375,6 @@ begin
 
           FGuia.add('<ans:numeroCNES>'+FormatFloat('0000000', TissPrestExec.TissCNES)+'</ans:numeroCNES>');
 
-//        FGuia.add('</ans:contratado>');
-
         FGuia.add('<ans:identificacaoProfissional>');
           FGuia.add('<ans:nomeExecutante>'+FInfProfissional.TissProf+'</ans:nomeExecutante>');
 
@@ -389,7 +387,7 @@ begin
           FGuia.add('<ans:codigoCBOS>'+FInfProfissional.TissfCBOS+'</ans:codigoCBOS>');
         FGuia.add('</ans:identificacaoProfissional>');
 
-        FGuia.add('<ans:posicaoProfissional>'+IntToStr(FInfProfissional.TissPosicProf)+'</ans:posicaoProfissional>');
+        FGuia.add('<ans:posicaoProfissional>'+zeroEsquerda(IntToStr(FInfProfissional.TissPosicProf),2)+'</ans:posicaoProfissional>');
         FGuia.add('<ans:tipoAcomodacao>'+FTipoAcomodacao+'</ans:tipoAcomodacao>');
 
       FGuia.add('</ans:contratadoExecutante>');
@@ -547,6 +545,7 @@ begin
     Writeln(arquivo,'</ans:mensagemTISS>');
 
     CloseFile(arquivo);
+
     numhash := hash(FTissCabecalho.TissArquivo);
 
     AssignFile(arquivo,FTissCabecalho.TissArquivo);
@@ -769,6 +768,11 @@ end;
 procedure TTissHonorario.setTotalGeralHonorario(const Value: Currency);
 begin
   FTotalGeralHonorario := Value;
+end;
+
+function TTissHonorario.zeroEsquerda(value: String; count: Integer): String;
+begin
+  Result := DupeString('0',count-Length(Trim(Value)))+Trim(Value);
 end;
 
 { TTissProcedimento }
