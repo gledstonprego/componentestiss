@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 359
-  Top = 163
+  Left = 262
+  Top = 66
   BorderStyle = bsDialog
   Caption = 'Form1'
-  ClientHeight = 466
+  ClientHeight = 513
   ClientWidth = 536
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -74,7 +74,7 @@ object Form1: TForm1
   end
   object PageControl1: TPageControl
     Left = 0
-    Top = 168
+    Top = 215
     Width = 536
     Height = 298
     ActivePage = TabSheet5
@@ -234,11 +234,79 @@ object Form1: TForm1
     TabOrder = 6
     OnClick = Button4Click
   end
+  object grp1: TGroupBox
+    Left = 10
+    Top = 166
+    Width = 385
+    Height = 44
+    Caption = 'Vers'#227'o a ser Gerada'
+    TabOrder = 7
+    object rb1: TRadioButton
+      Left = 16
+      Top = 20
+      Width = 81
+      Height = 17
+      Caption = 'V2.01.03'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = rb1Click
+    end
+    object rb2: TRadioButton
+      Left = 101
+      Top = 20
+      Width = 83
+      Height = 17
+      Caption = 'V2.02.01'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clTeal
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = rb2Click
+    end
+    object rb3: TRadioButton
+      Left = 188
+      Top = 20
+      Width = 81
+      Height = 17
+      Caption = 'V2.02.02'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      OnClick = rb3Click
+    end
+    object rb4: TRadioButton
+      Left = 278
+      Top = 20
+      Width = 81
+      Height = 17
+      Caption = 'V2.02.03'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      OnClick = rb4Click
+    end
+  end
   object TissC: TTissConsulta
-    ansVersaoXSD = v2_02_01
-    Versao.Versao = '0.10.3'
+    ansVersaoXSD = v2_02_03
+    Versao.Versao = '1.0.0'
     TissVersaoXml = '1.0'
-    TissVersaoTISS = '2.01.03'
+    TissVersaoTISS = '2.02.02'
     TissEncoding = 'ISO-8859-1'
     TissMensagemTissXml = 
       'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.a' +
@@ -254,6 +322,7 @@ object Form1: TForm1
     TissConfig.UsarCNPJCPF = True
     TissConfig.UsarRegANS = True
     TissConfig.UsarNumLote = True
+    TissConfig.UsarNumPres = True
     TissConfig.UsarNumGuia = True
     TissConfig.UsarNumCarteira = True
     TissConfig.UsarPaciente = True
@@ -293,15 +362,18 @@ object Form1: TForm1
     TissConfig.UsarNomeArq = True
     TissConfig.UsarArqNomeHash = True
     TissConfig.PadraoTipFontPg = CNPJ
+    TissConfig.UsarNomeAplica = True
+    TissConfig.UsarVersaoAplica = True
+    TissConfig.UsarFabricaAplica = True
     TissValid.UsarValidacao = True
-    TissValid.TissXSD = 'tissV2_02_01.xsd'
+    TissValid.TissXSD = 'tissV2_02_03.xsd'
     TissZerosArq = 20
     Left = 408
     Top = 144
   end
   object TissSP: TTissSP_SADT
-    ansVersaoXSD = v2_02_01
-    Versao.Versao = '0.10.3'
+    ansVersaoXSD = v2_02_03
+    Versao.Versao = '1.0.0'
     Tissconfig.TissUsarBenefic = True
     Tissconfig.TissUsarContratado = True
     Tissconfig.TissUsarPrestadorExec = True
@@ -322,6 +394,9 @@ object Form1: TForm1
     Tissconfig.TissCabecalho.TissTipoGeral = True
     Tissconfig.TissCabecalho.TissUsarNomeArqu = True
     Tissconfig.TissCabecalho.TissArqNomeHash = True
+    Tissconfig.TissCabecalho.TissNomeAplica = True
+    Tissconfig.TissCabecalho.TissVersaoAplica = True
+    Tissconfig.TissCabecalho.TissFabricaAplica = True
     Tissconfig.TissBenefic.TissNumCarteira = True
     Tissconfig.TissBenefic.TissBenific = True
     Tissconfig.TissBenefic.TissNomePlano = True
@@ -447,6 +522,9 @@ object Form1: TForm1
     Tissconfig.TissNumLote = True
     Tissconfig.PadraoTipFontPg = RegistroANS
     Tissconfig.TissUsarObs = False
+    Tissconfig.TissNomeAplica = True
+    Tissconfig.TissVersaoAplica = True
+    Tissconfig.TissFabricaAplica = True
     Tisscabecalho.TissVersaoXml = '1.0'
     Tisscabecalho.TissEncoding = 'ISO-8859-1'
     Tisscabecalho.TissMensagemTissXml = 
@@ -471,13 +549,13 @@ object Form1: TForm1
     TissProc.TissProcs.TissTipTabela = 0
     TissOutDesp.TissDespesa.TissTipDespesa = 0
     TissValid.UsarValidacao = True
-    TissValid.TissXSD = 'tissV2_02_01.xsd'
+    TissValid.TissXSD = 'tissV2_02_03.xsd'
     Left = 440
     Top = 144
   end
   object TissInt: TTissInternacao
-    ansVersaoXSD = v2_02_01
-    Versao.Versao = '0.10.3'
+    ansVersaoXSD = v2_02_03
+    Versao.Versao = '1.0.0'
     TissContratado.TissTipoGeral = JuridicoGeral
     TissProfissional.TissPosicProf = 0
     TissPrestadorExec.TissTipoGeral = JuridicoGeral
@@ -643,7 +721,7 @@ object Form1: TForm1
     TissConfig.PadraoTipFontPg = RegistroANS
     TissConfig.TissUsarObs = False
     TissValid.UsarValidacao = True
-    TissValid.TissXSD = 'tissV2_02_01.xsd'
+    TissValid.TissXSD = 'tissV2_02_03.xsd'
     TissObservacao = 'teste'
     Left = 472
     Top = 144
@@ -725,6 +803,7 @@ object Form1: TForm1
     TissConf.TissAcomod = True
     TissConf.TissUsarObs = False
     TissValid.UsarValidacao = True
+    TissValid.TissXSD = 'tissV2_02_03.xsd'
     TissCabecalho.TissVersaoXml = '1.0'
     TissCabecalho.TissEncoding = 'ISO-8859-1'
     TissCabecalho.TissMensagemTissXml = 
@@ -737,8 +816,8 @@ object Form1: TForm1
     TissPrestExec.TissTipoGeral = JuridicoGeral
     TissInfProfissional.TissPosicProf = 0
     TissProc.TissProcs.TissTipTabela = 0
-    TissCompVersao.Versao = '0.10.3'
-    ansVersaoXSD = v2_02_01
+    TissCompVersao.Versao = '1.0.0'
+    ansVersaoXSD = v2_02_03
     Left = 504
     Top = 144
   end

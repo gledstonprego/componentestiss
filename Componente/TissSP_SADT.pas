@@ -34,6 +34,10 @@ type
 
     FTipo: TpessoaSP_SADT;
     FNumLote: String;
+    FNomeAplica: string;
+    FVersaoAplica: string;
+    FFabricaAplica: string;
+
     FNumGuiaPrest: String;
     FNumGuiaOper: String;
     FNumGuiaPrinc: String;
@@ -88,6 +92,9 @@ type
     procedure setTipoAtend(const Value: integer);
     procedure setAnsVersaoxsd(const Value: TTissAnsVersao);
     procedure SetFontePagadora(const Value: TTissIdentFontPag);
+    procedure setNomeAplica(const Value: string);
+    procedure setVersaoAplica(const Value: string);
+    procedure setFabricaAplica(const Value: string);
     procedure setObservacao(const Value: String);
 
     { Private declarations }
@@ -141,6 +148,9 @@ type
     property TissCNPJCPF:String read FCNPJCPF write setCNPJCPF;
 //    property TissRegANS:String read FRegANS write setRegANS;
     property TissNumLote:String read FNumLote write setNumLote;
+    property TissNomeAplica:string read FNomeAplica write setNomeAplica;
+    property TissVersaoAplica:string read FVersaoAplica write setVersaoAplica;
+    property TissFabricaAplica:string read FFabricaAplica write setFabricaAplica;
 
     //GUIA
     property TissNumGuiaPrest:String read FNumGuiaPrest write setNumGuiaPrest;
@@ -192,37 +202,37 @@ end;
 procedure TTissSP_SADT.AdicionaOPM;
 begin
   Try
-    FOPM.Add('<ans:identificacaoOPM>');
-    FOPM.Add('<ans:OPM>');
+    FOPM.Add('<ansTISS:identificacaoOPM>');
+    FOPM.Add('<ansTISS:OPM>');
 
     with FTissConfSP_SADT.TissOPM do
       begin
         if TissCodigo then
 //          FOPM.Add ('<ans:codigo>' + TissOPMuti.TissOPM.TissTabOPM.TissCodigo + '</ans:codigo>');
-          FOPM.Add ('<ans:codigo>' + TissOPMuti.TissOpm.TissTabOPM.TissCodigo + '</ans:codigo>');
+          FOPM.Add ('<ansTISS:codigo>' + TissOPMuti.TissOpm.TissTabOPM.TissCodigo + '</ansTISS:codigo>');
 
         if TissTipTab then
-          FOPM.Add ('<ans:tipoTabela>' + RetZero (TissOPMuti.TissOPM.TissTabOPM.TissTipTab, 2) + '</ans:tipoTabela>');
+          FOPM.Add ('<ansTISS:tipoTabela>' + RetZero (TissOPMuti.TissOPM.TissTabOPM.TissTipTab, 2) + '</ansTISS:tipoTabela>');
 
         if TissDescricao then;
-          FOPM.Add ('<ans:descricao>' + TissOPMuti.TissOPM.TissTabOPM.TissDescricao + '</ans:descricao>');
+          FOPM.Add ('<ansTISS:descricao>' + TissOPMuti.TissOPM.TissTabOPM.TissDescricao + '</ansTISS:descricao>');
 
-        FOPM.Add('</ans:OPM>');
+        FOPM.Add('</ansTISS:OPM>');
 
         if TissQtde then
-          FOPM.add ('<ans:quantidade>' + CurrToStr (TissOPMuti.TissOPM.TissQtde) + '</ans:quantidade>');
+          FOPM.add ('<ansTISS:quantidade>' + CurrToStr (TissOPMuti.TissOPM.TissQtde) + '</ansTISS:quantidade>');
 
         if TissCodBar then
-          FOPM.add ('<ans:codigoBarra>' + TissOPMuti.TissOPM.TissCodBar + '</ans:codigoBarra>');
+          FOPM.add ('<ansTISS:codigoBarra>' + TissOPMuti.TissOPM.TissCodBar + '</ansTISS:codigoBarra>');
 
         if TissVlrUnt then
-          FOPM.add ('<ans:valorUnitario>' + CurrToStr (TissOPMuti.TissOPM.TissVlrUn) + '</ans:valorUnitario>');
+          FOPM.add ('<ansTISS:valorUnitario>' + CurrToStr (TissOPMuti.TissOPM.TissVlrUn) + '</ansTISS:valorUnitario>');
 
         if TissVlrTot then
-          FOPM.add ('<ans:valorTotal>' + CurrToStr (TissOPMuti.TissOPM.TissVlrTot) + '</ans:valorTotal>');
+          FOPM.add ('<ansTISS:valorTotal>' + CurrToStr (TissOPMuti.TissOPM.TissVlrTot) + '</ansTISS:valorTotal>');
       end;
 
-    FOPM.Add('</ans:identificacaoOPM>');
+    FOPM.Add('</ansTISS:identificacaoOPM>');
 
   Except on e: Exception do
     begin
@@ -235,66 +245,63 @@ end;
 procedure TTissSP_SADT.adicionaOutDesp;
 begin
     try
-      FOutDesp.Add('<ans:despesa>');
+      FOutDesp.Add('<ansTISS:despesa>');
 
       with FTissConfSP_SADT.TissOutDesp do
       begin
-        FOutDesp.Add('<ans:identificadorDespesa>');
+        FOutDesp.Add('<ansTISS:identificadorDespesa>');
           if TissTipoDesp then
-            FOutDesp.Add('<ans:codigo>'+TissOutDesp.TissDespesa.TissIdentCodigo+'</ans:codigo>');
+            FOutDesp.Add('<ansTISS:codigo>'+TissOutDesp.TissDespesa.TissIdentCodigo+'</ansTISS:codigo>');
           if TissIdentTipTab then
-            FOutDesp.Add('<ans:tipoTabela>'+TissOutDesp.TissDespesa.TissIdentTipoTab+'</ans:tipoTabela>');
+            FOutDesp.Add('<ansTISS:tipoTabela>'+TissOutDesp.TissDespesa.TissIdentTipoTab+'</ansTISS:tipoTabela>');
           if TissIdentDesc then
-            FOutDesp.Add('<ans:descricao>'+TissOutDesp.TissDespesa.TissIdentDesc+'</ans:descricao>');
-        FOutDesp.Add('</ans:identificadorDespesa>');
+            FOutDesp.Add('<ansTISS:descricao>'+TissOutDesp.TissDespesa.TissIdentDesc+'</ansTISS:descricao>');
+        FOutDesp.Add('</ansTISS:identificadorDespesa>');
 
         if TissTipoDesp then
-          FOutDesp.add('<ans:tipoDespesa>'+IntToStr(TissOutDesp.TissDespesa.TissTipDespesa)+'</ans:tipoDespesa>');
+          FOutDesp.add('<ansTISS:tipoDespesa>'+IntToStr(TissOutDesp.TissDespesa.TissTipDespesa)+'</ansTISS:tipoDespesa>');
 
 
         if TissDTRealizacao then
           begin
-            case ansVersaoXSD of
-              v2_01_03: FOutDesp.add('<ans:dataRealizacao>'+FormatDateTime('DD/MM/YYYY',TissOutDesp.TissDespesa.TissDataReal)+'</ans:dataRealizacao>');
-              v2_02_01: FOutDesp.add('<ans:dataRealizacao>'+FormatDateTime('YYYY-MM-DD',TissOutDesp.TissDespesa.TissDataReal)+'</ans:dataRealizacao>');              
-            end;
-
+            if ansVersaoXSD = v2_01_03 then
+              FOutDesp.add('<ansTISS:dataRealizacao>'+FormatDateTime('DD/MM/YYYY',TissOutDesp.TissDespesa.TissDataReal)+'</ansTISS:dataRealizacao>')
+            else
+              FOutDesp.add('<ansTISS:dataRealizacao>'+FormatDateTime('YYYY-MM-DD',TissOutDesp.TissDespesa.TissDataReal)+'</ansTISS:dataRealizacao>');
           end;
 
         if TissHSInicial then
           begin
-            case ansVersaoXSD of
-              v2_01_03: FOutDesp.add('<ans:horaInicial>'+FormatDateTime('hh:mm',TissOutDesp.TissDespesa.TissHoraInicial)+'</ans:horaInicial>');
-              v2_02_01: FOutDesp.add('<ans:horaInicial>'+FormatDateTime('hh:mm:ss',TissOutDesp.TissDespesa.TissHoraInicial)+'</ans:horaInicial>');
-            end;
-
+            if ansVersaoXSD = v2_01_03 then
+              FOutDesp.add('<ansTISS:horaInicial>'+FormatDateTime('hh:mm',TissOutDesp.TissDespesa.TissHoraInicial)+'</ansTISS:horaInicial>')
+            else
+              FOutDesp.add('<ansTISS:horaInicial>'+FormatDateTime('hh:mm:ss',TissOutDesp.TissDespesa.TissHoraInicial)+'</ansTISS:horaInicial>');
           end;
 
         if TissHSFinal then
           begin
-            case ansVersaoXSD of
-              v2_01_03: FOutDesp.add('<ans:horaFinal>'+FormatDateTime('hh:mm',TissOutDesp.TissDespesa.TissHoraFinal)+'</ans:horaFinal>');
-              v2_02_01: FOutDesp.add('<ans:horaFinal>'+FormatDateTime('hh:mm:ss',TissOutDesp.TissDespesa.TissHoraFinal)+'</ans:horaFinal>');
-            end;
-
+            if ansVersaoXSD = v2_01_03 then
+              FOutDesp.add('<ansTISS:horaFinal>'+FormatDateTime('hh:mm',TissOutDesp.TissDespesa.TissHoraFinal)+'</ansTISS:horaFinal>')
+            else
+              FOutDesp.add('<ansTISS:horaFinal>'+FormatDateTime('hh:mm:ss',TissOutDesp.TissDespesa.TissHoraFinal)+'</ansTISS:horaFinal>');
           end;
 
 
         if TissReducAcres then
-          FOutDesp.add('<ans:reducaoAcrescimo>'+CurrToStr(TissOutDesp.TissDespesa.TissredAcres)+'</ans:reducaoAcrescimo>');
+          FOutDesp.add('<ansTISS:reducaoAcrescimo>'+CurrToStr(TissOutDesp.TissDespesa.TissredAcres)+'</ansTISS:reducaoAcrescimo>');
 
         if TissQtde then
-          FOutDesp.add('<ans:quantidade>'+CurrToStr(TissOutDesp.TissDespesa.TissQtde)+'</ans:quantidade>');
+          FOutDesp.add('<ansTISS:quantidade>'+CurrToStr(TissOutDesp.TissDespesa.TissQtde)+'</ansTISS:quantidade>');
 
         if TissVlrUnt then
-          FOutDesp.add('<ans:valorUnitario>'+CurrToStr(TissOutDesp.TissDespesa.TissVlrUn)+'</ans:valorUnitario>');
+          FOutDesp.add('<ansTISS:valorUnitario>'+CurrToStr(TissOutDesp.TissDespesa.TissVlrUn)+'</ansTISS:valorUnitario>');
 
         if TissTotalGeral then
-          FOutDesp.add('<ans:valorTotal>'+CurrToStr(TissOutDesp.TissDespesa.TissVlrTot)+'</ans:valorTotal>');
+          FOutDesp.add('<ansTISS:valorTotal>'+CurrToStr(TissOutDesp.TissDespesa.TissVlrTot)+'</ansTISS:valorTotal>');
 
       end;
 
-      FOutDesp.Add('</ans:despesa>');
+      FOutDesp.Add('</ansTISS:despesa>');
 
     except
       on e: Exception do
@@ -309,66 +316,63 @@ var
   i: Integer;
 begin
     try
-      FProc.Add('<ans:procedimentos>');
+      FProc.Add('<ansTISS:procedimentos>');
         if Tissconfig.TissProc.TissUsarEquipe then
           begin
-            FProc.Add('<ans:equipe>');
+            FProc.Add('<ansTISS:equipe>');
               for i:= 0 to FMembEquipe.Count - 1 do
                 begin
                   FProc.Add(FMembEquipe.Strings[i]);
                 end;
-            FProc.Add('</ans:equipe>');
+            FProc.Add('</ansTISS:equipe>');
           end;
 
         with FTissConfSP_SADT.TissProc do
           begin
-            FProc.Add('<ans:procedimento>');
+            FProc.Add('<ansTISS:procedimento>');
               if TissProcs.TissCodigo then
-                FProc.Add('<ans:codigo>'+TissProc.TissProcs.TissCodigo+'</ans:codigo>');
+                FProc.Add('<ansTISS:codigo>'+TissProc.TissProcs.TissCodigo+'</ansTISS:codigo>');
               if TissProcs.TissTipTabela then
-                FProc.Add('<ans:tipoTabela>'+FormatFloat('00', TissProc.TissProcs.TissTipTabela)+'</ans:tipoTabela>');
+                FProc.Add('<ansTISS:tipoTabela>'+FormatFloat('00', TissProc.TissProcs.TissTipTabela)+'</ansTISS:tipoTabela>');
               if TissProcs.TissDescricao then
-                FProc.Add('<ans:descricao>'+TissProc.TissProcs.TissDescricao+'</ans:descricao>');
-            FProc.Add('</ans:procedimento>');
+                FProc.Add('<ansTISS:descricao>'+TissProc.TissProcs.TissDescricao+'</ansTISS:descricao>');
+            FProc.Add('</ansTISS:procedimento>');
             if TissData then
               begin
-                case ansVersaoXSD of
-                  v2_01_03: FProc.add('<ans:data>'+FormatDateTime('DD/MM/YYYY',TissProc.TissData)+'</ans:data>');
-                  v2_02_01: FProc.add('<ans:data>'+FormatDateTime('YYYY-MM-DD',TissProc.TissData)+'</ans:data>');
-                end;
-
+                if ansVersaoXSD = v2_01_03 then
+                  FProc.add('<ansTISS:data>'+FormatDateTime('DD/MM/YYYY',TissProc.TissData)+'</ansTISS:data>')
+                else
+                  FProc.add('<ansTISS:data>'+FormatDateTime('YYYY-MM-DD',TissProc.TissData)+'</ansTISS:data>');
               end;
             if TissHsInicio then
               begin
-                case ansVersaoXSD of
-                  v2_01_03: FProc.add('<ans:horaInicio>'+FormatDateTime('hh:mm',TissProc.TissHsInicio)+'</ans:horaInicio>');
-                  v2_02_01: FProc.add('<ans:horaInicio>'+FormatDateTime('hh:mm:ss',TissProc.TissHsInicio)+'</ans:horaInicio>');
-                end;
-
+                if ansVersaoXSD = v2_01_03 then
+                  FProc.add('<ansTISS:horaInicio>'+FormatDateTime('hh:mm',TissProc.TissHsInicio)+'</ansTISS:horaInicio>')
+                else
+                  FProc.add('<ansTISS:horaInicio>'+FormatDateTime('hh:mm:ss',TissProc.TissHsInicio)+'</ansTISS:horaInicio>');
               end;
             if TissHsFim then
               begin
-                case ansVersaoXSD of
-                  v2_01_03: FProc.add('<ans:horaFim>'+FormatDateTime('hh:mm',TissProc.TissHsFim)+'</ans:horaFim>');
-                  v2_02_01: FProc.add('<ans:horaFim>'+FormatDateTime('hh:mm:ss',TissProc.TissHsFim)+'</ans:horaFim>');
-                end;
-
+                if ansVersaoXSD = v2_01_03 then
+                  FProc.add('<ansTISS:horaFim>'+FormatDateTime('hh:mm',TissProc.TissHsFim)+'</ansTISS:horaFim>')
+                else
+                  FProc.add('<ansTISS:horaFim>'+FormatDateTime('hh:mm:ss',TissProc.TissHsFim)+'</ansTISS:horaFim>');
               end;
             if TissQtde then
-              FProc.add('<ans:quantidadeRealizada>'+CurrToStr(TissProc.TissQtde)+'</ans:quantidadeRealizada>');
+              FProc.add('<ansTISS:quantidadeRealizada>'+CurrToStr(TissProc.TissQtde)+'</ansTISS:quantidadeRealizada>');
             if TissVdeAcesso then
-              FProc.Add('<ans:viaAcesso>'+TissProc.TissVdeAcesso+'</ans:viaAcesso>');
+              FProc.Add('<ansTISS:viaAcesso>'+TissProc.TissVdeAcesso+'</ansTISS:viaAcesso>');
             if TissTecUtil then
-              FProc.Add('<ans:tecnicaUtilizada>'+TissProc.TissTecUtil+'</ans:tecnicaUtilizada>');
+              FProc.Add('<ansTISS:tecnicaUtilizada>'+TissProc.TissTecUtil+'</ansTISS:tecnicaUtilizada>');
             if TissReducAcres then
-              FProc.Add('<ans:reducaoAcrescimo>'+CurrToStr(TissProc.TissReducAcres)+'</ans:reducaoAcrescimo>');
+              FProc.Add('<ansTISS:reducaoAcrescimo>'+CurrToStr(TissProc.TissReducAcres)+'</ansTISS:reducaoAcrescimo>');
             if TissValor then
-              FProc.Add('<ans:valor>'+CurrToStr(TissProc.TissValor)+'</ans:valor>');
+              FProc.Add('<ansTISS:valor>'+CurrToStr(TissProc.TissValor)+'</ansTISS:valor>');
             if TissValorTotal then
-              FProc.Add('<ans:valorTotal>'+CurrToStr(TissProc.TissValorTotal)+'</ans:valorTotal>');
+              FProc.Add('<ansTISS:valorTotal>'+CurrToStr(TissProc.TissValorTotal)+'</ansTISS:valorTotal>');
           end;
 
-      FProc.Add('</ans:procedimentos>');
+      FProc.Add('</ansTISS:procedimentos>');
       FMembEquipe.Clear;
     except
       on e: Exception do
@@ -382,325 +386,321 @@ procedure TTissSP_SADT.adicionaProf;
 begin
   if Tissconfig.TissProc.TissUsarEquipe then
     begin
-      FMembEquipe.Add('<ans:membroEquipe>');
-        FMembEquipe.Add('<ans:codigoProfissional>');
+      FMembEquipe.Add('<ansTISS:membroEquipe>');
+        FMembEquipe.Add('<ansTISS:codigoProfissional>');
           if FTissConfSP_SADT.TissProc.TissEquipe.TissTipoMemb then
             begin
               if TissProc.TissEquipe.TissTipoMemb = FisicGeral then
-                FMembEquipe.Add('<ans:cpf>'+TissProc.TissEquipe.TissCodProf+'</ans:cpf>');
+                FMembEquipe.Add('<ansTISS:cpf>'+TissProc.TissEquipe.TissCodProf+'</ansTISS:cpf>');
               if TissProc.TissEquipe.TissTipoMemb = Outros then
-                FMembEquipe.Add('<ans:codigoPrestadorNaOperadora>'+TissProc.TissEquipe.TissCodProf+'</ans:codigoPrestadorNaOperadora>');
+                FMembEquipe.Add('<ansTISS:codigoPrestadorNaOperadora>'+TissProc.TissEquipe.TissCodProf+'</ansTISS:codigoPrestadorNaOperadora>');
 //----------->adcionei aqui SP/SADT e Internação
               if TissProc.TissEquipe.TissTipoMemb = conselhoProfissional then
                 begin
-                  FMembEquipe.Add('<ans:conselhoProfissional>');
-                    FMembEquipe.Add('<ans:siglaConselho>'+TissProc.TissEquipe.TissProfiss.TissSiglaConselho+'</ans:siglaConselho>');
-                    FMembEquipe.Add('<ans:numeroConselho>'+TissProc.TissEquipe.TissProfiss.TissNumConselho+'</ans:numeroConselho>');
-                    FMembEquipe.Add('<ans:ufConselho>'+TissProc.TissEquipe.TissProfiss.TissUFConselho+'</ans:ufConselho>');
-                  FMembEquipe.Add('</ans:conselhoProfissional>');
+                  FMembEquipe.Add('<ansTISS:conselhoProfissional>');
+                    FMembEquipe.Add('<ansTISS:siglaConselho>'+TissProc.TissEquipe.TissProfiss.TissSiglaConselho+'</ansTISS:siglaConselho>');
+                    FMembEquipe.Add('<ansTISS:numeroConselho>'+TissProc.TissEquipe.TissProfiss.TissNumConselho+'</ansTISS:numeroConselho>');
+                    FMembEquipe.Add('<ansTISS:ufConselho>'+TissProc.TissEquipe.TissProfiss.TissUFConselho+'</ansTISS:ufConselho>');
+                  FMembEquipe.Add('</ansTISS:conselhoProfissional>');
                 end;
 //----------------------->
             end;
-        FMembEquipe.Add('</ans:codigoProfissional>');
+        FMembEquipe.Add('</ansTISS:codigoProfissional>');
 
-        FMembEquipe.Add('<ans:identificacaoProfissional>');
+        FMembEquipe.Add('<ansTISS:identificacaoProfissional>');
           with FTissConfSP_SADT.TissProc.TissEquipe do
             begin
               if FTissConfSP_SADT.TissProc.TissEquipe.TissProfiss.TissProf then
-                FMembEquipe.Add('<ans:nomeExecutante>'+TissProc.TissEquipe.TissProfiss.TissProf+'</ans:nomeExecutante>');
-                FMembEquipe.Add('<ans:conselhoProfissional>');
+                FMembEquipe.Add('<ansTISS:nomeExecutante>'+TissProc.TissEquipe.TissProfiss.TissProf+'</ansTISS:nomeExecutante>');
+                FMembEquipe.Add('<ansTISS:conselhoProfissional>');
                   if FTissConfSP_SADT.TissProc.TissEquipe.TissProfiss.TissSiglaConselho then
-                    FMembEquipe.Add('<ans:siglaConselho>'+TissProc.TissEquipe.TissProfiss.TissSiglaConselho+'</ans:siglaConselho>');
+                    FMembEquipe.Add('<ansTISS:siglaConselho>'+TissProc.TissEquipe.TissProfiss.TissSiglaConselho+'</ansTISS:siglaConselho>');
                   if FTissConfSP_SADT.TissProc.TissEquipe.TissProfiss.TissNumConselho then
-                    FMembEquipe.Add('<ans:numeroConselho>'+TissProc.TissEquipe.TissProfiss.TissNumConselho+'</ans:numeroConselho>');
+                    FMembEquipe.Add('<ansTISS:numeroConselho>'+TissProc.TissEquipe.TissProfiss.TissNumConselho+'</ansTISS:numeroConselho>');
                   if FTissConfSP_SADT.TissProc.TissEquipe.TissProfiss.TissUFConselho then
-                    FMembEquipe.Add('<ans:ufConselho>'+TissProc.TissEquipe.TissProfiss.TissUFConselho+'</ans:ufConselho>');
-                FMembEquipe.Add('</ans:conselhoProfissional>');
+                    FMembEquipe.Add('<ansTISS:ufConselho>'+TissProc.TissEquipe.TissProfiss.TissUFConselho+'</ansTISS:ufConselho>');
+                FMembEquipe.Add('</ansTISS:conselhoProfissional>');
                 
                 if FTissConfSP_SADT.TissProc.TissEquipe.TissProfiss.TissfCBOS then
-                  FMembEquipe.Add('<ans:codigoCBOS>'+TissProc.TissEquipe.TissProfiss.TissfCBOS+'</ans:codigoCBOS>');
-              FMembEquipe.Add('</ans:identificacaoProfissional>');
+                  FMembEquipe.Add('<ansTISS:codigoCBOS>'+TissProc.TissEquipe.TissProfiss.TissfCBOS+'</ansTISS:codigoCBOS>');
+              FMembEquipe.Add('</ansTISS:identificacaoProfissional>');
               if FTissConfSP_SADT.TissProc.TissEquipe.TissProfiss.TissPosicProf then
-                //FMembEquipe.Add('<ans:posicaoProfissional>'+IntToStr(TissProc.TissEquipe.TissProfiss.TissPosicProf)+'</ans:posicaoProfissional>');
-                FMembEquipe.Add('<ans:posicaoProfissional>'+FormatFloat('00',TissProc.TissEquipe.TissProfiss.TissPosicProf)+'</ans:posicaoProfissional>');
+                //FMembEquipe.Add('<ansTISS:posicaoProfissional>'+IntToStr(TissProc.TissEquipe.TissProfiss.TissPosicProf)+'</ansTISS:posicaoProfissional>');
+                FMembEquipe.Add('<ansTISS:posicaoProfissional>'+FormatFloat('00',TissProc.TissEquipe.TissProfiss.TissPosicProf)+'</ansTISS:posicaoProfissional>');
             end;
-      FMembEquipe.Add('</ans:membroEquipe>');
+      FMembEquipe.Add('</ansTISS:membroEquipe>');
     end;
 end;
 
 procedure TTissSP_SADT.adicionarGuia;
 begin
     try  
-      FGuia.add('<ans:guiaSP_SADT>');
+      FGuia.add('<ansTISS:guiaSP_SADT>');
 
-        FGuia.add('<ans:identificacaoGuiaSADTSP>');
-        if FAnsVersaoxsd = v2_02_01 then
+        FGuia.add('<ansTISS:identificacaoGuiaSADTSP>');
+        if (FAnsVersaoxsd <> v2_01_03) then
           begin
-            FGuia.Add('<ans:identificacaoFontePagadora>');
+            FGuia.Add('<ansTISS:identificacaoFontePagadora>');
             case FTissConfSP_SADT.PadraoTipFontPg of
-              RegistroANS: FGuia.add('<ans:registroANS>'+FFontePagadora.TissRegAns+'</ans:registroANS>');
-              CNPJ: FGuia.add('<ans:cnpjFontePagadora>'+FFontePagadora.TissCnpj+'</ans:cnpjFontePagadora>');
+              RegistroANS: FGuia.add('<ansTISS:registroANS>'+FFontePagadora.TissRegAns+'</ansTISS:registroANS>');
+              CNPJ: FGuia.add('<ansTISS:cnpjFontePagadora>'+FFontePagadora.TissCnpj+'</ansTISS:cnpjFontePagadora>');
             end;    
-            FGuia.add('</ans:identificacaoFontePagadora>');
+            FGuia.add('</ansTISS:identificacaoFontePagadora>');
           end;
-        if FAnsVersaoxsd = v2_01_03 then        
+        if FAnsVersaoxsd = v2_01_03 then
           if FTissConfSP_SADT.TissRegANS then
-            FGuia.add('<ans:registroANS>'+FFontePagadora.TissRegAns+'</ans:registroANS>');
-          case ansVersaoXSD of
-            v2_01_03: FGuia.add('<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',FDataEmis)+'</ans:dataEmissaoGuia>');
-            v2_02_01: FGuia.add('<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',FDataEmis)+'</ans:dataEmissaoGuia>');
-          end;
+            FGuia.add('<ansTISS:registroANS>'+FFontePagadora.TissRegAns+'</ansTISS:registroANS>');
+          if ansVersaoXSD = v2_01_03 then
+            FGuia.add('<ansTISS:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',FDataEmis)+'</ansTISS:dataEmissaoGuia>')
+          else
+            FGuia.add('<ansTISS:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',FDataEmis)+'</ansTISS:dataEmissaoGuia>');
 
           if FTissConfSP_SADT.TissNumGuiaPrest then
-            FGuia.add('<ans:numeroGuiaPrestador>'+FNumGuiaPrest+'</ans:numeroGuiaPrestador>');
+            FGuia.add('<ansTISS:numeroGuiaPrestador>'+FNumGuiaPrest+'</ansTISS:numeroGuiaPrestador>');
           if FTissConfSP_SADT.TissNumGuiaOper then
-            FGuia.add('<ans:numeroGuiaOperadora>'+FNumGuiaOper+'</ans:numeroGuiaOperadora>');
+            FGuia.add('<ansTISS:numeroGuiaOperadora>'+FNumGuiaOper+'</ansTISS:numeroGuiaOperadora>');
 
-        FGuia.add('</ans:identificacaoGuiaSADTSP>');
+        FGuia.add('</ansTISS:identificacaoGuiaSADTSP>');
         if FTissConfSP_SADT.TissNumGuiaPrinc then
-          FGuia.add('<ans:numeroGuiaPrincipal>'+FNumGuiaPrinc+'</ans:numeroGuiaPrincipal>');
+          FGuia.add('<ansTISS:numeroGuiaPrincipal>'+FNumGuiaPrinc+'</ansTISS:numeroGuiaPrincipal>');
 
         if (FTissConfSP_SADT.TissDataAut) or
         (FTissConfSP_SADT.TissSenhaAut) or
         (FTissConfSP_SADT.TissSenhaValid) then
           begin
-            FGuia.add('<ans:dadosAutorizacao>');
+            FGuia.add('<ansTISS:dadosAutorizacao>');
               if FTissConfSP_SADT.TissDataAut then
                 begin
-                  case ansVersaoXSD of
-                    v2_01_03: FGuia.add('<ans:dataAutorizacao>'+FormatDateTime('DD/MM/YYYY',FDataAut)+'</ans:dataAutorizacao>');
-                    v2_02_01: FGuia.add('<ans:dataAutorizacao>'+FormatDateTime('YYYY-MM-DD',FDataAut)+'</ans:dataAutorizacao>');
-                  end;
+                  if ansVersaoXSD = v2_01_03 then
+                    FGuia.add('<ansTISS:dataAutorizacao>'+FormatDateTime('DD/MM/YYYY',FDataAut)+'</ansTISS:dataAutorizacao>')
+                  else
+                    FGuia.add('<ansTISS:dataAutorizacao>'+FormatDateTime('YYYY-MM-DD',FDataAut)+'</ansTISS:dataAutorizacao>');
                 end;
               if FTissConfSP_SADT.TissSenhaAut then
-                FGuia.add('<ans:senhaAutorizacao>'+FSenhaAut+'</ans:senhaAutorizacao>');
+                FGuia.add('<ansTISS:senhaAutorizacao>'+FSenhaAut+'</ansTISS:senhaAutorizacao>');
               if FTissConfSP_SADT.TissSenhaValid then
                 begin
-                  case ansVersaoXSD of
-                    v2_01_03: FGuia.add('<ans:validadeSenha>'+FormatDateTime('DD/MM/YYYY',FSenhaValid)+'</ans:validadeSenha>');
-                    v2_02_01: FGuia.add('<ans:validadeSenha>'+FormatDateTime('YYYY-MM-DD',FSenhaValid)+'</ans:validadeSenha>');
-                  end;
-
+                  if ansVersaoXSD = v2_01_03 then
+                    FGuia.add('<ansTISS:validadeSenha>'+FormatDateTime('DD/MM/YYYY',FSenhaValid)+'</ansTISS:validadeSenha>')
+                  else
+                    FGuia.add('<ansTISS:validadeSenha>'+FormatDateTime('YYYY-MM-DD',FSenhaValid)+'</ansTISS:validadeSenha>');
                 end;
-            FGuia.add('</ans:dadosAutorizacao>');
+            FGuia.add('</ansTISS:dadosAutorizacao>');
           end;
 
         if Tissconfig.TissUsarBenefic then
           begin
-            FGuia.add('<ans:dadosBeneficiario>');
+            FGuia.add('<ansTISS:dadosBeneficiario>');
               if FTissConfSP_SADT.TissBenefic.TissNumCarteira then
-                FGuia.add('<ans:numeroCarteira>'+FTissBenific.TissNumCarteira+'</ans:numeroCarteira>');
+                FGuia.add('<ansTISS:numeroCarteira>'+FTissBenific.TissNumCarteira+'</ansTISS:numeroCarteira>');
               if FTissConfSP_SADT.TissBenefic.TissBenific then
-                FGuia.add('<ans:nomeBeneficiario>'+FTissBenific.TissBenific+'</ans:nomeBeneficiario>');
+                FGuia.add('<ansTISS:nomeBeneficiario>'+FTissBenific.TissBenific+'</ansTISS:nomeBeneficiario>');
               if FTissConfSP_SADT.TissBenefic.TissNomePlano then
-                FGuia.add('<ans:nomePlano>'+FTissBenific.TissNomePlano+'</ans:nomePlano>');
+                FGuia.add('<ansTISS:nomePlano>'+FTissBenific.TissNomePlano+'</ansTISS:nomePlano>');
               if FTissConfSP_SADT.TissBenefic.TissValidadeCart then
                 begin
-                  case ansVersaoXSD of
-                    v2_01_03: FGuia.add('<ans:validadeCarteira>'+FormatDateTime('DD/MM/YYYY',FTissBenific.TissValidadeCart)+'</ans:validadeCarteira>');
-                    v2_02_01: FGuia.add('<ans:validadeCarteira>'+FormatDateTime('YYYY-MM-DD',FTissBenific.TissValidadeCart)+'</ans:validadeCarteira>');
-                  end;
-
+                  if ansVersaoXSD = v2_01_03 then
+                    FGuia.add('<ansTISS:validadeCarteira>'+FormatDateTime('DD/MM/YYYY',FTissBenific.TissValidadeCart)+'</ansTISS:validadeCarteira>')
+                  else
+                    FGuia.add('<ansTISS:validadeCarteira>'+FormatDateTime('YYYY-MM-DD',FTissBenific.TissValidadeCart)+'</ansTISS:validadeCarteira>');
                 end;
               if FTissConfSP_SADT.TissBenefic.TissNumCNS then
-                FGuia.add('<ans:numeroCNS>'+FTissBenific.TissNumCNS+'</ans:numeroCNS>');
+                FGuia.add('<ansTISS:numeroCNS>'+FTissBenific.TissNumCNS+'</ansTISS:numeroCNS>');
 
-            FGuia.add('</ans:dadosBeneficiario>');
+            FGuia.add('</ansTISS:dadosBeneficiario>');
           end;
 
         if (Tissconfig.TissUsarProfissional) or
         (Tissconfig.TissUsarContratado) then
           begin
-            FGuia.add('<ans:dadosSolicitante>');
+            FGuia.add('<ansTISS:dadosSolicitante>');
             if Tissconfig.TissUsarContratado then
               begin
-                FGuia.add('<ans:contratado>');
+                FGuia.add('<ansTISS:contratado>');
 
-                  FGuia.add('<ans:identificacao>');
+                  FGuia.add('<ansTISS:identificacao>');
                     if FTissConfSP_SADT.TissContratado.TissCNPJCPF then
                       begin
                         if TissContratado.TissTipoGeral = JuridicoGeral then
-                          FGuia.add('<ans:CNPJ>'+TissContratado.TissCNPJCPF+'</ans:CNPJ>');
+                          FGuia.add('<ansTISS:CNPJ>'+TissContratado.TissCNPJCPF+'</ansTISS:CNPJ>');
 
                         if TissContratado.TissTipoGeral = FisicGeral then
-                          FGuia.add('<ans:cpf>'+TissContratado.TissCNPJCPF+'</ans:cpf>');
+                          FGuia.add('<ansTISS:cpf>'+TissContratado.TissCNPJCPF+'</ansTISS:cpf>');
 
                         if TissContratado.TissTipoGeral = Outros then
-                          FGuia.Add('<ans:codigoPrestadorNaOperadora>'+TissContratado.TissCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
+                          FGuia.Add('<ansTISS:codigoPrestadorNaOperadora>'+TissContratado.TissCNPJCPF+'</ansTISS:codigoPrestadorNaOperadora>');
                       end;
 
-                  FGuia.add('</ans:identificacao>');
+                  FGuia.add('</ansTISS:identificacao>');
                   if FTissConfSP_SADT.TissContratado.TissNomeContradado then
-                    FGuia.add('<ans:nomeContratado>'+TissContratado.TissNomeContradado+'</ans:nomeContratado>');
+                    FGuia.add('<ansTISS:nomeContratado>'+TissContratado.TissNomeContradado+'</ansTISS:nomeContratado>');
 
                   If FTissConfSP_SADT.TissContratado.TissUsarEnd then
                     begin
-                      FGuia.add('<ans:enderecoContratado>');
+                      FGuia.add('<ansTISS:enderecoContratado>');
                         if FTissConfSP_SADT.TissContratado.TisstipoLogradouro then
-                          FGuia.add('<ans:tipoLogradouro>'+TissContratado.TisstipoLogradouro+'</ans:tipoLogradouro>');
+                          FGuia.add('<ansTISS:tipoLogradouro>'+TissContratado.TisstipoLogradouro+'</ansTISS:tipoLogradouro>');
                         if FTissConfSP_SADT.TissContratado.TissLogradouro then
-                          FGuia.add('<ans:logradouro>'+TissContratado.TissLogradouro+'</ans:logradouro>');
+                          FGuia.add('<ansTISS:logradouro>'+TissContratado.TissLogradouro+'</ansTISS:logradouro>');
                         if FTissConfSP_SADT.TissContratado.TissEndNum then
-                          FGuia.add('<ans:numero>'+TissContratado.TissEndNum+'</ans:numero>');
+                          FGuia.add('<ansTISS:numero>'+TissContratado.TissEndNum+'</ansTISS:numero>');
                         if FTissConfSP_SADT.TissContratado.TissComplemento then
-                          FGuia.add('<ans:complemento>'+TissContratado.TissComplemento+'</ans:complemento>');
+                          FGuia.add('<ansTISS:complemento>'+TissContratado.TissComplemento+'</ansTISS:complemento>');
                         if FTissConfSP_SADT.TissContratado.TisscodigoIBGE then
-                          FGuia.add('<ans:codigoIBGEMunicipio>'+FormatFloat('0000000',TissContratado.TisscodigoIBGE)+'</ans:codigoIBGEMunicipio>');
+                          FGuia.add('<ansTISS:codigoIBGEMunicipio>'+FormatFloat('0000000',TissContratado.TisscodigoIBGE)+'</ansTISS:codigoIBGEMunicipio>');
                         if FTissConfSP_SADT.TissContratado.TissMunicipio then
-                          FGuia.add('<ans:municipio>'+TissContratado.TissMunicipio+'</ans:municipio>');
+                          FGuia.add('<ansTISS:municipio>'+TissContratado.TissMunicipio+'</ansTISS:municipio>');
                         if FTissConfSP_SADT.TissContratado.TissUF then
-                          FGuia.add('<ans:codigoUF>'+TissContratado.TissUF+'</ans:codigoUF>');
+                          FGuia.add('<ansTISS:codigoUF>'+TissContratado.TissUF+'</ansTISS:codigoUF>');
                         if FTissConfSP_SADT.TissContratado.TissCEP then
-                          FGuia.add('<ans:cep>'+TissContratado.TissCEP+'</ans:cep>');
+                          FGuia.add('<ansTISS:cep>'+TissContratado.TissCEP+'</ansTISS:cep>');
 
-                      FGuia.add('</ans:enderecoContratado>');
+                      FGuia.add('</ansTISS:enderecoContratado>');
                     end;
                   if FTissConfSP_SADT.TissContratado.TissCNES then
-                    FGuia.add('<ans:numeroCNES>'+FormatFloat('0000000', TissContratado.TissCNES)+'</ans:numeroCNES>');
+                    FGuia.add('<ansTISS:numeroCNES>'+FormatFloat('0000000', TissContratado.TissCNES)+'</ansTISS:numeroCNES>');
 
-                FGuia.add('</ans:contratado>');
+                FGuia.add('</ansTISS:contratado>');
               end;
               if Tissconfig.TissUsarProfissional then
                 begin
-                  FGuia.add('<ans:profissional>');
+                  FGuia.add('<ansTISS:profissional>');
                     if FTissConfSP_SADT.TissProfissional.TissProf then
-                      FGuia.add('<ans:nomeProfissional>'+ FTissProfissional.TissProf+'</ans:nomeProfissional>');
-                    FGuia.add('<ans:conselhoProfissional>');
+                      FGuia.add('<ansTISS:nomeProfissional>'+ FTissProfissional.TissProf+'</ansTISS:nomeProfissional>');
+                    FGuia.add('<ansTISS:conselhoProfissional>');
                     if FTissConfSP_SADT.TissProfissional.TissSiglaConselho then
-                      FGuia.add('<ans:siglaConselho>'+FTissProfissional.TissSiglaConselho+'</ans:siglaConselho>');
+                      FGuia.add('<ansTISS:siglaConselho>'+FTissProfissional.TissSiglaConselho+'</ansTISS:siglaConselho>');
                     if FTissConfSP_SADT.TissProfissional.TissNumConselho then
-                      FGuia.add('<ans:numeroConselho>'+FTissProfissional.TissNumConselho+'</ans:numeroConselho>');
+                      FGuia.add('<ansTISS:numeroConselho>'+FTissProfissional.TissNumConselho+'</ansTISS:numeroConselho>');
                     if FTissConfSP_SADT.TissProfissional.TissUFConselho then
-                      FGuia.add('<ans:ufConselho>'+FTissProfissional.TissUFConselho+'</ans:ufConselho>');
-                    FGuia.add('</ans:conselhoProfissional>');
+                      FGuia.add('<ansTISS:ufConselho>'+FTissProfissional.TissUFConselho+'</ansTISS:ufConselho>');
+                    FGuia.add('</ansTISS:conselhoProfissional>');
                     if FTissConfSP_SADT.TissProfissional.TissfCBOS then
-                     FGuia.add('<ans:cbos>'+FTissProfissional.TissfCBOS+'</ans:cbos>');
-                  FGuia.add('</ans:profissional>');
+                     FGuia.add('<ansTISS:cbos>'+FTissProfissional.TissfCBOS+'</ansTISS:cbos>');
+                  FGuia.add('</ansTISS:profissional>');
                end;
-            FGuia.add('</ans:dadosSolicitante>');
+            FGuia.add('</ansTISS:dadosSolicitante>');
           end;
         if Tissconfig.TissUsarPrestadorExec then
           begin
-            FGuia.add('<ans:prestadorExecutante>');
-              FGuia.add('<ans:identificacao>');
+            FGuia.add('<ansTISS:prestadorExecutante>');
+              FGuia.add('<ansTISS:identificacao>');
                 if FTissConfSP_SADT.TissPrestadorExec.TissCNPJCPF then
                   begin
                     if FTissPrestExec.TissTipoGeral = JuridicoGeral then
-                      FGuia.add('<ans:CNPJ>'+FTissPrestExec.TissCNPJCPF+'</ans:CNPJ>');
+                      FGuia.add('<ansTISS:CNPJ>'+FTissPrestExec.TissCNPJCPF+'</ansTISS:CNPJ>');
                     if FTissPrestExec.TissTipoGeral = FisicGeral then
-                      FGuia.add('<ans:cpf>'+FTissPrestExec.TissCNPJCPF+'</ans:cpf>');
+                      FGuia.add('<ansTISS:cpf>'+FTissPrestExec.TissCNPJCPF+'</ansTISS:cpf>');
                     if FTissPrestExec.TissTipoGeral = Outros then
-                      FGuia.add('<ans:codigoPrestadorNaOperadora>'+FTissPrestExec.TissCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
+                      FGuia.add('<ansTISS:codigoPrestadorNaOperadora>'+FTissPrestExec.TissCNPJCPF+'</ansTISS:codigoPrestadorNaOperadora>');
                   end;
-              FGuia.add('</ans:identificacao>');
+              FGuia.add('</ansTISS:identificacao>');
               if FTissConfSP_SADT.TissPrestadorExec.TissNomeContradado then
-                FGuia.add('<ans:nomeContratado>'+FTissPrestExec.TissNomeContradado+'</ans:nomeContratado>');
+                FGuia.add('<ansTISS:nomeContratado>'+FTissPrestExec.TissNomeContradado+'</ansTISS:nomeContratado>');
 
               if FTissConfSP_SADT.TissPrestadorExec.TissUsarEnd then
                 begin
-                  FGuia.add('<ans:enderecoContratado>');
+                  FGuia.add('<ansTISS:enderecoContratado>');
                     if FTissConfSP_SADT.TissPrestadorExec.TisstipoLogradouro then
-                      FGuia.add('<ans:tipoLogradouro>'+FTissPrestExec.TisstipoLogradouro+'</ans:tipoLogradouro>');
+                      FGuia.add('<ansTISS:tipoLogradouro>'+FTissPrestExec.TisstipoLogradouro+'</ansTISS:tipoLogradouro>');
                     if FTissConfSP_SADT.TissPrestadorExec.TissLogradouro then
-                      FGuia.add('<ans:logradouro>'+FTissPrestExec.TissLogradouro+'</ans:logradouro>');
+                      FGuia.add('<ansTISS:logradouro>'+FTissPrestExec.TissLogradouro+'</ansTISS:logradouro>');
                     if FTissConfSP_SADT.TissPrestadorExec.TissEndNum then
-                      FGuia.add('<ans:numero>'+FTissPrestExec.TissEndNum+'</ans:numero>');
+                      FGuia.add('<ansTISS:numero>'+FTissPrestExec.TissEndNum+'</ansTISS:numero>');
                     if FTissConfSP_SADT.TissPrestadorExec.TissComplemento then
-                      FGuia.add('<ans:complemento>'+FTissPrestExec.TissComplemento+'</ans:complemento>');
+                      FGuia.add('<ansTISS:complemento>'+FTissPrestExec.TissComplemento+'</ansTISS:complemento>');
                     if FTissConfSP_SADT.TissPrestadorExec.TisscodigoIBGE then
-                      FGuia.add('<ans:codigoIBGEMunicipio>'+FormatFloat('0000000',FTissPrestExec.TisscodigoIBGE)+'</ans:codigoIBGEMunicipio>');
+                      FGuia.add('<ansTISS:codigoIBGEMunicipio>'+FormatFloat('0000000',FTissPrestExec.TisscodigoIBGE)+'</ansTISS:codigoIBGEMunicipio>');
                     if FTissConfSP_SADT.TissPrestadorExec.TissMunicipio then
-                      FGuia.add('<ans:municipio>'+FTissPrestExec.TissMunicipio+'</ans:municipio>');
+                      FGuia.add('<ansTISS:municipio>'+FTissPrestExec.TissMunicipio+'</ansTISS:municipio>');
                     if FTissConfSP_SADT.TissPrestadorExec.TissUF then
-                      FGuia.add('<ans:codigoUF>'+FTissPrestExec.TissUF+'</ans:codigoUF>');
+                      FGuia.add('<ansTISS:codigoUF>'+FTissPrestExec.TissUF+'</ansTISS:codigoUF>');
                     if FTissConfSP_SADT.TissPrestadorExec.TissCEP then
-                      FGuia.add('<ans:cep>'+FTissPrestExec.TissCEP+'</ans:cep>');
+                      FGuia.add('<ansTISS:cep>'+FTissPrestExec.TissCEP+'</ansTISS:cep>');
 
-                  FGuia.add('</ans:enderecoContratado>');
+                  FGuia.add('</ansTISS:enderecoContratado>');
                 end;
               if FTissConfSP_SADT.TissPrestadorExec.TissCNES then
-                FGuia.add('<ans:numeroCNES>'+FormatFloat('0000000', FTissPrestExec.TissCNES)+'</ans:numeroCNES>');
+                FGuia.add('<ansTISS:numeroCNES>'+FormatFloat('0000000', FTissPrestExec.TissCNES)+'</ansTISS:numeroCNES>');
 //Inclusão das tags profissionalExecutanteCompl
               if Tissconfig.TissUsarProfissionalCompl then
                 begin
-                  FGuia.add('<ans:profissionalExecutanteCompl>');
+                  FGuia.add('<ansTISS:profissionalExecutanteCompl>');
                     if FTissConfSP_SADT.TissProfissionalCompl.TissProf then
-                      FGuia.add('<ans:nomeExecutante>'+ FTissProfissionalCompl.TissProf+'</ans:nomeExecutante>');
-                    FGuia.add('<ans:conselhoProfissional>');
+                      FGuia.add('<ansTISS:nomeExecutante>'+ FTissProfissionalCompl.TissProf+'</ansTISS:nomeExecutante>');
+                    FGuia.add('<ansTISS:conselhoProfissional>');
                     if FTissConfSP_SADT.TissProfissionalCompl.TissSiglaConselho then
-                      FGuia.add('<ans:siglaConselho>'+FTissProfissionalCompl.TissSiglaConselho+'</ans:siglaConselho>');
+                      FGuia.add('<ansTISS:siglaConselho>'+FTissProfissionalCompl.TissSiglaConselho+'</ansTISS:siglaConselho>');
                     if FTissConfSP_SADT.TissProfissionalCompl.TissNumConselho then
-                      FGuia.add('<ans:numeroConselho>'+FTissProfissionalCompl.TissNumConselho+'</ans:numeroConselho>');
+                      FGuia.add('<ansTISS:numeroConselho>'+FTissProfissionalCompl.TissNumConselho+'</ansTISS:numeroConselho>');
                     if FTissConfSP_SADT.TissProfissionalCompl.TissUFConselho then
-                      FGuia.add('<ans:ufConselho>'+FTissProfissionalCompl.TissUFConselho+'</ans:ufConselho>');
-                    FGuia.add('</ans:conselhoProfissional>');
+                      FGuia.add('<ansTISS:ufConselho>'+FTissProfissionalCompl.TissUFConselho+'</ansTISS:ufConselho>');
+                    FGuia.add('</ansTISS:conselhoProfissional>');
                     if FTissConfSP_SADT.TissProfissionalCompl.TissfCBOS then
-                     FGuia.add('<ans:codigoCBOS>'+FTissProfissionalCompl.TissfCBOS+'</ans:codigoCBOS>');
-                    FGuia.Add('<ans:codigoProfissionalCompl>');
+                     FGuia.add('<ansTISS:codigoCBOS>'+FTissProfissionalCompl.TissfCBOS+'</ansTISS:codigoCBOS>');
+                    FGuia.Add('<ansTISS:codigoProfissionalCompl>');
                     if FTissConfSP_SADT.TissUsarPrestadorExecCompl then
                       begin
                         if FTissPrestExecCompl.TissTipoGeral = FisicGeral then
-                          FGuia.add('<ans:cpf>'+FTissPrestExecCompl.TissCNPJCPF+'</ans:cpf>');
+                          FGuia.add('<ansTISS:cpf>'+FTissPrestExecCompl.TissCNPJCPF+'</ansTISS:cpf>');
                         if FTissPrestExecCompl.TissTipoGeral = Outros then
-                          FGuia.add('<ans:codigoPrestadorNaOperadora>'+FTissPrestExecCompl.TissCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
+                          FGuia.add('<ansTISS:codigoPrestadorNaOperadora>'+FTissPrestExecCompl.TissCNPJCPF+'</ansTISS:codigoPrestadorNaOperadora>');
                       end;
-                    FGuia.Add('</ans:codigoProfissionalCompl>');
-                  FGuia.add('</ans:profissionalExecutanteCompl>');
+                    FGuia.Add('</ansTISS:codigoProfissionalCompl>');
+                  FGuia.add('</ansTISS:profissionalExecutanteCompl>');
                end;
 //Termina aqui
 
-            FGuia.add('</ans:prestadorExecutante>');
+            FGuia.add('</ansTISS:prestadorExecutante>');
           end;
 
         if FTissConfSP_SADT.TissindicClinica then
-          FGuia.add('<ans:indicacaoClinica>'+FindicClinica+'</ans:indicacaoClinica>');
+          FGuia.add('<ansTISS:indicacaoClinica>'+FindicClinica+'</ansTISS:indicacaoClinica>');
         if FTissConfSP_SADT.TisscaraterAtend then
-          FGuia.add('<ans:caraterAtendimento>'+FcaraAtend+'</ans:caraterAtendimento>');
+          FGuia.add('<ansTISS:caraterAtendimento>'+FcaraAtend+'</ansTISS:caraterAtendimento>');
         if FTissConfSP_SADT.TissDataAtend then
           begin
-            case ansVersaoXSD of
-              v2_01_03: FGuia.add('<ans:dataHoraAtendimento>'+FormatDateTime('DD/MM/YYYY',FDataATend)+'H'+FormatDateTime('hh:mm',FHoraAtend)+'</ans:dataHoraAtendimento>');
-              v2_02_01: FGuia.add('<ans:dataHoraAtendimento>'+FormatDateTime('YYYY-MM-DD',FDataATend)+'T'+FormatDateTime('hh:mm:ss',FHoraAtend)+'</ans:dataHoraAtendimento>');
-
-            end;
-
+            if ansVersaoXSD = v2_01_03 then
+              FGuia.add('<ansTISS:dataHoraAtendimento>'+FormatDateTime('DD/MM/YYYY',FDataATend)+'H'+FormatDateTime('hh:mm',FHoraAtend)+'</ansTISS:dataHoraAtendimento>')
+            else
+              FGuia.add('<ansTISS:dataHoraAtendimento>'+FormatDateTime('YYYY-MM-DD',FDataATend)+'T'+FormatDateTime('hh:mm:ss',FHoraAtend)+'</ansTISS:dataHoraAtendimento>');
           end;
 
         if Tissconfig.TissUsarDiagnostico then
           begin
-            FGuia.add('<ans:diagnosticoAtendimento>');
-              FGuia.add('<ans:CID>');
+            FGuia.add('<ansTISS:diagnosticoAtendimento>');
+              FGuia.add('<ansTISS:CID>');
                 if FTissConfSP_SADT.TissDiagnostico.TissCIDNomeTab then
-                  FGuia.add('<ans:nomeTabela>'+FTissDiagnostico.TissCIDNomeTab+'</ans:nomeTabela>');
+                  FGuia.add('<ansTISS:nomeTabela>'+FTissDiagnostico.TissCIDNomeTab+'</ansTISS:nomeTabela>');
                 if FTissConfSP_SADT.TissDiagnostico.TissCIDCodDiag then
-                  FGuia.add('<ans:codigoDiagnostico>'+FTissDiagnostico.TissCIDCodDiag+'</ans:codigoDiagnostico>');
+                  FGuia.add('<ansTISS:codigoDiagnostico>'+FTissDiagnostico.TissCIDCodDiag+'</ansTISS:codigoDiagnostico>');
                 if FTissConfSP_SADT.TissDiagnostico.TissCIDDescDiag then
-                  FGuia.add('<ans:descricaoDiagnostico>'+FTissDiagnostico.TissCIDDescDiag+'</ans:descricaoDiagnostico>');
-              FGuia.add('</ans:CID>');
+                  FGuia.add('<ansTISS:descricaoDiagnostico>'+FTissDiagnostico.TissCIDDescDiag+'</ansTISS:descricaoDiagnostico>');
+              FGuia.add('</ansTISS:CID>');
               if FTissConfSP_SADT.TissDiagnostico.TissTipDoenc then
-                FGuia.add('<ans:tipoDoenca>'+FTissDiagnostico.TissTipDoenc+'</ans:tipoDoenca>');
+                FGuia.add('<ansTISS:tipoDoenca>'+FTissDiagnostico.TissTipDoenc+'</ansTISS:tipoDoenca>');
               if (FTissConfSP_SADT.TissDiagnostico.TissValor) or
                (FTissConfSP_SADT.TissDiagnostico.TissUnTemp) then
                 begin
-                  FGuia.add('<ans:tempoReferidoEvolucaoDoenca>');
+                  FGuia.add('<ansTISS:tempoReferidoEvolucaoDoenca>');
                     if FTissConfSP_SADT.TissDiagnostico.TissValor then
-                      FGuia.add('<ans:valor>'+inttoStr(FTissDiagnostico.TissValor)+'</ans:valor>');
+                      FGuia.add('<ansTISS:valor>'+inttoStr(FTissDiagnostico.TissValor)+'</ansTISS:valor>');
                     if FTissConfSP_SADT.TissDiagnostico.TissUnTemp then
-                      FGuia.add('<ans:unidadeTempo>'+FTissDiagnostico.TissUnTemp+'</ans:unidadeTempo>');
-                  FGuia.add('</ans:tempoReferidoEvolucaoDoenca>');
+                      FGuia.add('<ansTISS:unidadeTempo>'+FTissDiagnostico.TissUnTemp+'</ansTISS:unidadeTempo>');
+                  FGuia.add('</ansTISS:tempoReferidoEvolucaoDoenca>');
                 end;
               if FTissConfSP_SADT.TissDiagnostico.TissIndicAcid then
-                FGuia.add('<ans:indicadorAcidente>'+inttoStr(FTissDiagnostico.TissIndicAcid)+'</ans:indicadorAcidente>');
+                FGuia.add('<ansTISS:indicadorAcidente>'+inttoStr(FTissDiagnostico.TissIndicAcid)+'</ansTISS:indicadorAcidente>');
 
-            FGuia.add('</ans:diagnosticoAtendimento>');
+            FGuia.add('</ansTISS:diagnosticoAtendimento>');
           end;
         if FTissConfSP_SADT.TissTipoSaida then
-          FGuia.add('<ans:tipoSaida>'+FTipoSaida+'</ans:tipoSaida>');
+          FGuia.add('<ansTISS:tipoSaida>'+FTipoSaida+'</ansTISS:tipoSaida>');
         if FTissConfSP_SADT.TissTipoAtend then
-          FGuia.add('<ans:tipoAtendimento>'+FormatFloat('00',FTipoAtend)+'</ans:tipoAtendimento>');
+          FGuia.add('<ansTISS:tipoAtendimento>'+FormatFloat('00',FTipoAtend)+'</ansTISS:tipoAtendimento>');
         if Tissconfig.TissUsarProc then
-          FGuia.add('<ans:procedimentosRealizados>');
-     // FGuia.add('</ans:guiaSP_SADT>');
+          FGuia.add('<ansTISS:procedimentosRealizados>');
+     // FGuia.add('</ansTISS:guiaSP_SADT>');
     except
       on e: Exception do
         begin
@@ -727,12 +727,12 @@ begin
   FTissOutrasDesp := TTissOutrasDesp.create;
   FFontePagadora := TTissIdentFontPag.Create;
 
-  FAnsVersaoxsd := v2_02_01;
+  FAnsVersaoxsd := v2_02_03;
   FTissCabecalho.TissEncoding:='ISO-8859-1';
   FTissCabecalho.TissVersaoXml:='1.0';
-  FTissCabecalho.TissVersaoTISS:='2.02.02';
+  FTissCabecalho.TissVersaoTISS:='2.02.03';
   FTipoSP:=JuridicoSP_SADT;
-  FTissCabecalho.TissMensagemTissXml:='xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+  FTissCabecalho.TissMensagemTissXml:='xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ansTISS="http://www.ans.gov.br/padroes/tiss/schemas"';
 
   inherited;
 
@@ -749,56 +749,63 @@ begin
     try
       FCabecalho.Add('<?xml version="'+FTissCabecalho.tissVersaoXml+'" encoding="'+FTissCabecalho.TissEncoding+'" ?>');
 
-      FCabecalho.Add('<ans:mensagemTISS '+FTissCabecalho.TissMensagemTissXml+'>');
-      FCabecalho.Add('<ans:cabecalho>');
+      FCabecalho.Add('<ansTISS:mensagemTISS '+FTissCabecalho.TissMensagemTissXml+'>');
+      FCabecalho.Add('<ansTISS:cabecalho>');
     //TAG IDENTIFICAÇÃO DA TRANSAÇÃO
-      FCabecalho.Add('<ans:identificacaoTransacao>');
-      FCabecalho.Add('<ans:tipoTransacao>'+FTissCabecalho.TissTipoTrans+'</ans:tipoTransacao>');
+      FCabecalho.Add('<ansTISS:identificacaoTransacao>');
+      FCabecalho.Add('<ansTISS:tipoTransacao>'+FTissCabecalho.TissTipoTrans+'</ansTISS:tipoTransacao>');
 
-      FCabecalho.Add('<ans:sequencialTransacao>'+FTissCabecalho.TissSequencialTrans+'</ans:sequencialTransacao>');
+      FCabecalho.Add('<ansTISS:sequencialTransacao>'+FTissCabecalho.TissSequencialTrans+'</ansTISS:sequencialTransacao>');
 
-      case ansVersaoXSD of
-        v2_01_03:
-          begin
-            FCabecalho.Add('<ans:dataRegistroTransacao>'+FormatDateTime('DD/MM/YYYY',FTissCabecalho.TissDataRegistroTrans)+'</ans:dataRegistroTransacao>');
-            FCabecalho.Add('<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm',FTissCabecalho.TissHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
-          end;
-        v2_02_01:
-          begin
-            FCabecalho.Add('<ans:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FTissCabecalho.TissDataRegistroTrans)+'</ans:dataRegistroTransacao>');
-            FCabecalho.Add('<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm:ss',FTissCabecalho.TissHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
-          end;
-      end; 
+      if ansVersaoXSD = v2_01_03 then
+      begin
+        FCabecalho.Add('<ansTISS:dataRegistroTransacao>'+FormatDateTime('DD/MM/YYYY',FTissCabecalho.TissDataRegistroTrans)+'</ansTISS:dataRegistroTransacao>');
+        FCabecalho.Add('<ansTISS:horaRegistroTransacao>'+FormatDateTime('hh:mm',FTissCabecalho.TissHoraRegistroTrans)+'</ansTISS:horaRegistroTransacao>');
+      end else begin
+        FCabecalho.Add('<ansTISS:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FTissCabecalho.TissDataRegistroTrans)+'</ansTISS:dataRegistroTransacao>');
+        FCabecalho.Add('<ansTISS:horaRegistroTransacao>'+FormatDateTime('hh:mm:ss',FTissCabecalho.TissHoraRegistroTrans)+'</ansTISS:horaRegistroTransacao>');
+      end;
 
-      FCabecalho.Add('</ans:identificacaoTransacao>');
+      FCabecalho.Add('</ansTISS:identificacaoTransacao>');
 
       //TAG ORIGEM
-      FCabecalho.Add('<ans:origem>');
-      FCabecalho.Add('<ans:codigoPrestadorNaOperadora>');
+      FCabecalho.Add('<ansTISS:origem>');
+      FCabecalho.Add('<ansTISS:codigoPrestadorNaOperadora>');
       if FTissCabecalho.TissTipoGeral = JuridicoGeral then
-        FCabecalho.Add('<ans:CNPJ>'+FTissCabecalho.TissCNPJCPF+'</ans:CNPJ>');
+        FCabecalho.Add('<ansTISS:CNPJ>'+FTissCabecalho.TissCNPJCPF+'</ansTISS:CNPJ>');
 
       if FTissCabecalho.TissTipoGeral = FisicGeral then
-        FCabecalho.Add('<ans:cpf>'+FTissCabecalho.TissCNPJCPF+'</ans:cpf>');
+        FCabecalho.Add('<ansTISS:cpf>'+FTissCabecalho.TissCNPJCPF+'</ansTISS:cpf>');
 
       if FTissCabecalho.TissTipoGeral = Outros then
-        FCabecalho.Add('<ans:codigoPrestadorNaOperadora>'+FTissCabecalho.TissCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
-       // mmCabecalho.Lines.Add('<ans:codigoPrestadorNaOperadora>'+fdsFaturamentoREGPRESTADORA.AsString+'</ans:codigoPrestadorNaOperadora>');
-      FCabecalho.Add('</ans:codigoPrestadorNaOperadora>');
-      FCabecalho.Add('</ans:origem>');
-      FCabecalho.Add('<ans:destino>');
-      FCabecalho.Add('<ans:registroANS>'+FTissCabecalho.TissRegAns+'</ans:registroANS>');
-      FCabecalho.Add('</ans:destino>');
+        FCabecalho.Add('<ansTISS:codigoPrestadorNaOperadora>'+FTissCabecalho.TissCNPJCPF+'</ansTISS:codigoPrestadorNaOperadora>');
+       // mmCabecalho.Lines.Add('<ansTISS:codigoPrestadorNaOperadora>'+fdsFaturamentoREGPRESTADORA.AsString+'</ansTISS:codigoPrestadorNaOperadora>');
+      FCabecalho.Add('</ansTISS:codigoPrestadorNaOperadora>');
+      FCabecalho.Add('</ansTISS:origem>');
+      FCabecalho.Add('<ansTISS:destino>');
+      FCabecalho.Add('<ansTISS:registroANS>'+FTissCabecalho.TissRegAns+'</ansTISS:registroANS>');
+      FCabecalho.Add('</ansTISS:destino>');
 
-      FCabecalho.Add('<ans:versaoPadrao>'+FTissCabecalho.TissVersaoTISS+'</ans:versaoPadrao>');
+      FCabecalho.Add('<ansTISS:versaoPadrao>'+FTissCabecalho.TissVersaoTISS+'</ansTISS:versaoPadrao>');
+      // identificacao Software Gerador
+      case ansVersaoXSD of
+        v2_02_02,v2_02_03:
+          begin
+            FCabecalho.Add('<ansTISS:identificacaoSoftwareGerador>');
+            FCabecalho.Add('<ansTISS:nomeAplicativo>'+FTissCabecalho.TissNomeAplica+'</ansTISS:nomeAplicativo>');
+            FCabecalho.Add('<ansTISS:versaoAplicativo>'+FTissCabecalho.TissVersaoAplica+'</ansTISS:versaoAplicativo>');
+            FCabecalho.Add('<ansTISS:fabricanteAplicativo>'+FTissCabecalho.TissFabricaAplica+'</ansTISS:fabricanteAplicativo>');
+            FCabecalho.Add('</ansTISS:identificacaoSoftwareGerador>');
+          end;
+      end;
 
-      FCabecalho.Add('</ans:cabecalho>');
+      FCabecalho.Add('</ansTISS:cabecalho>');
 
-      FCabecalho.Add('<ans:prestadorParaOperadora>');
-      FCabecalho.Add('<ans:loteGuias>');
-      FCabecalho.Add('<ans:numeroLote>'+FTissCabecalho.TissNumLote+'</ans:numeroLote>');
-      FCabecalho.Add('<ans:guias>');
-      FCabecalho.Add('<ans:guiaFaturamento>');
+      FCabecalho.Add('<ansTISS:prestadorParaOperadora>');
+      FCabecalho.Add('<ansTISS:loteGuias>');
+      FCabecalho.Add('<ansTISS:numeroLote>'+FTissCabecalho.TissNumLote+'</ansTISS:numeroLote>');
+      FCabecalho.Add('<ansTISS:guias>');
+      FCabecalho.Add('<ansTISS:guiaFaturamento>');
 
     except
       on e: Exception do
@@ -818,12 +825,12 @@ begin
       AssignFile(arquivo,FTissCabecalho.TissArquivo);
       Append(arquivo);
 
-      Writeln(arquivo,'</ans:guiaFaturamento>');
-      Writeln(arquivo,'</ans:guias>');
-      Writeln(arquivo,'</ans:loteGuias>');
-      Writeln(arquivo,'</ans:prestadorParaOperadora>');  
+      Writeln(arquivo,'</ansTISS:guiaFaturamento>');
+      Writeln(arquivo,'</ansTISS:guias>');
+      Writeln(arquivo,'</ansTISS:loteGuias>');
+      Writeln(arquivo,'</ansTISS:prestadorParaOperadora>');  
 
-      Writeln(arquivo,'</ans:mensagemTISS>');
+      Writeln(arquivo,'</ansTISS:mensagemTISS>');
 
 
       CloseFile(arquivo);
@@ -837,15 +844,15 @@ begin
       while not Eof(arquivo) do
         begin
           Readln(arquivo,linha);
-          if linha <> '</ans:mensagemTISS>' then
+          if linha <> '</ansTISS:mensagemTISS>' then
             Writeln(arquivotemp,linha);
         end;  
       CloseFile(arquivo);
               //TAG EPILOGO
-      Writeln(arquivotemp,'<ans:epilogo>');
-      Writeln(arquivotemp,'<ans:hash>'+numhash+'</ans:hash>');
-      Writeln(arquivotemp,'</ans:epilogo>');
-      Writeln(arquivotemp,'</ans:mensagemTISS>');
+      Writeln(arquivotemp,'<ansTISS:epilogo>');
+      Writeln(arquivotemp,'<ansTISS:hash>'+numhash+'</ansTISS:hash>');
+      Writeln(arquivotemp,'</ansTISS:epilogo>');
+      Writeln(arquivotemp,'</ansTISS:mensagemTISS>');
       CloseFile(arquivoTemp);
 
       AssignFile(arquivoTemp,'temp.xml');
@@ -890,48 +897,48 @@ begin
             begin
               FGeral.Add(FProc.Strings[i]);
             end;
-          FGeral.add('</ans:procedimentosRealizados>');
+          FGeral.add('</ansTISS:procedimentosRealizados>');
         end;
 
 
       if Tissconfig.TissUsarOutDespesas then
         begin
-          FGeral.Add('<ans:outrasDespesas>');
+          FGeral.Add('<ansTISS:outrasDespesas>');
           for i := 0 to FOutDesp.Count - 1 do
             begin
               FGeral.Add(FOutDesp.Strings[i]);
             end;
 
           TissTotalGeral:=CurrToStr(FTissOutrasDesp.TissTotalGeral);
-          FGeral.Add('<ans:totalGeralOutrasDespesas>'+TissTotalGeral+'</ans:totalGeralOutrasDespesas>');
-          FGeral.Add('</ans:outrasDespesas>')
+          FGeral.Add('<ansTISS:totalGeralOutrasDespesas>'+TissTotalGeral+'</ansTISS:totalGeralOutrasDespesas>');
+          FGeral.Add('</ansTISS:outrasDespesas>')
         end;
 
 
       if TissConfig.TissUsarOPM then
         begin
-         FGeral.Add ('<ans:OPMUtilizada>');
-          FGeral.Add ('<ans:OPM>');
+         FGeral.Add ('<ansTISS:OPMUtilizada>');
+          FGeral.Add ('<ansTISS:OPM>');
           for i := 0 to FOPM.Count - 1 do FGeral.Add (FOPM.Strings[i]);
           TissVlrTotOpm := CurrToStr (FTissOpmUti.TissVlrTotOPM);
-          FGeral.Add ('</ans:OPM>');
-          FGeral.Add ('<ans:valorTotalOPM>' + TissVlrTotOpm + '</ans:valorTotalOPM>');
-          FGeral.Add ('</ans:OPMUtilizada>');
+          FGeral.Add ('</ansTISS:OPM>');
+          FGeral.Add ('<ansTISS:valorTotalOPM>' + TissVlrTotOpm + '</ansTISS:valorTotalOPM>');
+          FGeral.Add ('</ansTISS:OPMUtilizada>');
         end;
 
-      FGeral.Add('<ans:valorTotal>');
+      FGeral.Add('<ansTISS:valorTotal>');
 
-      FGeral.Add('<ans:servicosExecutados>'+CurrToStr(TissProc.TissValorTotalServicos)+'</ans:servicosExecutados>');
-      FGeral.Add('<ans:diarias>'+CurrToStr(TissProc.TissValorTotalDiarias)+'</ans:diarias>');
-      FGeral.Add('<ans:taxas>'+CurrToStr(TissProc.TissValorTotalTaxas)+'</ans:taxas>');
-      FGeral.Add('<ans:materiais>'+CurrToStr(TissProc.TissValorTotalMateriais)+'</ans:materiais>');
-      FGeral.Add('<ans:medicamentos>'+CurrToStr(TissProc.TissValorTotalMedicamentos)+'</ans:medicamentos>');
-      FGeral.Add('<ans:gases>'+CurrToStr(TissProc.TissValorTotalGases)+'</ans:gases>');
-      FGeral.Add('<ans:totalGeral>'+CurrToStr(TissProc.TissValorTotalGeral)+'</ans:totalGeral>');  
-      FGeral.Add('</ans:valorTotal>');
+      FGeral.Add('<ansTISS:servicosExecutados>'+CurrToStr(TissProc.TissValorTotalServicos)+'</ansTISS:servicosExecutados>');
+      FGeral.Add('<ansTISS:diarias>'+CurrToStr(TissProc.TissValorTotalDiarias)+'</ansTISS:diarias>');
+      FGeral.Add('<ansTISS:taxas>'+CurrToStr(TissProc.TissValorTotalTaxas)+'</ansTISS:taxas>');
+      FGeral.Add('<ansTISS:materiais>'+CurrToStr(TissProc.TissValorTotalMateriais)+'</ansTISS:materiais>');
+      FGeral.Add('<ansTISS:medicamentos>'+CurrToStr(TissProc.TissValorTotalMedicamentos)+'</ansTISS:medicamentos>');
+      FGeral.Add('<ansTISS:gases>'+CurrToStr(TissProc.TissValorTotalGases)+'</ansTISS:gases>');
+      FGeral.Add('<ansTISS:totalGeral>'+CurrToStr(TissProc.TissValorTotalGeral)+'</ansTISS:totalGeral>');  
+      FGeral.Add('</ansTISS:valorTotal>');
       if FTissConfSP_SADT.TissUsarObs  then      
-        FGeral.Add('<ans:observacao>'+FObservacao+'</ans:observacao>');
-      FGeral.Add('</ans:guiaSP_SADT>');
+        FGeral.Add('<ansTISS:observacao>'+FObservacao+'</ansTISS:observacao>');
+      FGeral.Add('</ansTISS:guiaSP_SADT>');
       FGuia.Clear;
       FProc.Clear;
       FMembEquipe.Clear;
@@ -961,30 +968,11 @@ var
   arquivo,arquivoTemp: TextFile;
   numhash,linha,nomearq: string;
   i: integer;
+  TrocaString: TStringList;
 begin
-    try 
+    try
       AssignFile(arquivo,FTissCabecalho.TissArquivo);
       Rewrite(arquivo);
-      {FCabecalho.Add('<ans:guiaSP_SADT>');
-      for i:= 0 to FGuia.Count - 1 do
-        begin
-          FCabecalho.Add(FGuia.Strings[i]);
-        end;
-      for i:= 0 to FProc.Count - 1 do
-        begin
-          FCabecalho.Add(FProc.Strings[i]);
-        end;
-      FCabecalho.add('</ans:procedimentosRealizados>');
-      FCabecalho.Add('</ans:guiaSP_SADT>');
-      FCabecalho.Add('</ans:guiaFaturamento>');
-      FCabecalho.Add('</ans:guias>');
-      FCabecalho.Add('</ans:loteGuias>');
-      FCabecalho.Add('</ans:prestadorParaOperadora>');
-
-      FCabecalho.Add('</ans:mensagemTISS>');}
-
-
-
 
       for i:= 0 to FCabecalho.Count - 1 do
         begin
@@ -995,12 +983,12 @@ begin
           Writeln(arquivo,Fgeral.Strings[i]);
         end;
 
-      Writeln(arquivo,'</ans:guiaFaturamento>');
-      Writeln(arquivo,'</ans:guias>');
-      Writeln(arquivo,'</ans:loteGuias>');
-      Writeln(arquivo,'</ans:prestadorParaOperadora>');
+      Writeln(arquivo,'</ansTISS:guiaFaturamento>');
+      Writeln(arquivo,'</ansTISS:guias>');
+      Writeln(arquivo,'</ansTISS:loteGuias>');
+      Writeln(arquivo,'</ansTISS:prestadorParaOperadora>');
 
-      Writeln(arquivo,'</ans:mensagemTISS>');
+      Writeln(arquivo,'</ansTISS:mensagemTISS>');
 
 
 
@@ -1013,14 +1001,14 @@ begin
       AssignFile(arquivo,FTissCabecalho.TissArquivo);
       Rewrite(arquivo);
 
-      FGeral.Add('</ans:guiaFaturamento>');
-      FGeral.Add('</ans:guias>');
-      FGeral.Add('</ans:loteGuias>');
-      FGeral.Add('</ans:prestadorParaOperadora>');
-      FGeral.Add('<ans:epilogo>');
-      FGeral.Add('<ans:hash>'+numhash+'</ans:hash>');
-      FGeral.Add('</ans:epilogo>');
-      FGeral.Add('</ans:mensagemTISS>');
+      FGeral.Add('</ansTISS:guiaFaturamento>');
+      FGeral.Add('</ansTISS:guias>');
+      FGeral.Add('</ansTISS:loteGuias>');
+      FGeral.Add('</ansTISS:prestadorParaOperadora>');
+      FGeral.Add('<ansTISS:epilogo>');
+      FGeral.Add('<ansTISS:hash>'+numhash+'</ansTISS:hash>');
+      FGeral.Add('</ansTISS:epilogo>');
+      FGeral.Add('</ansTISS:mensagemTISS>');
             
       for i:= 0 to FCabecalho.Count - 1 do
         begin
@@ -1032,7 +1020,20 @@ begin
         end;
 //      CloseFile(arquivoTemp);
       CloseFile(arquivo);
-  
+
+      {Troca String <ansTISS></ansTISS> por <ans></ans>
+       para as Versões 2.01.03,2.02.01}
+      if (FAnsVersaoxsd <> v2_02_02) and (FAnsVersaoxsd <> v2_02_03) then
+        begin
+           TrocaString := TStringList.Create;
+          try
+            TrocaString.LoadFromFile(FTissCabecalho.TissArquivo);
+            TrocaString.Text := StringReplace(TrocaString.Text,'ansTISS','ans',[rfignorecase,rfreplaceall]);
+            TrocaString.SaveToFile(FTissCabecalho.TissArquivo);
+          finally
+            TrocaString.Free;
+          end;
+        end;
 
     except
       on e: Exception do
@@ -1098,14 +1099,14 @@ begin
            else
              begin
                nomearq := copy(ExtractFileName(Tisscabecalho.TissArquivo),1,length(ExtractFileName(Tisscabecalho.TissArquivo))-4);
-               RenameFile(Tisscabecalho.TissArquivo,nomearq+ExtractFilePath(Tisscabecalho.TissArquivo)+RetZero(Tisscabecalho.TissSequencialTrans,Tisscabecalho.TissZerosArq)+'_'+ numhash+'.xml');
-               FTissCabecalho.TissArquivo := nomearq+ExtractFilePath(Tisscabecalho.TissArquivo)+RetZero(Tisscabecalho.TissSequencialTrans,Tisscabecalho.TissZerosArq)+'_'+ numhash+'.xml';
-               //RenameFile(Tisscabecalho.TissArquivo,nomearq+ExtractFilePath(Tisscabecalho.TissArquivo)+'_'+ numhash+'.xml');
-               //FTissCabecalho.TissArquivo := nomearq+ExtractFilePath(Tisscabecalho.TissArquivo)+'_'+ numhash+'.xml';
+               //RenameFile(Tisscabecalho.TissArquivo,nomearq+ExtractFilePath(Tisscabecalho.TissArquivo)+RetZero(Tisscabecalho.TissSequencialTrans,Tisscabecalho.TissZerosArq)+'_'+ numhash+'.xml');
+               //FTissCabecalho.TissArquivo := nomearq+ExtractFilePath(Tisscabecalho.TissArquivo)+RetZero(Tisscabecalho.TissSequencialTrans,Tisscabecalho.TissZerosArq)+'_'+ numhash+'.xml';
+               RenameFile(Tisscabecalho.TissArquivo,nomearq+ExtractFilePath(Tisscabecalho.TissArquivo)+'_'+ numhash+'.xml');
+               FTissCabecalho.TissArquivo := nomearq+ExtractFilePath(Tisscabecalho.TissArquivo)+'_'+ numhash+'.xml';
              end;
 
-           RenameFile(Tisscabecalho.TissArquivo,ExtractFilePath(Tisscabecalho.TissArquivo)+RetZero(Tisscabecalho.TissSequencialTrans,Tisscabecalho.TissZerosArq)+'_'+ numhash+'.xml');
-           FTissCabecalho.TissArquivo := ExtractFilePath(Tisscabecalho.TissArquivo)+RetZero(Tisscabecalho.TissSequencialTrans,Tisscabecalho.TissZerosArq)+'_'+ numhash+'.xml';
+           //RenameFile(Tisscabecalho.TissArquivo,ExtractFilePath(Tisscabecalho.TissArquivo)+RetZero(Tisscabecalho.TissSequencialTrans,Tisscabecalho.TissZerosArq)+'_'+ numhash+'.xml');
+           //FTissCabecalho.TissArquivo := ExtractFilePath(Tisscabecalho.TissArquivo)+RetZero(Tisscabecalho.TissSequencialTrans,Tisscabecalho.TissZerosArq)+'_'+ numhash+'.xml';
          except
            on e:exception do
              begin
@@ -1121,7 +1122,22 @@ var
   arquivo: TextFile;
   MD5: TMD5;
   xml: TXMLDocument;
+  TrocaString: TStringList;
 begin
+  {Troca String <ansTISS></ansTISS> por <ans></ans>
+   para as Versões 2.01.03,2.02.01}
+  if (FAnsVersaoxsd <> v2_02_02) and (FAnsVersaoxsd <> v2_02_03) then
+  begin
+     TrocaString := TStringList.Create;
+    try
+      TrocaString.LoadFromFile(arquivohash);
+      TrocaString.Text := StringReplace(TrocaString.Text,'ansTISS','ans',[rfignorecase,rfreplaceall]);
+      TrocaString.SaveToFile(arquivohash);
+    finally
+      TrocaString.Free;
+    end;
+  end;
+
   try
     MD5 := TMD5.Create;
     xml := TXMLDocument.Create(self);
@@ -1222,6 +1238,21 @@ end;
 procedure TTissSP_SADT.setNumLote(const Value: String);
 begin
   FNumLote := Value;
+end;
+
+procedure TTissSP_SADT.setNomeAplica(const Value: String);
+begin
+  FNomeAplica := Value;
+end;
+
+procedure TTissSP_SADT.setVersaoAplica(const Value: String);
+begin
+  FVersaoAplica := Value;
+end;
+
+procedure TTissSP_SADT.setFabricaAplica(const Value: String);
+begin
+  FFabricaAplica := Value;
 end;
 
 procedure TTissSP_SADT.setObservacao(const Value: String);

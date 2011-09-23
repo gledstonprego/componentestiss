@@ -1,7 +1,7 @@
 unit TissConsulta;
 
 interface
-
+  
 uses
   SysUtils, Classes,Windows,Dialogs,Messages,forms,xmldom, XMLIntf, msxmldom, XMLDoc,untTissComp,Graphics;
   {COMPONENTE INICIADO POR Fabiano
@@ -30,8 +30,12 @@ type
     FCNPJCPF: String;
     FVersaoTISS: String;
     FRegANS: String;
+    FNomeAplica: string;
+    FVersaoAplica: string;
+    FFabricaAplica: string;
     FDataEmis : TDateTime;
     FNumLote: String;
+    FNumPres: String;
     FNumGuia: String;
     FNumCarteira: String;
     FPaciente: String;
@@ -89,7 +93,11 @@ type
     procedure setRegANS(const Value: String);
     procedure setDataEmis(const Value: TDateTime);
     procedure setVersaoTISS(const Value: String);
+    procedure setNomeAplica(const Value: String);
+    procedure setVersaoAplica(const Value: String);
+    procedure setFabricaAplica(const Value: String);
     procedure setNumLote(const Value: String);
+    procedure setNumPres(const Value: String);
     procedure setNumGuia(const Value: String);
     procedure setNumCarteira(const Value: String);
     procedure setPaciente(const Value: String);
@@ -158,6 +166,9 @@ type
     property Versao:TCompVersao read FCompVersao write FCompVersao;
     property TissVersaoXml: String read FVersaoXml write setVersaoXml;
     property TissVersaoTISS: String read FVersaoTISS write setVersaoTISS;
+    property TissNomeAplica: String read FNomeAplica write setNomeAplica;
+    property TissVersaoAplica: String read FVersaoAplica write setVersaoAplica;
+    property TissFabricaAplica: String read FFabricaAplica write setFabricaAplica;
     property TissEncoding:String read FEncoding write setEncoding;
     property TissMensagemTissXml:String read FMensagemTissXml write setMensagemTissXml;
     property TissTipoTrans:String read FTipoTrans write setTipoTrans;
@@ -170,6 +181,7 @@ type
     property TissRegANS:String read FRegANS write setRegANS;
     property TissDataEmis:TDateTime read FDataEmis write setDataEmis;
     property TissNumLote:String read FNumLote write setNumLote;
+    property TissNumPres:String read FNumPres write setNumPres;
     property TissNumGuia:String read FNumGuia write setNumGuia;
     property TissNumCarteira:String read FNumCarteira write setNumCarteira;
     property TissPaciente:String read FPaciente write setPaciente;
@@ -236,169 +248,166 @@ begin
     try
       AssignFile(arquivo,FArquivo);
       Append(arquivo);
-      Writeln(arquivo,'<ans:guiaConsulta>');
-      Writeln(arquivo,'<ans:identificacaoGuia>');
-      if FAnsVersaoxsd = v2_02_01 then
+      Writeln(arquivo,'<ansTISS:guiaConsulta>');
+      Writeln(arquivo,'<ansTISS:identificacaoGuia>');
+      if (FAnsVersaoxsd <> v2_01_03) then
         begin
-          Writeln(arquivo,'<ans:identificacaoFontePagadora>');
+          Writeln(arquivo,'<ansTISS:identificacaoFontePagadora>');
           case FTissReq.PadraoTipFontPg of
-            RegistroANS: Writeln(arquivo,'<ans:registroANS>'+FFontePadora.TissRegAns+'</ans:registroANS>');
-            CNPJ: Writeln(arquivo,'<ans:cnpjFontePagadora>'+FFontePadora.TissCnpj+'</ans:cnpjFontePagadora>');
+            RegistroANS: Writeln(arquivo,'<ansTISS:registroANS>'+FFontePadora.TissRegAns+'</ansTISS:registroANS>');
+            CNPJ: Writeln(arquivo,'<ansTISS:cnpjFontePagadora>'+FFontePadora.TissCnpj+'</ansTISS:cnpjFontePagadora>');
           end;    
-          Writeln(arquivo,'</ans:identificacaoFontePagadora>');
+          Writeln(arquivo,'</ansTISS:identificacaoFontePagadora>');
         end;      
       if FTissReq.UsarRegANS then
         if FAnsVersaoxsd = v2_01_03 then        
-          Writeln(arquivo,'<ans:registroANS>'+fRegAns+'</ans:registroANS>');
-      case FansVersaoXSD of
-          //v2_01_02: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',FDataEmis)+'</ans:dataEmissaoGuia>');
-          v2_01_03: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',FDataEmis)+'</ans:dataEmissaoGuia>');
-          v2_02_01: Writeln(arquivo,'<ans:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',FDataEmis)+'</ans:dataEmissaoGuia>');
-        end;
+          Writeln(arquivo,'<ansTISS:registroANS>'+fRegAns+'</ansTISS:registroANS>');
+      if FansVersaoXSD = v2_01_03 then
+        Writeln(arquivo,'<ansTISS:dataEmissaoGuia>'+FormatDateTime('DD/MM/YYYY',FDataEmis)+'</ansTISS:dataEmissaoGuia>')
+      else
+        Writeln(arquivo,'<ansTISS:dataEmissaoGuia>'+FormatDateTime('YYYY-MM-DD',FDataEmis)+'</ansTISS:dataEmissaoGuia>');
 
+      if FTissReq.UsarNumPres then
+        Writeln(arquivo,'<ansTISS:numeroGuiaPrestador>'+FNumPres+'</ansTISS:numeroGuiaPrestador>');
       if FTissReq.UsarNumGuia then
-        Writeln(arquivo,'<ans:numeroGuiaPrestador>'+FNumGuia+'</ans:numeroGuiaPrestador>');
-      if FTissReq.UsarNumGuia then
-        Writeln(arquivo,'<ans:numeroGuiaOperadora>'+FNumGuia+'</ans:numeroGuiaOperadora>');
-      Writeln(arquivo,'</ans:identificacaoGuia>');
-      Writeln(arquivo,'<ans:beneficiario>');
+        Writeln(arquivo,'<ansTISS:numeroGuiaOperadora>'+FNumGuia+'</ansTISS:numeroGuiaOperadora>');
+      Writeln(arquivo,'</ansTISS:identificacaoGuia>');
+      Writeln(arquivo,'<ansTISS:beneficiario>');
       if FTissReq.UsarNumCarteira then
-        Writeln(arquivo,'<ans:numeroCarteira>'+FNumCarteira+'</ans:numeroCarteira>');
+        Writeln(arquivo,'<ansTISS:numeroCarteira>'+FNumCarteira+'</ansTISS:numeroCarteira>');
       if FTissReq.UsarPaciente then
-        Writeln(arquivo,'<ans:nomeBeneficiario>'+FPaciente+'</ans:nomeBeneficiario>');
+        Writeln(arquivo,'<ansTISS:nomeBeneficiario>'+FPaciente+'</ansTISS:nomeBeneficiario>');
       if FTissReq.UsarNomePlano then
-        Writeln(arquivo,'<ans:nomePlano>'+FNomePlano+'</ans:nomePlano>');
+        Writeln(arquivo,'<ansTISS:nomePlano>'+FNomePlano+'</ansTISS:nomePlano>');
       if FTissReq.UsarValidadeCart then
         begin
-          case FansVersaoXSD of
-            v2_01_03: Writeln(arquivo,'<ans:validadeCarteira>'+FormatDateTime('DD/MM/YYYY',FValidadeCart)+'</ans:validadeCarteira>');
-            v2_02_01: Writeln(arquivo,'<ans:validadeCarteira>'+FormatDateTime('YYYY-MM-DD',FValidadeCart)+'</ans:validadeCarteira>');
-          end;
-
+          if FansVersaoXSD = v2_01_03 then
+            Writeln(arquivo,'<ansTISS:validadeCarteira>'+FormatDateTime('DD/MM/YYYY',FValidadeCart)+'</ansTISS:validadeCarteira>')
+          else
+            Writeln(arquivo,'<ansTISS:validadeCarteira>'+FormatDateTime('YYYY-MM-DD',FValidadeCart)+'</ansTISS:validadeCarteira>');
         end;
       if FTissReq.UsarNumCNS then
-        Writeln(arquivo,'<ans:numeroCNS>'+FNumCNS+'</ans:numeroCNS>');
+        Writeln(arquivo,'<ansTISS:numeroCNS>'+FNumCNS+'</ansTISS:numeroCNS>');
 
-      Writeln(arquivo,'</ans:beneficiario>');
+      Writeln(arquivo,'</ansTISS:beneficiario>');
 
-      Writeln(arquivo,'<ans:dadosContratado>');
-      Writeln(arquivo,'<ans:identificacao>');
+      Writeln(arquivo,'<ansTISS:dadosContratado>');
+      Writeln(arquivo,'<ansTISS:identificacao>');
       if FTissReq.UsarCNPJCPF then
         begin
           if FTipo = Juridico then
-            Writeln(arquivo,'<ans:CNPJ>'+FCNPJCPF+'</ans:CNPJ>');
+            Writeln(arquivo,'<ansTISS:CNPJ>'+FCNPJCPF+'</ansTISS:CNPJ>');
           if FTipo = Fisico then
-            Writeln(arquivo,'<ans:CPF>'+FCNPJCPF+'</ans:CPF>');
+            Writeln(arquivo,'<ansTISS:CPF>'+FCNPJCPF+'</ansTISS:CPF>');
           if FTipo = Outro then
-            Writeln(arquivo,'<ans:codigoPrestadorNaOperadora>'+FCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
+            Writeln(arquivo,'<ansTISS:codigoPrestadorNaOperadora>'+FCNPJCPF+'</ansTISS:codigoPrestadorNaOperadora>');
         end;
 
-      Writeln(arquivo,'</ans:identificacao>');
+      Writeln(arquivo,'</ansTISS:identificacao>');
       if FTissReq.UsarNomeContradado then
-        Writeln(arquivo,'<ans:nomeContratado>'+FNomeContradado+'</ans:nomeContratado>');
+        Writeln(arquivo,'<ansTISS:nomeContratado>'+FNomeContradado+'</ansTISS:nomeContratado>');
 
       if FTissReq.UsarEndContratado then
         begin
-          Writeln(arquivo,'<ans:enderecoContratado>');
+          Writeln(arquivo,'<ansTISS:enderecoContratado>');
           if FTissReq.UsartipoLogradouro then
-            Writeln(arquivo,'<ans:tipoLogradouro>'+FtipoLogradouro+'</ans:tipoLogradouro>');
+            Writeln(arquivo,'<ansTISS:tipoLogradouro>'+FtipoLogradouro+'</ansTISS:tipoLogradouro>');
           if FTissReq.UsarLogradouro then
-            Writeln(arquivo,'<ans:logradouro>'+FLogradouro+'</ans:logradouro>');
+            Writeln(arquivo,'<ansTISS:logradouro>'+FLogradouro+'</ansTISS:logradouro>');
           if FTissReq.UsarEndNum then
-            Writeln(arquivo,'<ans:numero>'+FEndNum+'</ans:numero>');
+            Writeln(arquivo,'<ansTISS:numero>'+FEndNum+'</ansTISS:numero>');
           if FTissReq.UsarComplemento then
-            Writeln(arquivo,'<ans:complemento>'+FComplemento+'</ans:complemento>');
+            Writeln(arquivo,'<ansTISS:complemento>'+FComplemento+'</ansTISS:complemento>');
           if FTissReq.UsarcodigoIBGE then
-            Writeln(arquivo,'<ans:codigoIBGEMunicipio>'+FormatFloat('0000000',FcodigoIBGE)+'</ans:codigoIBGEMunicipio>');
+            Writeln(arquivo,'<ansTISS:codigoIBGEMunicipio>'+FormatFloat('0000000',FcodigoIBGE)+'</ansTISS:codigoIBGEMunicipio>');
           if FTissReq.UsarMunicipio then
-            Writeln(arquivo,'<ans:municipio>'+FMunicipio+'</ans:municipio>');
+            Writeln(arquivo,'<ansTISS:municipio>'+FMunicipio+'</ansTISS:municipio>');
           if FTissReq.UsarUF then
-            Writeln(arquivo,'<ans:codigoUF>'+FUF+'</ans:codigoUF>');
+            Writeln(arquivo,'<ansTISS:codigoUF>'+FUF+'</ansTISS:codigoUF>');
           if FTissReq.UsarCEP then
-            Writeln(arquivo,'<ans:cep>'+fCEP+'</ans:cep>');
+            Writeln(arquivo,'<ansTISS:cep>'+fCEP+'</ansTISS:cep>');
 
-          Writeln(arquivo,'</ans:enderecoContratado>');
+          Writeln(arquivo,'</ansTISS:enderecoContratado>');
         end;
       if FTissReq.UsarCNES then
-        Writeln(arquivo,'<ans:numeroCNES>'+FormatFloat('0000000', fCNES)+'</ans:numeroCNES>');
+        Writeln(arquivo,'<ansTISS:numeroCNES>'+FormatFloat('0000000', fCNES)+'</ansTISS:numeroCNES>');
 
-      Writeln(arquivo,'</ans:dadosContratado>');
+      Writeln(arquivo,'</ansTISS:dadosContratado>');
 
-      Writeln(arquivo,'<ans:profissionalExecutante>');
+      Writeln(arquivo,'<ansTISS:profissionalExecutante>');
       if FTissReq.UsarMEDICO then
-        Writeln(arquivo,'<ans:nomeProfissional>'+fMEDICO+'</ans:nomeProfissional>');
+        Writeln(arquivo,'<ansTISS:nomeProfissional>'+fMEDICO+'</ansTISS:nomeProfissional>');
 
-      Writeln(arquivo,'<ans:conselhoProfissional>');
+      Writeln(arquivo,'<ansTISS:conselhoProfissional>');
       if FTissReq.UsarSIGLACONSELHO then
-        Writeln(arquivo,'<ans:siglaConselho>'+fSIGLACONSELHO+'</ans:siglaConselho>');
+        Writeln(arquivo,'<ansTISS:siglaConselho>'+fSIGLACONSELHO+'</ansTISS:siglaConselho>');
       if FTissReq.UsarNUMEROCONSELHO then
-        Writeln(arquivo,'<ans:numeroConselho>'+fNUMEROCONSELHO+'</ans:numeroConselho>');
+        Writeln(arquivo,'<ansTISS:numeroConselho>'+fNUMEROCONSELHO+'</ansTISS:numeroConselho>');
       if FTissReq.UsarUFCONSELHO then
-        Writeln(arquivo,'<ans:ufConselho>'+fUFCONSELHO+'</ans:ufConselho>');
+        Writeln(arquivo,'<ansTISS:ufConselho>'+fUFCONSELHO+'</ansTISS:ufConselho>');
 
-      Writeln(arquivo,'</ans:conselhoProfissional>');
+      Writeln(arquivo,'</ansTISS:conselhoProfissional>');
       if FTissReq.UsarCBOS then
-        Writeln(arquivo,'<ans:cbos>'+fCBOS+'</ans:cbos>');
+        Writeln(arquivo,'<ansTISS:cbos>'+fCBOS+'</ansTISS:cbos>');
 
-      Writeln(arquivo,'</ans:profissionalExecutante>');
+      Writeln(arquivo,'</ansTISS:profissionalExecutante>');
 
       if FTissReq.UsarHipoteseDiag then
         begin
-          Writeln(arquivo,'<ans:hipoteseDiagnostica>');
-          Writeln(arquivo,'<ans:CID>');
+          Writeln(arquivo,'<ansTISS:hipoteseDiagnostica>');
+          Writeln(arquivo,'<ansTISS:CID>');
           if FTissReq.UsarCIDNomeTab then
-            Writeln(arquivo,'<ans:nomeTabela>'+fCIDNomeTab+'</ans:nomeTabela>');
+            Writeln(arquivo,'<ansTISS:nomeTabela>'+fCIDNomeTab+'</ansTISS:nomeTabela>');
           if FTissReq.UsarCIDCodDiag then
-            Writeln(arquivo,'<ans:codigoDiagnostico>'+fCIDCodDiag+'</ans:codigoDiagnostico>');
+            Writeln(arquivo,'<ansTISS:codigoDiagnostico>'+fCIDCodDiag+'</ansTISS:codigoDiagnostico>');
           if FTissReq.UsarCIDDescDiag then
-            Writeln(arquivo,'<ans:descricaoDiagnostico>'+fCIDDescDiag+'</ans:descricaoDiagnostico>');
-          Writeln(arquivo,'</ans:CID>');
+            Writeln(arquivo,'<ansTISS:descricaoDiagnostico>'+fCIDDescDiag+'</ansTISS:descricaoDiagnostico>');
+          Writeln(arquivo,'</ansTISS:CID>');
           if FTissReq.UsarTipDoenca then
-            Writeln(arquivo,'<ans:tipoDoenca>'+FTipDoenca+'</ans:tipoDoenca>');
-          Writeln(arquivo,'<ans:tempoReferidoEvolucaoDoenca>');
+            Writeln(arquivo,'<ansTISS:tipoDoenca>'+FTipDoenca+'</ansTISS:tipoDoenca>');
+          Writeln(arquivo,'<ansTISS:tempoReferidoEvolucaoDoenca>');
             if FTissReq.UsarEvolucaoValor then
-              Writeln(arquivo,'<ans:valor>'+CurrToStr(FEvolucaoValor)+'</ans:valor>');
+              Writeln(arquivo,'<ansTISS:valor>'+CurrToStr(FEvolucaoValor)+'</ansTISS:valor>');
             if FTissReq.UsarUnidTemp then
-              Writeln(arquivo,'<ans:unidadeTempo>'+FUnidTemp+'</ans:unidadeTempo>');
-          Writeln(arquivo,'</ans:tempoReferidoEvolucaoDoenca>');
+              Writeln(arquivo,'<ansTISS:unidadeTempo>'+FUnidTemp+'</ansTISS:unidadeTempo>');
+          Writeln(arquivo,'</ansTISS:tempoReferidoEvolucaoDoenca>');
           if FTissReq.UsarIndicAcid then
-            Writeln(arquivo,'<ans:indicadorAcidente>'+FIndicAcid+'</ans:indicadorAcidente>');
-          Writeln(arquivo,'</ans:hipoteseDiagnostica>');
+            Writeln(arquivo,'<ansTISS:indicadorAcidente>'+FIndicAcid+'</ansTISS:indicadorAcidente>');
+          Writeln(arquivo,'</ansTISS:hipoteseDiagnostica>');
         end;
 
-      Writeln(arquivo,'<ans:dadosAtendimento>');
+      Writeln(arquivo,'<ansTISS:dadosAtendimento>');
       if FTissReq.UsardataAtendimento then
         begin
-          case FAnsVersaoxsd of
-            v2_01_03: Writeln(arquivo,'<ans:dataAtendimento>'+FormatDateTime('DD/MM/YYYY',fdataAtendimento)+'</ans:dataAtendimento>');
-            v2_02_01: Writeln(arquivo,'<ans:dataAtendimento>'+FormatDateTime('YYYY-MM-DD',fdataAtendimento)+'</ans:dataAtendimento>');
-          end;
-
+          if FAnsVersaoxsd = v2_01_03 then
+            Writeln(arquivo,'<ansTISS:dataAtendimento>'+FormatDateTime('DD/MM/YYYY',fdataAtendimento)+'</ansTISS:dataAtendimento>')
+          else
+            Writeln(arquivo,'<ansTISS:dataAtendimento>'+FormatDateTime('YYYY-MM-DD',fdataAtendimento)+'</ansTISS:dataAtendimento>');
         end;
 
-      Writeln(arquivo,'<ans:procedimento>');
+      Writeln(arquivo,'<ansTISS:procedimento>');
       if FTissReq.UsarCodigoTabela then
-        Writeln(arquivo,'<ans:codigoTabela>'+FormatFloat('00',fCodigoTabela)+'</ans:codigoTabela>');
+        Writeln(arquivo,'<ansTISS:codigoTabela>'+FormatFloat('00',fCodigoTabela)+'</ansTISS:codigoTabela>');
       if FTissReq.UsarCodProc then
-        Writeln(arquivo,'<ans:codigoProcedimento>'+TiraMascara(FCodProc)+'</ans:codigoProcedimento>');
+        Writeln(arquivo,'<ansTISS:codigoProcedimento>'+TiraMascara(FCodProc)+'</ansTISS:codigoProcedimento>');
 
-      Writeln(arquivo,'</ans:procedimento>');
+      Writeln(arquivo,'</ansTISS:procedimento>');
       if FTissReq.UsarTipoConsulta then
-        Writeln(arquivo,'<ans:tipoConsulta>'+FTipoConsulta+'</ans:tipoConsulta>');
+        Writeln(arquivo,'<ansTISS:tipoConsulta>'+FTipoConsulta+'</ansTISS:tipoConsulta>');
       if FTissReq.UsarTipoSaidaa then
-        Writeln(arquivo,'<ans:tipoSaida>'+FTipoSaida+'</ans:tipoSaida>');
+        Writeln(arquivo,'<ansTISS:tipoSaida>'+FTipoSaida+'</ansTISS:tipoSaida>');
 
-      Writeln(arquivo,'</ans:dadosAtendimento>');
+      Writeln(arquivo,'</ansTISS:dadosAtendimento>');
       if FTissReq.UsarObs then
-        Writeln(arquivo,'<ans:observacao>'+FObs+'</ans:observacao>');
-      Writeln(arquivo,'</ans:guiaConsulta>');
+        Writeln(arquivo,'<ansTISS:observacao>'+FObs+'</ansTISS:observacao>');
+      Writeln(arquivo,'</ansTISS:guiaConsulta>');
       CloseFile(arquivo);
     except
       on e: Exception do
         begin
           Application.MessageBox(PChar('Erro ao criar arquivo:'+#13+e.Message),'ATENÇÃO',MB_OK+MB_ICONERROR);
         end;
-    end;      
+    end;
 end;
 
 function TTissConsulta.arqvalidado: Boolean;
@@ -411,14 +420,14 @@ begin
   FZerosArq := 20;
   FEncoding:='ISO-8859-1';
   FVersaoXml:='1.0';
-  FVersaoTISS:='2.02.01';
+  FVersaoTISS:='2.02.03';
   FTipo:=Juridico;
-  FMensagemTissXml:='xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+  FMensagemTissXml:='xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ansTISS="http://www.ans.gov.br/padroes/tiss/schemas"';
   FTissReq := TTissReq.Create;
   FCompVersao := TCompVersao.create;
   FTissValid := TTissValidacao.create;
   FFontePadora := TTissIdentFontPag.Create;
-  FAnsVersaoxsd := v2_02_01;
+  FAnsVersaoxsd := v2_02_03;
   // FBusca := TBusca.Create(self);
   inherited;
 end;
@@ -441,68 +450,77 @@ begin
       Rewrite(arquivo);
       Append(arquivo);
       Writeln(arquivo,'<?xml version="'+FVersaoXml+'" encoding="'+FEncoding+'" ?>');
-      Writeln(arquivo,'<ans:mensagemTISS '+FMensagemTissXml+'>');
-      Writeln(arquivo,'<ans:cabecalho>');
+      Writeln(arquivo,'<ansTISS:mensagemTISS '+FMensagemTissXml+'>');
+      Writeln(arquivo,'<ansTISS:cabecalho>');
     //TAG IDENTIFICAÇÃO DA TRANSAÇÃO
-      Writeln(arquivo,'<ans:identificacaoTransacao>');
+      Writeln(arquivo,'<ansTISS:identificacaoTransacao>');
       
 
 
-      Writeln(arquivo,'<ans:tipoTransacao>'+FTipoTrans+'</ans:tipoTransacao>');
+      Writeln(arquivo,'<ansTISS:tipoTransacao>'+FTipoTrans+'</ansTISS:tipoTransacao>');
       if FTissReq.UsarSequencialTrans then
-        Writeln(arquivo,'<ans:sequencialTransacao>'+FSequencialTrans+'</ans:sequencialTransacao>');
+        Writeln(arquivo,'<ansTISS:sequencialTransacao>'+FSequencialTrans+'</ansTISS:sequencialTransacao>');
       if FTissReq.UsarDataRegistroTrans then
         begin
-          case FAnsVersaoxsd of
-            v2_01_03: Writeln(arquivo,'<ans:dataRegistroTransacao>'+FormatDateTime('DD/MM/YYYY',FDataRegistroTrans)+'</ans:dataRegistroTransacao>');
-            v2_02_01: Writeln(arquivo,'<ans:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FDataRegistroTrans)+'</ans:dataRegistroTransacao>');
-          end;
-
+          if FAnsVersaoxsd = v2_01_03 then
+            Writeln(arquivo,'<ansTISS:dataRegistroTransacao>'+FormatDateTime('DD/MM/YYYY',FDataRegistroTrans)+'</ansTISS:dataRegistroTransacao>')
+          else
+            Writeln(arquivo,'<ansTISS:dataRegistroTransacao>'+FormatDateTime('YYYY-MM-DD',FDataRegistroTrans)+'</ansTISS:dataRegistroTransacao>');
         end;
       if FTissReq.UsarHoraRegistroTrans then
         begin
-          case FAnsVersaoxsd of
-            v2_01_03: Writeln(arquivo,'<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm',FHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
-            v2_02_01: Writeln(arquivo,'<ans:horaRegistroTransacao>'+FormatDateTime('hh:mm:ss',FHoraRegistroTrans)+'</ans:horaRegistroTransacao>');
-          end;
-
+          if FAnsVersaoxsd = v2_01_03 then
+            Writeln(arquivo,'<ansTISS:horaRegistroTransacao>'+FormatDateTime('hh:mm',FHoraRegistroTrans)+'</ansTISS:horaRegistroTransacao>')
+          else
+            Writeln(arquivo,'<ansTISS:horaRegistroTransacao>'+FormatDateTime('hh:mm:ss',FHoraRegistroTrans)+'</ansTISS:horaRegistroTransacao>');
         end;
 
-      Writeln(arquivo,'</ans:identificacaoTransacao>');
+      Writeln(arquivo,'</ansTISS:identificacaoTransacao>');
 
       //TAG ORIGEM
-      Writeln(arquivo,'<ans:origem>');
-      Writeln(arquivo,'<ans:codigoPrestadorNaOperadora>');
+      Writeln(arquivo,'<ansTISS:origem>');
+      Writeln(arquivo,'<ansTISS:codigoPrestadorNaOperadora>');
       if FTissReq.UsarCNPJCPF then
         begin
           if FTipo = Juridico then
-            Writeln(arquivo,'<ans:CNPJ>'+FCNPJCPF+'</ans:CNPJ>');
+            Writeln(arquivo,'<ansTISS:CNPJ>'+FCNPJCPF+'</ansTISS:CNPJ>');
 
           if FTipo = Fisico then
-            Writeln(arquivo,'<ans:CPF>'+FCNPJCPF+'</ans:CPF>');
+            Writeln(arquivo,'<ansTISS:CPF>'+FCNPJCPF+'</ansTISS:CPF>');
 
           if FTipo = Outro then
-            Writeln(arquivo,'<ans:codigoPrestadorNaOperadora>'+FCNPJCPF+'</ans:codigoPrestadorNaOperadora>');
+            Writeln(arquivo,'<ansTISS:codigoPrestadorNaOperadora>'+FCNPJCPF+'</ansTISS:codigoPrestadorNaOperadora>');
         end;
 
-       // mmCabecalho.Lines.Add('<ans:codigoPrestadorNaOperadora>'+fdsFaturamentoREGPRESTADORA.AsString+'</ans:codigoPrestadorNaOperadora>');
-      Writeln(arquivo,'</ans:codigoPrestadorNaOperadora>');
-      Writeln(arquivo,'</ans:origem>');
-      Writeln(arquivo,'<ans:destino>');
+       // mmCabecalho.Lines.Add('<ansTISS:codigoPrestadorNaOperadora>'+fdsFaturamentoREGPRESTADORA.AsString+'</ansTISS:codigoPrestadorNaOperadora>');
+      Writeln(arquivo,'</ansTISS:codigoPrestadorNaOperadora>');
+      Writeln(arquivo,'</ansTISS:origem>');
+      Writeln(arquivo,'<ansTISS:destino>');
       if FTissReq.UsarRegANS then
-        Writeln(arquivo,'<ans:registroANS>'+fRegANS+'</ans:registroANS>');
-      Writeln(arquivo,'</ans:destino>');
+        Writeln(arquivo,'<ansTISS:registroANS>'+fRegANS+'</ansTISS:registroANS>');
+      Writeln(arquivo,'</ansTISS:destino>');
 
-      Writeln(arquivo,'<ans:versaoPadrao>'+FVersaoTISS+'</ans:versaoPadrao>');
+      Writeln(arquivo,'<ansTISS:versaoPadrao>'+FVersaoTISS+'</ansTISS:versaoPadrao>');
+      // identificacao Software Gerador
+      case ansVersaoXSD of
+        v2_02_02,v2_02_03:
+          begin
+            Writeln(arquivo,'<ansTISS:identificacaoSoftwareGerador>');
+            Writeln(arquivo,'<ansTISS:nomeAplicativo>'+FNomeAplica+'</ansTISS:nomeAplicativo>');
+            Writeln(arquivo,'<ansTISS:versaoAplicativo>'+FVersaoAplica+'</ansTISS:versaoAplicativo>');
+            Writeln(arquivo,'<ansTISS:fabricanteAplicativo>'+FFabricaAplica+'</ansTISS:fabricanteAplicativo>');
+            Writeln(arquivo,'</ansTISS:identificacaoSoftwareGerador>');
+          end;
+      end;
 
-      Writeln(arquivo,'</ans:cabecalho>');
+      Writeln(arquivo,'</ansTISS:cabecalho>');
 
-      Writeln(arquivo,'<ans:prestadorParaOperadora>');
-      Writeln(arquivo,'<ans:loteGuias>');
+      Writeln(arquivo,'<ansTISS:prestadorParaOperadora>');
+      Writeln(arquivo,'<ansTISS:loteGuias>');
       if FTissReq.UsarNumLote then
-        Writeln(arquivo,'<ans:numeroLote>'+FNumLote+'</ans:numeroLote>');
-      Writeln(arquivo,'<ans:guias>');
-      Writeln(arquivo,'<ans:guiaFaturamento>');
+        Writeln(arquivo,'<ansTISS:numeroLote>'+FNumLote+'</ansTISS:numeroLote>');
+      Writeln(arquivo,'<ansTISS:guias>');
+      Writeln(arquivo,'<ansTISS:guiaFaturamento>');
       CloseFile(arquivo);
     except
       on e: Exception do
@@ -517,39 +535,40 @@ procedure TTissConsulta.criaRodape;
 var
   arquivo,arquivoTemp: TextFile;
   numhash,linha,nomeArq: string;
+  TrocaString: TStringList;
 begin
     try
       Fvalidado := True;
       AssignFile(arquivo,FArquivo);
       Append(arquivo);
-      Writeln(arquivo,'</ans:guiaFaturamento>');
-      Writeln(arquivo,'</ans:guias>');
-      Writeln(arquivo,'</ans:loteGuias>');
-      Writeln(arquivo,'</ans:prestadorParaOperadora>');  
+      Writeln(arquivo,'</ansTISS:guiaFaturamento>');
+      Writeln(arquivo,'</ansTISS:guias>');
+      Writeln(arquivo,'</ansTISS:loteGuias>');
+      Writeln(arquivo,'</ansTISS:prestadorParaOperadora>');
 
-      Writeln(arquivo,'</ans:mensagemTISS>');
-
+      Writeln(arquivo,'</ansTISS:mensagemTISS>');
 
       CloseFile(arquivo);
       AssignFile(arquivoTemp,'temp.xml');
       Rewrite(arquivoTemp);
 
       numhash := hash(FArquivo);
-      
+
       AssignFile(arquivo,FArquivo);
       Reset(arquivo);
       while not Eof(arquivo) do
         begin
           Readln(arquivo,linha);
-          if linha <> '</ans:mensagemTISS>' then
+          if (linha <> '</ansTISS:mensagemTISS>') and
+             (linha <> '</ans:mensagemTISS>') then
             Writeln(arquivotemp,linha);
-        end;  
+        end;
       CloseFile(arquivo);
               //TAG EPILOGO
-      Writeln(arquivotemp,'<ans:epilogo>');
-      Writeln(arquivotemp,'<ans:hash>'+numhash+'</ans:hash>');
-      Writeln(arquivotemp,'</ans:epilogo>');
-      Writeln(arquivotemp,'</ans:mensagemTISS>');
+      Writeln(arquivotemp,'<ansTISS:epilogo>');
+      Writeln(arquivotemp,'<ansTISS:hash>'+numhash+'</ansTISS:hash>');
+      Writeln(arquivotemp,'</ansTISS:epilogo>');
+      Writeln(arquivotemp,'</ansTISS:mensagemTISS>');
       CloseFile(arquivoTemp);
 
       AssignFile(arquivoTemp,'temp.xml');
@@ -560,10 +579,24 @@ begin
       while not Eof(arquivoTemp) do
         begin
            Readln(arquivoTemp,linha);
-           Writeln(arquivo,linha); 
+           Writeln(arquivo,linha);
         end;
       CloseFile(arquivo);
       CloseFile(arquivoTemp);
+      {Troca String <ansTISS></ansTISS> por <ans></ans>
+       para as Versões 2.01.03,2.02.01}
+      if (FAnsVersaoxsd <> v2_02_02) and (FAnsVersaoxsd <> v2_02_03)then
+        begin
+          TrocaString := TStringList.Create;
+          TrocaString.Clear;
+          try
+            TrocaString.LoadFromFile(TissArquivo);
+            TrocaString.Text := StringReplace(TrocaString.Text,'ansTISS','ans',[rfignorecase,rfreplaceall]);
+            TrocaString.SaveToFile(TissArquivo);
+          finally
+            TrocaString.Free;
+          end;
+        end;
     except
       on e: Exception do
         begin
@@ -586,6 +619,8 @@ begin
                 Abort;
               end
           end;
+
+
         try
           Application.CreateForm(TfrmValida,frmValida);
           with frmValida do
@@ -641,7 +676,23 @@ var
   arquivo: TextFile;
   MD5: TMD5;
   xml: TXMLDocument;
+  TrocaString: TStringList;
 begin
+  {Troca String <ansTISS></ansTISS> por <ans></ans>
+   para as Versões 2.01.03,2.02.01}
+  if (FAnsVersaoxsd <> v2_02_02) and (FAnsVersaoxsd <> v2_02_03)then
+    begin
+      TrocaString := TStringList.Create;
+      TrocaString.Clear;
+      try
+        TrocaString.LoadFromFile(arquivohash);
+        TrocaString.Text := StringReplace(TrocaString.Text,'ansTISS','ans',[rfignorecase,rfreplaceall]);
+        TrocaString.SaveToFile(arquivohash);
+      finally
+        TrocaString.Free;
+      end;
+    end;
+
   try
     MD5 := TMD5.Create;
     xml := TXMLDocument.Create(self);
@@ -827,6 +878,11 @@ begin
   fNUMEROCONSELHO := Value;
 end;
 
+procedure TTissConsulta.setNumPres(const Value: String);
+begin
+  FNumPres := Value;
+end;
+
 procedure TTissConsulta.setNumGuia(const Value: String);
 begin
   FNumGuia := Value;
@@ -923,6 +979,21 @@ end;
 procedure TTissConsulta.setVersaoTISS(const Value: String);
 begin
   FVersaoTISS := Value;
+end;
+
+procedure TTissConsulta.setNomeAplica(const Value: String);
+begin
+  FNomeAplica := Value;
+end;
+
+procedure TTissConsulta.setVersaoAplica(const Value: String);
+begin
+  FVersaoAplica := Value;
+end;
+
+procedure TTissConsulta.setFabricaAplica(const Value: String);
+begin
+  FFabricaAplica := Value;
 end;
 
 procedure TTissConsulta.setVersaoXml(const Value: String);
