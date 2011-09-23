@@ -306,6 +306,9 @@ type
     FTipoTrans: boolean;
     FUsarNomeArqu: boolean;
     FArqNomeHash: Boolean;
+    FNomeAplica: Boolean;
+    FVersaoAplica: Boolean;
+    FFabricaAplica: Boolean;
 
     procedure setCNPJCPF(const Value: boolean);
     procedure setDataRegistroTrans(const Value: boolean);
@@ -317,6 +320,9 @@ type
     procedure setTissTipoGeral(const Value: boolean);
     procedure setUsarNomeArqu(const Value: boolean);
     procedure setFArqNomeHash(const Value: Boolean);
+    procedure setNomeAplica(const Value: Boolean);
+    procedure setVersaoAplica(const Value: Boolean);
+    procedure setFabricaAplica(const Value: Boolean);
 
   public
     constructor create;
@@ -331,6 +337,9 @@ type
     property TissTipoGeral:boolean read FTissTipoGeral write setTissTipoGeral;
     property TissUsarNomeArqu: boolean read FUsarNomeArqu write setUsarNomeArqu;
     property TissArqNomeHash:Boolean read FArqNomeHash write setFArqNomeHash;
+    property TissNomeAplica: Boolean read FNomeAplica write setNomeAplica;
+    property TissVersaoAplica: Boolean read FVersaoAplica write setVersaoAplica;
+    property TissFabricaAplica: Boolean read FFabricaAplica write setFabricaAplica;
 
   end;
 
@@ -377,6 +386,9 @@ type
     FUsarOutDesp: Boolean;
     FPadraoTipFontPg: TTissAnsRegCNPJ;
     FUsarObs: Boolean;
+    FNomeAplica: Boolean;
+    FVersaoAplica: Boolean;
+    FFabricaAplica: Boolean;
 
 
     procedure setcaraAtend(const Value: boolean);
@@ -410,6 +422,9 @@ type
     procedure setUsarOutDesp(const Value: Boolean);
     procedure setPadraoTipFontPg(const Value: TTissAnsRegCNPJ);
     procedure setUsarObs(const Value: Boolean);
+    procedure setNomeAplica(const Value: Boolean);
+    procedure setVersaoAplica(const Value: Boolean);
+    procedure setFabricaAplica(const Value: Boolean);
 
   public
     constructor create;
@@ -462,6 +477,9 @@ type
     property TissNumLote:boolean read FNumLote write setNumLote;
     property PadraoTipFontPg: TTissAnsRegCNPJ read FPadraoTipFontPg write setPadraoTipFontPg;
     property TissUsarObs: Boolean read FUsarObs write setUsarObs;
+    property TissNomeAplica: boolean read FNomeAplica write setNomeAplica;
+    property TissVersaoAplica: boolean read FVersaoAplica write setVersaoAplica;
+    property TissFabricaAplica: boolean read FFabricaAplica write setFabricaAplica;
   end;
 
 
@@ -518,6 +536,9 @@ begin
     FHoraRegistroTrans:= true;
     FTipoTrans:= true;
     FArqNomeHash := true;
+    FNomeAplica:= True;
+    FVersaoAplica:= True;
+    FFabricaAplica:= True;
 end;
 
 
@@ -572,6 +593,21 @@ begin
   FUsarNomeArqu := Value;
 end;
 
+procedure TTissConfCabecalho.setNomeAplica(const Value: boolean);
+begin
+  FNomeAplica := Value;
+end;
+
+procedure TTissConfCabecalho.setVersaoAplica(const Value: boolean);
+begin
+  FVersaoAplica := Value;
+end;
+
+procedure TTissConfCabecalho.setFabricaAplica(const Value: boolean);
+begin
+  FFabricaAplica := Value;
+end;
+
 { TTissConfSP_SADT }
 
 constructor TTissConfSP_SADT.create;
@@ -612,6 +648,9 @@ begin
   FUsarProfissional := true;
   FUsarProfissionalCompl := true;
   FUsarUsarProc := true;
+  FNomeAplica:= True;
+  FVersaoAplica:= True;
+  FFabricaAplica:= True;
 end;
 
 procedure TTissConfSP_SADT.setcaraAtend(const Value: boolean);
@@ -767,6 +806,18 @@ end;
 procedure TTissConfSP_SADT.setUsarUsarProc(const Value: boolean);
 begin
   FUsarUsarProc := Value;
+end;
+procedure TTissConfSP_SADT.setNomeAplica(const Value: boolean);
+begin
+  FNomeAplica := Value;
+end;
+procedure TTissConfSP_SADT.setVersaoAplica(const Value: boolean);
+begin
+  FVersaoAplica := Value;
+end;
+procedure TTissConfSP_SADT.setFabricaAplica(const Value: boolean);
+begin
+  FFabricaAplica := Value;
 end;
 
 { TTissConfContratado }

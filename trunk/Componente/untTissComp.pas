@@ -5,7 +5,7 @@ uses
   SysUtils, Classes;
 type
   TTissTipoGeral = (JuridicoGeral,FisicGeral,Outros,conselhoProfissional);
-  TTissAnsVersao = (v2_01_03,v2_02_01);
+  TTissAnsVersao = (v2_01_03,v2_02_01,v2_02_02,v2_02_03);
   TTissAnsRegCNPJ = (RegistroANS,CNPJ);
 
   TTissIdentFontPag = class(TPersistent)
@@ -257,22 +257,6 @@ type
     procedure setUFConselho(const Value: String);
     procedure setPosicProf(const Value: Integer);
 
-  {TTissProfissionalCompl = class(TPersistent)
-  private
-    fCBOS: Currency;
-    fNumConselho: String;
-    FProf: String;
-    fUFConselho: String;
-    fSiglaConselho: String;
-    FPosicProf: Integer;
-    procedure setCBOS(const Value: Currency);
-    procedure setNumConselho(const Value: String);
-    procedure setProf(const Value: String);
-    procedure setSiglaConselho(const Value: String);
-    procedure setUFConselho(const Value: String);
-    procedure setPosicProf(const Value: Integer);}
-
-
   public
     constructor create;
   published
@@ -325,6 +309,10 @@ type
     FTipoGeral: TTissTipoGeral;
     FTissTipoGeral: TTissTipoGeral;
     FZerosArq: integer;
+    FNomeAplica: string;
+    FVersaoAplica: string;
+    FFabricaAplica: string;
+
     procedure setArquivo(const Value: String);
     procedure setEncoding(const Value: String);
     procedure setMensagemTissXml(const Value: String);
@@ -340,6 +328,9 @@ type
     procedure setTissTipoGeral(const Value: TTissTipoGeral);
     procedure setFArqNomeHash(const Value: Boolean);
     procedure SetZerosArq(const Value: integer);
+    procedure setNomeAplica(const Value: string);
+    procedure setVersaoAplica(const Value: string);
+    procedure setFabricaAplica(const Value: string);
 
   public
     constructor create;
@@ -359,6 +350,9 @@ type
     property TissTipoGeral:TTissTipoGeral read FTissTipoGeral write setTissTipoGeral;
 
     property TissZerosArq: integer read FZerosArq write SetZerosArq;
+    property TissNomeAplica: string read FNomeAplica write setNomeAplica;
+    property TissVersaoAplica: string read FVersaoAplica write setVersaoAplica;
+    property TissFabricaAplica: string read FFabricaAplica write setFabricaAplica;
 
 
 
@@ -393,6 +387,7 @@ type
     FTipoConsulta: Boolean;
     FEndNum: Boolean;
     FNumCNS: Boolean;
+    FNumPres: Boolean;
     FNumGuia: Boolean;
     FUF: Boolean;
     FPaciente: Boolean;
@@ -414,7 +409,11 @@ type
     FNomeArqu: Boolean;
     FArqNomeHash: Boolean;
     FPadraoTipFontPg: TTissAnsRegCNPJ;
-    procedure setFArqNomeHash(const Value: Boolean);    
+    FNomeAplica: Boolean;
+    FVersaoAplica: Boolean;
+    FFabricaAplica: Boolean;
+
+    procedure setFArqNomeHash(const Value: Boolean);
     procedure SetUsarCBOS(const Value: Boolean);
     procedure setCEP(const Value: Boolean);
     procedure setCIDCodDiag(const Value: Boolean);
@@ -438,6 +437,7 @@ type
     procedure setNumCarteira(const Value: Boolean);
     procedure setNumCNS(const Value: Boolean);
     procedure setNUMEROCONSELHO(const Value: Boolean);
+    procedure setNumPres(const Value: Boolean);
     procedure setNumGuia(const Value: Boolean);
     procedure setNumLote(const Value: Boolean);
     procedure setPaciente(const Value: Boolean);
@@ -462,7 +462,10 @@ type
     procedure setUsarEndContratado(const Value: Boolean);
     procedure setNomeArq(const Value: Boolean);
     procedure setPadraoTipFontPg(const Value: TTissAnsRegCNPJ);
-    
+    procedure setNomeAplica(const Value: Boolean);
+    procedure setVersaoAplica(const Value: Boolean);
+    procedure setFabricaAplica(const Value: Boolean);
+
   public
     constructor create;
 
@@ -478,6 +481,7 @@ type
     property UsarCNPJCPF:Boolean read FCNPJCPF write setCNPJCPF;
     property UsarRegANS:Boolean read FRegANS write setRegANS;
     property UsarNumLote:Boolean read FNumLote write setNumLote;
+    property UsarNumPres:Boolean read FNumPres write setNumPres;
     property UsarNumGuia:Boolean read FNumGuia write setNumGuia;
     property UsarNumCarteira:Boolean read FNumCarteira write setNumCarteira;
     property UsarPaciente:Boolean read FPaciente write setPaciente;
@@ -521,6 +525,10 @@ type
 
     property UsarArqNomeHash:Boolean read FArqNomeHash write setFArqNomeHash;
     property PadraoTipFontPg: TTissAnsRegCNPJ read FPadraoTipFontPg write setPadraoTipFontPg;
+
+    property UsarNomeAplica: Boolean read FNomeAplica write setNomeAplica;
+    property UsarVersaoAplica: Boolean read FVersaoAplica write setVersaoAplica;
+    property UsarFabricaAplica: Boolean read FFabricaAplica write setFabricaAplica;
 
   end;
 
@@ -806,6 +814,7 @@ begin
   FTipoConsulta:= True;
   FEndNum:= True;
   FNumCNS:= True;
+  FNumPres:= True;
   FNumGuia:= True;
   FUF:= True;
   FPaciente:= True;
@@ -824,6 +833,9 @@ begin
   FTipDoenca := True;
   FObs := True;
   FUsarEndContratado := True;
+  FNomeAplica:= True;
+  FVersaoAplica:= True;
+  FFabricaAplica:= True;
 end;
 
 procedure TTissReq.setCEP(const Value: Boolean);
@@ -961,6 +973,11 @@ begin
   fNUMEROCONSELHO := Value;
 end;
 
+procedure TTissReq.setNumPres(const Value: Boolean);
+begin
+  FNumPres := Value;
+end;
+
 procedure TTissReq.setNumGuia(const Value: Boolean);
 begin
   FNumGuia := Value;
@@ -1063,7 +1080,18 @@ begin
   FValidadeCart := Value;
 end;
 
-
+procedure TTissReq.setNomeAplica(const Value: Boolean);
+begin
+  FNomeAplica := Value;
+end;
+procedure TTissReq.setVersaoAplica(const Value: Boolean);
+begin
+  FVersaoAplica := Value;
+end;
+procedure TTissReq.setFabricaAplica(const Value: Boolean);
+begin
+  FFabricaAplica := Value;
+end;
 
 
 { TTissCabecalho }
@@ -1073,9 +1101,9 @@ begin
   FZerosArq := 20;
   FEncoding:='ISO-8859-1';
   FVersaoXml:='1.0';
-  FVersaoTISS:='2.01.03';
+  FVersaoTISS:='2.02.03';
   FTipoGeral := JuridicoGeral;
-  FMensagemTissXml:='xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+  FMensagemTissXml:='xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ansTISS="http://www.ans.gov.br/padroes/tiss/schemas"';
 end;
 
 procedure TTissCabecalho.setArquivo(const Value: String);
@@ -1128,8 +1156,6 @@ begin
   FSequencialTrans := Value;
 end;
 
-
-
 procedure TTissCabecalho.setTipoTrans(const Value: String);
 begin
   FTipoTrans := Value;
@@ -1148,6 +1174,21 @@ end;
 procedure TTissCabecalho.setVersaoXml(const Value: String);
 begin
   FVersaoXml := Value;
+end;
+
+procedure TTissCabecalho.setNomeAplica(const Value: String);
+begin
+  FNomeAplica := Value;
+end;
+
+procedure TTissCabecalho.setVersaoAplica(const Value: String);
+begin
+  FVersaoAplica := Value;
+end;
+
+procedure TTissCabecalho.setFabricaAplica(const Value: String);
+begin
+  FFabricaAplica := Value;
 end;
 
 procedure TTissCabecalho.SetZerosArq(const Value: integer);
@@ -1322,18 +1363,6 @@ begin
 
 end;
 
-{ TTissPrestExecCompl }
-{
-constructor TTissPrestExecCompl.create;
-begin
-
-end;
-procedure TTissPrestExec.setCNPJCPF(const Value: String);
-begin
-
-end;
-}
-
 { TTissProfissional }
 
 constructor TTissProfissional.create;
@@ -1370,44 +1399,6 @@ procedure TTissProfissional.setUFConselho(const Value: String);
 begin
   fUFConselho := Value;
 end;
-
-{ TTissProfissionalCompl }
-{
-constructor TTissProfissionalCompl.create;
-begin
-
-end;
-
-procedure TTissProfissionalCompl.setCBOS(const Value: Currency);
-begin
-  //fCBOS := Value;
-end;
-
-procedure TTissProfissionalCompl.setNumConselho(const Value: String);
-begin
-  //fNumConselho := Value;
-end;
-
-procedure TTissProfissionalCompl.setPosicProf(const Value: Integer);
-begin
-  //FPosicProf := Value;
-end;
-
-procedure TTissProfissionalCompl.setProf(const Value: String);
-begin
-  //FProf := Value;
-end;
-
-procedure TTissProfissionalCompl.setSiglaConselho(const Value: String);
-begin
-  //fSiglaConselho := Value;
-end;
-
-procedure TTissProfissionalCompl.setUFConselho(const Value: String);
-begin
-  //fUFConselho := Value;
-end;
-}
 
 { TTissDiagnostico }
 

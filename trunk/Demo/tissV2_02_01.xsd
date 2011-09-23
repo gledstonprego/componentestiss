@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- edited with XMLSpy v2006 U (http://www.altova.com) by luiz.vieira (ANS) -->
+<!-- edited with XMLSpy v2008 rel. 2 sp2 (http://www.altova.com) by Profeta2 (home) -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas" targetNamespace="http://www.ans.gov.br/padroes/tiss/schemas" elementFormDefault="qualified">
 	<!--VERSÃO TISS 2.02.01-->
 	<!--<include schemaLocation="http://www.ans.gov.br/padroes/tiss/schemas/tissSimpleTypesV2_02_01.xsd"/>
 	<include schemaLocation="http://www.ans.gov.br/padroes/tiss/schemas/tissComplexTypesV2_02_01.xsd"/>
 	<include schemaLocation="http://www.ans.gov.br/padroes/tiss/schemas/tissGuiasV2_02_01.xsd"/>-->
-	<include schemaLocation="tissSimpleTypesV2_02_01.xsd"/>
-	<include schemaLocation="tissComplexTypesV2_02_01.xsd"/>
-	<include schemaLocation="tissGuiasV2_02_01.xsd"/>
+	<!-- Schema com as guias que compõem o  padrão TISS-->
 	<!-- Definicao do cabecalho das mensagens -->
 	<complexType name="cabecalhoTransacao">
 		<sequence>
@@ -149,4 +147,3722 @@
 			</sequence>
 		</complexType>
 	</element>
+	<simpleType name="st_CNES">
+		<restriction base="string">
+			<maxLength value="7"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_CNPJ">
+		<restriction base="string">
+			<pattern value="[0-9]{14}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_CPF">
+		<restriction base="string">
+			<pattern value="[0-9]{11}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_codigoBeneficiario">
+		<restriction base="string">
+			<maxLength value="20"/>
+			<minLength value="17"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_codigoDiagnostico">
+		<restriction base="string">
+			<maxLength value="5"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_codigoMunicipioIBGE">
+		<restriction base="string">
+			<length value="7"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_codigoPrestadorNaOperadora">
+		<restriction base="string">
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_codigoTabela">
+		<restriction base="string">
+			<maxLength value="10"/>
+			<minLength value="8"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_condicaoClinica">
+		<restriction base="string">
+			<maxLength value="1"/>
+			<enumeration value="H"/>
+			<enumeration value="E"/>
+			<enumeration value="A"/>
+			<enumeration value="C"/>
+			<enumeration value="R"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_conta">
+		<restriction base="string">
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_conselhoProfissional">
+		<restriction base="string">
+			<enumeration value="CRAS"/>
+			<enumeration value="COREN"/>
+			<enumeration value="CRF"/>
+			<enumeration value="CREFITO"/>
+			<enumeration value="CRM"/>
+			<enumeration value="CRN"/>
+			<enumeration value="CRO"/>
+			<enumeration value="CRP"/>
+			<enumeration value="OUT"/>
+			<enumeration value="CRFA"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_data">
+		<restriction base="date"/>
+	</simpleType>
+	<simpleType name="st_dataHora">
+		<restriction base="dateTime"/>
+	</simpleType>
+	<simpleType name="st_dente">
+		<restriction base="string">
+			<maxLength value="2"/>
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value="13"/>
+			<enumeration value="14"/>
+			<enumeration value="15"/>
+			<enumeration value="16"/>
+			<enumeration value="17"/>
+			<enumeration value="18"/>
+			<enumeration value="19"/>
+			<enumeration value="21"/>
+			<enumeration value="22"/>
+			<enumeration value="23"/>
+			<enumeration value="24"/>
+			<enumeration value="25"/>
+			<enumeration value="26"/>
+			<enumeration value="27"/>
+			<enumeration value="28"/>
+			<enumeration value="29"/>
+			<enumeration value="31"/>
+			<enumeration value="32"/>
+			<enumeration value="33"/>
+			<enumeration value="34"/>
+			<enumeration value="35"/>
+			<enumeration value="36"/>
+			<enumeration value="37"/>
+			<enumeration value="38"/>
+			<enumeration value="39"/>
+			<enumeration value="41"/>
+			<enumeration value="42"/>
+			<enumeration value="43"/>
+			<enumeration value="44"/>
+			<enumeration value="45"/>
+			<enumeration value="46"/>
+			<enumeration value="47"/>
+			<enumeration value="48"/>
+			<enumeration value="49"/>
+			<enumeration value="51"/>
+			<enumeration value="52"/>
+			<enumeration value="53"/>
+			<enumeration value="54"/>
+			<enumeration value="55"/>
+			<enumeration value="59"/>
+			<enumeration value="61"/>
+			<enumeration value="62"/>
+			<enumeration value="63"/>
+			<enumeration value="64"/>
+			<enumeration value="65"/>
+			<enumeration value="69"/>
+			<enumeration value="71"/>
+			<enumeration value="72"/>
+			<enumeration value="73"/>
+			<enumeration value="74"/>
+			<enumeration value="75"/>
+			<enumeration value="79"/>
+			<enumeration value="81"/>
+			<enumeration value="82"/>
+			<enumeration value="83"/>
+			<enumeration value="84"/>
+			<enumeration value="85"/>
+			<enumeration value="89"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_descricao12">
+		<restriction base="string">
+			<maxLength value="12"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_descricao15">
+		<restriction base="string">
+			<maxLength value="15"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_descricao20">
+		<restriction base="string">
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_descricao40">
+		<restriction base="string">
+			<maxLength value="40"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_descricaoGlosa">
+		<restriction base="string">
+			<maxLength value="500"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_descricaoTabela">
+		<restriction base="string">
+			<maxLength value="60"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_diariasUTI">
+		<restriction base="integer">
+			<totalDigits value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_eletivaEmergencia">
+		<restriction base="string">
+			<enumeration value="E"/>
+			<enumeration value="U"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_face">
+		<restriction base="string">
+			<maxLength value="5"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_formaPagamento">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_hora">
+		<restriction base="time"/>
+	</simpleType>
+	<simpleType name="st_indicacaoClinica">
+		<restriction base="string">
+			<maxLength value="500"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_indicadorAcidente">
+		<restriction base="string">
+			<enumeration value="0"/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_inteiro12">
+		<restriction base="integer">
+			<totalDigits value="12"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_justificativa">
+		<restriction base="string">
+			<maxLength value="500"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_logradouro">
+		<restriction base="string">
+			<maxLength value="40"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_motivoSaida">
+		<restriction base="string">
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value="13"/>
+			<enumeration value="14"/>
+			<enumeration value="15"/>
+			<enumeration value="16"/>
+			<enumeration value="17"/>
+			<enumeration value="18"/>
+			<enumeration value="21"/>
+			<enumeration value="22"/>
+			<enumeration value="23"/>
+			<enumeration value="24"/>
+			<enumeration value="25"/>
+			<enumeration value="26"/>
+			<enumeration value="27"/>
+			<enumeration value="28"/>
+			<enumeration value="31"/>
+			<enumeration value="41"/>
+			<enumeration value="42"/>
+			<enumeration value="43"/>
+			<enumeration value="51"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_nome">
+		<restriction base="string">
+			<maxLength value="70"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numeroGuia">
+		<restriction base="string">
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numeroInteiro">
+		<restriction base="integer"/>
+	</simpleType>
+	<simpleType name="st_numeroLogradouro">
+		<restriction base="string">
+			<maxLength value="5"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_numeroTel">
+		<restriction base="string">
+			<maxLength value="10"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_obito">
+		<restriction base="string">
+			<enumeration value="F"/>
+			<enumeration value="N"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_obitoMulher">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_observacao">
+		<restriction base="string">
+			<maxLength value="240"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_outrasDespesas">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_percentual">
+		<restriction base="decimal">
+			<totalDigits value="5"/>
+			<fractionDigits value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_posicaoProfissao">
+		<restriction base="string">
+			<enumeration value="00"/>
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<enumeration value="06"/>
+			<enumeration value="07"/>
+			<enumeration value="08"/>
+			<enumeration value="09"/>
+			<enumeration value="10"/>
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value="13"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_procedimentoSUS">
+		<restriction base="string"/>
+	</simpleType>
+	<simpleType name="st_protocolo">
+		<restriction base="string">
+			<maxLength value="12"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_quantidade">
+		<restriction base="decimal">
+			<totalDigits value="12"/>
+			<fractionDigits value="4"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_quantidadeProcedimento">
+		<restriction base="integer">
+			<totalDigits value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_quantidadeObito">
+		<restriction base="integer">
+			<totalDigits value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_regiao">
+		<restriction base="string">
+			<maxLength value="5"/>
+			<enumeration value="AI"/>
+			<enumeration value="AS"/>
+			<enumeration value="HASD"/>
+			<enumeration value="HASE"/>
+			<enumeration value="HAID"/>
+			<enumeration value="HAIE"/>
+			<enumeration value="ASAI"/>
+			<enumeration value="S1"/>
+			<enumeration value="S2"/>
+			<enumeration value="S3"/>
+			<enumeration value="S4"/>
+			<enumeration value="S5"/>
+			<enumeration value="S6"/>
+			<enumeration value="LG"/>
+			<enumeration value="CL"/>
+			<enumeration value="AB"/>
+			<enumeration value="PA"/>
+			<enumeration value="MJ"/>
+			<enumeration value="PD"/>
+			<enumeration value="PM"/>
+			<enumeration value="RM"/>
+			<enumeration value="MA"/>
+			<enumeration value="GI"/>
+			<enumeration value="PT"/>
+			<enumeration value="TP"/>
+			<enumeration value="RIS"/>
+			<enumeration value="RCSD"/>
+			<enumeration value="RPSD"/>
+			<enumeration value="RMSD"/>
+			<enumeration value="RCSE"/>
+			<enumeration value="RPSE"/>
+			<enumeration value="RMSE"/>
+			<enumeration value="RII"/>
+			<enumeration value="RCID"/>
+			<enumeration value="RPID"/>
+			<enumeration value="RMID"/>
+			<enumeration value="RCIE"/>
+			<enumeration value="RPIE"/>
+			<enumeration value="RMIE"/>
+			<enumeration value="RMD"/>
+			<enumeration value="RME"/>
+			<enumeration value="RPD"/>
+			<enumeration value="RPE"/>
+			<enumeration value="RMPE"/>
+			<enumeration value="RMPD"/>
+			<enumeration value="SM"/>
+			<enumeration value="TU"/>
+			<enumeration value="SI"/>
+			<enumeration value="FLI"/>
+			<enumeration value="FLA"/>
+			<enumeration value="UV"/>
+			<enumeration value="PP"/>
+			<enumeration value="PI"/>
+			<enumeration value="LS"/>
+			<enumeration value="LI"/>
+			<enumeration value="RL"/>
+			<enumeration value="RP"/>
+			<enumeration value="RV"/>
+			<enumeration value="RSMD"/>
+			<enumeration value="RSME"/>
+			<enumeration value="RSL"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_registroANS">
+		<restriction base="string">
+			<maxLength value="6"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_regimeInternacao">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_senhaAutorizacao">
+		<restriction base="string">
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_simNao">
+		<restriction base="boolean"/>
+	</simpleType>
+	<simpleType name="st_statusCancelamento">
+		<restriction base="string">
+			<maxLength value="1"/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_statusProtocolo">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+			<enumeration value="7"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_statusSolicitacao">
+		<restriction base="string">
+			<length value="1"/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tabela">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<enumeration value="06"/>
+			<enumeration value="07"/>
+			<enumeration value="08"/>
+			<enumeration value="09"/>
+			<enumeration value="10"/>
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value="13"/>
+			<enumeration value="14"/>
+			<enumeration value="15"/>
+			<enumeration value="16"/>
+			<enumeration value="94"/>
+			<enumeration value="95"/>
+			<enumeration value="96"/>
+			<enumeration value="97"/>
+			<enumeration value="98"/>
+			<enumeration value="99"/>
+			<enumeration value="00"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tabelasDiagnostico">
+		<restriction base="string">
+			<enumeration value="CID-10"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tecnicaUtilizada">
+		<restriction base="string">
+			<enumeration value="V"/>
+			<enumeration value="C"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoAcomodacao">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+			<enumeration value="7"/>
+			<enumeration value="8"/>
+			<enumeration value="11"/>
+			<enumeration value="12"/>
+			<enumeration value="13"/>
+			<enumeration value="14"/>
+			<enumeration value="15"/>
+			<enumeration value="21"/>
+			<enumeration value="22"/>
+			<enumeration value="23"/>
+			<enumeration value="31"/>
+			<enumeration value="32"/>
+			<enumeration value="33"/>
+			<enumeration value="34"/>
+			<enumeration value="35"/>
+			<enumeration value="41"/>
+			<enumeration value="42"/>
+			<enumeration value="43"/>
+			<enumeration value="51"/>
+			<enumeration value="52"/>
+			<enumeration value="53"/>
+			<enumeration value="54"/>
+			<enumeration value="55"/>
+			<enumeration value="61"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoAtendimento">
+		<restriction base="string">
+			<enumeration value="01"/>
+			<enumeration value="02"/>
+			<enumeration value="03"/>
+			<enumeration value="04"/>
+			<enumeration value="05"/>
+			<enumeration value="06"/>
+			<enumeration value="07"/>
+			<enumeration value="08"/>
+			<enumeration value="09"/>
+			<enumeration value="10"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoConsulta">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoDemonstrativo">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoDoenca">
+		<restriction base="string">
+			<enumeration value="A"/>
+			<enumeration value="C"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoFaturamento">
+		<restriction base="string">
+			<enumeration value="T"/>
+			<enumeration value="P"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoGlosa">
+		<restriction base="string">
+			<maxLength value="4"/>
+			<enumeration value="1001"/>
+			<enumeration value="1002"/>
+			<enumeration value="1003"/>
+			<enumeration value="1004"/>
+			<enumeration value="1005"/>
+			<enumeration value="1006"/>
+			<enumeration value="1007"/>
+			<enumeration value="1008"/>
+			<enumeration value="1009"/>
+			<enumeration value="1010"/>
+			<enumeration value="1011"/>
+			<enumeration value="1012"/>
+			<enumeration value="1013"/>
+			<enumeration value="1014"/>
+			<enumeration value="1015"/>
+			<enumeration value="1016"/>
+			<enumeration value="1017"/>
+			<enumeration value="1018"/>
+			<enumeration value="1019"/>
+			<enumeration value="1020"/>
+			<enumeration value="1021"/>
+			<enumeration value="1022"/>
+			<enumeration value="1023"/>
+			<enumeration value="1024"/>
+			<enumeration value="1099"/>
+			<enumeration value="1101"/>
+			<enumeration value="1102"/>
+			<enumeration value="1103"/>
+			<enumeration value="1104"/>
+			<enumeration value="1199"/>
+			<enumeration value="1201"/>
+			<enumeration value="1202"/>
+			<enumeration value="1203"/>
+			<enumeration value="1204"/>
+			<enumeration value="1205"/>
+			<enumeration value="1206"/>
+			<enumeration value="1207"/>
+			<enumeration value="1208"/>
+			<enumeration value="1209"/>
+			<enumeration value="1210"/>
+			<enumeration value="1211"/>
+			<enumeration value="1212"/>
+			<enumeration value="1213"/>
+			<enumeration value="1214"/>
+			<enumeration value="1215"/>
+			<enumeration value="1216"/>
+			<enumeration value="1217"/>
+			<enumeration value="1299"/>
+			<enumeration value="1301"/>
+			<enumeration value="1302"/>
+			<enumeration value="1303"/>
+			<enumeration value="1304"/>
+			<enumeration value="1305"/>
+			<enumeration value="1306"/>
+			<enumeration value="1307"/>
+			<enumeration value="1308"/>
+			<enumeration value="1309"/>
+			<enumeration value="1310"/>
+			<enumeration value="1311"/>
+			<enumeration value="1312"/>
+			<enumeration value="1313"/>
+			<enumeration value="1314"/>
+			<enumeration value="1315"/>
+			<enumeration value="1316"/>
+			<enumeration value="1317"/>
+			<enumeration value="1318"/>
+			<enumeration value="1319"/>
+			<enumeration value="1320"/>
+			<enumeration value="1321"/>
+			<enumeration value="1399"/>
+			<enumeration value="1401"/>
+			<enumeration value="1402"/>
+			<enumeration value="1403"/>
+			<enumeration value="1404"/>
+			<enumeration value="1405"/>
+			<enumeration value="1406"/>
+			<enumeration value="1407"/>
+			<enumeration value="1408"/>
+			<enumeration value="1409"/>
+			<enumeration value="1410"/>
+			<enumeration value="1411"/>
+			<enumeration value="1412"/>
+			<enumeration value="1413"/>
+			<enumeration value="1414"/>
+			<enumeration value="1415"/>
+			<enumeration value="1416"/>
+			<enumeration value="1417"/>
+			<enumeration value="1418"/>
+			<enumeration value="1419"/>
+			<enumeration value="1420"/>
+			<enumeration value="1421"/>
+			<enumeration value="1422"/>
+			<enumeration value="1423"/>
+			<enumeration value="1424"/>
+			<enumeration value="1425"/>
+			<enumeration value="1426"/>
+			<enumeration value="1427"/>
+			<enumeration value="1428"/>
+			<enumeration value="1429"/>
+			<enumeration value="1430"/>
+			<enumeration value="1431"/>
+			<enumeration value="1432"/>
+			<enumeration value="1433"/>
+			<enumeration value="1499"/>
+			<enumeration value="1501"/>
+			<enumeration value="1502"/>
+			<enumeration value="1503"/>
+			<enumeration value="1504"/>
+			<enumeration value="1505"/>
+			<enumeration value="1506"/>
+			<enumeration value="1507"/>
+			<enumeration value="1508"/>
+			<enumeration value="1509"/>
+			<enumeration value="1599"/>
+			<enumeration value="1601"/>
+			<enumeration value="1602"/>
+			<enumeration value="1603"/>
+			<enumeration value="1604"/>
+			<enumeration value="1605"/>
+			<enumeration value="1606"/>
+			<enumeration value="1607"/>
+			<enumeration value="1608"/>
+			<enumeration value="1609"/>
+			<enumeration value="1610"/>
+			<enumeration value="1611"/>
+			<enumeration value="1612"/>
+			<enumeration value="1613"/>
+			<enumeration value="1614"/>
+			<enumeration value="1615"/>
+			<enumeration value="1699"/>
+			<enumeration value="1701"/>
+			<enumeration value="1702"/>
+			<enumeration value="1703"/>
+			<enumeration value="1704"/>
+			<enumeration value="1705"/>
+			<enumeration value="1706"/>
+			<enumeration value="1707"/>
+			<enumeration value="1708"/>
+			<enumeration value="1709"/>
+			<enumeration value="1710"/>
+			<enumeration value="1711"/>
+			<enumeration value="1712"/>
+			<enumeration value="1713"/>
+			<enumeration value="1714"/>
+			<enumeration value="1715"/>
+			<enumeration value="1716"/>
+			<enumeration value="1799"/>
+			<enumeration value="1801"/>
+			<enumeration value="1802"/>
+			<enumeration value="1803"/>
+			<enumeration value="1804"/>
+			<enumeration value="1805"/>
+			<enumeration value="1806"/>
+			<enumeration value="1807"/>
+			<enumeration value="1808"/>
+			<enumeration value="1809"/>
+			<enumeration value="1810"/>
+			<enumeration value="1811"/>
+			<enumeration value="1812"/>
+			<enumeration value="1813"/>
+			<enumeration value="1814"/>
+			<enumeration value="1815"/>
+			<enumeration value="1816"/>
+			<enumeration value="1817"/>
+			<enumeration value="1818"/>
+			<enumeration value="1819"/>
+			<enumeration value="1820"/>
+			<enumeration value="1821"/>
+			<enumeration value="1822"/>
+			<enumeration value="1823"/>
+			<enumeration value="1824"/>
+			<enumeration value="1825"/>
+			<enumeration value="1899"/>
+			<enumeration value="1901"/>
+			<enumeration value="1902"/>
+			<enumeration value="1903"/>
+			<enumeration value="1904"/>
+			<enumeration value="1905"/>
+			<enumeration value="1906"/>
+			<enumeration value="1907"/>
+			<enumeration value="1908"/>
+			<enumeration value="1909"/>
+			<enumeration value="1910"/>
+			<enumeration value="1911"/>
+			<enumeration value="1912"/>
+			<enumeration value="1913"/>
+			<enumeration value="1914"/>
+			<enumeration value="1915"/>
+			<enumeration value="1916"/>
+			<enumeration value="1999"/>
+			<enumeration value="2001"/>
+			<enumeration value="2002"/>
+			<enumeration value="2003"/>
+			<enumeration value="2004"/>
+			<enumeration value="2005"/>
+			<enumeration value="2006"/>
+			<enumeration value="2007"/>
+			<enumeration value="2008"/>
+			<enumeration value="2009"/>
+			<enumeration value="2010"/>
+			<enumeration value="2011"/>
+			<enumeration value="2012"/>
+			<enumeration value="2013"/>
+			<enumeration value="2014"/>
+			<enumeration value="2099"/>
+			<enumeration value="2101"/>
+			<enumeration value="2102"/>
+			<enumeration value="2103"/>
+			<enumeration value="2104"/>
+			<enumeration value="2105"/>
+			<enumeration value="2106"/>
+			<enumeration value="2107"/>
+			<enumeration value="2108"/>
+			<enumeration value="2109"/>
+			<enumeration value="2110"/>
+			<enumeration value="2111"/>
+			<enumeration value="2112"/>
+			<enumeration value="2113"/>
+			<enumeration value="2114"/>
+			<enumeration value="2199"/>
+			<enumeration value="2201"/>
+			<enumeration value="2202"/>
+			<enumeration value="2203"/>
+			<enumeration value="2204"/>
+			<enumeration value="2205"/>
+			<enumeration value="2206"/>
+			<enumeration value="2207"/>
+			<enumeration value="2208"/>
+			<enumeration value="2209"/>
+			<enumeration value="2210"/>
+			<enumeration value="2211"/>
+			<enumeration value="2299"/>
+			<enumeration value="2301"/>
+			<enumeration value="2302"/>
+			<enumeration value="2303"/>
+			<enumeration value="2304"/>
+			<enumeration value="2305"/>
+			<enumeration value="2306"/>
+			<enumeration value="2307"/>
+			<enumeration value="2308"/>
+			<enumeration value="2309"/>
+			<enumeration value="2310"/>
+			<enumeration value="2399"/>
+			<enumeration value="2401"/>
+			<enumeration value="2402"/>
+			<enumeration value="2403"/>
+			<enumeration value="2404"/>
+			<enumeration value="2405"/>
+			<enumeration value="2406"/>
+			<enumeration value="2407"/>
+			<enumeration value="2408"/>
+			<enumeration value="2409"/>
+			<enumeration value="2410"/>
+			<enumeration value="2411"/>
+			<enumeration value="2412"/>
+			<enumeration value="2413"/>
+			<enumeration value="2414"/>
+			<enumeration value="2415"/>
+			<enumeration value="2416"/>
+			<enumeration value="2417"/>
+			<enumeration value="2418"/>
+			<enumeration value="2419"/>
+			<enumeration value="2420"/>
+			<enumeration value="2421"/>
+			<enumeration value="2422"/>
+			<enumeration value="2423"/>
+			<enumeration value="2424"/>
+			<enumeration value="2499"/>
+			<enumeration value="2501"/>
+			<enumeration value="2502"/>
+			<enumeration value="2503"/>
+			<enumeration value="2504"/>
+			<enumeration value="2505"/>
+			<enumeration value="2506"/>
+			<enumeration value="2507"/>
+			<enumeration value="2508"/>
+			<enumeration value="2509"/>
+			<enumeration value="2510"/>
+			<enumeration value="2511"/>
+			<enumeration value="2512"/>
+			<enumeration value="2513"/>
+			<enumeration value="2514"/>
+			<enumeration value="2515"/>
+			<enumeration value="2516"/>
+			<enumeration value="2599"/>
+			<enumeration value="2601"/>
+			<enumeration value="2602"/>
+			<enumeration value="2603"/>
+			<enumeration value="2604"/>
+			<enumeration value="2605"/>
+			<enumeration value="2606"/>
+			<enumeration value="2607"/>
+			<enumeration value="2608"/>
+			<enumeration value="2609"/>
+			<enumeration value="2699"/>
+			<enumeration value="2701"/>
+			<enumeration value="2702"/>
+			<enumeration value="2703"/>
+			<enumeration value="2704"/>
+			<enumeration value="2705"/>
+			<enumeration value="2706"/>
+			<enumeration value="2707"/>
+			<enumeration value="2708"/>
+			<enumeration value="2709"/>
+			<enumeration value="2710"/>
+			<enumeration value="2711"/>
+			<enumeration value="2712"/>
+			<enumeration value="2713"/>
+			<enumeration value="2714"/>
+			<enumeration value="2715"/>
+			<enumeration value="2716"/>
+			<enumeration value="2717"/>
+			<enumeration value="2718"/>
+			<enumeration value="2799"/>
+			<enumeration value="2801"/>
+			<enumeration value="2802"/>
+			<enumeration value="2803"/>
+			<enumeration value="2804"/>
+			<enumeration value="2805"/>
+			<enumeration value="2806"/>
+			<enumeration value="2807"/>
+			<enumeration value="2808"/>
+			<enumeration value="2809"/>
+			<enumeration value="2810"/>
+			<enumeration value="2811"/>
+			<enumeration value="2812"/>
+			<enumeration value="2813"/>
+			<enumeration value="2814"/>
+			<enumeration value="2815"/>
+			<enumeration value="2816"/>
+			<enumeration value="2817"/>
+			<enumeration value="2818"/>
+			<enumeration value="2819"/>
+			<enumeration value="2820"/>
+			<enumeration value="2821"/>
+			<enumeration value="2822"/>
+			<enumeration value="2899"/>
+			<enumeration value="2901"/>
+			<enumeration value="2902"/>
+			<enumeration value="2903"/>
+			<enumeration value="2904"/>
+			<enumeration value="2905"/>
+			<enumeration value="2906"/>
+			<enumeration value="2999"/>
+			<enumeration value="3001"/>
+			<enumeration value="3002"/>
+			<enumeration value="3003"/>
+			<enumeration value="3004"/>
+			<enumeration value="3005"/>
+			<enumeration value="3006"/>
+			<enumeration value="3007"/>
+			<enumeration value="3008"/>
+			<enumeration value="3009"/>
+			<enumeration value="3010"/>
+			<enumeration value="3011"/>
+			<enumeration value="3012"/>
+			<enumeration value="3013"/>
+			<enumeration value="3014"/>
+			<enumeration value="3015"/>
+			<enumeration value="3016"/>
+			<enumeration value="3017"/>
+			<enumeration value="3018"/>
+			<enumeration value="3019"/>
+			<enumeration value="3020"/>
+			<enumeration value="3021"/>
+			<enumeration value="3022"/>
+			<enumeration value="3023"/>
+			<enumeration value="3024"/>
+			<enumeration value="3025"/>
+			<enumeration value="3026"/>
+			<enumeration value="3027"/>
+			<enumeration value="3028"/>
+			<enumeration value="3029"/>
+			<enumeration value="3030"/>
+			<enumeration value="3031"/>
+			<enumeration value="3032"/>
+			<enumeration value="3033"/>
+			<enumeration value="3034"/>
+			<enumeration value="3035"/>
+			<enumeration value="3036"/>
+			<enumeration value="3037"/>
+			<enumeration value="3038"/>
+			<enumeration value="3039"/>
+			<enumeration value="3040"/>
+			<enumeration value="3099"/>
+			<enumeration value="5001"/>
+			<enumeration value="5002"/>
+			<enumeration value="5003"/>
+			<enumeration value="5004"/>
+			<enumeration value="5005"/>
+			<enumeration value="5006"/>
+			<enumeration value="5007"/>
+			<enumeration value="5008"/>
+			<enumeration value="5009"/>
+			<enumeration value="5010"/>
+			<enumeration value="5011"/>
+			<enumeration value="5012"/>
+			<enumeration value="5013"/>
+			<enumeration value="5014"/>
+			<enumeration value="5015"/>
+			<enumeration value="5099"/>
+			<enumeration value="9901"/>
+			<enumeration value="9902"/>
+			<enumeration value="9903"/>
+			<enumeration value="9904"/>
+			<enumeration value="9905"/>
+			<enumeration value="9906"/>
+			<enumeration value="9907"/>
+			<enumeration value="9908"/>
+			<enumeration value="9909"/>
+			<enumeration value="9910"/>
+			<enumeration value="9911"/>
+			<enumeration value="9912"/>
+			<enumeration value="9913"/>
+			<enumeration value="9914"/>
+			<enumeration value="9915"/>
+			<enumeration value="9916"/>
+			<enumeration value="9917"/>
+			<enumeration value="9918"/>
+			<enumeration value="9919"/>
+			<enumeration value="9920"/>
+			<enumeration value="9921"/>
+			<enumeration value="9922"/>
+			<enumeration value="9923"/>
+			<enumeration value="9924"/>
+			<enumeration value="9925"/>
+			<enumeration value="9926"/>
+			<enumeration value="9927"/>
+			<enumeration value="9928"/>
+			<enumeration value="9929"/>
+			<enumeration value="9930"/>
+			<enumeration value="9931"/>
+			<enumeration value="9932"/>
+			<enumeration value="9933"/>
+			<enumeration value="9934"/>
+			<enumeration value="9935"/>
+			<enumeration value="9936"/>
+			<enumeration value="9937"/>
+			<enumeration value="9938"/>
+			<enumeration value="9939"/>
+			<enumeration value="9940"/>
+			<enumeration value="9941"/>
+			<enumeration value="9942"/>
+			<enumeration value="9943"/>
+			<enumeration value="9944"/>
+			<enumeration value="9945"/>
+			<enumeration value="9946"/>
+			<enumeration value="9947"/>
+			<enumeration value="9948"/>
+			<enumeration value="9949"/>
+			<enumeration value="9950"/>
+			<enumeration value="9951"/>
+			<enumeration value="9952"/>
+			<enumeration value="9953"/>
+			<enumeration value="9954"/>
+			<enumeration value="9955"/>
+			<enumeration value="9956"/>
+			<enumeration value="9957"/>
+			<enumeration value="9958"/>
+			<enumeration value="9959"/>
+			<enumeration value="9960"/>
+			<enumeration value="9961"/>
+			<enumeration value="9962"/>
+			<enumeration value="9963"/>
+			<enumeration value="9964"/>
+			<enumeration value="9965"/>
+			<enumeration value="9966"/>
+			<enumeration value="9967"/>
+			<enumeration value="9968"/>
+			<enumeration value="9969"/>
+			<enumeration value="9970"/>
+			<enumeration value="9971"/>
+			<enumeration value="9972"/>
+			<enumeration value="9973"/>
+			<enumeration value="9974"/>
+			<enumeration value="9975"/>
+			<enumeration value="9976"/>
+			<enumeration value="9977"/>
+			<enumeration value="9978"/>
+			<enumeration value="9979"/>
+			<enumeration value="9980"/>
+			<enumeration value="9981"/>
+			<enumeration value="9982"/>
+			<enumeration value="9983"/>
+			<enumeration value="9984"/>
+			<enumeration value="9985"/>
+			<enumeration value="9986"/>
+			<enumeration value="9987"/>
+			<enumeration value="9988"/>
+			<enumeration value="9989"/>
+			<enumeration value="9990"/>
+			<enumeration value="9991"/>
+			<enumeration value="9992"/>
+			<enumeration value="9993"/>
+			<enumeration value="9994"/>
+			<enumeration value="9995"/>
+			<enumeration value="9996"/>
+			<enumeration value="9997"/>
+			<enumeration value="9998"/>
+			<enumeration value="9999"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoGuia">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoInternacao">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoLogradouro">
+		<restriction base="string">
+			<enumeration value="001"/>
+			<enumeration value="002"/>
+			<enumeration value="004"/>
+			<enumeration value="005"/>
+			<enumeration value="007"/>
+			<enumeration value="008"/>
+			<enumeration value="009"/>
+			<enumeration value="010"/>
+			<enumeration value="011"/>
+			<enumeration value="012"/>
+			<enumeration value="013"/>
+			<enumeration value="014"/>
+			<enumeration value="015"/>
+			<enumeration value="016"/>
+			<enumeration value="017"/>
+			<enumeration value="019"/>
+			<enumeration value="020"/>
+			<enumeration value="021"/>
+			<enumeration value="022"/>
+			<enumeration value="023"/>
+			<enumeration value="024"/>
+			<enumeration value="027"/>
+			<enumeration value="028"/>
+			<enumeration value="030"/>
+			<enumeration value="031"/>
+			<enumeration value="032"/>
+			<enumeration value="033"/>
+			<enumeration value="036"/>
+			<enumeration value="037"/>
+			<enumeration value="038"/>
+			<enumeration value="039"/>
+			<enumeration value="040"/>
+			<enumeration value="043"/>
+			<enumeration value="045"/>
+			<enumeration value="046"/>
+			<enumeration value="050"/>
+			<enumeration value="052"/>
+			<enumeration value="053"/>
+			<enumeration value="054"/>
+			<enumeration value="055"/>
+			<enumeration value="056"/>
+			<enumeration value="059"/>
+			<enumeration value="060"/>
+			<enumeration value="062"/>
+			<enumeration value="063"/>
+			<enumeration value="064"/>
+			<enumeration value="065"/>
+			<enumeration value="067"/>
+			<enumeration value="070"/>
+			<enumeration value="071"/>
+			<enumeration value="072"/>
+			<enumeration value="073"/>
+			<enumeration value="074"/>
+			<enumeration value="076"/>
+			<enumeration value="077"/>
+			<enumeration value="079"/>
+			<enumeration value="081"/>
+			<enumeration value="082"/>
+			<enumeration value="087"/>
+			<enumeration value="088"/>
+			<enumeration value="089"/>
+			<enumeration value="090"/>
+			<enumeration value="091"/>
+			<enumeration value="092"/>
+			<enumeration value="094"/>
+			<enumeration value="095"/>
+			<enumeration value="096"/>
+			<enumeration value="097"/>
+			<enumeration value="098"/>
+			<enumeration value="099"/>
+			<enumeration value="100"/>
+			<enumeration value="101"/>
+			<enumeration value="103"/>
+			<enumeration value="104"/>
+			<enumeration value="105"/>
+			<enumeration value="106"/>
+			<enumeration value="108"/>
+			<enumeration value="452"/>
+			<enumeration value="453"/>
+			<enumeration value="465"/>
+			<enumeration value="468"/>
+			<enumeration value="469"/>
+			<enumeration value="470"/>
+			<enumeration value="471"/>
+			<enumeration value="472"/>
+			<enumeration value="473"/>
+			<enumeration value="474"/>
+			<enumeration value="475"/>
+			<enumeration value="476"/>
+			<enumeration value="477"/>
+			<enumeration value="478"/>
+			<enumeration value="479"/>
+			<enumeration value="480"/>
+			<enumeration value="481"/>
+			<enumeration value="482"/>
+			<enumeration value="483"/>
+			<enumeration value="484"/>
+			<enumeration value="485"/>
+			<enumeration value="486"/>
+			<enumeration value="487"/>
+			<enumeration value="495"/>
+			<enumeration value="496"/>
+			<enumeration value="497"/>
+			<enumeration value="498"/>
+			<enumeration value="499"/>
+			<enumeration value="500"/>
+			<enumeration value="501"/>
+			<enumeration value="502"/>
+			<enumeration value="503"/>
+			<enumeration value="504"/>
+			<enumeration value="505"/>
+			<enumeration value="506"/>
+			<enumeration value="507"/>
+			<enumeration value="508"/>
+			<enumeration value="509"/>
+			<enumeration value="510"/>
+			<enumeration value="511"/>
+			<enumeration value="512"/>
+			<enumeration value="513"/>
+			<enumeration value="514"/>
+			<enumeration value="515"/>
+			<enumeration value="516"/>
+			<enumeration value="517"/>
+			<enumeration value="518"/>
+			<enumeration value="519"/>
+			<enumeration value="520"/>
+			<enumeration value="521"/>
+			<enumeration value="522"/>
+			<enumeration value="523"/>
+			<enumeration value="524"/>
+			<enumeration value="525"/>
+			<enumeration value="526"/>
+			<enumeration value="527"/>
+			<enumeration value="528"/>
+			<enumeration value="529"/>
+			<enumeration value="530"/>
+			<enumeration value="531"/>
+			<enumeration value="532"/>
+			<enumeration value="533"/>
+			<enumeration value="534"/>
+			<enumeration value="535"/>
+			<enumeration value="536"/>
+			<enumeration value="537"/>
+			<enumeration value="538"/>
+			<enumeration value="539"/>
+			<enumeration value="540"/>
+			<enumeration value="541"/>
+			<enumeration value="542"/>
+			<enumeration value="543"/>
+			<enumeration value="544"/>
+			<enumeration value="545"/>
+			<enumeration value="546"/>
+			<enumeration value="547"/>
+			<enumeration value="548"/>
+			<enumeration value="549"/>
+			<enumeration value="550"/>
+			<enumeration value="551"/>
+			<enumeration value="552"/>
+			<enumeration value="553"/>
+			<enumeration value="554"/>
+			<enumeration value="555"/>
+			<enumeration value="556"/>
+			<enumeration value="557"/>
+			<enumeration value="558"/>
+			<enumeration value="559"/>
+			<enumeration value="560"/>
+			<enumeration value="561"/>
+			<enumeration value="562"/>
+			<enumeration value="563"/>
+			<enumeration value="564"/>
+			<enumeration value="565"/>
+			<enumeration value="566"/>
+			<enumeration value="567"/>
+			<enumeration value="568"/>
+			<enumeration value="569"/>
+			<enumeration value="570"/>
+			<enumeration value="571"/>
+			<enumeration value="572"/>
+			<enumeration value="573"/>
+			<enumeration value="645"/>
+			<enumeration value="646"/>
+			<enumeration value="650"/>
+			<enumeration value="651"/>
+			<enumeration value="652"/>
+			<enumeration value="653"/>
+			<enumeration value="654"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoSaidaGuiaConsulta">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoSaidaGuiaSADT">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+			<enumeration value="6"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_tipoTransacao">
+		<restriction base="string">
+			<enumeration value="ENVIO_LOTE_GUIAS"/>
+			<enumeration value="SOLIC_DEMONSTRATIVO_RETORNO"/>
+			<enumeration value="SOLIC_STATUS_PROTOCOLO"/>
+			<enumeration value="SOLICITACAO_PROCEDIMENTOS"/>
+			<enumeration value="PROTOCOLO_RECEBIMENTO"/>
+			<enumeration value="SITUACAO_PROTOCOLO"/>
+			<enumeration value="RESPOSTA_SOLICITACAO"/>
+			<enumeration value="DEMONSTRATIVO_PAGAMENTO"/>
+			<enumeration value="DEMONSTRATIVO_ANALISE_CONTA"/>
+			<enumeration value="DEMONSTRATIVO_ODONTOLOGIA"/>
+			<enumeration value="CANCELAMENTO_GUIA_RECIBO"/>
+			<enumeration value="RE_APRESENTACAO_GUIA"/>
+			<enumeration value="CANCELA_GUIA"/>
+			<enumeration value="VERIFICA_ELEGIBILIDADE"/>
+			<enumeration value="SITUACAO_ELEGIBILIDADE"/>
+			<enumeration value="AUTORIZACAO_ODONTOLOGIA"/>
+			<enumeration value="SOLICITA_STATUS_AUTORIZACAO"/>
+			<enumeration value="STATUS_AUTORIZACAO"/>
+			<enumeration value="ENVIO_ANEXO"/>
+			<enumeration value="PROTOCOLO_RECEBIMENTO_ANEXO"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_UF">
+		<restriction base="string">
+			<length value="2"/>
+			<enumeration value="RS"/>
+			<enumeration value="SC"/>
+			<enumeration value="PR"/>
+			<enumeration value="SP"/>
+			<enumeration value="MG"/>
+			<enumeration value="RJ"/>
+			<enumeration value="ES"/>
+			<enumeration value="MS"/>
+			<enumeration value="MT"/>
+			<enumeration value="GO"/>
+			<enumeration value="TO"/>
+			<enumeration value="PA"/>
+			<enumeration value="AM"/>
+			<enumeration value="RO"/>
+			<enumeration value="RR"/>
+			<enumeration value="AC"/>
+			<enumeration value="DF"/>
+			<enumeration value="BA"/>
+			<enumeration value="SE"/>
+			<enumeration value="CE"/>
+			<enumeration value="PI"/>
+			<enumeration value="PB"/>
+			<enumeration value="RN"/>
+			<enumeration value="AL"/>
+			<enumeration value="MA"/>
+			<enumeration value="PE"/>
+			<enumeration value="AP"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_unidadeTempo">
+		<restriction base="string">
+			<length value="1"/>
+			<enumeration value="A"/>
+			<enumeration value="M"/>
+			<enumeration value="D"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_valorMonetario">
+		<restriction base="decimal">
+			<fractionDigits value="2"/>
+			<totalDigits value="10"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_versao">
+		<restriction base="string">
+			<enumeration value="2.01.01"/>
+			<enumeration value="2.01.02"/>
+			<enumeration value="2.01.03"/>
+			<enumeration value="2.02.01"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_viaDeAcesso">
+		<restriction base="string">
+			<maxLength value="1"/>
+			<enumeration value="U"/>
+			<enumeration value="M"/>
+			<enumeration value="D"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_CEP">
+		<restriction base="string">
+			<maxLength value="8"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_CBOS">
+		<restriction base="string">
+			<enumeration value="1312.05"/>
+			<enumeration value="1312.05"/>
+			<enumeration value="1312.05"/>
+			<enumeration value="1312.05"/>
+			<enumeration value="1312.05"/>
+			<enumeration value="1312.05"/>
+			<enumeration value="1312.05"/>
+			<enumeration value="1312.05"/>
+			<enumeration value="1312.05"/>
+			<enumeration value="1312.10"/>
+			<enumeration value="1312.10"/>
+			<enumeration value="1312.10"/>
+			<enumeration value="1312.10"/>
+			<enumeration value="1312.10"/>
+			<enumeration value="1311.20"/>
+			<enumeration value="2011"/>
+			<enumeration value="2011.15"/>
+			<enumeration value="2033.05"/>
+			<enumeration value="2030.10"/>
+			<enumeration value="2030.10"/>
+			<enumeration value="2030.10"/>
+			<enumeration value="2030.10"/>
+			<enumeration value="2033.10"/>
+			<enumeration value="2030.15"/>
+			<enumeration value="2030.20"/>
+			<enumeration value="2030.25"/>
+			<enumeration value="2131.50"/>
+			<enumeration value="2131.50"/>
+			<enumeration value="2211.05"/>
+			<enumeration value="2211.05"/>
+			<enumeration value="2231"/>
+			<enumeration value="2232"/>
+			<enumeration value="2231.01"/>
+			<enumeration value="2231.02"/>
+			<enumeration value="2231.02"/>
+			<enumeration value="2231.02"/>
+			<enumeration value="2231.03"/>
+			<enumeration value="2231.03"/>
+			<enumeration value="2231.04"/>
+			<enumeration value="2231.04"/>
+			<enumeration value="2235"/>
+			<enumeration value="2231.04"/>
+			<enumeration value="2231.04"/>
+			<enumeration value="2231.05"/>
+			<enumeration value="2232.04"/>
+			<enumeration value="2231.05"/>
+			<enumeration value="2236"/>
+			<enumeration value="2231.06"/>
+			<enumeration value="2231.06"/>
+			<enumeration value="2231.06"/>
+			<enumeration value="2237"/>
+			<enumeration value="2231.07"/>
+			<enumeration value="2238"/>
+			<enumeration value="2231.07"/>
+			<enumeration value="2233.05"/>
+			<enumeration value="2233.05"/>
+			<enumeration value="2233.05"/>
+			<enumeration value="2231.08"/>
+			<enumeration value="2234.05"/>
+			<enumeration value="2234.05"/>
+			<enumeration value="2234.05"/>
+			<enumeration value="2231.08"/>
+			<enumeration value="2232.08"/>
+			<enumeration value="2231.09"/>
+			<enumeration value="2231.09"/>
+			<enumeration value="2232.08"/>
+			<enumeration value="2235.05"/>
+			<enumeration value="2231.09"/>
+			<enumeration value="2232.08"/>
+			<enumeration value="2232.08"/>
+			<enumeration value="2231.10"/>
+			<enumeration value="2236.05"/>
+			<enumeration value="2236.05"/>
+			<enumeration value="2231.10"/>
+			<enumeration value="2231.10"/>
+			<enumeration value="2237.05"/>
+			<enumeration value="2237.05"/>
+			<enumeration value="2231.11"/>
+			<enumeration value="2231.11"/>
+			<enumeration value="2231.12"/>
+			<enumeration value="2231.12"/>
+			<enumeration value="2232.12"/>
+			<enumeration value="2231.13"/>
+			<enumeration value="2231.13"/>
+			<enumeration value="2232.12"/>
+			<enumeration value="2235.10"/>
+			<enumeration value="2231.14"/>
+			<enumeration value="2241.05"/>
+			<enumeration value="2231.15"/>
+			<enumeration value="2231.15"/>
+			<enumeration value="2231.15"/>
+			<enumeration value="2231.15"/>
+			<enumeration value="2231.15"/>
+			<enumeration value="2231.15"/>
+			<enumeration value="2231.16"/>
+			<enumeration value="2231.16"/>
+			<enumeration value="2231.16"/>
+			<enumeration value="2237.10"/>
+			<enumeration value="2237.10"/>
+			<enumeration value="2232.16"/>
+			<enumeration value="2231.17"/>
+			<enumeration value="2238.10"/>
+			<enumeration value="2231.17"/>
+			<enumeration value="2231.17"/>
+			<enumeration value="2231.18"/>
+			<enumeration value="2235.15"/>
+			<enumeration value="2231.19"/>
+			<enumeration value="2231.20"/>
+			<enumeration value="2231.20"/>
+			<enumeration value="2236.15"/>
+			<enumeration value="2232.20"/>
+			<enumeration value="2231.21"/>
+			<enumeration value="2231.21"/>
+			<enumeration value="2231.22"/>
+			<enumeration value="2231.22"/>
+			<enumeration value="2231.23"/>
+			<enumeration value="2231.23"/>
+			<enumeration value="2235.20"/>
+			<enumeration value="2231.24"/>
+			<enumeration value="2235.20"/>
+			<enumeration value="2231.24"/>
+			<enumeration value="2231.24"/>
+			<enumeration value="2231.24"/>
+			<enumeration value="2231.24"/>
+			<enumeration value="2231.24"/>
+			<enumeration value="2231.24"/>
+			<enumeration value="2231.24"/>
+			<enumeration value="2231.24"/>
+			<enumeration value="2231.24"/>
+			<enumeration value="2232.24"/>
+			<enumeration value="2231.25"/>
+			<enumeration value="2231.25"/>
+			<enumeration value="2231.25"/>
+			<enumeration value="2231.25"/>
+			<enumeration value="2231.25"/>
+			<enumeration value="2236.20"/>
+			<enumeration value="2236.20"/>
+			<enumeration value="2231.26"/>
+			<enumeration value="2231.26"/>
+			<enumeration value="2231.27"/>
+			<enumeration value="2231.27"/>
+			<enumeration value="2231.28"/>
+			<enumeration value="2232.28"/>
+			<enumeration value="2232.28"/>
+			<enumeration value="2232.28"/>
+			<enumeration value="2235.25"/>
+			<enumeration value="2235.25"/>
+			<enumeration value="2231.29"/>
+			<enumeration value="2231.29"/>
+			<enumeration value="2231.29"/>
+			<enumeration value="2231.29"/>
+			<enumeration value="2231.30"/>
+			<enumeration value="2231.31"/>
+			<enumeration value="2231.31"/>
+			<enumeration value="2231.31"/>
+			<enumeration value="2231.31"/>
+			<enumeration value="2231.32"/>
+			<enumeration value="2231.32"/>
+			<enumeration value="2231.32"/>
+			<enumeration value="2231.32"/>
+			<enumeration value="2231.32"/>
+			<enumeration value="2231.32"/>
+			<enumeration value="2232.32"/>
+			<enumeration value="2231.33"/>
+			<enumeration value="2231.33"/>
+			<enumeration value="235.30"/>
+			<enumeration value="2231.34"/>
+			<enumeration value="2231.34"/>
+			<enumeration value="2231.34"/>
+			<enumeration value="2231.35"/>
+			<enumeration value="2231.36"/>
+			<enumeration value="2231.36"/>
+			<enumeration value="2231.36"/>
+			<enumeration value="2232.36"/>
+			<enumeration value="2232.36"/>
+			<enumeration value="2231.37"/>
+			<enumeration value="2232.36"/>
+			<enumeration value="2231.38"/>
+			<enumeration value="2231.38"/>
+			<enumeration value="2231.38"/>
+			<enumeration value="2231.38"/>
+			<enumeration value="2235.35"/>
+			<enumeration value="2231.39"/>
+			<enumeration value="2231.40"/>
+			<enumeration value="2231.40"/>
+			<enumeration value="2231.40"/>
+			<enumeration value="2231.40"/>
+			<enumeration value="2232.40"/>
+			<enumeration value="2232.40"/>
+			<enumeration value="2231.41"/>
+			<enumeration value="2231.41"/>
+			<enumeration value="2232.40"/>
+			<enumeration value="2232.40"/>
+			<enumeration value="2232.40"/>
+			<enumeration value="2231.42"/>
+			<enumeration value="2231.42"/>
+			<enumeration value="2231.42"/>
+			<enumeration value="2231.42"/>
+			<enumeration value="2231.43"/>
+			<enumeration value="2231.43"/>
+			<enumeration value="2231.43"/>
+			<enumeration value="2231.44"/>
+			<enumeration value="2235.40"/>
+			<enumeration value="2235.40"/>
+			<enumeration value="2231.44"/>
+			<enumeration value="2231.44"/>
+			<enumeration value="2232.44"/>
+			<enumeration value="2231.45"/>
+			<enumeration value="2231.45"/>
+			<enumeration value="2231.45"/>
+			<enumeration value="2231.46"/>
+			<enumeration value="2231.46"/>
+			<enumeration value="2231.46"/>
+			<enumeration value="2231.46"/>
+			<enumeration value="2231.46"/>
+			<enumeration value="2231.46"/>
+			<enumeration value="2231.46"/>
+			<enumeration value="2231.46"/>
+			<enumeration value="2231.46"/>
+			<enumeration value="2231.46"/>
+			<enumeration value="2231.47"/>
+			<enumeration value="2231.47"/>
+			<enumeration value="2231.47"/>
+			<enumeration value="2231.47"/>
+			<enumeration value="2231.48"/>
+			<enumeration value="2231.48"/>
+			<enumeration value="2231.48"/>
+			<enumeration value="2231.48"/>
+			<enumeration value="2232.48"/>
+			<enumeration value="2232.48"/>
+			<enumeration value="2235.45"/>
+			<enumeration value="2235.45"/>
+			<enumeration value="2231.49"/>
+			<enumeration value="2231.49"/>
+			<enumeration value="2231.49"/>
+			<enumeration value="2231.49"/>
+			<enumeration value="2232.48"/>
+			<enumeration value="2231.50"/>
+			<enumeration value="2231.51"/>
+			<enumeration value="2231.51"/>
+			<enumeration value="2231.51"/>
+			<enumeration value="2231.51"/>
+			<enumeration value="2231.51"/>
+			<enumeration value="2231.52"/>
+			<enumeration value="2231.52"/>
+			<enumeration value="2231.52"/>
+			<enumeration value="2232.52"/>
+			<enumeration value="2231.53"/>
+			<enumeration value="2231.53"/>
+			<enumeration value="2231.53"/>
+			<enumeration value="2231.53"/>
+			<enumeration value="2232.52"/>
+			<enumeration value="2231.53"/>
+			<enumeration value="2235.50"/>
+			<enumeration value="2231.54"/>
+			<enumeration value="2231.54"/>
+			<enumeration value="2231.55"/>
+			<enumeration value="2231.55"/>
+			<enumeration value="2231.56"/>
+			<enumeration value="2231.56"/>
+			<enumeration value="2231.56"/>
+			<enumeration value="2231.56"/>
+			<enumeration value="2231.56"/>
+			<enumeration value="2231.57"/>
+			<enumeration value="2232.56"/>
+			<enumeration value="2231.57"/>
+			<enumeration value="2231.57"/>
+			<enumeration value="2231.57"/>
+			<enumeration value="2232.56"/>
+			<enumeration value="2232.56"/>
+			<enumeration value="2231.57"/>
+			<enumeration value="2235.55"/>
+			<enumeration value="2232.60"/>
+			<enumeration value="2232.60"/>
+			<enumeration value="2235.60"/>
+			<enumeration value="2235.60"/>
+			<enumeration value="2232.64"/>
+			<enumeration value="2232.68"/>
+			<enumeration value="2232.68"/>
+			<enumeration value="2232.68"/>
+			<enumeration value="2232.72"/>
+			<enumeration value="2232.72"/>
+			<enumeration value="2232.72"/>
+			<enumeration value="2232.72"/>
+			<enumeration value="2232.72"/>
+			<enumeration value="2394.25"/>
+			<enumeration value="2515"/>
+			<enumeration value="2515.05"/>
+			<enumeration value="2515.05"/>
+			<enumeration value="2515.05"/>
+			<enumeration value="2516.05"/>
+			<enumeration value="2515.10"/>
+			<enumeration value="2515.10"/>
+			<enumeration value="2515.10"/>
+			<enumeration value="2515.10"/>
+			<enumeration value="2515.10"/>
+			<enumeration value="2521.05"/>
+			<enumeration value="2515.15"/>
+			<enumeration value="2515.15"/>
+			<enumeration value="2515.20"/>
+			<enumeration value="2515.25"/>
+			<enumeration value="2515.25"/>
+			<enumeration value="2515.25"/>
+			<enumeration value="2515.30"/>
+			<enumeration value="2515.35"/>
+			<enumeration value="2515.40"/>
+			<enumeration value="2515.40"/>
+			<enumeration value="2515.45"/>
+			<enumeration value="2515.50"/>
+			<enumeration value="3011.05"/>
+			<enumeration value="3135.05"/>
+			<enumeration value="3134.10"/>
+			<enumeration value="3225"/>
+			<enumeration value="3221.05"/>
+			<enumeration value="3221.05"/>
+			<enumeration value="3221.05"/>
+			<enumeration value="3221.05"/>
+			<enumeration value="3222.05"/>
+			<enumeration value="3222.05"/>
+			<enumeration value="3222.05"/>
+			<enumeration value="3223.05"/>
+			<enumeration value="3223.05"/>
+			<enumeration value="3223.05"/>
+			<enumeration value="3224.05"/>
+			<enumeration value="3225.05"/>
+			<enumeration value="3225.05"/>
+			<enumeration value="3226.05"/>
+			<enumeration value="3226.05"/>
+			<enumeration value="3222.10"/>
+			<enumeration value="3222.10"/>
+			<enumeration value="3222.10"/>
+			<enumeration value="3224.10"/>
+			<enumeration value="3221.15"/>
+			<enumeration value="3221.15"/>
+			<enumeration value="3221.15"/>
+			<enumeration value="3221.15"/>
+			<enumeration value="3221.15"/>
+			<enumeration value="3222.15"/>
+			<enumeration value="3222.15"/>
+			<enumeration value="3222.15"/>
+			<enumeration value="3224.15"/>
+			<enumeration value="3224.15"/>
+			<enumeration value="3224.15"/>
+			<enumeration value="3224.15"/>
+			<enumeration value="3224.15"/>
+			<enumeration value="3224.15"/>
+			<enumeration value="3222.20"/>
+			<enumeration value="3222.20"/>
+			<enumeration value="3224.20"/>
+			<enumeration value="3241.05"/>
+			<enumeration value="3222.25"/>
+			<enumeration value="3222.25"/>
+			<enumeration value="3222.25"/>
+			<enumeration value="3242.05"/>
+			<enumeration value="3242.05"/>
+			<enumeration value="3241.10"/>
+			<enumeration value="3251"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3222.30"/>
+			<enumeration value="3242.10"/>
+			<enumeration value="3242.10"/>
+			<enumeration value="3251.05"/>
+			<enumeration value="3241.15"/>
+			<enumeration value="3241.15"/>
+			<enumeration value="3241.15"/>
+			<enumeration value="3241.15"/>
+			<enumeration value="3241.15"/>
+			<enumeration value="3241.15"/>
+			<enumeration value="3241.15"/>
+			<enumeration value="3222.35"/>
+			<enumeration value="3222.35"/>
+			<enumeration value="3222.35"/>
+			<enumeration value="3251.10"/>
+			<enumeration value="3222.40"/>
+			<enumeration value="3222.40"/>
+			<enumeration value="3253.10"/>
+			<enumeration value="3251.15"/>
+			<enumeration value="3522"/>
+			<enumeration value="3522.10"/>
+			<enumeration value="3522.10"/>
+			<enumeration value="4110.10"/>
+			<enumeration value="4110.10"/>
+			<enumeration value="4110.10"/>
+			<enumeration value="4151.20"/>
+			<enumeration value="4221.05"/>
+			<enumeration value="4221.05"/>
+			<enumeration value="4221.10"/>
+			<enumeration value="4221.10"/>
+			<enumeration value="4221.10"/>
+			<enumeration value="4221.15"/>
+			<enumeration value="5151"/>
+			<enumeration value="5152"/>
+			<enumeration value="5132.20"/>
+			<enumeration value="5151.05"/>
+			<enumeration value="5151.05"/>
+			<enumeration value="5151.05"/>
+			<enumeration value="5151.10"/>
+			<enumeration value="5151.10"/>
+			<enumeration value="5151.10"/>
+			<enumeration value="5151.10"/>
+			<enumeration value="5151.10"/>
+			<enumeration value="5151.10"/>
+			<enumeration value="5151.10"/>
+			<enumeration value="5151.10"/>
+			<enumeration value="5151.10"/>
+			<enumeration value="5152.10"/>
+			<enumeration value="5134.30"/>
+			<enumeration value="5151.15"/>
+			<enumeration value="5151.20"/>
+			<enumeration value="5151.20"/>
+			<enumeration value="5162.10"/>
+			<enumeration value="5168.05"/>
+			<enumeration value="5161.15"/>
+			<enumeration value="5161.35"/>
+			<enumeration value="5193.05"/>
+			<enumeration value="5193.05"/>
+			<enumeration value="5193.05"/>
+			<enumeration value="5211.30"/>
+			<enumeration value="6233.15"/>
+			<enumeration value="6233.15"/>
+			<enumeration value="7411.05"/>
+			<enumeration value="7664.20"/>
+			<enumeration value="7823.10"/>
+			<enumeration value="9151.05"/>
+			<enumeration value="9153.05"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_banco">
+		<restriction base="integer">
+			<totalDigits value="10"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_atendimentoOdonto">
+		<restriction base="string">
+			<length value="1"/>
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="3"/>
+			<enumeration value="4"/>
+			<enumeration value="5"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_agencia">
+		<restriction base="string">
+			<maxLength value="10"/>
+		</restriction>
+	</simpleType>
+	<!-- Tipos complexos de dados -->
+	<complexType name="ct_atendimentoConsultaReapr">
+		<sequence>
+			<element name="procedimento">
+				<complexType>
+					<all>
+						<element name="codigoTabela" type="ans:st_tabela"/>
+						<element name="codigoProcedimento" type="ans:st_codigoTabela"/>
+						<element name="justificativa" type="ans:st_justificativa"/>
+					</all>
+				</complexType>
+			</element>
+			<element name="tipoConsulta" type="ans:st_tipoConsulta"/>
+			<element name="tipoSaida" type="ans:st_tipoSaidaGuiaConsulta"/>
+			<element name="dataAtendimento" type="ans:st_data"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_atendimentoOdontologia">
+		<sequence>
+			<element name="dataTerminoTratamento" type="ans:st_data" minOccurs="0"/>
+			<element name="tipoAtendimento" type="ans:st_atendimentoOdonto" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_autorizacaoGuia">
+		<sequence>
+			<element name="dataAutorizacao" type="ans:st_data" minOccurs="0"/>
+			<element name="senhaAutorizacao" type="ans:st_senhaAutorizacao" minOccurs="0"/>
+			<element name="validadeSenha" type="ans:st_data" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_autorizacaoGuiaInternacao">
+		<complexContent>
+			<extension base="ans:ct_autorizacaoGuia">
+				<sequence>
+					<element name="diasAutorizado" type="ans:st_numeroInteiro" minOccurs="0"/>
+					<element name="dataProvavelAdmisHosp" type="ans:st_data" minOccurs="0"/>
+					<element name="tipoAcomodacao" type="ans:st_tipoAcomodacao" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ct_autorizacaoProcedimento">
+		<sequence>
+			<element name="identificacaoAutorizacao" type="ans:ct_cabecalhoGuia"/>
+			<element name="statusSolicitacao" type="ans:st_statusSolicitacao" minOccurs="0"/>
+			<element name="motivoNegativa" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="motivoGlosa" type="ans:ct_motivoGlosa" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="beneficiario" type="ans:ct_beneficiario"/>
+			<element name="prestadorAutorizado" type="ans:ct_contratado" minOccurs="0"/>
+			<element name="dadosAutorizacao" type="ans:ct_autorizacaoGuiaInternacao" minOccurs="0"/>
+			<element name="procedimentos" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="procedimento" type="ans:ct_itemSolicitacao" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_autorizacaoProcedimentoOdonto">
+		<sequence>
+			<element name="identificacaoAutorizacao" type="ans:ct_cabecalhoGuia"/>
+			<element name="statusSolicitacao" type="ans:st_statusSolicitacao" minOccurs="0"/>
+			<element name="motivoNegativa" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="motivoGlosa" type="ans:ct_motivoGlosa" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="beneficiario" type="ans:ct_beneficiario"/>
+			<element name="prestadorAutorizado" type="ans:ct_contratado" minOccurs="0"/>
+			<element name="dadosAutorizacao" type="ans:ct_autorizacaoGuiaInternacao" minOccurs="0"/>
+			<element name="procedimentos" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="procedimento" type="ans:ct_itemSolicitacaoOdonto" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="totalOdonto" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="totalvalor" type="ans:st_valorMonetario" minOccurs="0"/>
+						<element name="totalFranquiaCoparticipacao" type="ans:st_valorMonetario" minOccurs="0"/>
+						<element name="totalquantidadeUS" type="ans:st_valorMonetario" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_beneficiario">
+		<sequence>
+			<element name="numeroCarteira" type="ans:st_descricao20"/>
+			<element name="nomeBeneficiario" type="ans:st_nome"/>
+			<element name="nomePlano" type="ans:st_descricao40"/>
+			<element name="validadeCarteira" type="ans:st_data" minOccurs="0"/>
+			<element name="numeroCNS" type="ans:st_descricao15" minOccurs="0"/>
+			<element name="identificadorBeneficiario" type="base64Binary" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_cabecalhoAnexoOdonto">
+		<sequence>
+			<element name="numeroGuiaPrincipal" type="ans:st_numeroGuia"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_cabecalhoGuia">
+		<sequence>
+			<element name="identificacaoFontePagadora">
+				<complexType>
+					<choice>
+						<element name="registroANS" type="ans:st_registroANS"/>
+						<element name="cnpjFontePagadora" type="ans:st_CNPJ"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="dataEmissaoGuia" type="ans:st_data"/>
+			<element name="numeroGuiaPrestador" type="ans:st_numeroGuia"/>
+			<element name="numeroGuiaOperadora" type="ans:st_numeroGuia" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_cabecalhoGuiaOdonto">
+		<sequence>
+			<element name="identificacaoFontePagadora">
+				<complexType>
+					<choice>
+						<element name="registroANS" type="ans:st_registroANS"/>
+						<element name="cnpjFontePagadora" type="ans:st_CNPJ"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="numeroGuiaPrestador" type="ans:st_numeroGuia"/>
+			<element name="numeroGuiaOperadora" type="ans:st_numeroGuia" minOccurs="0"/>
+			<element name="dataEmissaoGuia" type="ans:st_data" minOccurs="0"/>
+			<element name="numeroGuiaPrincipal" type="ans:st_numeroGuia" minOccurs="0"/>
+			<sequence>
+				<element name="dataAutorizacao" type="ans:st_data" minOccurs="0"/>
+				<element name="senhaAutorizacao" type="ans:st_senhaAutorizacao" minOccurs="0"/>
+				<element name="validadeSenha" type="ans:st_data" minOccurs="0"/>
+			</sequence>
+		</sequence>
+	</complexType>
+	<complexType name="ct_cabecalhoDemonstrativo">
+		<sequence>
+			<element name="numeroDemonstrativo" type="ans:st_descricao20"/>
+			<element name="dataEmissao" type="ans:st_data"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_cabecalhoSolicitacao">
+		<sequence>
+			<element name="identificacaoFontePagadora">
+				<complexType>
+					<choice>
+						<element name="registroANS" type="ans:st_registroANS"/>
+						<element name="cnpjFontePagadora" type="ans:st_CNPJ"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="dataEmissaoGuia" type="ans:st_data" minOccurs="0"/>
+			<element name="numeroGuiaOperadora" type="ans:st_numeroGuia" minOccurs="0"/>
+			<element name="numeroGuiaPrestador" type="ans:st_numeroGuia"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_cancelaGuia">
+		<sequence>
+			<element name="dadosPrestador" type="ans:ct_contratado"/>
+			<element name="tipoGuia" type="ans:st_tipoGuia"/>
+			<element name="guia">
+				<complexType>
+					<sequence>
+						<element name="dadosGuia" type="ans:ct_cabecalhoGuia" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_contratado">
+		<sequence>
+			<element name="identificacao" type="ans:ct_identificacaoPrestadorExecutante"/>
+			<element name="nomeContratado" type="ans:st_nome"/>
+			<element name="enderecoContratado" type="ans:ct_endereco" minOccurs="0"/>
+			<element name="numeroCNES" type="ans:st_CNES" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_contratadoSolicitante">
+		<sequence>
+			<element name="identificacao" type="ans:ct_identificacaoPrestador"/>
+			<element name="nomeContratado" type="ans:st_nome"/>
+			<element name="enderecoContratado" type="ans:ct_endereco" minOccurs="0"/>
+			<element name="numeroCNES" type="ans:st_CNES" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_conselhoProfissional">
+		<sequence>
+			<element name="siglaConselho" type="ans:st_conselhoProfissional"/>
+			<element name="numeroConselho" type="ans:st_descricao15"/>
+			<element name="ufConselho" type="ans:st_UF"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_creditoOdonto">
+		<sequence>
+			<element name="valorDesconto" type="ans:st_valorMonetario"/>
+			<element name="descricao" type="ans:st_descricao40"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadoBancario">
+		<sequence>
+			<element name="dataPagamento" type="ans:st_data"/>
+			<element name="formaPagamento" type="ans:st_formaPagamento"/>
+			<element name="banco" type="ans:st_banco" minOccurs="0"/>
+			<element name="agencia" type="ans:st_agencia" minOccurs="0"/>
+			<element name="contaCorrente" type="ans:st_conta" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosConta">
+		<sequence>
+			<element name="numeroFatura" type="ans:st_descricao12" minOccurs="0"/>
+			<element name="lote">
+				<complexType>
+					<sequence>
+						<element name="dadosLote" type="ans:ct_dadosLote" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="valorProcessadoFatura" type="ans:st_valorMonetario"/>
+			<element name="valorLiberadoFatura" type="ans:st_valorMonetario"/>
+			<element name="valorGlosaFatura" type="ans:st_valorMonetario" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosGuia">
+		<sequence>
+			<element name="numeroGuiaPrestador" type="ans:st_numeroGuia"/>
+			<element name="numeroGuiaOperadora" type="ans:st_numeroGuia" minOccurs="0"/>
+			<element name="beneficiario" type="ans:ct_beneficiario"/>
+			<element name="dataRealizacao" type="ans:st_data"/>
+			<element name="valorProcessadoGuia" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="valorLiberadoGuia" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="valorGlosaGuia" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="procedimentos">
+				<complexType>
+					<choice>
+						<element name="dadosProcedimento" type="ans:ct_dadosProcedimento" maxOccurs="unbounded"/>
+						<element name="dadosProcedimentoOdonto" type="ans:ct_procedimentoOdontoRealizado" maxOccurs="unbounded"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="codigoGlosaGuia" type="ans:ct_motivoGlosa" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosLote">
+		<sequence>
+			<element name="numeroLote" type="ans:st_descricao12"/>
+			<element name="dataEnvioLote" type="ans:st_data"/>
+			<element name="numeroProtocolo" type="ans:st_protocolo"/>
+			<element name="valorProtocolo" type="ans:st_valorMonetario"/>
+			<element name="valorGlosaProtocolo" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="codigoGlosaProtocolo" type="ans:st_tipoGlosa" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="guia">
+				<complexType>
+					<sequence>
+						<element name="dadosGuia" type="ans:ct_dadosGuia" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosPagamento">
+		<sequence>
+			<element name="dataPagamento" type="ans:st_data"/>
+			<element name="loteOdonto" maxOccurs="unbounded">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_loteOdonto">
+							<sequence>
+								<element name="totalGeralLote" type="ans:ct_totalDemoOdonto"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosProcedimento">
+		<sequence>
+			<element name="procedimento" type="ans:ct_tabela"/>
+			<element name="quantidadeExecutada" type="ans:st_quantidadeProcedimento"/>
+			<element name="valorProcessado" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="valorLiberado" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="grauParticipacao" type="ans:st_posicaoProfissao" minOccurs="0"/>
+			<element name="relacaoGlosa" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="tipoGlosa" type="ans:ct_motivoGlosa" maxOccurs="unbounded"/>
+						<element name="valorGlosa" type="ans:st_valorMonetario" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_dadosResumo">
+		<sequence>
+			<element name="numeroFatura" type="ans:st_descricao12" minOccurs="0"/>
+			<element name="numeroLote" type="ans:st_descricao12"/>
+			<element name="dataEnvioLote" type="ans:st_data"/>
+			<element name="numeroProtocolo" type="ans:st_protocolo"/>
+			<element name="valorInformado" type="ans:st_valorMonetario"/>
+			<element name="valorProcessado" type="ans:st_valorMonetario"/>
+			<element name="valorLiberado" type="ans:st_valorMonetario"/>
+			<element name="valorGlosa" type="ans:st_valorMonetario" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_demonstrativoAnaliseConta">
+		<sequence>
+			<element name="identificacaoFontePagadora" type="ans:ct_identificacaoFontePagadora"/>
+			<element name="cabecalhoDemonstrativo" type="ans:ct_cabecalhoDemonstrativo"/>
+			<element name="dadosPrestador" type="ans:ct_contratado"/>
+			<element name="fatura">
+				<complexType>
+					<sequence>
+						<element name="dadosFatura" type="ans:ct_dadosConta"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="valorProcessadoGeral" type="ans:st_valorMonetario"/>
+			<element name="valorLiberadoGeral" type="ans:st_valorMonetario"/>
+			<element name="valorGlosaGeral" type="ans:st_valorMonetario" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_demonstrativoPagamento">
+		<sequence>
+			<element name="cabecalhoDemonstrativo" type="ans:ct_cabecalhoDemonstrativo"/>
+			<element name="identificacaoFontePagadora" type="ans:ct_identificacaoFontePagadora"/>
+			<element name="dadosPrestador" type="ans:ct_contratado"/>
+			<element name="dadosPagamento" type="ans:ct_dadoBancario"/>
+			<element name="dadosResumo">
+				<complexType>
+					<sequence>
+						<element name="detalheResumo" type="ans:ct_dadosResumo" maxOccurs="unbounded"/>
+						<element name="totalGeralInformado" type="ans:st_valorMonetario"/>
+						<element name="TotalGeralProcessado" type="ans:st_valorMonetario"/>
+						<element name="TotalGeralGlosa" type="ans:st_valorMonetario" minOccurs="0"/>
+						<element name="TotalGeralLiberado" type="ans:st_valorMonetario"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="valorTotal" type="ans:st_valorMonetario"/>
+			<element name="demaisDescontos" type="ans:ct_descontos" minOccurs="0"/>
+			<element name="valorFinalLiberado" type="ans:st_valorMonetario"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_demonstrativoOdontologia">
+		<sequence>
+			<element name="cabecalhoDemonstrativo" type="ans:ct_cabecalhoDemonstrativo"/>
+			<element name="identificacaoFontePagadora" type="ans:ct_identificacaoFontePagadora"/>
+			<element name="dadosPrestador">
+				<complexType>
+					<sequence>
+						<element name="codigoPrestadorNaOperadora" type="ans:st_codigoPrestadorNaOperadora" minOccurs="0"/>
+						<element name="identificadorPrestador" type="ans:ct_identificadorPrestOdontoDemo"/>
+						<element name="nomeContratado" type="ans:st_nome"/>
+						<element name="numeroCNES" type="ans:st_CNES" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="dadosPagamento" maxOccurs="unbounded">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_dadosPagamento">
+							<sequence>
+								<element name="totalGeral" type="ans:ct_totalDemoOdonto"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="debitosCreditosTributaveis">
+				<complexType>
+					<sequence>
+						<element name="descontos" type="ans:ct_descontoOdonto" minOccurs="0" maxOccurs="unbounded"/>
+						<element name="creditos" type="ans:ct_creditoOdonto" minOccurs="0" maxOccurs="unbounded"/>
+						<element name="valorTotalTributavel" type="ans:st_valorMonetario" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="demaisImpostos">
+				<complexType>
+					<sequence>
+						<element name="descontos" type="ans:ct_descontoOdonto" minOccurs="0" maxOccurs="unbounded"/>
+						<element name="valorTotalImpostos" type="ans:st_valorMonetario" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="debitosCreditosNaoTributaveis">
+				<complexType>
+					<sequence>
+						<element name="descontos" type="ans:ct_descontoOdonto" minOccurs="0" maxOccurs="unbounded"/>
+						<element name="creditos" type="ans:ct_creditoOdonto" minOccurs="0" maxOccurs="unbounded"/>
+						<element name="valorTotalNaoTributavel" type="ans:st_valorMonetario" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="valorFinalReceber" type="ans:st_valorMonetario"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_descontoOdonto">
+		<sequence>
+			<element name="descricao" type="ans:st_descricao40"/>
+			<element name="valorDesconto">
+				<simpleType>
+					<restriction base="ans:st_valorMonetario"/>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_detalheGuiaOdonto">
+		<sequence>
+			<element name="numeroGuiaPrestador" type="ans:st_numeroGuia"/>
+			<element name="numeroGuiaOperadora" type="ans:st_numeroGuia" minOccurs="0"/>
+			<element name="codigoBeneficiario" type="ans:st_codigoBeneficiario"/>
+			<element name="NomeBeneficiario" type="ans:st_nome"/>
+			<element name="procedimentoRealizado">
+				<complexType>
+					<sequence>
+						<element name="procedimentosOdonto" type="ans:ct_procedimentoOdontoRealizado" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="valorTotalGlosaGuia" type="ans:st_valorMonetario"/>
+			<element name="valorTotalLiberadoGuia" type="ans:st_valorMonetario"/>
+			<element name="valorTotalProcessadoGuia" type="ans:st_valorMonetario"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_detalheProtocolo">
+		<sequence>
+			<element name="numeroProtocolo" type="ans:st_protocolo"/>
+			<element name="valorProtocolo" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="codigoGlosaProtocolo" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="motivoGlosa" type="ans:ct_motivoGlosa" maxOccurs="unbounded"/>
+						<element name="valorGlosaProtocolo" type="ans:st_valorMonetario"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="guias">
+				<complexType>
+					<sequence>
+						<element name="dadosGuia" type="ans:ct_dadosGuia" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_denteRegiao">
+		<choice>
+			<element name="dente" type="ans:st_dente"/>
+			<element name="regiao" type="ans:st_regiao"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_descontos">
+		<sequence>
+			<element name="itemDesconto" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="valorDesconto" type="ans:st_valorMonetario"/>
+						<element name="descricao" type="ans:st_descricao40"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_diagnostico">
+		<sequence>
+			<element name="nomeTabela" type="ans:st_tabelasDiagnostico"/>
+			<element name="codigoDiagnostico" type="ans:st_codigoDiagnostico"/>
+			<element name="descricaoDiagnostico" type="ans:st_nome" nillable="true" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_diagnosticoAtendimento">
+		<sequence>
+			<element name="CID" type="ans:ct_diagnostico" minOccurs="0"/>
+			<element name="tipoDoenca" type="ans:st_tipoDoenca" nillable="true" minOccurs="0"/>
+			<element name="tempoReferidoEvolucaoDoenca" type="ans:ct_tempoEvolucaoDoenca" nillable="true" minOccurs="0"/>
+			<element name="indicadorAcidente" type="ans:st_indicadorAcidente" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_diagnosticoGuia">
+		<sequence>
+			<element name="CID" type="ans:ct_diagnostico"/>
+			<element name="tipoDoenca" type="ans:st_tipoDoenca" nillable="true" minOccurs="0"/>
+			<element name="tempoReferidoEvolucaoDoenca" type="ans:ct_tempoEvolucaoDoenca" nillable="true" minOccurs="0"/>
+			<element name="indicadorAcidente" type="ans:st_indicadorAcidente" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_diagnosticoSaidaInternacao">
+		<sequence>
+			<element name="diagnosticoPrincipal" type="ans:ct_diagnostico"/>
+			<element name="indicadorAcidente" type="ans:st_indicadorAcidente" minOccurs="0"/>
+			<element name="diagnosticosSecundarios" type="ans:ct_diagnosticosSecundarios" minOccurs="0"/>
+			<element name="motivoSaidaInternacao" type="ans:st_motivoSaida"/>
+			<element name="obito" type="ans:ct_obitoInternacao" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_diagnosticosSecundarios">
+		<sequence>
+			<element name="CID" type="ans:ct_diagnostico" maxOccurs="3"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_diariaProrrogacaoAutorizada">
+		<complexContent>
+			<extension base="ans:ct_diariaProrrogacao">
+				<sequence>
+					<element name="quantidadeAutorizada" type="ans:st_quantidade" minOccurs="0"/>
+					<element name="motivoGlosa" type="ans:ct_motivoGlosa" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="ct_diariaProrrogacao">
+		<sequence>
+			<element name="tipoAcomodacao" type="ans:st_tipoAcomodacao"/>
+			<element name="quantidadeDiaria" type="ans:st_quantidade"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_endereco">
+		<sequence>
+			<element name="tipoLogradouro" type="ans:st_tipoLogradouro"/>
+			<element name="logradouro" type="ans:st_logradouro"/>
+			<element name="numero" type="ans:st_numeroLogradouro"/>
+			<element name="complemento" type="ans:st_descricao15" nillable="true" minOccurs="0"/>
+			<element name="codigoIBGEMunicipio" type="ans:st_codigoMunicipioIBGE"/>
+			<element name="municipio" type="ans:st_descricao40" minOccurs="0"/>
+			<element name="codigoUF" type="ans:st_UF"/>
+			<element name="cep" type="ans:st_CEP"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_executanteComplementar">
+		<sequence>
+			<element name="codigoProfissionalCompl" type="ans:ct_identificacaoPrestador"/>
+			<element name="nomeProfissionalCompl" type="ans:st_nome"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_hipoteseDiagnostica">
+		<sequence>
+			<element name="CIDPrincipal" type="ans:ct_diagnosticoGuia"/>
+			<element name="diagnosticosSecundarios" type="ans:ct_diagnosticosSecundarios" nillable="true" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_identificacaoEquipe">
+		<sequence>
+			<element name="membroEquipe" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="codigoProfissional" type="ans:ct_identificacaoPrestadorEquipe"/>
+						<element name="identificacaoProfissional" type="ans:ct_profissionalExecutante"/>
+						<element name="cpf" type="ans:st_CPF" minOccurs="0"/>
+						<element name="posicaoProfissional" type="ans:st_posicaoProfissao"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_identificacaoFontePagadora">
+		<choice>
+			<element name="operadoraRegulada">
+				<complexType>
+					<sequence>
+						<element name="registroANS" type="ans:st_registroANS"/>
+						<element name="CNPJ" type="ans:st_CNPJ"/>
+						<element name="nomeOperadora" type="ans:st_nome"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="entidadeNaoRegulada">
+				<complexType>
+					<sequence>
+						<element name="CNPJ" type="ans:st_CNPJ"/>
+						<element name="nomeOperadoraEntidade" type="ans:st_nome"/>
+					</sequence>
+				</complexType>
+			</element>
+		</choice>
+	</complexType>
+	<complexType name="ct_identificacaoPrestador">
+		<choice>
+			<element name="CNPJ" type="ans:st_CNPJ"/>
+			<element name="cpf" type="ans:st_CPF"/>
+			<element name="codigoPrestadorNaOperadora" type="ans:st_codigoPrestadorNaOperadora"/>
+			<element name="conselhoProfissional" type="ans:ct_conselhoProfissional"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_identificacaoPrestadorEquipe">
+		<choice>
+			<element name="cpf" type="ans:st_CPF"/>
+			<element name="codigoPrestadorNaOperadora" type="ans:st_codigoPrestadorNaOperadora"/>
+			<element name="conselhoProfissional" type="ans:ct_conselhoProfissional"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_identificacaoPrestadorExecutante">
+		<choice>
+			<element name="CNPJ" type="ans:st_CNPJ"/>
+			<element name="CPF" type="ans:st_CPF"/>
+			<element name="codigoPrestadorNaOperadora" type="ans:st_codigoPrestadorNaOperadora"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_identificacaoProfissional">
+		<sequence>
+			<element name="nomeProfissional" type="ans:st_nome" minOccurs="0"/>
+			<element name="conselhoProfissional" type="ans:ct_conselhoProfissional"/>
+			<element name="cbos" type="ans:st_CBOS" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_identificacaoProfissionalCompl">
+		<choice>
+			<element name="cpf" type="ans:st_CPF"/>
+			<element name="codigoPrestadorNaOperadora" type="ans:st_codigoPrestadorNaOperadora"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_identificadorPrestOdontoDemo">
+		<choice>
+			<element name="CNPJ" type="ans:st_CNPJ"/>
+			<element name="cpf" type="ans:st_CPF"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_internacaoObstetrica">
+		<sequence>
+			<element name="emGestacao" type="ans:st_simNao" minOccurs="0"/>
+			<element name="aborto" type="ans:st_simNao" minOccurs="0"/>
+			<element name="transtornoMaternoRelGravidez" type="ans:st_simNao" minOccurs="0"/>
+			<element name="complicacaoPeriodoPuerperio" type="ans:st_simNao" minOccurs="0"/>
+			<element name="atendimentoRNSalaParto" type="ans:st_simNao" minOccurs="0"/>
+			<element name="complicacaoNeonatal" type="ans:st_simNao" minOccurs="0"/>
+			<element name="baixoPeso" type="ans:st_simNao" minOccurs="0"/>
+			<element name="partoCesareo" type="ans:st_simNao" minOccurs="0"/>
+			<element name="partoNormal" type="ans:st_simNao" minOccurs="0"/>
+			<element name="declaracoesNascidosVivos" type="ans:ct_numeroDN" minOccurs="0"/>
+			<element name="qtdNascidosVivosTermo" type="ans:st_numeroInteiro" minOccurs="0"/>
+			<element name="qtdNascidosMortos" type="ans:st_numeroInteiro" minOccurs="0"/>
+			<element name="qtdVivosPrematuros" type="ans:st_numeroInteiro" minOccurs="0"/>
+			<element name="obitoMulher" type="ans:st_obitoMulher" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_itemSolicitacao">
+		<sequence>
+			<element name="identificacaoProcedimentos" type="ans:ct_tabela"/>
+			<element name="quantidadeSolicitada" type="ans:st_quantidade"/>
+			<element name="quantidadeAutorizada" type="ans:st_quantidade" minOccurs="0"/>
+			<element name="statusSolicitacaoProcedimento" type="ans:st_statusSolicitacao"/>
+			<element name="glosas" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="motivoGlosa" type="ans:ct_motivoGlosa" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_itemSolicitacaoOdonto">
+		<sequence>
+			<element name="identificacaoProcedimentos" type="ans:ct_tabela"/>
+			<element name="denteRegiao" type="ans:ct_denteRegiao" minOccurs="0"/>
+			<element name="face" type="ans:st_face" minOccurs="0"/>
+			<element name="quantidadeSolicitada" type="ans:st_quantidade"/>
+			<element name="quantidadeAutorizada" type="ans:st_quantidade" minOccurs="0"/>
+			<element name="glosas" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="motivoGlosa" type="ans:ct_motivoGlosa" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="statusSolicitacaoProcedimento" type="ans:st_statusSolicitacao"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_loteOdonto">
+		<sequence>
+			<element name="numeroLote" type="ans:st_descricao12" minOccurs="0"/>
+			<element name="detalheGuia" type="ans:ct_detalheGuiaOdonto" maxOccurs="unbounded"/>
+			<element name="valorTotalLiberadoLote" type="ans:st_valorMonetario"/>
+			<element name="valorTotalProcessadoLote" type="ans:st_valorMonetario"/>
+			<element name="valorTotalGlosaLote" type="ans:st_valorMonetario"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_motivoGlosa">
+		<sequence>
+			<element name="codigoGlosa" type="ans:st_tipoGlosa"/>
+			<element name="descricaoGlosa" type="ans:st_descricaoGlosa"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_numeroDN">
+		<sequence>
+			<element name="numeroDN" type="ans:st_descricao15" minOccurs="0" maxOccurs="10"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_obitoInternacao">
+		<sequence>
+			<element name="CID" type="ans:ct_diagnostico"/>
+			<element name="numeroDeclaracao" type="ans:st_descricao12"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_obitoNeonatal">
+		<choice>
+			<element name="qtdeobitoPrecoce" type="ans:st_quantidadeObito" minOccurs="0"/>
+			<element name="qtdeobitoTardio" type="ans:st_quantidadeObito" minOccurs="0"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_OPMAutorizada">
+		<sequence>
+			<element name="OPMAutorizada" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="quantidadeAutorizada" type="ans:st_quantidade"/>
+						<element name="fabricante" type="ans:st_descricao40" minOccurs="0"/>
+						<element name="OPM" type="ans:ct_tabela"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_OPMSolicitadas">
+		<sequence>
+			<element name="OPMSolicitada" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="quantidadeSolicitada" type="ans:st_quantidade"/>
+						<element name="fabricante" type="ans:st_descricao40" minOccurs="0"/>
+						<element name="valor" type="ans:st_valorMonetario" minOccurs="0"/>
+						<element name="OPM" type="ans:ct_tabela"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_OPMUtilizada">
+		<sequence>
+			<element name="OPM">
+				<complexType>
+					<sequence>
+						<element name="identificacaoOPM" maxOccurs="unbounded">
+							<complexType>
+								<sequence>
+									<element name="OPM" type="ans:ct_tabela"/>
+									<element name="quantidade" type="ans:st_quantidade"/>
+									<element name="codigoBarra" type="ans:st_descricao20" minOccurs="0"/>
+									<element name="valorUnitario" type="ans:st_valorMonetario" minOccurs="0"/>
+									<element name="valorTotal" type="ans:st_valorMonetario" minOccurs="0"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="valorTotalOPM" type="ans:st_valorMonetario" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_OPMUtilizadasRevisao">
+		<sequence>
+			<element name="OPMUtilizada">
+				<complexType>
+					<sequence>
+						<element name="OPM" maxOccurs="unbounded">
+							<complexType>
+								<sequence>
+									<element name="OPM" type="ans:ct_tabela"/>
+									<element name="valorUnitario" type="ans:st_valorMonetario" minOccurs="0"/>
+									<element name="quantidade" type="ans:st_quantidade"/>
+									<element name="codigoBarra" type="ans:st_descricao20" minOccurs="0"/>
+									<element name="valorTotal" type="ans:st_valorMonetario" minOccurs="0"/>
+									<element name="justificativa" type="ans:st_justificativa"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="valorTotalOPM" type="ans:st_valorMonetario" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_outrasDespesas">
+		<sequence>
+			<element name="despesa" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="identificadorDespesa" type="ans:ct_tabela"/>
+						<element name="tipoDespesa" type="ans:st_outrasDespesas"/>
+						<element name="dataRealizacao" type="ans:st_data"/>
+						<element name="horaInicial" type="ans:st_hora" minOccurs="0"/>
+						<element name="horaFinal" type="ans:st_hora" minOccurs="0"/>
+						<element name="reducaoAcrescimo" type="ans:st_percentual" minOccurs="0"/>
+						<element name="quantidade" type="ans:st_quantidade"/>
+						<element name="valorUnitario" type="ans:st_valorMonetario" minOccurs="0"/>
+						<element name="valorTotal" type="ans:st_valorMonetario" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="totalGeralOutrasDespesas" type="ans:st_valorMonetario" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_outrasDespesasRevisao">
+		<sequence>
+			<element name="itensDespesas" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="tipoDespesa" type="ans:st_outrasDespesas"/>
+						<element name="dataRealizacao" type="ans:st_data"/>
+						<element name="despesa" type="ans:ct_tabela"/>
+						<element name="reducaoAcrescimo" type="ans:st_percentual" minOccurs="0"/>
+						<element name="quantidade" type="ans:st_quantidade"/>
+						<element name="valorUnitario" type="ans:st_valorMonetario" minOccurs="0"/>
+						<element name="valorTotal" type="ans:st_valorMonetario" minOccurs="0"/>
+						<element name="justificativa" type="ans:st_justificativa"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="totalGeralOutrasDespesas" type="ans:st_valorMonetario" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_periodoProcessamento">
+		<sequence>
+			<element name="dataInicial" type="ans:st_data"/>
+			<element name="dataFinal" type="ans:st_data"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentoOdontologia">
+		<sequence>
+			<element name="procedimentoOdonto" type="ans:ct_tabela"/>
+			<element name="denteRegiao" type="ans:ct_denteRegiao" minOccurs="0"/>
+			<element name="face" type="ans:st_face" minOccurs="0"/>
+			<element name="quantidade" type="ans:st_quantidadeProcedimento" minOccurs="0"/>
+			<element name="quantidadeUS" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="valor" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="franquiaCoparticipacao" type="ans:st_valorMonetario" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentoOdontoRealizado">
+		<sequence>
+			<element name="procedimentoOdonto" type="ans:ct_tabela"/>
+			<element name="denteRegiao" type="ans:ct_denteRegiao" minOccurs="0"/>
+			<element name="face" type="ans:st_face" minOccurs="0"/>
+			<element name="dataRealizacao" type="ans:st_data"/>
+			<element name="quantidade" type="ans:st_quantidadeProcedimento" minOccurs="0"/>
+			<element name="valorProcessado" type="ans:st_valorMonetario"/>
+			<element name="valorGlosaEstorno" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="glosas" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="motivoGlosa" type="ans:ct_motivoGlosa" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="valorLiberado" type="ans:st_valorMonetario"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentosRealizados">
+		<sequence>
+			<element name="procedimentoRealizado" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="data" type="ans:st_data"/>
+						<element name="horaInicio" type="ans:st_hora" minOccurs="0"/>
+						<element name="horaFim" type="ans:st_hora" minOccurs="0"/>
+						<element name="procedimento" type="ans:ct_tabela"/>
+						<element name="quantidadeRealizada" type="ans:st_quantidadeProcedimento"/>
+						<element name="viaAcesso" type="ans:st_viaDeAcesso" minOccurs="0"/>
+						<element name="tecnicaUtilizada" type="ans:st_tecnicaUtilizada" minOccurs="0"/>
+						<element name="reducaoAcrescimo" type="ans:st_percentual" minOccurs="0"/>
+						<element name="valor" type="ans:st_valorMonetario" nillable="true" minOccurs="0"/>
+						<element name="valorTotal" type="ans:st_valorMonetario" nillable="true" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentoOdontoRevisao">
+		<sequence>
+			<element name="procedimentoOdontologia">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_procedimentoOdontologia">
+							<sequence>
+								<element name="dataRealizacao" type="ans:st_data"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="valorTotal" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="quantidadeTotalUS" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="totalFranquiaCoparticipacao" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="justificativaRevisao" type="ans:st_justificativa"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentoRealizadoEquipe">
+		<sequence>
+			<element name="procedimentos" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="equipe" type="ans:ct_identificacaoEquipe" minOccurs="0"/>
+						<element name="procedimento" type="ans:ct_tabela"/>
+						<element name="data" type="ans:st_data"/>
+						<element name="horaInicio" type="ans:st_hora" minOccurs="0"/>
+						<element name="horaFim" type="ans:st_hora" minOccurs="0"/>
+						<element name="quantidadeRealizada" type="ans:st_quantidadeProcedimento"/>
+						<element name="viaAcesso" type="ans:st_viaDeAcesso" minOccurs="0"/>
+						<element name="tecnicaUtilizada" type="ans:st_tecnicaUtilizada" minOccurs="0"/>
+						<element name="reducaoAcrescimo" type="ans:st_percentual" minOccurs="0"/>
+						<element name="valor" type="ans:st_valorMonetario" nillable="true" minOccurs="0"/>
+						<element name="valorTotal" type="ans:st_valorMonetario" nillable="true" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentoRevisao">
+		<sequence>
+			<element name="procedimentosRevisao" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="data" type="ans:st_data"/>
+						<element name="horaInicio" type="ans:st_hora" minOccurs="0"/>
+						<element name="horaFim" type="ans:st_hora" minOccurs="0"/>
+						<element name="procedimento" type="ans:ct_tabela"/>
+						<element name="quantidadeRealizada" type="ans:st_quantidadeProcedimento"/>
+						<element name="viaAcesso" type="ans:st_viaDeAcesso" minOccurs="0"/>
+						<element name="tecnicaUtilizada" type="ans:st_tecnicaUtilizada" minOccurs="0"/>
+						<element name="reducaoAcrescimo" type="ans:st_percentual" minOccurs="0"/>
+						<element name="valor" type="ans:st_valorMonetario" nillable="true" minOccurs="0"/>
+						<element name="valorTotal" type="ans:st_valorMonetario" nillable="true" minOccurs="0"/>
+						<element name="justificativaRevisao" type="ans:st_justificativa" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_procedimentosSolicitados">
+		<sequence>
+			<element name="procedimentoSolicitado" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="quantidadeSolicitada" type="ans:st_quantidadeProcedimento"/>
+						<element name="procedimento" type="ans:ct_tabela"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_profissionalExecutante">
+		<sequence>
+			<element name="nomeExecutante" type="ans:st_nome" minOccurs="0"/>
+			<element name="conselhoProfissional" type="ans:ct_conselhoProfissional"/>
+			<element name="codigoCBOS" type="ans:st_CBOS" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_protocoloRecebimentoAnexo">
+		<choice>
+			<element name="protocoloRecebimento">
+				<complexType>
+					<sequence>
+						<element name="numeroProtocoloRecebimento" type="ans:st_protocolo"/>
+						<element name="dadosOperadora" type="ans:ct_identificacaoFontePagadora"/>
+						<element name="dadosPrestador" type="ans:ct_contratado"/>
+						<element name="dataEnvioAnexo" type="ans:st_data"/>
+						<element name="numeroLote" type="ans:st_descricao12"/>
+						<element name="quantidadeAnexo" type="ans:st_numeroInteiro"/>
+						<element name="relacaoAnexo">
+							<complexType>
+								<sequence>
+									<element name="numeroGuiaPrincipal" type="ans:st_numeroGuia" minOccurs="0" maxOccurs="100"/>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="mensagemErro" type="ans:st_observacao"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_protocoloRecebimento">
+		<choice>
+			<element name="protocoloRecebimento">
+				<complexType>
+					<sequence>
+						<element name="numeroProtocoloRecebimento" type="ans:st_protocolo"/>
+						<element name="dadosOperadora" type="ans:ct_identificacaoFontePagadora"/>
+						<element name="dadosPrestador" type="ans:ct_contratado"/>
+						<element name="numeroLote" type="ans:st_descricao12"/>
+						<element name="dataEnvioLote" type="ans:st_data"/>
+						<element name="mensagemDetalheProtocolo" type="ans:ct_detalheProtocolo" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="mensagemErro" type="ans:st_observacao"/>
+		</choice>
+	</complexType>
+	<complexType name="ct_reciboCancelaGuia">
+		<sequence>
+			<element name="operadora" type="ans:ct_identificacaoFontePagadora"/>
+			<element name="guiasCanceladas">
+				<complexType>
+					<sequence>
+						<element name="dadosGuia" maxOccurs="unbounded">
+							<complexType>
+								<complexContent>
+									<extension base="ans:ct_cabecalhoGuia">
+										<sequence>
+											<element name="statusCancelamento" type="ans:st_statusCancelamento"/>
+											<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+										</sequence>
+									</extension>
+								</complexContent>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_retornoElegibilidade">
+		<sequence>
+			<element name="dadosOperadora" type="ans:ct_identificacaoFontePagadora"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiario"/>
+			<element name="respostaSolicitacao" type="ans:st_simNao"/>
+			<element name="motivoNegacao" type="ans:ct_motivoGlosa" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_solicitaStatusAutorizacao">
+		<sequence>
+			<element name="identificacaoAutorizacao">
+				<complexType>
+					<sequence>
+						<element name="identificacaoSolicitacao" maxOccurs="unbounded">
+							<complexType>
+								<complexContent>
+									<extension base="ans:ct_cabecalhoSolicitacao">
+										<sequence>
+											<element name="profissionalSolicitante" type="ans:ct_contratadoSolicitante"/>
+											<element name="identificacaoBeneficiario" type="ans:ct_beneficiario" minOccurs="0"/>
+										</sequence>
+									</extension>
+								</complexContent>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="dataSolicitaStatus" type="ans:st_dataHora"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_situacaoAutorizacao">
+		<sequence>
+			<element name="dadosAutorizacao" maxOccurs="unbounded">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_autorizacaoProcedimento">
+							<sequence>
+								<element name="totalOdonto" minOccurs="0">
+									<complexType>
+										<sequence>
+											<element name="totalvalor" type="ans:st_quantidade" minOccurs="0"/>
+											<element name="totalFranquiaCoparticipacao" type="ans:st_quantidade" minOccurs="0"/>
+											<element name="totalquantidadeUS" type="ans:st_quantidade" minOccurs="0"/>
+										</sequence>
+									</complexType>
+								</element>
+								<element name="ct_diariaProrrogacaoAutorizada" minOccurs="0">
+									<complexType>
+										<complexContent>
+											<extension base="ans:ct_diariaProrrogacao">
+												<sequence>
+													<element name="tipoAcomodacaoAutorizada" type="ans:st_tipoAcomodacao" minOccurs="0"/>
+													<element name="quantidadeAutorizada" type="ans:st_quantidade" minOccurs="0"/>
+													<element name="motivoGlosa" type="ans:ct_motivoGlosa" minOccurs="0"/>
+												</sequence>
+											</extension>
+										</complexContent>
+									</complexType>
+								</element>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_situacaoClinica">
+		<sequence>
+			<element name="dentes" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="elementoDentario" type="ans:st_dente"/>
+						<element name="condicaoClinica" type="ans:st_condicaoClinica"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_situacaoDentes">
+		<sequence>
+			<element name="dente" type="ans:st_dente"/>
+			<element name="obturado" type="ans:st_simNao"/>
+			<element name="careado" type="ans:st_simNao"/>
+			<element name="perdido" type="ans:st_simNao"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_situacaoInicial">
+		<sequence>
+			<element name="situacaoClinica" type="ans:ct_situacaoClinica"/>
+			<element name="doencaPeriodontal" type="ans:st_simNao" minOccurs="0"/>
+			<element name="alteracaoTecidoMole" type="ans:st_simNao" minOccurs="0"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_solicitaElegibilidade">
+		<sequence>
+			<element name="dadosPrestador" type="ans:ct_contratado"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiario"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_solicitante">
+		<sequence>
+			<element name="contratado" type="ans:ct_contratadoSolicitante"/>
+			<element name="profissional" type="ans:ct_identificacaoProfissional"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_solicitacaoDemonstrativoPagamento">
+		<sequence>
+			<element name="dadosPrestador" type="ans:ct_contratado"/>
+			<element name="dataSolicitacao" type="ans:st_data"/>
+			<element name="tipoDemonstrativo" type="ans:st_tipoDemonstrativo"/>
+			<choice>
+				<sequence>
+					<element name="dataInicial" type="ans:st_data"/>
+					<element name="dataFinal" type="ans:st_data" minOccurs="0"/>
+				</sequence>
+				<element name="numeroProtocolo" type="ans:st_protocolo"/>
+			</choice>
+		</sequence>
+	</complexType>
+	<complexType name="ct_solicitacaoStatusProtocolo">
+		<sequence>
+			<element name="dadosPrestador" type="ans:ct_contratado"/>
+			<element name="dataSolicitacao" type="ans:st_data"/>
+			<element name="detalheProtocolo">
+				<complexType>
+					<sequence>
+						<element name="numeroProtocolo" type="ans:st_protocolo" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_statusLote">
+		<sequence>
+			<element name="numeroProtocolo" type="ans:st_protocolo"/>
+			<element name="numeroLote" type="ans:st_inteiro12"/>
+			<element name="dataEnvioLote" type="ans:st_data"/>
+			<element name="numeroFatura" type="ans:st_inteiro12" minOccurs="0"/>
+			<element name="valorProcessado" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="valorLiberado" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="valorGlosa" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="status" type="ans:st_statusProtocolo"/>
+			<element name="guias">
+				<complexType>
+					<choice>
+						<element name="detalheguiaMedica" minOccurs="0" maxOccurs="100">
+							<complexType>
+								<sequence>
+									<element name="identificacaoGuia" type="ans:ct_cabecalhoGuia"/>
+									<element name="procedimentosAnalisados">
+										<complexType>
+											<sequence>
+												<element name="procedimento" type="ans:ct_itemSolicitacao" maxOccurs="unbounded"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="detalheguiaOdonto" minOccurs="0" maxOccurs="100">
+							<complexType>
+								<sequence>
+									<element name="identificacaoGuia" type="ans:ct_cabecalhoGuia"/>
+									<element name="procedimentosAnalisados">
+										<complexType>
+											<sequence>
+												<element name="procedimento" type="ans:ct_itemSolicitacaoOdonto" maxOccurs="unbounded"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+					</choice>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_StatusProtocolo">
+		<sequence>
+			<element name="identificacaoFontePagadora" type="ans:ct_identificacaoFontePagadora"/>
+			<element name="statusProtocolo" type="ans:st_statusProtocolo" minOccurs="0"/>
+			<element name="dadosPrestador" type="ans:ct_contratado"/>
+			<element name="CNESPrestador" type="ans:st_CNES" minOccurs="0"/>
+			<element name="lote">
+				<complexType>
+					<sequence>
+						<element name="detalheLote" type="ans:ct_statusLote" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ct_tabela">
+		<sequence>
+			<element name="codigo" type="ans:st_codigoTabela"/>
+			<element name="tipoTabela" type="ans:st_tabela"/>
+			<element name="descricao" type="ans:st_descricaoTabela" nillable="true" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_tempoEvolucaoDoenca">
+		<sequence>
+			<element name="valor" type="ans:st_numeroInteiro"/>
+			<element name="unidadeTempo" type="ans:st_unidadeTempo"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_totalDemoOdonto">
+		<sequence>
+			<element name="valorTotalGeralGlosa" type="ans:st_valorMonetario"/>
+			<element name="valorTotalGeralLiberado" type="ans:st_valorMonetario"/>
+			<element name="valorTotalProcessadoGuia" type="ans:st_valorMonetario"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_totaisOdonto">
+		<sequence>
+			<element name="servicoExecutado" type="ans:st_valorMonetario"/>
+			<element name="taxas" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="materiais" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="medicamentos" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="totalGeral" type="ans:st_valorMonetario" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_tratamenteOdontoRealizado">
+		<sequence>
+			<element name="data" type="ans:st_data"/>
+			<element name="procedimento" type="ans:ct_tabela"/>
+			<element name="dente" type="ans:st_dente"/>
+			<element name="face" type="ans:st_face"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_tratamentoOdontoSolicitado">
+		<sequence>
+			<element name="procedimento" type="ans:ct_tabela"/>
+			<element name="dente" type="ans:st_dente"/>
+			<element name="face" type="ans:st_face"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_valorTotalServicos">
+		<sequence>
+			<element name="servicosExecutados" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="diarias" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="taxas" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="materiais" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="medicamentos" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="gases" type="ans:st_valorMonetario" minOccurs="0"/>
+			<element name="totalGeral" type="ans:st_valorMonetario" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_atendimentoConsulta">
+		<sequence>
+			<element name="dataAtendimento" type="ans:st_data"/>
+			<element name="procedimento">
+				<complexType>
+					<all>
+						<element name="codigoTabela" type="ans:st_tabela"/>
+						<element name="codigoProcedimento" type="ans:st_codigoTabela"/>
+					</all>
+				</complexType>
+			</element>
+			<element name="tipoConsulta" type="ans:st_tipoConsulta"/>
+			<element name="tipoSaida" type="ans:st_tipoSaidaGuiaConsulta"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_anexoSituacaoInicial">
+		<sequence>
+			<element name="cabecalhoAnexoGuia" type="ans:ct_cabecalhoAnexoOdonto"/>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_beneficiario">
+							<sequence>
+								<element name="nomeEmpresa" type="ans:st_descricao40" minOccurs="0"/>
+								<element name="numeroTelefone" type="ans:st_numeroTel" minOccurs="0"/>
+								<element name="nomeTitular" type="ans:st_nome" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosContratadoExecutante">
+				<complexType>
+					<sequence>
+						<element name="dadosContratado">
+							<complexType>
+								<complexContent>
+									<extension base="ans:ct_contratado">
+										<sequence>
+											<element name="conselhoProfissional" type="ans:ct_conselhoProfissional"/>
+										</sequence>
+									</extension>
+								</complexContent>
+							</complexType>
+						</element>
+						<element name="dadosExecutante" type="ans:ct_profissionalExecutante" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="situacaoInicial" type="ans:ct_situacaoInicial"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<!-- Tipos de guias -->
+	<complexType name="ct_loteGuias">
+		<sequence>
+			<element name="numeroLote" type="ans:st_inteiro12"/>
+			<element name="guias">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_guias"/>
+					</complexContent>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- Schema com as guias que compõem o  padrão TISS-->
+	<complexType name="ct_guias">
+		<choice>
+			<element name="guiaFaturamento">
+				<complexType>
+					<choice>
+						<element name="guiaConsulta" type="ans:ct_guiaConsulta" minOccurs="0" maxOccurs="100"/>
+						<element name="guiaSP_SADT" type="ans:ct_guiaSP_SADT" minOccurs="0" maxOccurs="100"/>
+						<element name="guiaResumoInternacao" type="ans:ct_guiaResumoInternacao" minOccurs="0" maxOccurs="100"/>
+						<element name="guiaHonorarioIndividual" type="ans:ct_guiaHonorarioIndividual" minOccurs="0" maxOccurs="100"/>
+						<element name="guiaOdontologia" type="ans:ct_guiaOdontologia" minOccurs="0" maxOccurs="100"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="guiaRevisaoGlosa">
+				<complexType>
+					<choice>
+						<element name="guiaConsultaReapresentacao" type="ans:ct_guiaConsultaReapresentacao" minOccurs="0" maxOccurs="100"/>
+						<element name="guiaSP_SADTReapresentacao" type="ans:ct_guiaSP_SADTReapresentacao" minOccurs="0" maxOccurs="100"/>
+						<element name="guiaResumoInternacaoReapresentacao" type="ans:ct_guiaResumoInternacaoReapresentacao" minOccurs="0" maxOccurs="100"/>
+						<element name="guiaHonorarioIndividualReapresentacao" type="ans:ct_guiaHonorarioIndividualReapresentacao" minOccurs="0" maxOccurs="100"/>
+						<element name="guiaOdontologiaReapresentacao" type="ans:ct_guiaTratamentoOdontologicoReapresentacao" minOccurs="0" maxOccurs="100"/>
+					</choice>
+				</complexType>
+			</element>
+		</choice>
+	</complexType>
+	<complexType name="ct_guiaHonorarioIndividual">
+		<sequence>
+			<element name="identificacaoGuiaHonorarioIndividual" type="ans:ct_cabecalhoGuia"/>
+			<element name="numeroGuiaPrincipal" type="ans:st_numeroGuia"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiario"/>
+			<element name="contratado" type="ans:ct_contratado"/>
+			<element name="contratadoExecutante">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_contratado">
+							<sequence>
+								<element name="identificacaoProfissional" type="ans:ct_profissionalExecutante"/>
+								<element name="posicaoProfissional" type="ans:st_posicaoProfissao"/>
+								<element name="tipoAcomodacao" type="ans:st_tipoAcomodacao" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="procedimentosExamesRealizados">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_procedimentosRealizados">
+							<sequence>
+								<element name="totalGeralHonorario" type="ans:st_valorMonetario" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaHonorarioIndividualReapresentacao">
+		<sequence>
+			<element name="identificacaoGuiaHonorarioIndividual" type="ans:ct_cabecalhoGuia"/>
+			<element name="numeroGuiaPrincipal" type="ans:st_numeroGuia"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiario"/>
+			<element name="contratado" type="ans:ct_contratado"/>
+			<element name="contratadoExecutante">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_contratado">
+							<sequence>
+								<element name="identificacaoProfissional" type="ans:ct_profissionalExecutante"/>
+								<element name="posicaoProfissional" type="ans:st_posicaoProfissao"/>
+								<element name="tipoAcomodacao" type="ans:st_tipoAcomodacao" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="procedimentosExamesRealizados">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_procedimentoRevisao">
+							<sequence>
+								<element name="totalGeralHonorario" type="ans:st_valorMonetario" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaConsulta">
+		<sequence>
+			<element name="identificacaoGuia" type="ans:ct_cabecalhoGuia"/>
+			<element name="beneficiario" type="ans:ct_beneficiario"/>
+			<element name="dadosContratado" type="ans:ct_contratado"/>
+			<element name="profissionalExecutante" type="ans:ct_identificacaoProfissional"/>
+			<element name="hipoteseDiagnostica" minOccurs="0">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_diagnosticoAtendimento">
+							<sequence>
+								<element name="diagnosticoSecundario" type="ans:ct_diagnosticosSecundarios" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosAtendimento">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_atendimentoConsulta"/>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaConsultaReapresentacao">
+		<sequence>
+			<element name="identificacaoGuia" type="ans:ct_cabecalhoGuia"/>
+			<element name="beneficiario" type="ans:ct_beneficiario"/>
+			<element name="dadosContratado" type="ans:ct_contratado"/>
+			<element name="profissionalExecutante" type="ans:ct_identificacaoProfissional"/>
+			<element name="hipoteseDiagnostica" minOccurs="0">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_diagnosticoAtendimento">
+							<sequence>
+								<element name="diagnosticoSecundario" type="ans:ct_diagnosticosSecundarios" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosAtendimento" type="ans:ct_atendimentoConsultaReapr"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaOdontologia">
+		<sequence>
+			<element name="cabecalhoGuia" type="ans:ct_cabecalhoGuiaOdonto"/>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_beneficiario">
+							<sequence>
+								<element name="nomeEmpresa" type="ans:st_descricao40" minOccurs="0"/>
+								<element name="numeroTelefone" type="ans:st_numeroTel" minOccurs="0"/>
+								<element name="nomeTitular" type="ans:st_nome" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosContratadoExecutante">
+				<complexType>
+					<sequence>
+						<element name="dadosContratado">
+							<complexType>
+								<complexContent>
+									<extension base="ans:ct_contratado">
+										<sequence>
+											<element name="conselhoProfissional" type="ans:ct_conselhoProfissional"/>
+										</sequence>
+									</extension>
+								</complexContent>
+							</complexType>
+						</element>
+						<element name="dadosExecutante" type="ans:ct_profissionalExecutante" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="procedimentosExecutados">
+				<complexType>
+					<sequence>
+						<element name="procedimentoExecutado" maxOccurs="unbounded">
+							<complexType>
+								<complexContent>
+									<extension base="ans:ct_procedimentoOdontologia">
+										<sequence>
+											<element name="dataRealizacao" type="ans:st_data"/>
+										</sequence>
+									</extension>
+								</complexContent>
+							</complexType>
+						</element>
+						<element name="quantidadeTotalUS" type="ans:st_valorMonetario" minOccurs="0"/>
+						<element name="valorTotal" type="ans:st_valorMonetario" minOccurs="0"/>
+						<element name="totalFranquiaCoparticipacao" type="ans:st_valorMonetario" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="outrasDespesas" type="ans:ct_outrasDespesas" minOccurs="0"/>
+			<element name="dadosAtendimento" type="ans:ct_atendimentoOdontologia"/>
+			<element name="tipoFaturamento" type="ans:st_tipoFaturamento" minOccurs="0"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaResumoInternacao">
+		<sequence>
+			<element name="identificacaoGuiaInternacao" type="ans:ct_cabecalhoGuia"/>
+			<element name="numeroGuiaSolicitacao" type="ans:st_numeroGuia" minOccurs="0"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiario"/>
+			<element name="identificacaoExecutante" type="ans:ct_contratado"/>
+			<element name="dadosAutorizacao" type="ans:ct_autorizacaoGuia" minOccurs="0"/>
+			<element name="caraterInternacao" type="ans:st_eletivaEmergencia"/>
+			<element name="acomodacao" type="ans:st_tipoAcomodacao"/>
+			<element name="dataHoraInternacao" type="ans:st_dataHora"/>
+			<element name="dataHoraSaidaInternacao" type="ans:st_dataHora" minOccurs="0"/>
+			<element name="tipoInternacao" type="ans:st_tipoInternacao"/>
+			<element name="regimeInternacao" type="ans:st_regimeInternacao"/>
+			<element name="internacaoObstetrica" type="ans:ct_internacaoObstetrica" minOccurs="0"/>
+			<element name="obitoNeonatal" type="ans:ct_obitoNeonatal" minOccurs="0"/>
+			<element name="diagnosticosSaidaInternacao" type="ans:ct_diagnosticoSaidaInternacao"/>
+			<element name="procedimentosRealizados" type="ans:ct_procedimentoRealizadoEquipe" minOccurs="0"/>
+			<element name="OPMUtilizadas" type="ans:ct_OPMUtilizada" minOccurs="0"/>
+			<element name="outrasDespesas" type="ans:ct_outrasDespesas" minOccurs="0"/>
+			<element name="tipoFaturamento" type="ans:st_tipoFaturamento"/>
+			<element name="valorTotal" type="ans:ct_valorTotalServicos" minOccurs="0"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaResumoInternacaoReapresentacao">
+		<sequence>
+			<element name="identificacaoGuiaInternacao" type="ans:ct_cabecalhoGuia"/>
+			<element name="numeroGuiaSolicitacao" type="ans:st_numeroGuia" minOccurs="0"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiario"/>
+			<element name="identificacaoExecutante" type="ans:ct_contratado"/>
+			<element name="dadosAutorizacao" type="ans:ct_autorizacaoGuia" minOccurs="0"/>
+			<element name="caraterInternacao" type="ans:st_eletivaEmergencia"/>
+			<element name="acomodacao" type="ans:st_tipoAcomodacao"/>
+			<element name="dataHoraInternacao" type="ans:st_dataHora"/>
+			<element name="dataHoraSaidaInternacao" type="ans:st_dataHora" minOccurs="0"/>
+			<element name="tipoInternacao" type="ans:st_tipoInternacao"/>
+			<element name="regimeInternacao" type="ans:st_regimeInternacao"/>
+			<element name="internacaoObstetrica" type="ans:ct_internacaoObstetrica" minOccurs="0"/>
+			<element name="obitoNeonatal" type="ans:ct_obitoNeonatal" minOccurs="0"/>
+			<element name="diagnosticosSaidaInternacao" type="ans:ct_diagnosticoSaidaInternacao"/>
+			<element name="procedimentosRealizados" type="ans:ct_procedimentoRevisao" minOccurs="0"/>
+			<element name="OPMUtilizadas" type="ans:ct_OPMUtilizadasRevisao" minOccurs="0"/>
+			<element name="outrasDespesas" type="ans:ct_outrasDespesasRevisao" minOccurs="0"/>
+			<element name="tipoFaturamento" type="ans:st_tipoFaturamento"/>
+			<element name="valorTotal" type="ans:ct_valorTotalServicos" minOccurs="0"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaSolicInternacao">
+		<sequence>
+			<element name="identificacaoGuiaSolicitacaoInternacao" type="ans:ct_cabecalhoSolicitacao"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiario"/>
+			<element name="dadosSolicitanteAtendimento" type="ans:ct_solicitante" minOccurs="0"/>
+			<element name="dadosSolicitante" type="ans:ct_solicitante"/>
+			<element name="prestadorSolicitado" minOccurs="0">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_identificacaoPrestador">
+							<sequence>
+								<element name="nomePrestador" type="ans:st_nome"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="caraterInternacao" type="ans:st_eletivaEmergencia"/>
+			<element name="tipoInternacao" type="ans:st_tipoInternacao"/>
+			<element name="indicacaoClinica" type="ans:st_indicacaoClinica"/>
+			<element name="regimeInternacao" type="ans:st_regimeInternacao"/>
+			<element name="hipotesesDiagnosticas" type="ans:ct_hipoteseDiagnostica"/>
+			<element name="procedimentosExamesSolicitados" type="ans:ct_procedimentosSolicitados"/>
+			<element name="OPMsSolicitadas" type="ans:ct_OPMSolicitadas" minOccurs="0"/>
+			<element name="diasSolicitados" type="integer"/>
+			<element name="dataProvavelAdmisHosp" type="ans:st_data" minOccurs="0"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaSolicitacaoOdonto">
+		<sequence>
+			<element name="cabecalhoGuia" type="ans:ct_cabecalhoGuiaOdonto"/>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_beneficiario">
+							<sequence>
+								<element name="nomeEmpresa" type="ans:st_descricao40" minOccurs="0"/>
+								<element name="numeroTelefone" type="ans:st_numeroTel" minOccurs="0"/>
+								<element name="nomeTitular" type="ans:st_nome" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosSolicitante">
+				<complexType>
+					<sequence>
+						<element name="dadosContratado">
+							<complexType>
+								<complexContent>
+									<extension base="ans:ct_contratado">
+										<sequence>
+											<element name="conselhoProfissional" type="ans:ct_conselhoProfissional"/>
+										</sequence>
+									</extension>
+								</complexContent>
+							</complexType>
+						</element>
+						<element name="dadosProfissional" minOccurs="0">
+							<complexType>
+								<complexContent>
+									<extension base="ans:ct_profissionalExecutante"/>
+								</complexContent>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="planoTratamento">
+				<complexType>
+					<sequence>
+						<element name="procedimentoSolicitado" maxOccurs="unbounded">
+							<complexType>
+								<complexContent>
+									<extension base="ans:ct_procedimentoOdontologia">
+										<sequence>
+											<element name="totalFranquiaCoparticipacao" type="ans:st_valorMonetario" minOccurs="0"/>
+										</sequence>
+									</extension>
+								</complexContent>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="tipoAtendimento" type="ans:st_atendimentoOdonto" minOccurs="0"/>
+			<element name="dataTerminoTratamento" type="ans:st_data" minOccurs="0"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaSolicitacaoProrrogacao">
+		<sequence>
+			<element name="identificacaoProrrogacao" type="ans:ct_cabecalhoGuia"/>
+			<element name="identificacaoGuiaReferencia" type="ans:ct_cabecalhoGuia"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiario"/>
+			<element name="dadosSolicitante" type="ans:ct_solicitante"/>
+			<element name="indicacaoClinica" type="ans:st_indicacaoClinica"/>
+			<element name="responsavelAutorizacao" type="ans:st_nome" minOccurs="0"/>
+			<element name="procedimentosExamesSolicitados" type="ans:ct_procedimentosSolicitados" minOccurs="0"/>
+			<element name="diarias" type="ans:ct_diariaProrrogacao" minOccurs="0"/>
+			<element name="OPMsSolicitadas" type="ans:ct_OPMSolicitadas" minOccurs="0"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaSolicitacaoSP_SADT">
+		<sequence>
+			<element name="identificacaoGuiaSolicitacaoSADTSP" type="ans:ct_cabecalhoSolicitacao"/>
+			<element name="numeroGuiaPrincipal" type="ans:st_numeroGuia" minOccurs="0"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiario"/>
+			<element name="dadosSolicitante" type="ans:ct_solicitante"/>
+			<element name="prestadorExecutante">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_contratado"/>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="caraterSolicitacao" type="ans:st_eletivaEmergencia"/>
+			<element name="dataHoraSolicitacao" type="ans:st_dataHora"/>
+			<element name="Diagnostico" type="ans:ct_diagnostico" nillable="true" minOccurs="0"/>
+			<element name="indicacaoClinica" type="ans:st_indicacaoClinica" nillable="true" minOccurs="0"/>
+			<element name="procedimentosSolicitados" type="ans:ct_procedimentosSolicitados"/>
+			<element name="opmSolicitada" type="ans:ct_OPMSolicitadas" minOccurs="0"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaSP_SADT">
+		<sequence>
+			<element name="identificacaoGuiaSADTSP" type="ans:ct_cabecalhoGuia"/>
+			<element name="numeroGuiaPrincipal" type="ans:st_numeroGuia" minOccurs="0"/>
+			<element name="dadosAutorizacao" type="ans:ct_autorizacaoGuia" minOccurs="0"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiario"/>
+			<element name="dadosSolicitante" type="ans:ct_solicitante"/>
+			<element name="prestadorExecutante">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_contratado">
+							<sequence>
+								<element name="profissionalExecutanteCompl" minOccurs="0">
+									<complexType>
+										<complexContent>
+											<extension base="ans:ct_profissionalExecutante">
+												<sequence>
+													<element name="codigoProfissionalCompl" type="ans:ct_identificacaoProfissionalCompl" minOccurs="0"/>
+												</sequence>
+											</extension>
+										</complexContent>
+									</complexType>
+								</element>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="indicacaoClinica" type="ans:st_indicacaoClinica" minOccurs="0"/>
+			<element name="caraterAtendimento" type="ans:st_eletivaEmergencia"/>
+			<element name="dataHoraAtendimento" type="ans:st_dataHora" minOccurs="0"/>
+			<element name="diagnosticoAtendimento" type="ans:ct_diagnosticoAtendimento" minOccurs="0"/>
+			<element name="tipoSaida" type="ans:st_tipoSaidaGuiaSADT"/>
+			<element name="tipoAtendimento" type="ans:st_tipoAtendimento"/>
+			<element name="procedimentosRealizados" type="ans:ct_procedimentoRealizadoEquipe" minOccurs="0"/>
+			<element name="outrasDespesas" type="ans:ct_outrasDespesas" minOccurs="0"/>
+			<element name="OPMUtilizada" type="ans:ct_OPMUtilizada" minOccurs="0"/>
+			<element name="valorTotal" type="ans:ct_valorTotalServicos" minOccurs="0"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaSP_SADTReapresentacao">
+		<sequence>
+			<element name="identificacaoGuiaSADTSP" type="ans:ct_cabecalhoGuia"/>
+			<element name="numeroGuiaPrincipal" type="ans:st_numeroGuia" minOccurs="0"/>
+			<element name="dadosAutorizacao" type="ans:ct_autorizacaoGuia" minOccurs="0"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiario"/>
+			<element name="dadosSolicitante" type="ans:ct_solicitante"/>
+			<element name="prestadorExecutante">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_contratado">
+							<sequence>
+								<element name="profissionalExecutanteCompl" minOccurs="0">
+									<complexType>
+										<complexContent>
+											<extension base="ans:ct_profissionalExecutante">
+												<sequence>
+													<element name="codigoProfissionalCompl" type="ans:ct_identificacaoProfissionalCompl" minOccurs="0"/>
+												</sequence>
+											</extension>
+										</complexContent>
+									</complexType>
+								</element>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="indicacaoClinica" type="ans:st_indicacaoClinica" minOccurs="0"/>
+			<element name="caraterAtendimento" type="ans:st_eletivaEmergencia"/>
+			<element name="dataHoraAtendimento" type="ans:st_dataHora" minOccurs="0"/>
+			<element name="diagnosticoAtendimento" type="ans:ct_diagnosticoAtendimento" minOccurs="0"/>
+			<element name="tipoSaida" type="ans:st_tipoSaidaGuiaSADT"/>
+			<element name="tipoAtendimento" type="ans:st_tipoAtendimento"/>
+			<element name="procedimentosRealizados" type="ans:ct_procedimentoRevisao" minOccurs="0"/>
+			<element name="outrasDespesas" type="ans:ct_outrasDespesasRevisao" minOccurs="0"/>
+			<element name="OPMUtilizada" type="ans:ct_OPMUtilizadasRevisao" minOccurs="0"/>
+			<element name="valorTotal" type="ans:ct_valorTotalServicos" minOccurs="0"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_guiaTratamentoOdontologicoReapresentacao">
+		<sequence>
+			<element name="cabecalhoGuia" type="ans:ct_cabecalhoGuiaOdonto"/>
+			<element name="dadosBeneficiario">
+				<complexType>
+					<complexContent>
+						<extension base="ans:ct_beneficiario">
+							<sequence>
+								<element name="nomeEmpresa" type="ans:st_descricao40" minOccurs="0"/>
+								<element name="numeroTelefone" type="ans:st_numeroTel" minOccurs="0"/>
+								<element name="nomeTitular" type="ans:st_nome" minOccurs="0"/>
+							</sequence>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="dadosContratadoExecutante">
+				<complexType>
+					<sequence>
+						<element name="dadosContratado">
+							<complexType>
+								<complexContent>
+									<extension base="ans:ct_contratado">
+										<sequence>
+											<element name="conselhoProfissional" type="ans:ct_conselhoProfissional"/>
+										</sequence>
+									</extension>
+								</complexContent>
+							</complexType>
+						</element>
+						<element name="dadosExecutante" type="ans:ct_profissionalExecutante" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="procedimentosExecutados">
+				<complexType>
+					<sequence>
+						<element name="procedimentoExecutado" type="ans:ct_procedimentoOdontoRevisao" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="outrasDespesas" type="ans:ct_outrasDespesas" minOccurs="0"/>
+			<element name="dadosAtendimento" type="ans:ct_atendimentoOdontologia" minOccurs="0"/>
+			<element name="tipoFaturamento" type="ans:st_tipoFaturamento" minOccurs="0"/>
+			<element name="observacao" type="ans:st_observacao" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ct_loteAnexo">
+		<sequence>
+			<element name="numeroLote" type="ans:st_descricao12"/>
+			<element name="anexoGuia">
+				<complexType>
+					<choice>
+						<element name="anexoSituacaoInicial" type="ans:ct_anexoSituacaoInicial"/>
+					</choice>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
 </schema>

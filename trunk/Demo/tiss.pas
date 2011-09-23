@@ -10,7 +10,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, TissSP_SADT, TissConsulta, ComCtrls, TissInternacao,
-  TissHonorario;
+  TissHonorario, CheckLst;
 
 type
   TForm1 = class(TForm)
@@ -37,11 +37,20 @@ type
     TissSP: TTissSP_SADT;
     TissInt: TTissInternacao;
     TissHon: TTissHonorario;
+    grp1: TGroupBox;
+    rb1: TRadioButton;
+    rb2: TRadioButton;
+    rb3: TRadioButton;
+    rb4: TRadioButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure rb1Click(Sender: TObject);
+    procedure rb2Click(Sender: TObject);
+    procedure rb3Click(Sender: TObject);
+    procedure rb4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -74,7 +83,11 @@ begin
   FALAR COM Fabiano}
   TissC.TissArquivo := 'CONSULTA.xml';
   TissC.TissEncoding := 'ISO-8859-1';
-  TissC.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+  case TissC.ansVersaoXSD of
+    v2_01_03: TissC.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+    v2_02_01: TissC.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+    v2_02_02,v2_02_03: TissC.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ansTISS="http://www.ans.gov.br/padroes/tiss/schemas"';
+  end;
   TissC.TissVersaoXml := '1.0';
 
 
@@ -86,9 +99,36 @@ begin
   TissC.TissTipo := Juridico;
   TissC.TissCNPJCPF := '01614414000173';
   TissC.TissRegANS := '123';
-  TissC.TissDataEmis := StrToDate ('26/10/2009');
-  TissC.TissVersaoTISS := '2.02.01';
-  TissC.TissNumLote := '1545';  
+  TissC.TissDataEmis := Now;
+  case TissC.ansVersaoXSD of
+    v2_01_03:
+      begin
+        TissC.TissVersaoTISS := '2.01.03';
+        TissC.TissValid.TissXSD := 'tissV2_01_03.xsd';
+      end;
+    v2_02_01:
+      begin
+        TissC.TissVersaoTISS := '2.02.01';
+        TissC.TissValid.TissXSD := 'tissV2_02_01.xsd';
+      end;
+    v2_02_02:
+      begin
+        TissC.TissVersaoTISS := '2.02.02';
+        TissC.TissValid.TissXSD := 'tissV2_02_02.xsd';
+        TissC.TissNomeAplica := 'LAB ADVANCED';
+        TissC.TissVersaoAplica := '3.0.0';
+        TissC.TissFabricaAplica := 'LAB MICRA';
+      end;
+    v2_02_03:
+      begin
+        TissC.TissVersaoTISS := '2.02.03';
+        TissC.TissValid.TissXSD := 'tissV2_02_03.xsd';
+        TissC.TissNomeAplica := 'LAB ADVANCED';
+        TissC.TissVersaoAplica := '3.0.0';
+        TissC.TissFabricaAplica := 'LAB MICRA';
+      end;
+  end;
+  TissC.TissNumLote := '1545';
   //FIM CABEÇALHO
   TissC.criaCabecalho;  {COMANDO PARA ADICIONAR O CABEÇALHO}
 
@@ -101,11 +141,25 @@ begin
    for i:= 1 to 5 do
      begin
         //VERSÃO 2.02.01
-        TissC.TissFontePadora.TissRegAns := '123';
-        TissC.TissFontePadora.TissCnpj := '01614414000173';
+        case TissC.ansVersaoXSD of
+          v2_01_03:
+            begin
+              TissC.TissFontePadora.TissRegAns := '123456';
+            end;
+          v2_02_01:
+            begin
+              TissC.TissFontePadora.TissCnpj := '01614414000173';
+            end;
+          v2_02_02,v2_02_03:
+            begin
+              TissC.TissFontePadora.TissCnpj := '01614414000173';
+            end;
+        end;
         //VERSÃO 2.02.01
+        TissC.TissDataEmis := Now;
         TissC.TissRegANS := '0';
         TissC.TissNumGuia := IntToStr(I);
+        TissC.TissNumPres := IntToStr(I);
         TissC.TissNumCarteira := '548787';
         TissC.TissPaciente := 'PACIENTE TESTE';
         TissC.TissNomePlano := 'PLANO DE SAUDE '+IntToStr(I);
@@ -125,20 +179,27 @@ begin
         TissC.TissSIGLACONSELHO := 'CRM';
         TissC.TissNUMEROCONSELHO := '02457';
         TissC.TissUFCONSELHO := 'RJ';
-        TissC.TissCBOS := '2231.40';
+        if TissC.ansVersaoXSD = v2_01_03 then
+          TissC.TissCBOS:='06149'
+        else
+          TissC.TissCBOS:='2231.32';
 
         //hipótese diagnóstica
         TissC.TissCIDNomeTab := 'CID-10';
-        TissC.TissCodigoTabela := 1;
+        case TissC.ansVersaoXSD of
+          v2_01_03: TissC.TissCodigoTabela := 1;
+          v2_02_01: TissC.TissCodigoTabela := 1;
+          v2_02_02,v2_02_03: TissC.TissCodigoTabela := 16;
+        end;
         TissC.TissCodProc := '00010014';
-        TissC.TissCIDCodDiag := '';
-        TissC.TissCIDDescDiag := '';
+        TissC.TissCIDCodDiag := 'A81';
+        TissC.TissCIDDescDiag := 'teste';
         TissC.TissTipDoenca := 'A'; //A,C
         TissC.TissEvolucaoValor := 10;
         TissC.TissUnidTemp := 'D';
         TissC.TissIndicAcid := '1';
 
-
+        TissC.TissdataAtendimento := Now;
         TissC.TissTipoConsulta := '1';
         TissC.TissTipoSaidaa := '5';
 
@@ -177,7 +238,12 @@ begin
   TissSP.iniciaSPSADT; //Método de inicialização
   TissSP.Tisscabecalho.TissArquivo := 'SPSADT.xml';
   TissSP.Tisscabecalho.TissEncoding := 'ISO-8859-1';
-  TissSP.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+  case TissSP.ansVersaoXSD of
+    v2_01_03: TissSP.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+    v2_02_01: TissSP.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+    v2_02_02,v2_02_03: TissSP.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ansTISS="http://www.ans.gov.br/padroes/tiss/schemas"';
+  end;
+
   TissSP.Tisscabecalho.TissVersaoXml := '1.0';
 
   //CABEÇALHO
@@ -187,7 +253,35 @@ begin
   TissSP.Tisscabecalho.TissHoraRegistroTrans := Time;
   TissSP.Tisscabecalho.TissCNPJCPF := '02762719000195';
   TissSP.Tisscabecalho.TissRegANS := '0';
-  TissSP.Tisscabecalho.TissVersaoTISS := '2.01.03';
+  case TissSP.ansVersaoXSD of
+    v2_01_03:
+      begin
+        TissSP.Tisscabecalho.TissVersaoTISS := '2.01.03';
+        TissSP.TissValid.TissXSD := 'tissV2_01_03.xsd';
+      end;
+    v2_02_01:
+      begin
+        TissSP.Tisscabecalho.TissVersaoTISS := '2.02.01';
+        TissSP.TissValid.TissXSD := 'tissV2_02_01.xsd';
+      end;
+    v2_02_02:
+      begin
+        TissSP.Tisscabecalho.TissVersaoTISS := '2.02.02';
+        TissSP.TissValid.TissXSD := 'tissV2_02_02.xsd';
+        TissSP.Tisscabecalho.TissNomeAplica := 'LAB ADVANCED';
+        TissSP.Tisscabecalho.TissVersaoAplica := '3.0.0';
+        TissSP.Tisscabecalho.TissFabricaAplica := 'LAB MICRA';
+      end;
+    v2_02_03:
+      begin
+        TissSP.Tisscabecalho.TissVersaoTISS := '2.02.03';
+        TissSP.TissValid.TissXSD := 'tissV2_02_03.xsd';
+        TissSP.Tisscabecalho.TissNomeAplica := 'LAB ADVANCED';
+        TissSP.Tisscabecalho.TissVersaoAplica := '3.0.0';
+        TissSP.Tisscabecalho.TissFabricaAplica := 'LAB MICRA';
+      end;
+  end;
+
   TissSP.Tisscabecalho.TissNumLote := '1545';
   //FIM CABEÇALHO
   TissSP.criaCabecalho;  {COMANDO PARA ADICIONAR O CABEÇALHO}
@@ -200,10 +294,24 @@ begin
     begin
       //identificação guia SADTSP
 
-        //VERSÃO 2.02.01
-        TissSP.TissFontePadora.TissRegAns := '123';
-        TissSP.TissFontePadora.TissCnpj := '01614414000173';
-        //VERSÃO 2.02.01
+      case TissSP.ansVersaoXSD of
+        v2_01_03:
+          begin
+            TissSP.TissConfig.PadraoTipFontPg := RegistroANS;
+            TissSP.TissFontePadora.TissRegAns := '123456';
+          end;
+        v2_02_01:
+          begin
+            TissSP.TissConfig.PadraoTipFontPg := CNPJ;
+            TissSP.TissFontePadora.TissCnpj := '01614414000173';
+          end;
+        v2_02_02,v2_02_03:
+          begin
+            TissSP.TissConfig.PadraoTipFontPg := CNPJ;
+            TissSP.TissFontePadora.TissCnpj := '01614414000173';
+          end;
+      end;
+      //VERSÃO 2.02.01
       TissSP.TissNumGuiaPrest := IntToStr(i);
       TissSP.TissNumGuiaOper := IntToStr(i);
       TissSP.TissNumGuiaPrinc:= IntToStr(i);
@@ -242,7 +350,10 @@ begin
       TissSP.TissProfissional.TissSIGLACONSELHO := 'CRM';
       TissSP.TissProfissional.TissNumConselho := '02457';
       TissSP.TissProfissional.TissUFCONSELHO := 'RJ';
-      TissSP.TissProfissional.TissfCBOS := '2011';
+      case TissSP.ansVersaoXSD of
+        v2_01_03: TissSP.TissProfissional.TissfCBOS:='06149';
+        v2_02_01,v2_02_02,v2_02_03: TissSP.TissProfissional.TissfCBOS:='2231.32';
+      end;
 
       // Prestador Executante
       {TissSP.TissPrestadorExec.TissTipoGeral INFORME ESSA PROPRIEDADE NO
@@ -265,7 +376,11 @@ begin
       TissSP.TissProfissionalCompl.TissSiglaConselho:='CRM';
       TissSP.TissProfissionalCompl.TissNumConselho:='3435';
       TissSP.TissProfissionalCompl.TissUFConselho:='DF';
-      TissSP.TissProfissionalCompl.TissfCBOS:='2011';
+      case TissSP.ansVersaoXSD of
+        v2_01_03: TissSP.TissProfissionalCompl.TissfCBOS:='06149';
+        v2_02_01,v2_02_02,v2_02_03: TissSP.TissProfissionalCompl.TissfCBOS:='2231.32';
+      end;
+
       TissSP.TissPrestadorExecCompl.TissTipoGeral:=FisicGeral;
       TissSP.TissPrestadorExecCompl.TissCNPJCPF:='24428051115';
       //indicação Clinica
@@ -311,12 +426,30 @@ begin
               TissSP.TissProc.TissEquipe.TissProfiss.TissSiglaConselho := 'CRM';
               TissSP.TissProc.TissEquipe.TissProfiss.TissNumConselho := '02457';
               TissSP.TissProc.TissEquipe.TissProfiss.TissUFCONSELHO := 'RJ';
-              TissSP.TissProc.TissEquipe.TissProfiss.TissfCBOS := '2011';
+              case TissSP.ansVersaoXSD of
+                v2_01_03: TissSP.TissProc.TissEquipe.TissProfiss.TissfCBOS:='06149';
+                v2_02_01,v2_02_02,v2_02_03: TissSP.TissProc.TissEquipe.TissProfiss.TissfCBOS:='2231.32';
+              end;
               TissSP.TissProc.TissEquipe.TissProfiss.TissPosicProf:=10;
               TissSP.adicionaProf;
             end;
-          TissSP.TissProc.TissProcs.TissCodigo := '00010014';
-          TissSP.TissProc.TissProcs.TissTipTabela := 1;
+          case TissSP.ansVersaoXSD of
+            v2_01_03:
+              begin
+                 TissSP.TissProc.TissProcs.TissCodigo := '00010014';
+                 TissSP.TissProc.TissProcs.TissTipTabela := 1;
+              end;
+            v2_02_01:
+              begin
+                 TissSP.TissProc.TissProcs.TissCodigo := '21010021';
+                 TissSP.TissProc.TissProcs.TissTipTabela := 2;
+              end;
+            v2_02_02,v2_02_03:
+              begin
+                 TissSP.TissProc.TissProcs.TissCodigo := '40601110';
+                 TissSP.TissProc.TissProcs.TissTipTabela := 16;
+              end;
+          end;
           TissSP.TissProc.TissProcs.TissDescricao := 'TESTE SP/SADT';
           TissSP.TissProc.TissData := Now;
           TissSP.TissProc.TissHsInicio := Now;
@@ -338,8 +471,23 @@ begin
 
         For j := 1 to 3 do
           begin
-            TissSP.TissOpmUti.TissOpm.TissTabOpm.TissCodigo    := '12345678';
-            TissSP.TissOpmUti.TissOpm.TissTabOpm.TissTipTab    := '02';
+            case TissSP.ansVersaoXSD of
+              v2_01_03:
+                begin
+                   TissSP.TissOpmUti.TissOpm.TissTabOpm.TissCodigo := '12345678';
+                   TissSP.TissOpmUti.TissOpm.TissTabOpm.TissTipTab := '02';
+                end;
+              v2_02_01:
+                begin
+                   TissSP.TissOpmUti.TissOpm.TissTabOpm.TissCodigo := '12345678';
+                   TissSP.TissOpmUti.TissOpm.TissTabOpm.TissTipTab := '02';
+                end;
+              v2_02_02,v2_02_03:
+                begin
+                   TissSP.TissOpmUti.TissOpm.TissTabOpm.TissCodigo := '40601110';
+                   TissSP.TissOpmUti.TissOpm.TissTabOpm.TissTipTab := '16';
+                end;
+            end;
             TissSP.TissOpmUti.TissOpm.TissTabOpm.TissDescricao := 'DESCRICAO ORTESE PROTESE MATERIAL ESPECIAL SP/SADT: ' + IntToStr (j);
             TissSP.TissOpmUti.TissOpm.TissQtde                 := 1 * j;
             TissSP.TissOpmUti.TissOpm.TissCodBar               := '1234567890123';
@@ -357,9 +505,23 @@ begin
           begin
             with TissSP.TissOutDesp do
               begin
-                TissDespesa.TissIdentCodigo := '00010014';//informei um código qualquer
-                TissDespesa.TissIdentTipoTab := '01'; {Verifique
-                os valores nos arquivos da ANS}
+                case TissSP.ansVersaoXSD of
+                  v2_01_03:
+                    begin
+                       TissDespesa.TissIdentCodigo := '21010021';
+                       TissDespesa.TissIdentTipoTab := '02';
+                    end;
+                  v2_02_01:
+                    begin
+                       TissDespesa.TissIdentCodigo := '21010056';
+                       TissDespesa.TissIdentTipoTab := '02';
+                    end;
+                  v2_02_02,v2_02_03:
+                    begin
+                       TissDespesa.TissIdentCodigo := '40601110';
+                       TissDespesa.TissIdentTipoTab := '16';
+                    end;
+                end;
                 TissDespesa.TissIdentDesc := 'TESTE DE DESPESA SP/SADT' + IntToStr(j);
                 TissDespesa.TissTipDespesa := 1;
                 TissDespesa.TissDataReal := Date;
@@ -426,9 +588,33 @@ begin
   TissInt.iniciaInternacao; //Método de inicialização
   TissInt.Tisscabecalho.TissArquivo := 'internacao.xml';
   TissInt.Tisscabecalho.TissEncoding := 'ISO-8859-1';
-  TissInt.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
   TissInt.Tisscabecalho.TissVersaoXml := '1.0';
-
+  case TissInt.ansVersaoXSD of
+    v2_01_03:
+      begin
+        TissInt.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+        TissInt.Tisscabecalho.TissVersaoTISS := '2.01.03';
+        TissInt.TissValid.TissXSD := 'tissV2_01_03.xsd';
+      end;
+    v2_02_01:
+      begin
+        TissInt.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+        TissInt.Tisscabecalho.TissVersaoTISS := '2.02.01';
+        TissInt.TissValid.TissXSD := 'tissV2_02_01.xsd';
+      end;
+    v2_02_02:
+      begin
+        TissInt.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ansTISS="http://www.ans.gov.br/padroes/tiss/schemas"';
+        TissInt.Tisscabecalho.TissVersaoTISS := '2.02.02';
+        TissInt.TissValid.TissXSD := 'tissV2_02_02.xsd';
+      end;
+    v2_02_03:
+      begin
+        TissInt.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ansTISS="http://www.ans.gov.br/padroes/tiss/schemas"';
+        TissInt.Tisscabecalho.TissVersaoTISS := '2.02.03';
+        TissInt.TissValid.TissXSD := 'tissV2_02_03.xsd';
+      end;
+  end;
   //CABEÇALHO
   TissInt.Tisscabecalho.TissTipoTrans := 'ENVIO_LOTE_GUIAS';//ENVIO_LOTE_GUIAS
   TissInt.Tisscabecalho.TissSequencialTrans := '3';
@@ -436,7 +622,14 @@ begin
   TissInt.Tisscabecalho.TissHoraRegistroTrans := Time;
   TissInt.Tisscabecalho.TissCNPJCPF := '02762719000195';
   TissInt.Tisscabecalho.TissRegANS := '0';
-  TissInt.Tisscabecalho.TissVersaoTISS := '2.01.03';
+  case TissInt.ansVersaoXSD of
+    v2_02_02,v2_02_03:
+      begin
+        TissInt.Tisscabecalho.TissNomeAplica := 'LAB ADVANCED';
+        TissInt.Tisscabecalho.TissVersaoAplica := '3.0.0';
+        TissInt.Tisscabecalho.TissFabricaAplica := 'LAB MICRA';
+      end;
+  end;
   TissInt.Tisscabecalho.TissNumLote := '1545';
   //FIM CABEÇALHO
   TissInt.criaCabecalho;  {COMANDO PARA ADICIONAR O CABEÇALHO}
@@ -487,7 +680,10 @@ begin
       TissInt.TissProfissional.TissSIGLACONSELHO := 'CRM';
       TissInt.TissProfissional.TissNumConselho := '02457';
       TissInt.TissProfissional.TissUFCONSELHO := 'RJ';
-      TissInt.TissProfissional.TissfCBOS := '2231.44';
+      case TissInt.ansVersaoXSD of
+        v2_01_03: TissInt.TissProfissional.TissfCBOS:='06149';
+        v2_02_01,v2_02_02,v2_02_03: TissInt.TissProfissional.TissfCBOS:='2231.32';
+      end;
 
       // Prestador Executante
       {TissInt.TissPrestadorExec.TissTipoGeral INFORME ESSA PROPRIEDADE NO
@@ -518,17 +714,17 @@ begin
       TissInt.TissDiagSaidInt.TissIndicAcid := 0;
       TissInt.TissDiagSaidInt.TissMotSaidInt := '11';
       TissInt.TissDiagSaidInt.TissDiagPrinc.TissCIDNomeTab := 'CID-10';
-      TissInt.TissDiagSaidInt.TissDiagPrinc.TissCIDCodDiag := '1';
+      TissInt.TissDiagSaidInt.TissDiagPrinc.TissCIDCodDiag := 'A81';
       TissInt.TissDiagSaidInt.TissDiagPrinc.TissCIDDescDiag := 'TESTE INT';
 
       TissInt.TissDiagSaidInt.TissDiagSec.TissCIDNomeTab := 'CID-10';;
-      TissInt.TissDiagSaidInt.TissDiagSec.TissCIDCodDiag := '1';
+      TissInt.TissDiagSaidInt.TissDiagSec.TissCIDCodDiag := 'A81';
       TissInt.TissDiagSaidInt.TissDiagSec.TissCIDDescDiag := 'TESTE INT';
 
 
       //EM CASO DE ÓBITO
       TissInt.TissDiagSaidInt.TissObito.TissCID.TissCIDNomeTab := 'CID-10';
-      TissInt.TissDiagSaidInt.TissObito.TissCID.TissCIDCodDiag  := '1';
+      TissInt.TissDiagSaidInt.TissObito.TissCID.TissCIDCodDiag  := 'A81';
       TissInt.TissDiagSaidInt.TissObito.TissCID.TissCIDDescDiag := 'TESTE INT';
       TissInt.TissDiagSaidInt.TissObito.TissnumeracaoDe := '8';
       //Tipo faturamento
@@ -559,13 +755,20 @@ begin
               TissInt.TissProc.TissEquipe.TissProfiss.TissSiglaConselho := 'CRM';
               TissInt.TissProc.TissEquipe.TissProfiss.TissNumConselho := '02457';
               TissInt.TissProc.TissEquipe.TissProfiss.TissUFCONSELHO := 'RJ';
-              TissInt.TissProc.TissEquipe.TissProfiss.TissfCBOS := '2231.44';
+              case TissInt.ansVersaoXSD of
+                v2_01_03: TissInt.TissProc.TissEquipe.TissProfiss.TissfCBOS :='06149';
+                v2_02_01,v2_02_02,v2_02_03: TissInt.TissProc.TissEquipe.TissProfiss.TissfCBOS :='2231.32';
+              end;
               TissInt.TissProc.TissEquipe.TissProfiss.TissPosicProf := 11;
 
               TissInt.adicionaProf;
             end;
           TissInt.TissProc.TissProcs.TissCodigo := '00010014';
-          TissInt.TissProc.TissProcs.TissTipTabela := 1;
+          case TissC.ansVersaoXSD of
+            v2_01_03: TissInt.TissProc.TissProcs.TissTipTabela := 1;
+            v2_02_01: TissInt.TissProc.TissProcs.TissTipTabela := 1;
+            v2_02_02,v2_02_03: TissInt.TissProc.TissProcs.TissTipTabela := 16;
+          end;
           TissInt.TissProc.TissProcs.TissDescricao := 'TESTE INT.';
           TissInt.TissProc.TissData := Now;
           TissInt.TissProc.TissHsInicio := Now;
@@ -587,8 +790,23 @@ begin
 
         For j := 1 to 2 do
           begin
-            TissInt.TissOpmUti.TissOpm.TissTabOpm.TissCodigo    := '12345678';
-            TissInt.TissOpmUti.TissOpm.TissTabOpm.TissTipTab    := '02';
+            case TissSP.ansVersaoXSD of
+              v2_01_03:
+                begin
+                   TissInt.TissOpmUti.TissOpm.TissTabOpm.TissCodigo := '00010014';
+                   TissInt.TissOpmUti.TissOpm.TissTabOpm.TissTipTab := '02';
+                end;
+              v2_02_01:
+                begin
+                   TissInt.TissOpmUti.TissOpm.TissTabOpm.TissCodigo := '21010021';
+                   TissInt.TissOpmUti.TissOpm.TissTabOpm.TissTipTab := '02';
+                end;
+              v2_02_02,v2_02_03:
+                begin
+                   TissInt.TissOpmUti.TissOpm.TissTabOpm.TissCodigo := '40601110';
+                   TissInt.TissOpmUti.TissOpm.TissTabOpm.TissTipTab := '16';
+                end;
+            end;
             TissInt.TissOpmUti.TissOpm.TissTabOpm.TissDescricao := 'DESCRICAO ORTESE PROTESE MATERIAL ESPECIAL INT.: ' + IntToStr (j);
             TissInt.TissOpmUti.TissOpm.TissQtde                 := 1 * j;
             TissInt.TissOpmUti.TissOpm.TissCodBar               := '1234567890123';
@@ -606,9 +824,23 @@ begin
           begin
             with TissInt.TissOutDesp do
               begin
-                TissDespesa.TissIdentCodigo := '00010014';//informei um código qualquer
-                TissDespesa.TissIdentTipoTab := '01'; {Verifique
-                os valores nos arquivos da ANS}
+                case TissSP.ansVersaoXSD of
+                  v2_01_03:
+                    begin
+                       TissDespesa.TissIdentCodigo := '00010014';
+                       TissDespesa.TissIdentTipoTab := '02';
+                    end;
+                  v2_02_01:
+                    begin
+                       TissDespesa.TissIdentCodigo := '21010021';
+                       TissDespesa.TissIdentTipoTab := '02';
+                    end;
+                  v2_02_02,v2_02_03:
+                    begin
+                       TissDespesa.TissIdentCodigo := '40601110';
+                       TissDespesa.TissIdentTipoTab := '16';
+                    end;
+                end;
                 TissDespesa.TissIdentDesc := 'TESTE DE DESPESA INT. ' + IntToStr(j);
 
                 TissDespesa.TissTipDespesa := 1;
@@ -668,9 +900,33 @@ begin
   TissHon.iniciaHonorario; //Método de inicialização
   TissHon.Tisscabecalho.TissArquivo := 'honorario.xml';
   TissHon.Tisscabecalho.TissEncoding := 'ISO-8859-1';
-  TissHon.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
   TissHon.Tisscabecalho.TissVersaoXml := '1.0';
-
+  case TissHon.ansVersaoXSD of
+    v2_01_03:
+      begin
+        TissHon.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+        TissHon.Tisscabecalho.TissVersaoTISS := '2.01.03';
+        TissHon.TissValid.TissXSD := 'tissV2_01_03.xsd';
+      end;
+    v2_02_01:
+      begin
+        TissHon.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas"';
+        TissHon.Tisscabecalho.TissVersaoTISS := '2.02.01';
+        TissHon.TissValid.TissXSD := 'tissV2_02_01.xsd';
+      end;
+    v2_02_02:
+      begin
+        TissHon.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ansTISS="http://www.ans.gov.br/padroes/tiss/schemas"';
+        TissHon.Tisscabecalho.TissVersaoTISS := '2.02.02';
+        TissHon.TissValid.TissXSD := 'tissV2_02_02.xsd';
+      end;
+    v2_02_03:
+      begin
+        TissHon.Tisscabecalho.TissMensagemTissXml := 'xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ansTISS="http://www.ans.gov.br/padroes/tiss/schemas"';
+        TissHon.Tisscabecalho.TissVersaoTISS := '2.02.03';
+        TissHon.TissValid.TissXSD := 'tissV2_02_03.xsd';
+      end;
+  end;
   //CABEÇALHO
   TissHon.Tisscabecalho.TissTipoTrans := 'ENVIO_LOTE_GUIAS';//ENVIO_LOTE_GUIAS
   TissHon.Tisscabecalho.TissSequencialTrans := '3';
@@ -678,7 +934,14 @@ begin
   TissHon.Tisscabecalho.TissHoraRegistroTrans := Time;
   TissHon.Tisscabecalho.TissCNPJCPF := '02762719000195';
   TissHon.Tisscabecalho.TissRegANS := '0';
-  TissHon.Tisscabecalho.TissVersaoTISS := '2.02.01';
+  case TissHon.ansVersaoXSD of
+    v2_02_02,v2_02_03:
+      begin
+        TissHon.Tisscabecalho.TissNomeAplica := 'LAB ADVANCED';
+        TissHon.Tisscabecalho.TissVersaoAplica := '3.0.0';
+        TissHon.Tisscabecalho.TissFabricaAplica := 'LAB MICRA';
+      end;
+  end;
   TissHon.Tisscabecalho.TissNumLote := '1545';
   //FIM CABEÇALHO
   TissHon.criaCabecalho;  {COMANDO PARA ADICIONAR O CABEÇALHO}
@@ -687,7 +950,7 @@ begin
   USA-SE O MÉTODO "CRIACABEÇALHO" DEPOIS ADICIONA-SE AS GUIAS
   PASSANDO OS VALORES E USANDO O MÉTODO "ADICIONARGUIA" E POR
   ÚLTIMO A PROCEDURE "CRIARRODAPE" SE NÃO FOR FEITO ASSIM VAI GERAR ERRO}
-  for i := 1 to 1 {5} do
+  for i := 1 to 1 do
   begin
     //identificação guia Internação
     TissHon.TissNumGuiaPrest := IntToStr(i);
@@ -738,7 +1001,10 @@ begin
 
     //profissional
     TissHon.TissInfProfissional.TissPosicProf     := 12;
-    TissHon.TissInfProfissional.TissfCBOS         := '2231.40';
+    case TissHon.ansVersaoXSD of
+      v2_01_03: TissHon.TissInfProfissional.TissfCBOS:='06149';
+      v2_02_01,v2_02_02,v2_02_03: TissHon.TissInfProfissional.TissfCBOS:='2231.32';
+    end;
     TissHon.TissInfProfissional.TissProf          := 'Médico';
     TissHon.TissInfProfissional.TissSiglaConselho := 'CRM';
     TissHon.TissInfProfissional.TissUFConselho    := 'RJ';
@@ -761,8 +1027,11 @@ begin
 
       TissHon.TissProc.TissProcs.TissCodigo    := '00010014';
       TissHon.TissProc.TissProcs.TissDescricao := 'TESTE SP/SADT';
-      TissHon.TissProc.TissProcs.TissTipTabela := 1;
-
+      case TissHon.ansVersaoXSD of
+        v2_01_03: TissHon.TissProc.TissProcs.TissTipTabela := 1;
+        v2_02_01: TissHon.TissProc.TissProcs.TissTipTabela := 1;
+        v2_02_02,v2_02_03: TissHon.TissProc.TissProcs.TissTipTabela := 16;
+      end;
       TissHon.adicionaProc;
     end;
 
@@ -779,6 +1048,38 @@ begin
     RichEdit1.Lines.LoadFromFile(TissHon.Tisscabecalho.TissArquivo);
     PageControl1.ActivePageIndex := 0;
   end;
+end;
+
+procedure TForm1.rb1Click(Sender: TObject);
+begin
+  TissC.ansVersaoXSD := v2_01_03;
+  TissSP.ansVersaoXSD := v2_01_03;
+  TissInt.ansVersaoXSD := v2_01_03;
+  TissHon.ansVersaoXSD := v2_01_03;
+end;
+
+procedure TForm1.rb2Click(Sender: TObject);
+begin
+  TissC.ansVersaoXSD := v2_02_01;
+  TissSP.ansVersaoXSD := v2_02_01;
+  TissInt.ansVersaoXSD := v2_02_01;
+  TissHon.ansVersaoXSD := v2_02_01;
+end;
+
+procedure TForm1.rb3Click(Sender: TObject);
+begin
+  TissC.ansVersaoXSD := v2_02_02;
+  TissSP.ansVersaoXSD := v2_02_02;
+  TissInt.ansVersaoXSD := v2_02_02;
+  TissHon.ansVersaoXSD := v2_02_02;
+end;
+
+procedure TForm1.rb4Click(Sender: TObject);
+begin
+  TissC.ansVersaoXSD := v2_02_03;
+  TissSP.ansVersaoXSD := v2_02_03;
+  TissInt.ansVersaoXSD := v2_02_03;
+  TissHon.ansVersaoXSD := v2_02_03;
 end;
 
 end.
