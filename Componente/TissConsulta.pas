@@ -538,7 +538,7 @@ var
   TrocaString: TStringList;
 begin
     try
-      Fvalidado := True;
+      Fvalidado := False;
       AssignFile(arquivo,FArquivo);
       Append(arquivo);
       Writeln(arquivo,'</ansTISS:guiaFaturamento>');
@@ -632,11 +632,14 @@ begin
                   begin
                     lblInfo.Caption := MSG_ISVALID_PTBR;
                     lblInfo.Font.Color := clGreen;
+                    Fvalidado := True;
+
                   end
                   else
                   begin
                     lblInfo.Caption := MSG_ISNTVALID_PTBR;
                     lblInfo.Font.Color := clRed;
+                    Fvalidado := True;
                   end;
                 end;
             end;
