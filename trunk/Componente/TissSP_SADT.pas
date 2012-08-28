@@ -71,6 +71,7 @@ type
     FAnsVersaoxsd: TTissAnsVersao;
     FFontePagadora: TTissIdentFontPag;
     FObservacao: String;
+    Fvalidado: Boolean;
 
     procedure setCNPJCPF(const Value: String);
     procedure setNumLote(const Value: String);
@@ -96,6 +97,7 @@ type
     procedure setVersaoAplica(const Value: string);
     procedure setFabricaAplica(const Value: string);
     procedure setObservacao(const Value: String);
+    procedure setvalidado(const Value: Boolean);
 
     { Private declarations }
   protected
@@ -116,6 +118,7 @@ type
     procedure GerarXml;
     
     constructor create(Aowner: TComponent);override;
+    function arqvalidado: Boolean;
   published
     { Published declarations }
     //versão do xsd da ANS
@@ -181,6 +184,8 @@ type
     //Validação
     property TissValid: TTissValidacao read FTissValid write FTissValid;
     property TissObservacao: String read FObservacao write setObservacao;
+
+    property validado: Boolean read Fvalidado write setvalidado;
 
   end;
 
@@ -709,6 +714,11 @@ begin
     end;
 end;
 
+function TTissSP_SADT.arqvalidado: Boolean;
+begin
+  result := Fvalidado;
+end;
+
 constructor TTissSP_SADT.create(Aowner: TComponent);
 begin
   FTissCabecalho := TTissCabecalho.create;
@@ -1042,9 +1052,10 @@ begin
         
         end;
     end;        
-
+    Fvalidado := True;
     if FTissValid.UsarValidacao then
       begin
+        Fvalidado := False;
         if Trim(FTissValid.TissXSD) = EmptyStr then
           begin
             Application.MessageBox('Para realizar a validação informe o Schema','ATENÇÃO',MB_OK+MB_ICONERROR);
@@ -1069,6 +1080,7 @@ begin
                   begin
                     lblInfo.Caption := MSG_ISVALID_PTBR;
                     lblInfo.Font.Color := clGreen;
+                    Fvalidado := True;
                   end
                   else
                   begin
@@ -1289,6 +1301,11 @@ procedure TTissSP_SADT.setTipoSP(const Value: TpessoaSP_SADT);
 begin
   FTipoSP := Value;
 end;  
+
+procedure TTissSP_SADT.setvalidado(const Value: Boolean);
+begin
+  Fvalidado := Value;
+end;
 
 function TTissSP_SADT.TiraMascara(Texto: String): String;
 var
